@@ -1,0 +1,252 @@
+{
+  "base_size": 32768,
+  "created_at": "2026-11-06T14:03:29.047036+00:00",
+  "pairs": [
+    {
+      "budgets": {
+        "8192": {
+          "comparisons": {
+            "continuation_25_vs_frequency": {
+              "ci_high": 0.7575841921813486,
+              "ci_low": 0.7159163948865666,
+              "delta": 0.7367502935339574,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "continuation_50_vs_frequency": {
+              "ci_high": 0.7706935806395743,
+              "ci_low": 0.7159163948865666,
+              "delta": 0.7433049877630702,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "continuation_50_vs_native": {
+              "delta": -1.2875925284684406,
+              "native_gap_closure": 0.3649835467636761,
+              "relative_gain": 0.3610975630552995
+            },
+            "continuation_75_vs_frequency": {
+              "ci_high": 0.7523743612783571,
+              "ci_low": 0.7119976703552711,
+              "delta": 0.7321860158168141,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "frequency_vs_native": {
+              "delta": -2.0365438232873387
+            },
+            "random_50_vs_frequency": {
+              "delta": 0.5842227775308082,
+              "max_delta": 0.5842227775308082,
+              "min_delta": 0.5842227775308082,
+              "seeds": [
+                13
+              ]
+            }
+          },
+          "document_values": {
+            "continuation_25": [
+              2.8185185185185184,
+              2.770538243626062
+            ],
+            "continuation_50": [
+              2.831627906976744,
+              2.770538243626062
+            ],
+            "continuation_75": [
+              2.813308687615527,
+              2.7666195190947667
+            ],
+            "frequency": [
+              2.0609343263371698,
+              2.0546218487394956
+            ],
+            "random_50:13": [
+              2.6725197541703247,
+              2.611481975967957
+            ]
+          },
+          "merge_budget": 7932,
+          "methods": {
+            "continuation_25": {
+              "actual_vocab_size": 8190,
+              "diagnostics": {
+                "accepted_new_merges": 5080,
+                "actual_merges": 7930,
+                "donor_merges": 1983,
+                "fallback_donor_merges": 869,
+                "learned_raw_merges": 5081,
+                "mapped_merges": 5081,
+                "partial_vocab_size": 2243,
+                "pruned_unreachable_merges": 2,
+                "requested_new_merges": 5949,
+                "skipped_duplicate_parents": 1,
+                "train_documents": 7,
+                "train_symbols": 8876,
+                "unique_tokens": 1031,
+                "unmapped_merges": 0
+              },
+              "english_retention": 0.8138297872340425,
+              "selected_merges": 7930,
+              "share": 0.25,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.799552071668533,
+              "test_tokens": 1786
+            },
+            "continuation_50": {
+              "actual_vocab_size": 8192,
+              "diagnostics": {
+                "accepted_new_merges": 3965,
+                "actual_merges": 7932,
+                "donor_merges": 3966,
+                "fallback_donor_merges": 1,
+                "learned_raw_merges": 3966,
+                "mapped_merges": 3966,
+                "partial_vocab_size": 4226,
+                "pruned_unreachable_merges": 0,
+                "requested_new_merges": 3966,
+                "skipped_duplicate_parents": 1,
+                "train_documents": 7,
+                "train_symbols": 8876,
+                "unique_tokens": 1031,
+                "unmapped_merges": 0
+              },
+              "english_retention": 0.872416250890948,
+              "selected_merges": 7932,
+              "share": 0.5,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.807411566535654,
+              "test_tokens": 1781
+            },
+            "continuation_75": {
+              "actual_vocab_size": 8192,
+              "diagnostics": {
+                "accepted_new_merges": 1982,
+                "actual_merges": 7932,
+                "donor_merges": 5949,
+                "fallback_donor_merges": 1,
+                "learned_raw_merges": 1983,
+                "mapped_merges": 1983,
+                "partial_vocab_size": 6209,
+                "pruned_unreachable_merges": 0,
+                "requested_new_merges": 1983,
+                "skipped_duplicate_parents": 1,
+                "train_documents": 7,
+                "train_symbols": 8876,
+                "unique_tokens": 1031,
+                "unmapped_merges": 0
+              },
+              "english_retention": 0.9357798165137615,
+              "selected_merges": 7932,
+              "share": 0.75,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.7948574622694244,
+              "test_tokens": 1789
+            },
+            "frequency": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9959316517493898,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.058460271716756,
+              "test_tokens": 2429
+            },
+            "random_50": {
+              "max_compression": 2.6483050847457625,
+              "mean_compression": 2.6483050847457625,
+              "mean_reachability": 1.0,
+              "mean_vocab": 8192.0,
+              "min_compression": 2.6483050847457625,
+              "rows": [
+                {
+                  "actual_vocab_size": 8192,
+                  "diagnostics": {
+                    "accepted_new_merges": 3966,
+                    "actual_merges": 7932,
+                    "donor_merges": 3966,
+                    "fallback_donor_merges": 0,
+                    "learned_raw_merges": 3966,
+                    "mapped_merges": 3966,
+                    "partial_vocab_size": 4226,
+                    "pruned_unreachable_merges": 0,
+                    "requested_new_merges": 3966,
+                    "skipped_duplicate_parents": 0,
+                    "train_documents": 7,
+                    "train_symbols": 11390,
+                    "unique_tokens": 595,
+                    "unmapped_merges": 0
+                  },
+                  "english_retention": 0.6325581395348838,
+                  "seed": 13,
+                  "selected_merges": 7932,
+                  "share": 0.5,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 5000,
+                  "test_compression": 2.6483050847457625,
+                  "test_tokens": 1888
+                }
+              ]
+            }
+          },
+          "native": {
+            "actual_vocab_size": 8192,
+            "test_bytes": 5000,
+            "test_compression": 4.095004095004095,
+            "test_tokens": 1221
+          },
+          "requested_vocab_size": 8192
+        }
+      },
+      "donor": "wikitext_en",
+      "donor_sha256": "69b2903546061263dc25fc1c40496d4a0e128268e1d8371009e8024b015675d7",
+      "initial_vocab_size": 260,
+      "target": "wikipedia_sw",
+      "test_bytes": 5000,
+      "test_documents": 2,
+      "train_bytes": 20000,
+      "train_documents": 7
+    }
+  ],
+  "pre_registration": {
+    "frozen_at": "2026-11-06T13:54:36Z",
+    "path": "docs/PREREGISTRATION_C4_C5.md",
+    "sha256": "c6d530af8ee3bde6bf7ba86b53f3d34fa03930788988785c323764a3b918a55e"
+  },
+  "primary": {
+    "comparison": "continuation_50_vs_frequency",
+    "mean_relative_gain": 0.3610975630552995,
+    "negative_significant": 0,
+    "passed": false,
+    "positive_significant": 1,
+    "primary_arm": "continuation_50",
+    "rows": [
+      {
+        "actual_vocab_size": 8192,
+        "ci_high": 0.7706935806395743,
+        "ci_low": 0.7159163948865666,
+        "delta": 0.7433049877630702,
+        "label": "wikitext_en->wikipedia_sw:8192",
+        "p_adjusted": 0.0,
+        "p_value": 0.0,
+        "relative_gain": 0.3610975630552995,
+        "requested_vocab_size": 8192,
+        "strict_reachability": 1.0
+      }
+    ],
+    "valid_construction": true
+  },
+  "primary_arm": "continuation_50",
+  "primary_share": 0.5,
+  "random_seeds": [
+    13
+  ],
+  "shares": [
+    0.25,
+    0.5,
+    0.75
+  ]
+}

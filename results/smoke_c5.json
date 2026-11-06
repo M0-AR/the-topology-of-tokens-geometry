@@ -1,0 +1,288 @@
+{
+  "base_size": 32768,
+  "created_at": "2026-11-06T14:05:08.901927+00:00",
+  "pairs": [
+    {
+      "budgets": {
+        "8192": {
+          "comparisons": {
+            "data_efficiency_vs_full_16mb": {
+              "full_16mb": 2.253267237494367,
+              "high_fertility": 2.0885547201336676,
+              "ratio": 0.9269005847953217
+            },
+            "high_fertility_vs_first": {
+              "ci_high": 0.03322380972754724,
+              "ci_low": 0.0020681867204648263,
+              "delta": 0.017645998224006476,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "high_fertility_vs_full_16mb": {
+              "ci_high": -0.03295298056768292,
+              "ci_low": -0.04227616972714987,
+              "delta": -0.037614575147416396,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "high_fertility_vs_high_mismatch": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            },
+            "high_fertility_vs_high_rare": {
+              "ci_high": 0.05264065790446404,
+              "ci_low": 0.010298596105488222,
+              "delta": 0.03146962700497635,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "high_fertility_vs_high_ttr": {
+              "ci_high": 0.025349766822118536,
+              "ci_low": 0.014388579931651213,
+              "delta": 0.019869173376885207,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "high_fertility_vs_low_fertility": {
+              "ci_high": 0.022711253542873067,
+              "ci_low": -0.00414916634847895,
+              "delta": 0.009281043597197502,
+              "iterations": 2000.0,
+              "p_value": 0.453
+            },
+            "high_fertility_vs_random_mean": {
+              "ci_high": 0.023360883723281933,
+              "ci_low": -2.129955428031849e-06,
+              "delta": 0.011679376883927173,
+              "iterations": 2000.0,
+              "p_value": 0.453,
+              "random_mean_level": 2.0084841355069893,
+              "relative_gain": 0.005815020730038786
+            }
+          },
+          "document_values": {
+            "first": [
+              1.9947575360419396,
+              2.010277492291881
+            ],
+            "full_16mb": [
+              2.0609343263371698,
+              2.0546218487394956
+            ],
+            "high_fertility": [
+              2.027981345769487,
+              2.0123456790123457
+            ],
+            "high_mismatch": [
+              2.027981345769487,
+              2.0123456790123457
+            ],
+            "high_rare": [
+              1.9753406878650228,
+              2.0020470829068575
+            ],
+            "high_ttr": [
+              2.0026315789473683,
+              1.9979570990806945
+            ],
+            "low_fertility": [
+              2.005270092226614,
+              2.0164948453608247
+            ],
+            "random:13": [
+              2.0092409240924094,
+              2.014418125643666
+            ],
+            "random:37": [
+              2.0,
+              2.010277492291881
+            ],
+            "random_mean": [
+              2.004620462046205,
+              2.0123478089677738
+            ]
+          },
+          "merge_budget": 7932,
+          "methods": {
+            "first": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0008176614881439,
+              "selected_bytes": 5000,
+              "selected_documents": 3,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.192982456140351,
+              "test_tokens": 2280
+            },
+            "full_16mb": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9959316517493898,
+              "selected_bytes": 20000,
+              "selected_documents": 7,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 20000,
+              "test_compression": 2.253267237494367,
+              "test_tokens": 8876
+            },
+            "high_fertility": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0,
+              "selected_bytes": 5000,
+              "selected_documents": 3,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.0885547201336676,
+              "test_tokens": 2394
+            },
+            "high_mismatch": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0,
+              "selected_bytes": 5000,
+              "selected_documents": 3,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.0885547201336676,
+              "test_tokens": 2394
+            },
+            "high_rare": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0008176614881439,
+              "selected_bytes": 5000,
+              "selected_documents": 2,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.300966405890474,
+              "test_tokens": 2173
+            },
+            "high_ttr": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0008176614881439,
+              "selected_bytes": 5000,
+              "selected_documents": 4,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.2904260192395784,
+              "test_tokens": 2183
+            },
+            "low_fertility": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0,
+              "selected_bytes": 5000,
+              "selected_documents": 1,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 5000,
+              "test_compression": 2.323420074349442,
+              "test_tokens": 2152
+            },
+            "random": {
+              "max_compression": 2.1805494984736153,
+              "mean_compression": 2.152748187400854,
+              "mean_reachability": 1.0,
+              "mean_selected_bytes": 5000.0,
+              "mean_vocab": 8192.0,
+              "min_compression": 2.124946876328092,
+              "rows": [
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 1.0008176614881439,
+                  "seed": 13,
+                  "selected_bytes": 5000,
+                  "selected_documents": 3,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 5000,
+                  "test_compression": 2.1805494984736153,
+                  "test_tokens": 2293
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 1.0,
+                  "seed": 37,
+                  "selected_bytes": 5000,
+                  "selected_documents": 2,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 5000,
+                  "test_compression": 2.124946876328092,
+                  "test_tokens": 2353
+                }
+              ]
+            }
+          },
+          "native": {
+            "actual_vocab_size": 8192,
+            "test_bytes": 5000,
+            "test_compression": 4.095004095004095,
+            "test_tokens": 1221
+          },
+          "requested_vocab_size": 8192
+        }
+      },
+      "donor": "wikitext_en",
+      "donor_sha256": "69b2903546061263dc25fc1c40496d4a0e128268e1d8371009e8024b015675d7",
+      "initial_vocab_size": 260,
+      "pool_bytes_actual": 20000,
+      "pool_bytes_requested": 20000,
+      "pool_documents": 7,
+      "rare_threshold": 1.0,
+      "selection_bytes": 5000,
+      "target": "wikipedia_sw",
+      "test_bytes": 5000,
+      "test_documents": 2
+    }
+  ],
+  "pre_registration": {
+    "frozen_at": "2026-11-06T13:54:36Z",
+    "path": "docs/PREREGISTRATION_C4_C5.md",
+    "sha256": "c6d530af8ee3bde6bf7ba86b53f3d34fa03930788988785c323764a3b918a55e"
+  },
+  "primary": {
+    "comparison": "high_fertility_vs_random_mean",
+    "mean_relative_gain": 0.005815020730038786,
+    "negative_significant": 0,
+    "passed": false,
+    "positive_significant": 0,
+    "primary_arm": "high_fertility",
+    "rows": [
+      {
+        "actual_vocab_size": 8192,
+        "ci_high": 0.023360883723281933,
+        "ci_low": -2.129955428031849e-06,
+        "data_efficiency_vs_full_16mb": 0.9269005847953217,
+        "delta": 0.011679376883927173,
+        "label": "wikitext_en->wikipedia_sw:8192",
+        "p_adjusted": 0.453,
+        "p_value": 0.453,
+        "relative_gain": 0.005815020730038786,
+        "requested_vocab_size": 8192,
+        "strict_reachability": 1.0
+      }
+    ],
+    "valid_construction": true
+  },
+  "primary_arm": "high_fertility",
+  "random_seeds": [
+    13,
+    37
+  ],
+  "strategies": [
+    "high_fertility",
+    "low_fertility",
+    "high_mismatch",
+    "high_rare",
+    "high_ttr",
+    "first",
+    "random",
+    "full_16mb"
+  ]
+}

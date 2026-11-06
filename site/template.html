@@ -842,10 +842,11 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;background:rgba(4,7,
     </div>
     <div class="card reveal" style="margin-top:20px">
       <h3 style="font-size:1.05rem;margin-bottom:10px">Extend it</h3>
-      <p class="small muted">Six follow-up experiments go beyond the pre-registered null: merge-list truncation, persistent homology on the BPE merge graph, scale-normalized topology, a per-corpus scaling law, a tokenizer health check, and a packaged benchmark. The strongest result is scale planning inside a corpus: merge-graph features lift within-corpus unseen-size R² from 0.575 to 0.934 (Δ +0.359, 95% CI [0.196, 0.705], permutation p = 0.0083). Cross-corpus transfer still fails, and the report keeps that failure visible. Three further invention candidates — persistence-selected merge cores, merge-graph compatibility, and a merge-filtration persistence descriptor — were pre-registered and killed; the negative result is public.</p>
+      <p class="small muted">Six follow-up experiments go beyond the pre-registered null: merge-list truncation, persistent homology on the BPE merge graph, scale-normalized topology, a per-corpus scaling law, a tokenizer health check, and a packaged benchmark. The strongest result is scale planning inside a corpus: merge-graph features lift within-corpus unseen-size R² from 0.575 to 0.934 (Δ +0.359, 95% CI [0.196, 0.705], permutation p = 0.0083). Cross-corpus transfer still fails, and the report keeps that failure visible. Three further invention candidates — persistence-selected merge cores, merge-graph compatibility, and a merge-filtration persistence descriptor — were pre-registered and killed; the negative result is public. Two follow-up tests then checked the diagnosis: C4 continued BPE on target text and passed (6/6 primary comparisons, mean relative gain 123.0%), but it is a replication of published continued-BPE work with a measured English-retention cost; C5 tokenizer-aware data selection was killed (0/6 positive, 6/6 negative). Neither is a novelty claim.</p>
       <div class="tagline">
         <a class="btn btn-ghost" href="docs/EXTENSIONS.md" style="padding:9px 14px;font-size:.82rem">Extension report</a>
         <a class="btn btn-ghost" href="docs/NEGATIVE_RESULT.md" style="padding:9px 14px;font-size:.82rem">Negative result</a>
+        <a class="btn btn-ghost" href="docs/C4_C5_RESULTS.md" style="padding:9px 14px;font-size:.82rem">C4/C5 results</a>
         <a class="btn btn-ghost" href="calculator.html" style="padding:9px 14px;font-size:.82rem">Scaling calculator</a>
         <a class="btn btn-ghost" href="benchmark/BENCHMARK_CARD.md" style="padding:9px 14px;font-size:.82rem">TokenizerBench</a>
       </div>
@@ -899,6 +900,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 36px;background:rgba(4,7,
           <li><a href="artifacts/manifest.json">Artifact manifest</a></li>
           <li><a href="docs/PROTOCOL.md">Frozen protocol</a></li>
           <li><a href="docs/NEGATIVE_RESULT.md">Negative result</a></li>
+          <li><a href="docs/C4_C5_RESULTS.md">C4/C5 results</a></li>
         </ul>
       </div>
       <div class="foot">

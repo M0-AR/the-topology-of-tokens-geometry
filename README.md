@@ -6,12 +6,12 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-5eead4)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-22d3ee)](pyproject.toml)
-[![Tests](https://img.shields.io/badge/tests-37%20passing-5eead4)](tests)
+[![Tests](https://img.shields.io/badge/tests-47%20passing-5eead4)](tests)
 [![Artifacts](https://img.shields.io/badge/artifacts-332%20hashed-a78bfa)](artifacts/manifest.json)
 
 **Explore:** [Live interactive preview](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [Demo GIF](docs/assets/topobpe-demo.gif) · [Generated report](results/REPORT.md) · [Frozen protocol](docs/PROTOCOL.md)
 
-**Extensions:** [Merge-topology experiments](docs/EXTENSIONS.md) · [Negative result: persistence-selected merge cores](docs/NEGATIVE_RESULT.md) · [Scaling calculator](calculator.html) · [TokenizerBench card](benchmark/BENCHMARK_CARD.md)
+**Extensions:** [Merge-topology experiments](docs/EXTENSIONS.md) · [Negative result: persistence-selected merge cores](docs/NEGATIVE_RESULT.md) · [C4/C5 results: continuation passes, data selection killed](docs/C4_C5_RESULTS.md) · [Scaling calculator](calculator.html) · [TokenizerBench card](benchmark/BENCHMARK_CARD.md)
 
 **All preview entry points work:** [site root](https://m0-ar.github.io/the-topology-of-tokens-geometry/) · [preview.html](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [docs/preview.html](https://m0-ar.github.io/the-topology-of-tokens-geometry/docs/preview.html).
 
@@ -190,6 +190,8 @@ This is a scale-planning result, not a universal tokenizer score. The all-featur
 
 Three further invention candidates were pre-registered and tested after the extensions: persistence-selected merge cores (C1), merge-graph compatibility (C2), and a merge-filtration persistence descriptor (C3). All three were killed by their pre-registered criteria; frequency selection is the only arm that works. The full protocol and frozen numbers are in **[docs/NEGATIVE_RESULT.md](docs/NEGATIVE_RESULT.md)**.
 
+Two follow-up experiments tested the diagnosis that the donor merge inventory is the binding constraint. **C4** continued BPE on target text under a fixed vocabulary budget and **passed** (6/6 primary comparisons, mean per-document relative gain 123.0%, median 76.0%, 79.1% mean native-gap closure), but it is a replication/variant of published continued-BPE work, not a new invention, and reallocating budget away from donor merges costs English compression. A random-donor control shows the gain comes mainly from target continuation, not frequency-based donor selection. **C5** tested tokenizer-aware target-document selection and was **killed** (0/6 positive, 6/6 negative, mean relative gain −0.174%); high-fertility selection was slightly worse than random, and post-hoc length controls did not rescue it. Full protocol, deviations, prior art, and numbers: **[docs/C4_C5_RESULTS.md](docs/C4_C5_RESULTS.md)**.
+
 ## Why this negative result is valuable
 
 A negative result is only useful if it is trustworthy and reusable. This one is both.
@@ -271,7 +273,7 @@ This is not a one-off notebook. Every claim has a paper trail.
 - **Bug found and fixed.** A permutation-test slicing bug was discovered during the final audit, fixed, covered by a regression test, and the analysis was re-run from cached features. All numbers here come from the fixed run.
 - **Seed and scale checks.** BPB standard deviation across seeds is at most 0.007. Point-count sensitivity is reported honestly: persistence summaries are scale-dependent, so absolute descriptor magnitudes should not be compared across studies.
 - **Hashed manifest.** 332 artifacts with SHA-256 hashes, environment details, and the config hash: [`artifacts/manifest.json`](artifacts/manifest.json).
-- **Tests.** 37 tests pass; `ruff` is clean; Docker Compose configuration is verified.
+- **Tests.** 47 tests pass; `ruff` is clean; Docker Compose configuration is verified.
 
 ### What this does not claim
 
@@ -308,17 +310,21 @@ This is not a one-off notebook. Every claim has a paper trail.
 | `docs/DATA_CARD.md` | Corpus provenance, splits, audits |
 | `docs/METHODOLOGY_AUDIT.md` | Leakage, multiplicity, and inference review |
 | `docs/REPRODUCIBILITY.md` | Environment, seeds, commands, Docker |
-| `docs/RESEARCH_DIRECTIONS.md` | Frozen pre-registration for the three invention tests |
+| `docs/RESEARCH_DIRECTIONS.md` | Frozen pre-registration and results for the C1-C3 invention tests |
 | `docs/NEGATIVE_RESULT.md` | Pre-registered negative result: merge-core selection, merge-graph compatibility, filtration descriptor |
-| `results/analysis.json` | Single source of truth for every reported number |
+| `docs/PREREGISTRATION_C4_C5.md` | Frozen C4/C5 protocol and hash |
+| `docs/C4_C5_RESULTS.md` | C4 pass (continued-BPE replication) and C5 kill (data selection), with deviations and prior art |
+| `src/topobpe/hybrid.py` | PUA token-level continuation and hybrid BPE construction for C4 |
+| `results/analysis.json` | Single source of truth for every reported main-benchmark number |
+| `results/invention_c4.json`, `results/invention_c5.json` | Frozen C4/C5 experiment outputs |
 | `results/REPORT.md` | Auto-generated human-readable report |
 | `results/tables/` | Predictions, BPB summary, H3, H5, TDA agreement, byte audit |
 | `results/figures/` | Six publication figures in PDF and PNG |
 | `site/` | Source parts for the interactive preview |
 | `preview.html` | Generated showcase: 3D map, explorer, quiz, glossary, business case |
 | `index.html` | Meta-refresh redirect to `preview.html` |
-| `scripts/` | Reproduce, build site, byte audit, TDA stability, download, report |
-| `tests/` | 37 tests, including permutation slicing, ancestor closure, merge-tree cycles, and ICC checks |
+| `scripts/` | Reproduce, build site, byte audit, TDA stability, download, report, C4/C5 experiments |
+| `tests/` | 47 tests, including permutation slicing, ancestor closure, merge-tree cycles, ICC checks, and held-out C5 evaluation |
 | `artifacts/manifest.json` | SHA-256 hashes for 332 artifacts |
 | `Dockerfile`, `docker-compose.yml`, `Makefile` | CPU/GPU reproducibility entry points |
 | `CITATION.cff`, `LICENSE` | Citation metadata and MIT license |

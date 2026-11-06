@@ -226,3 +226,30 @@ criterion, is the binding constraint, because no selector over donor merges can 
 target-specific merges that native training creates. No supported invention remains among C1, C2, or
 C3. Any further direction must be pre-registered afresh, and the honest default is to write up the
 negative result rather than to promote a survivor.
+
+## Follow-up: C4/C5 (2026-11-06)
+
+Two follow-up experiments were pre-registered separately, after C1-C3, in
+[`docs/PREREGISTRATION_C4_C5.md`](PREREGISTRATION_C4_C5.md) (frozen SHA-256
+`c6d530af8ee3bde6bf7ba86b53f3d34fa03930788988785c323764a3b918a55e`). They are not amendments to the
+C1-C3 protocol.
+
+- **C4 (fixed-budget hybrid continuation): PASS, but a replication/variant.** Continuing BPE on
+  target text and appending the new merges to a donor half beat donor-only frequency selection in
+  6/6 primary comparisons (Holm p < 0.0005), with mean per-document relative gain 123.0% (median
+  76.0%) and mean native-gap closure 79.1%. All 70 constructed tokenizers were valid. This
+  confirms the C1-C3 diagnosis that the donor inventory is the constraint. It is not a new
+  invention: continued BPE is published (Purason et al., Findings of EACL 2026), and C4 differs by
+  reallocating a fixed budget, which costs English compression (mean retention 73.5% vs 91.2% for
+  donor-only frequency). The random-donor control shows most of the gain comes from target
+  continuation, not frequency-based donor selection.
+- **C5 (tokenizer-aware target-document selection): KILL.** Selecting target documents by donor
+  token fertility did not improve donor-frequency merge selection. High fertility was negative in
+  6/6 primary comparisons (Holm p < 0.0005; mean relative gain -0.174%) and slightly worse than
+  random; low fertility and other scores were indistinguishable from random. All 120 constructed
+  tokenizers were valid. The post-hoc length and low-fertility controls are exploratory and do not
+  rescue the kill.
+
+Full results, validity checks, deviations, prior art, and reproduction commands:
+[`docs/C4_C5_RESULTS.md`](C4_C5_RESULTS.md). The honest summary is: continuation works, donor-only
+data selection does not, and neither result is a novel invention claim.
