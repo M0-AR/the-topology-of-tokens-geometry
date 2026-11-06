@@ -6,12 +6,12 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-5eead4)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-22d3ee)](pyproject.toml)
-[![Tests](https://img.shields.io/badge/tests-22%20passing-5eead4)](tests)
+[![Tests](https://img.shields.io/badge/tests-37%20passing-5eead4)](tests)
 [![Artifacts](https://img.shields.io/badge/artifacts-332%20hashed-a78bfa)](artifacts/manifest.json)
 
 **Explore:** [Live interactive preview](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [Demo GIF](docs/assets/topobpe-demo.gif) · [Generated report](results/REPORT.md) · [Frozen protocol](docs/PROTOCOL.md)
 
-**Extensions:** [Merge-topology experiments](docs/EXTENSIONS.md) · [Scaling calculator](calculator.html) · [TokenizerBench card](benchmark/BENCHMARK_CARD.md)
+**Extensions:** [Merge-topology experiments](docs/EXTENSIONS.md) · [Negative result: persistence-selected merge cores](docs/NEGATIVE_RESULT.md) · [Scaling calculator](calculator.html) · [TokenizerBench card](benchmark/BENCHMARK_CARD.md)
 
 **All preview entry points work:** [site root](https://m0-ar.github.io/the-topology-of-tokens-geometry/) · [preview.html](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [docs/preview.html](https://m0-ar.github.io/the-topology-of-tokens-geometry/docs/preview.html).
 
@@ -188,6 +188,8 @@ The original study asked whether topology transfers **across corpora**. It does 
 
 This is a scale-planning result, not a universal tokenizer score. The all-feature model overfits catastrophically under LOCO; the report keeps that failure visible. Read the full methods, nulls and caveats in **[docs/EXTENSIONS.md](docs/EXTENSIONS.md)**, try the **[calculator](calculator.html)**, or use the **[benchmark package](benchmark/BENCHMARK_CARD.md)**.
 
+Three further invention candidates were pre-registered and tested after the extensions: persistence-selected merge cores (C1), merge-graph compatibility (C2), and a merge-filtration persistence descriptor (C3). All three were killed by their pre-registered criteria; frequency selection is the only arm that works. The full protocol and frozen numbers are in **[docs/NEGATIVE_RESULT.md](docs/NEGATIVE_RESULT.md)**.
+
 ## Why this negative result is valuable
 
 A negative result is only useful if it is trustworthy and reusable. This one is both.
@@ -269,7 +271,7 @@ This is not a one-off notebook. Every claim has a paper trail.
 - **Bug found and fixed.** A permutation-test slicing bug was discovered during the final audit, fixed, covered by a regression test, and the analysis was re-run from cached features. All numbers here come from the fixed run.
 - **Seed and scale checks.** BPB standard deviation across seeds is at most 0.007. Point-count sensitivity is reported honestly: persistence summaries are scale-dependent, so absolute descriptor magnitudes should not be compared across studies.
 - **Hashed manifest.** 332 artifacts with SHA-256 hashes, environment details, and the config hash: [`artifacts/manifest.json`](artifacts/manifest.json).
-- **Tests.** 22 tests pass; `ruff` is clean; Docker Compose configuration is verified.
+- **Tests.** 37 tests pass; `ruff` is clean; Docker Compose configuration is verified.
 
 ### What this does not claim
 
@@ -306,6 +308,8 @@ This is not a one-off notebook. Every claim has a paper trail.
 | `docs/DATA_CARD.md` | Corpus provenance, splits, audits |
 | `docs/METHODOLOGY_AUDIT.md` | Leakage, multiplicity, and inference review |
 | `docs/REPRODUCIBILITY.md` | Environment, seeds, commands, Docker |
+| `docs/RESEARCH_DIRECTIONS.md` | Frozen pre-registration for the three invention tests |
+| `docs/NEGATIVE_RESULT.md` | Pre-registered negative result: merge-core selection, merge-graph compatibility, filtration descriptor |
 | `results/analysis.json` | Single source of truth for every reported number |
 | `results/REPORT.md` | Auto-generated human-readable report |
 | `results/tables/` | Predictions, BPB summary, H3, H5, TDA agreement, byte audit |
@@ -314,7 +318,7 @@ This is not a one-off notebook. Every claim has a paper trail.
 | `preview.html` | Generated showcase: 3D map, explorer, quiz, glossary, business case |
 | `index.html` | Meta-refresh redirect to `preview.html` |
 | `scripts/` | Reproduce, build site, byte audit, TDA stability, download, report |
-| `tests/` | 22 tests, including the permutation slicing regression and the extension checks |
+| `tests/` | 37 tests, including permutation slicing, ancestor closure, merge-tree cycles, and ICC checks |
 | `artifacts/manifest.json` | SHA-256 hashes for 332 artifacts |
 | `Dockerfile`, `docker-compose.yml`, `Makefile` | CPU/GPU reproducibility entry points |
 | `CITATION.cff`, `LICENSE` | Citation metadata and MIT license |

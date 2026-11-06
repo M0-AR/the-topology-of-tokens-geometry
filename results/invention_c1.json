@@ -1,0 +1,1743 @@
+{
+  "base_size": 32768,
+  "created_at": "2026-11-06T13:14:10.715786+00:00",
+  "methods": [
+    "prefix",
+    "frequency",
+    "persistence",
+    "combined",
+    "redundancy",
+    "rank_fusion",
+    "random"
+  ],
+  "pairs": [
+    {
+      "budgets": {
+        "16384": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            },
+            "frequency_vs_native": {
+              "delta": -1.771339851045317
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.18618652318350018,
+              "ci_low": -0.19487770770120172,
+              "delta": -0.1905698421304436,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.1343304068261537,
+              "ci_low": -0.14191971016738475,
+              "delta": -0.13822174595396097,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.24531828459563107,
+              "max_delta": -0.22288686002940183,
+              "min_delta": -0.26340517073963854,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.35401629245753724,
+              "ci_low": -0.3745588079024126,
+              "delta": -0.36418603824232254,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            }
+          },
+          "merge_budget": 16124,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9610530181494868,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.279243838064284,
+              "test_tokens": 438742
+            },
+            "frequency": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9610530181494868,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.279243838064284,
+              "test_tokens": 438742
+            },
+            "persistence": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.989089028356591,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.0739573179583966,
+              "test_tokens": 482170
+            },
+            "prefix": {
+              "actual_vocab_size": 16384,
+              "english_retention": 1.0,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.140424703069583,
+              "test_tokens": 467197
+            },
+            "random": {
+              "max_compression": 2.0648870093828466,
+              "mean_compression": 2.040606585096424,
+              "mean_reachability": 1.0,
+              "mean_vocab": 16384.0,
+              "min_compression": 2.027102358533594,
+              "rows": [
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7563690573528908,
+                  "seed": 13,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 2.0648870093828466,
+                  "test_tokens": 484288
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7515246782494351,
+                  "seed": 37,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 2.029830387372831,
+                  "test_tokens": 492652
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7438485733627052,
+                  "seed": 73,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 2.027102358533594,
+                  "test_tokens": 493315
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.6447626488408809,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.939777662684303,
+              "test_tokens": 515523
+            },
+            "redundancy": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9610530181494868,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.279243838064284,
+              "test_tokens": 438742
+            }
+          },
+          "native": {
+            "actual_vocab_size": 16384,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 1000000,
+            "test_compression": 4.050583689109601,
+            "test_tokens": 246878
+          },
+          "requested_vocab_size": 16384
+        },
+        "8192": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": -0.0005778750991275006,
+              "ci_low": -0.002327080601725173,
+              "delta": -0.001371658424714095,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "frequency_vs_native": {
+              "delta": -1.4430809912929896
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.41982356078670097,
+              "ci_low": -0.4313095078821032,
+              "delta": -0.4257098171623288,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.31176775500183185,
+              "ci_low": -0.32205361638005614,
+              "delta": -0.3170456622683544,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.3919517349549577,
+              "max_delta": -0.3861340920728191,
+              "min_delta": -0.39953450058748197,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.44288831766854697,
+              "ci_low": -0.46142279176409756,
+              "delta": -0.4522400993601128,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": -0.0017649928671543357,
+              "ci_low": -0.0036311688999567824,
+              "delta": -0.0026788341496319923,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            }
+          },
+          "merge_budget": 7932,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.7766550645149949,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.256740319148216,
+              "test_tokens": 443117
+            },
+            "frequency": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.7743247127444038,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.260101523760447,
+              "test_tokens": 442458
+            },
+            "persistence": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9148640981359308,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.8322568824149146,
+              "test_tokens": 545775
+            },
+            "prefix": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.9387359441644048,
+              "test_tokens": 515800
+            },
+            "random": {
+              "max_compression": 1.8779554323616792,
+              "mean_compression": 1.8747561068049994,
+              "mean_reachability": 1.0,
+              "mean_vocab": 8192.0,
+              "min_compression": 1.871845939591788,
+              "rows": [
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.7039104721117568,
+                  "seed": 13,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.8779554323616792,
+                  "test_tokens": 532494
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.684500330004369,
+                  "seed": 37,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.871845939591788,
+                  "test_tokens": 534232
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.6930278084529665,
+                  "seed": 73,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.8744669484615313,
+                  "test_tokens": 533485
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.6296951919979704,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.8236793825751083,
+              "test_tokens": 548342
+            },
+            "redundancy": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.7630166416822675,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.258728290797715,
+              "test_tokens": 442727
+            }
+          },
+          "native": {
+            "actual_vocab_size": 8192,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 1000000,
+            "test_compression": 3.7031825150534368,
+            "test_tokens": 270038
+          },
+          "requested_vocab_size": 8192
+        }
+      },
+      "donor": "wikitext_en",
+      "donor_sha256": "69b2903546061263dc25fc1c40496d4a0e128268e1d8371009e8024b015675d7",
+      "initial_vocab_size": 260,
+      "target": "wikipedia_sw",
+      "test_bytes": 1000000,
+      "test_documents": 556,
+      "train_bytes": 4000000,
+      "train_documents": 2030
+    },
+    {
+      "budgets": {
+        "16384": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            },
+            "frequency_vs_native": {
+              "delta": -4.889536761769958
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.5285702650556128,
+              "ci_low": -0.547340874330227,
+              "delta": -0.5371173240471527,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.4141061584349567,
+              "ci_low": -0.43060748581115205,
+              "delta": -0.42169966544347126,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.23518832999167252,
+              "max_delta": -0.20878857531886164,
+              "min_delta": -0.2769300462676414,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.5390165353546127,
+              "ci_low": -0.5603780081334144,
+              "delta": -0.5491830857580036,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            }
+          },
+          "merge_budget": 16124,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9978426434140418,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.5395471571463542,
+              "test_tokens": 649541
+            },
+            "frequency": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9978426434140418,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.5395471571463542,
+              "test_tokens": 649541
+            },
+            "persistence": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.989089028356591,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.0118671902747323,
+              "test_tokens": 988271
+            },
+            "prefix": {
+              "actual_vocab_size": 16384,
+              "english_retention": 1.0,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.1278434371288686,
+              "test_tokens": 886647
+            },
+            "random": {
+              "max_compression": 1.3434617012272534,
+              "mean_compression": 1.317513441554205,
+              "mean_reachability": 1.0,
+              "mean_vocab": 16384.0,
+              "min_compression": 1.2759190454074525,
+              "rows": [
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7563690573528908,
+                  "seed": 13,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999999,
+                  "test_compression": 1.3331595780279084,
+                  "test_tokens": 750097
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7515246782494351,
+                  "seed": 37,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999999,
+                  "test_compression": 1.3434617012272534,
+                  "test_tokens": 744345
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7438485733627052,
+                  "seed": 73,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999999,
+                  "test_compression": 1.2759190454074525,
+                  "test_tokens": 783748
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.6311199961921081,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.0056153617956285,
+              "test_tokens": 994415
+            },
+            "redundancy": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9978426434140418,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.5395471571463542,
+              "test_tokens": 649541
+            }
+          },
+          "native": {
+            "actual_vocab_size": 16384,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 999999,
+            "test_compression": 6.429083918916312,
+            "test_tokens": 155543
+          },
+          "requested_vocab_size": 16384
+        },
+        "8192": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            },
+            "frequency_vs_native": {
+              "delta": -4.264477656979373
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.5299944689857922,
+              "ci_low": -0.5488746820404395,
+              "delta": -0.5385790851574013,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.5293745751579852,
+              "ci_low": -0.5480887801676084,
+              "delta": -0.5379717049650985,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.4921558701178355,
+              "max_delta": -0.4350617416793934,
+              "min_delta": -0.5452559419607641,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.5400415847440829,
+              "ci_low": -0.5612299400814338,
+              "delta": -0.5500679259924697,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            }
+          },
+          "merge_budget": 7932,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9820268774422419,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.5394144369509095,
+              "test_tokens": 649597
+            },
+            "frequency": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9820268774422419,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.5394144369509095,
+              "test_tokens": 649597
+            },
+            "persistence": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9148640981359308,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.0110027539742559,
+              "test_tokens": 989116
+            },
+            "prefix": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.0113800598130767,
+              "test_tokens": 988747
+            },
+            "random": {
+              "max_compression": 1.1166086773980313,
+              "mean_compression": 1.05964460590261,
+              "mean_reachability": 1.0,
+              "mean_vocab": 8192.0,
+              "min_compression": 1.0076429796435762,
+              "rows": [
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.7039104721117568,
+                  "seed": 13,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999999,
+                  "test_compression": 1.0076429796435762,
+                  "test_tokens": 992414
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.684500330004369,
+                  "seed": 37,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999999,
+                  "test_compression": 1.0546821606662222,
+                  "test_tokens": 948152
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.6930278084529665,
+                  "seed": 73,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999999,
+                  "test_compression": 1.1166086773980313,
+                  "test_tokens": 895568
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.6320789268873322,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.0049554402312204,
+              "test_tokens": 995068
+            },
+            "redundancy": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9820268774422419,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999999,
+              "test_compression": 1.5394144369509095,
+              "test_tokens": 649597
+            }
+          },
+          "native": {
+            "actual_vocab_size": 8192,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 999999,
+            "test_compression": 5.803892093930283,
+            "test_tokens": 172298
+          },
+          "requested_vocab_size": 8192
+        }
+      },
+      "donor": "wikitext_en",
+      "donor_sha256": "69b2903546061263dc25fc1c40496d4a0e128268e1d8371009e8024b015675d7",
+      "initial_vocab_size": 260,
+      "target": "wikipedia_ar",
+      "test_bytes": 1000000,
+      "test_documents": 35,
+      "train_bytes": 4000000,
+      "train_documents": 86
+    },
+    {
+      "budgets": {
+        "16384": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            },
+            "frequency_vs_native": {
+              "delta": -2.119331900949359
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.15965467135753736,
+              "ci_low": -0.17161751077879836,
+              "delta": -0.16582795966290642,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.13989311213758282,
+              "ci_low": -0.15055383779556367,
+              "delta": -0.1452680655309957,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.16934324789627583,
+              "max_delta": -0.1386484845378273,
+              "min_delta": -0.18627902218822778,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.2117909718383322,
+              "ci_low": -0.2556346966495824,
+              "delta": -0.2309609399404542,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            }
+          },
+          "merge_budget": 16124,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9701238458049002,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.0692024052408757,
+              "test_tokens": 483278
+            },
+            "frequency": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9701238458049002,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.0692024052408757,
+              "test_tokens": 483278
+            },
+            "persistence": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.989089028356591,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.8955908556697123,
+              "test_tokens": 527540
+            },
+            "prefix": {
+              "actual_vocab_size": 16384,
+              "english_retention": 1.0,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.9180383837841364,
+              "test_tokens": 521366
+            },
+            "random": {
+              "max_compression": 1.9280862394413176,
+              "mean_compression": 1.8986859834427818,
+              "mean_reachability": 1.0,
+              "mean_vocab": 16384.0,
+              "min_compression": 1.8822466496009638,
+              "rows": [
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7563690573528908,
+                  "seed": 13,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.8857250612860645,
+                  "test_tokens": 530300
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7515246782494351,
+                  "seed": 37,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.9280862394413176,
+                  "test_tokens": 518649
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7438485733627052,
+                  "seed": 73,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.8822466496009638,
+                  "test_tokens": 531280
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.6362461451841994,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.8370601159552344,
+              "test_tokens": 544348
+            },
+            "redundancy": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9701238458049002,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.0692024052408757,
+              "test_tokens": 483278
+            }
+          },
+          "native": {
+            "actual_vocab_size": 16384,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 1000000,
+            "test_compression": 4.188534306190235,
+            "test_tokens": 238747
+          },
+          "requested_vocab_size": 16384
+        },
+        "8192": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": 0.0004899706983047425,
+              "ci_low": -0.00019798098866313785,
+              "delta": 0.00011637906497963257,
+              "iterations": 2000.0,
+              "p_value": 0.494
+            },
+            "frequency_vs_native": {
+              "delta": -1.673658739971187
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.3333583749409612,
+              "ci_low": -0.35105320335619344,
+              "delta": -0.3424759132909434,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.21870939858200983,
+              "ci_low": -0.23353218178212456,
+              "delta": -0.22624347934473987,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.2786849671460408,
+              "max_delta": -0.26779263528452657,
+              "min_delta": -0.2955411001792514,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.2994148828473812,
+              "ci_low": -0.3408808298613744,
+              "delta": -0.3178001646584847,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": -0.00030021130517845503,
+              "ci_low": -0.002346615031104682,
+              "delta": -0.00134093609192254,
+              "iterations": 2000.0,
+              "p_value": 0.014
+            }
+          },
+          "merge_budget": 7932,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.7689822743918571,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.0604197487112073,
+              "test_tokens": 485338
+            },
+            "frequency": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.7889992142295877,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.0602202375433936,
+              "test_tokens": 485385
+            },
+            "persistence": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9148640981359308,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.7004142209042123,
+              "test_tokens": 588092
+            },
+            "prefix": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.8213443342531122,
+              "test_tokens": 549045
+            },
+            "random": {
+              "max_compression": 1.7838539808485436,
+              "mean_compression": 1.7737990856410402,
+              "mean_reachability": 1.0,
+              "mean_vocab": 8192.0,
+              "min_compression": 1.7560187542802956,
+              "rows": [
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.7039104721117568,
+                  "seed": 13,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.7560187542802956,
+                  "test_tokens": 569470
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.684500330004369,
+                  "seed": 37,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.7838539808485436,
+                  "test_tokens": 560584
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.6930278084529665,
+                  "seed": 73,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 1000000,
+                  "test_compression": 1.7815245217942803,
+                  "test_tokens": 561317
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.6307812236762829,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 1.734088008434604,
+              "test_tokens": 576672
+            },
+            "redundancy": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.7677315316818194,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 1000000,
+              "test_compression": 2.0591554168142396,
+              "test_tokens": 485636
+            }
+          },
+          "native": {
+            "actual_vocab_size": 8192,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 1000000,
+            "test_compression": 3.7338789775145806,
+            "test_tokens": 267818
+          },
+          "requested_vocab_size": 8192
+        }
+      },
+      "donor": "wikitext_en",
+      "donor_sha256": "69b2903546061263dc25fc1c40496d4a0e128268e1d8371009e8024b015675d7",
+      "initial_vocab_size": 260,
+      "target": "wikipedia_hu",
+      "test_bytes": 1000000,
+      "test_documents": 96,
+      "train_bytes": 4000000,
+      "train_documents": 302
+    },
+    {
+      "budgets": {
+        "16384": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            },
+            "frequency_vs_native": {
+              "delta": -2.886294752687008
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.04997388986896696,
+              "ci_low": -0.05619715982583148,
+              "delta": -0.05285673012975156,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.04930188152476569,
+              "ci_low": -0.055580137430981266,
+              "delta": -0.05220499304209514,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.028051538889139582,
+              "max_delta": -0.025322786387407037,
+              "min_delta": -0.029596438420918192,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.053918948654273144,
+              "ci_low": -0.0640985200694152,
+              "delta": -0.05849400876657662,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            }
+          },
+          "merge_budget": 16124,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9955151563688784,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0743286506834893,
+              "test_tokens": 930812
+            },
+            "frequency": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9955151563688784,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0743286506834893,
+              "test_tokens": 930812
+            },
+            "persistence": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.989089028356591,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0220445223925292,
+              "test_tokens": 978429
+            },
+            "prefix": {
+              "actual_vocab_size": 16384,
+              "english_retention": 1.0,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0220455669706918,
+              "test_tokens": 978428
+            },
+            "random": {
+              "max_compression": 1.0517504317444157,
+              "mean_compression": 1.0481842829941288,
+              "mean_reachability": 1.0,
+              "mean_vocab": 16384.0,
+              "min_compression": 1.0462397023651342,
+              "rows": [
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7563690573528908,
+                  "seed": 13,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999998,
+                  "test_compression": 1.0517504317444157,
+                  "test_tokens": 950794
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7515246782494351,
+                  "seed": 37,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999998,
+                  "test_compression": 1.0465627148728371,
+                  "test_tokens": 955507
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": 0.7438485733627052,
+                  "seed": 73,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999998,
+                  "test_compression": 1.0462397023651342,
+                  "test_tokens": 955802
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.6311640586075471,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0182262869896894,
+              "test_tokens": 982098
+            },
+            "redundancy": {
+              "actual_vocab_size": 16384,
+              "english_retention": 0.9955151563688784,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0743286506834893,
+              "test_tokens": 930812
+            }
+          },
+          "native": {
+            "actual_vocab_size": 16384,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 999998,
+            "test_compression": 3.9606234033704975,
+            "test_tokens": 252485
+          },
+          "requested_vocab_size": 16384
+        },
+        "8192": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            },
+            "frequency_vs_native": {
+              "delta": -2.5109508356539
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.05487450386127497,
+              "ci_low": -0.06250610931735107,
+              "delta": -0.05842317967218991,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.05271549998569544,
+              "ci_low": -0.059703948124229564,
+              "delta": -0.05602676740969925,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.04813899586653614,
+              "max_delta": -0.03679232803894439,
+              "min_delta": -0.05546256189665644,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.0548142882163683,
+              "ci_low": -0.065148996921994,
+              "delta": -0.05946539549849561,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            }
+          },
+          "merge_budget": 7932,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9496060216569874,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0736953769805693,
+              "test_tokens": 931361
+            },
+            "frequency": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9496060216569874,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0736953769805693,
+              "test_tokens": 931361
+            },
+            "persistence": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9148640981359308,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0173043821491208,
+              "test_tokens": 982988
+            },
+            "prefix": {
+              "actual_vocab_size": 8192,
+              "english_retention": 1.0,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0186380578200491,
+              "test_tokens": 981701
+            },
+            "random": {
+              "max_compression": 1.0400773819119782,
+              "mean_compression": 1.0285887870593315,
+              "mean_reachability": 1.0,
+              "mean_vocab": 8192.0,
+              "min_compression": 1.020985375376234,
+              "rows": [
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.7039104721117568,
+                  "seed": 13,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999998,
+                  "test_compression": 1.0400773819119782,
+                  "test_tokens": 961465
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.684500330004369,
+                  "seed": 37,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999998,
+                  "test_compression": 1.0247036038897828,
+                  "test_tokens": 975890
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": 0.6930278084529665,
+                  "seed": 73,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 999998,
+                  "test_compression": 1.020985375376234,
+                  "test_tokens": 979444
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.6332131329866824,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.01698469536671,
+              "test_tokens": 983297
+            },
+            "redundancy": {
+              "actual_vocab_size": 8192,
+              "english_retention": 0.9496060216569874,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 999998,
+              "test_compression": 1.0736953769805693,
+              "test_tokens": 931361
+            }
+          },
+          "native": {
+            "actual_vocab_size": 8192,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 999998,
+            "test_compression": 3.5846462126344694,
+            "test_tokens": 278967
+          },
+          "requested_vocab_size": 8192
+        }
+      },
+      "donor": "wikitext_en",
+      "donor_sha256": "69b2903546061263dc25fc1c40496d4a0e128268e1d8371009e8024b015675d7",
+      "initial_vocab_size": 260,
+      "target": "wikipedia_zh",
+      "test_bytes": 1000000,
+      "test_documents": 79,
+      "train_bytes": 4000000,
+      "train_documents": 160
+    },
+    {
+      "budgets": {
+        "16384": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            },
+            "frequency_vs_native": {
+              "delta": -0.9965961467329811
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.36004619168355095,
+              "ci_low": -0.37415363713326044,
+              "delta": -0.367198175794484,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.29053002792329313,
+              "ci_low": -0.3022969014310937,
+              "delta": -0.29644148444498963,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -0.5745792530189848,
+              "max_delta": -0.5417138561919601,
+              "min_delta": -0.6202379697362428,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -0.953221237689909,
+              "ci_low": -0.9777150156344424,
+              "delta": -0.9656391507773598,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": 0.0,
+              "ci_low": 0.0,
+              "delta": 0.0,
+              "iterations": 2000.0,
+              "p_value": 1.0
+            }
+          },
+          "merge_budget": 16124,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 16384,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 3.532480519531449,
+              "test_tokens": 254999
+            },
+            "frequency": {
+              "actual_vocab_size": 16384,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 3.532480519531449,
+              "test_tokens": 254999
+            },
+            "persistence": {
+              "actual_vocab_size": 16384,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 3.1687779446787703,
+              "test_tokens": 284267
+            },
+            "prefix": {
+              "actual_vocab_size": 16384,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 3.2388957006684334,
+              "test_tokens": 278113
+            },
+            "random": {
+              "max_compression": 2.999147646872763,
+              "mean_compression": 2.96733058255268,
+              "mean_reachability": 1.0,
+              "mean_vocab": 16384.0,
+              "min_compression": 2.9225006651050216,
+              "rows": [
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": null,
+                  "seed": 13,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 900779,
+                  "test_compression": 2.999147646872763,
+                  "test_tokens": 300345
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": null,
+                  "seed": 37,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 900779,
+                  "test_compression": 2.9225006651050216,
+                  "test_tokens": 308222
+                },
+                {
+                  "actual_vocab_size": 16384,
+                  "english_retention": null,
+                  "seed": 73,
+                  "selected_merges": 16124,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 900779,
+                  "test_compression": 2.980343435680254,
+                  "test_tokens": 302240
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 16384,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 2.581820214220406,
+              "test_tokens": 348893
+            },
+            "redundancy": {
+              "actual_vocab_size": 16384,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 16124,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 3.532480519531449,
+              "test_tokens": 254999
+            }
+          },
+          "native": {
+            "actual_vocab_size": 16384,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 900779,
+            "test_compression": 4.52907666626443,
+            "test_tokens": 198888
+          },
+          "requested_vocab_size": 16384
+        },
+        "8192": {
+          "comparisons": {
+            "combined_vs_frequency": {
+              "ci_high": -0.002131781093920127,
+              "ci_low": -0.004280316792760796,
+              "delta": -0.0032217609061113706,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "frequency_vs_native": {
+              "delta": -0.5827266641742659
+            },
+            "persistence_vs_frequency": {
+              "ci_high": -0.814303906857681,
+              "ci_low": -0.833491726043089,
+              "delta": -0.8241717747623225,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "prefix_vs_frequency": {
+              "ci_high": -0.5658379127984348,
+              "ci_low": -0.582894220556932,
+              "delta": -0.5746879415068951,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "random_vs_frequency": {
+              "delta": -1.0248367823412785,
+              "max_delta": -0.983074397732667,
+              "min_delta": -1.0740995949471306,
+              "seeds": [
+                13,
+                37,
+                73
+              ]
+            },
+            "rank_fusion_vs_frequency": {
+              "ci_high": -1.239520562501233,
+              "ci_low": -1.2650932168284181,
+              "delta": -1.2524705830871627,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            },
+            "redundancy_vs_frequency": {
+              "ci_high": -0.008101169208564364,
+              "ci_low": -0.011172018668375916,
+              "delta": -0.00963968622557454,
+              "iterations": 2000.0,
+              "p_value": 0.0
+            }
+          },
+          "merge_budget": 7932,
+          "methods": {
+            "combined": {
+              "actual_vocab_size": 8192,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 3.4917298187808896,
+              "test_tokens": 257975
+            },
+            "frequency": {
+              "actual_vocab_size": 8192,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 3.4949677189061674,
+              "test_tokens": 257736
+            },
+            "persistence": {
+              "actual_vocab_size": 8192,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 2.6798689784843868,
+              "test_tokens": 336128
+            },
+            "prefix": {
+              "actual_vocab_size": 8192,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 2.9299342961228207,
+              "test_tokens": 307440
+            },
+            "random": {
+              "max_compression": 2.525744520369337,
+              "mean_compression": 2.482276683168782,
+              "mean_reachability": 1.0,
+              "mean_vocab": 8192.0,
+              "min_compression": 2.432532642011315,
+              "rows": [
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": null,
+                  "seed": 13,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 900779,
+                  "test_compression": 2.4885528871256932,
+                  "test_tokens": 361969
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": null,
+                  "seed": 37,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 900779,
+                  "test_compression": 2.525744520369337,
+                  "test_tokens": 356639
+                },
+                {
+                  "actual_vocab_size": 8192,
+                  "english_retention": null,
+                  "seed": 73,
+                  "selected_merges": 7932,
+                  "strict_reachability": 1.0,
+                  "test_bytes": 900779,
+                  "test_compression": 2.432532642011315,
+                  "test_tokens": 370305
+                }
+              ]
+            },
+            "rank_fusion": {
+              "actual_vocab_size": 8192,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 2.2573595194478764,
+              "test_tokens": 399041
+            },
+            "redundancy": {
+              "actual_vocab_size": 8192,
+              "english_retention": null,
+              "seed": 0,
+              "selected_merges": 7932,
+              "strict_reachability": 1.0,
+              "test_bytes": 900779,
+              "test_compression": 3.485474272359328,
+              "test_tokens": 258438
+            }
+          },
+          "native": {
+            "actual_vocab_size": 8192,
+            "selected_merges": 0,
+            "strict_reachability": null,
+            "test_bytes": 900779,
+            "test_compression": 4.077694383080433,
+            "test_tokens": 220904
+          },
+          "requested_vocab_size": 8192
+        }
+      },
+      "donor": "codeparrot_py",
+      "donor_sha256": "dc1f9d8b61d48b3a86034040bea6993a4796947869a762cdc7ed5001db06406d",
+      "initial_vocab_size": 260,
+      "target": "wikitext_en",
+      "test_bytes": 1000000,
+      "test_documents": 1218,
+      "train_bytes": 4000000,
+      "train_documents": 5378
+    }
+  ],
+  "primary_arm": "combined",
+  "primary_holm": [
+    {
+      "label": "wikitext_en->wikipedia_sw:8192",
+      "p_adjusted": 0.0,
+      "p_value": 0.0
+    },
+    {
+      "label": "wikitext_en->wikipedia_sw:16384",
+      "p_adjusted": 1.0,
+      "p_value": 1.0
+    },
+    {
+      "label": "wikitext_en->wikipedia_ar:8192",
+      "p_adjusted": 1.0,
+      "p_value": 1.0
+    },
+    {
+      "label": "wikitext_en->wikipedia_ar:16384",
+      "p_adjusted": 1.0,
+      "p_value": 1.0
+    },
+    {
+      "label": "wikitext_en->wikipedia_hu:8192",
+      "p_adjusted": 1.0,
+      "p_value": 0.494
+    },
+    {
+      "label": "wikitext_en->wikipedia_hu:16384",
+      "p_adjusted": 1.0,
+      "p_value": 1.0
+    }
+  ],
+  "random_seeds": [
+    13,
+    37,
+    73
+  ]
+}
