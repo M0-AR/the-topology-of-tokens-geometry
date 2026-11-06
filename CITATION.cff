@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this repository, please cite the software and the accompanying report."
+title: "TopoBPE: topological signatures of byte-pair encodings"
+authors:
+  - name: "TopoBPE contributors"
+version: 0.1.0
+date-released: "2026-11-05"
+license: MIT
+type: software

@@ -1,0 +1,156 @@
+project:
+  name: topobpe
+  seed: 20261105
+  artifact_dir: artifacts
+  results_dir: results
+
+data:
+  data_dir: data/processed
+  docs_per_corpus: 12000
+  min_chars: 200
+  max_chars: 200000
+  train_fraction: 0.8
+  val_fraction: 0.1
+  test_fraction: 0.1
+  corpora:
+    - name: wikitext_en
+      hf_id: Salesforce/wikitext
+      hf_config: wikitext-103-raw-v1
+      split: train
+      field: text
+      language: en
+      domain: prose
+    - name: codeparrot_py
+      hf_id: codeparrot/codeparrot-clean
+      hf_config: null
+      split: train
+      field: content
+      language: py
+      domain: code
+    - name: wikipedia_zh
+      hf_id: wikimedia/wikipedia
+      hf_config: 20231101.zh
+      split: train
+      field: text
+      language: zh
+      domain: prose
+    - name: wikipedia_hu
+      hf_id: wikimedia/wikipedia
+      hf_config: 20231101.hu
+      split: train
+      field: text
+      language: hu
+      domain: prose
+    - name: wikipedia_ar
+      hf_id: wikimedia/wikipedia
+      hf_config: 20231101.ar
+      split: train
+      field: text
+      language: ar
+      domain: prose
+    - name: wikipedia_sw
+      hf_id: wikimedia/wikipedia
+      hf_config: 20231101.sw
+      split: train
+      field: text
+      language: sw
+      domain: prose
+tokenizers:
+  families:
+    - bpe
+    - unigram
+  vocab_sizes:
+    - 8192
+    - 16384
+    - 32768
+  min_frequency: 2
+  special_tokens:
+    - <pad>
+    - <bos>
+    - <eos>
+    - <unk>
+  byte_level: true
+  sample_bytes_for_training: 100000000
+
+features:
+  vocab_points: 256
+  cooccurrence_tokens: 256
+  cooccurrence_window: 5
+  cooccurrence_docs: 512
+  byte_ngram_dim: 64
+  byte_ngram_max: 3
+  maxdim: 1
+  persistence_thresholds:
+    - 0.05
+    - 0.10
+    - 0.20
+    - 0.40
+
+model:
+  d_model: 256
+  n_layers: 6
+  n_heads: 8
+  d_ff: 1024
+  dropout: 0.1
+  context_length: 1024
+  vocab_capacity: 32768
+  byte_chunk: 2048
+  batch_size: 16
+  steps: 1500
+  warmup_steps: 100
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  grad_clip: 1.0
+  eval_interval: 250
+  bf16: true
+  tokenizer_families:
+    - bpe
+  seeds:
+    - 13
+    - 37
+
+analysis:
+  outer_folds: leave_one_corpus_out
+  ridge_alphas:
+    - 0.01
+    - 0.1
+    - 1.0
+    - 10.0
+    - 100.0
+  bootstrap_iterations: 2000
+  permutation_iterations: 2000
+  confidence: 0.95
+  primary_targets:
+    - compression
+    - bpb
+
+market:
+  enabled: true
+  cache_dir: data/market
+  tickers:
+    - AAPL
+    - MSFT
+    - NVDA
+    - JPM
+    - XOM
+    - JNJ
+    - WMT
+    - CAT
+    - KO
+    - DIS
+    - GS
+    - TSLA
+  ranges:
+    - range: 10y
+      interval: 1d
+    - range: 2y
+      interval: 1h
+    - range: 1mo
+      interval: 5m
+  endpoint: https://query1.finance.yahoo.com/v8/finance/chart
+  nasdaq_endpoint: https://api.nasdaq.com/api/quote
+  user_agent: Mozilla/5.0 (research; topobpe)
+  train_end: 2023-12-31
+  val_end: 2024-12-31
+  max_retries: 3
+  sleep_seconds: 2

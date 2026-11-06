@@ -1,0 +1,31 @@
+services:
+  topobpe-cpu:
+    build:
+      context: .
+      args:
+        TORCH_INDEX: https://download.pytorch.org/whl/cpu
+    image: topobpe:cpu
+    working_dir: /app
+    environment:
+      TOPOBPE_ROOT: /app
+    volumes:
+      - .:/app
+    entrypoint: ["python", "-m", "topobpe"]
+    command: ["--help"]
+
+  topobpe-gpu:
+    profiles: ["gpu"]
+    build:
+      context: .
+      args:
+        TORCH_INDEX: https://download.pytorch.org/whl/cu130
+    image: topobpe:gpu
+    working_dir: /app
+    environment:
+      TOPOBPE_ROOT: /app
+    volumes:
+      - .:/app
+    gpus: all
+    shm_size: "8gb"
+    entrypoint: ["python", "-m", "topobpe"]
+    command: ["--help"]

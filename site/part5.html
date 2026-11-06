@@ -1,0 +1,388 @@
+
+  /* ---------- beginner guide ---------- */
+  const TERMS = [
+    {t:"Token", b:"A token is a chunk of text that a model treats as one unit. It can be a whole word, part of a word, a punctuation mark, or a single byte. The model never sees raw text; it sees a sequence of token IDs.", w:"Every cost and prediction in this project is ultimately about tokens."},
+    {t:"Tokenizer", b:"The algorithm that splits text into tokens and maps each token to an integer ID. Different tokenizers on the same sentence can produce very different token counts, which is why tokenizer choice is an economic decision.", w:"We train 36 of them: 2 families × 3 vocabulary sizes × 6 corpora."},
+    {t:"BPE (byte-pair encoding)", b:"Start with individual bytes. Repeatedly merge the most frequent adjacent pair into a new token. Frequent words become one token; rare words stay as several pieces. It is simple, fast, and the dominant choice in production LLMs.", w:"18 of the 36 tokenizers are BPE, and all 36 language models use BPE."},
+    {t:"Unigram", b:"Start with a large candidate vocabulary and remove tokens that hurt the likelihood of the training text. The result is a probabilistic vocabulary. It often compresses differently from BPE, especially on non-Latin scripts.", w:"The other 18 tokenizers. Compared on compression and topology, but not on LM BPB."},
+    {t:"Compression (bytes per token)", b:"How many bytes of original text one token represents on average. Higher is better: fewer tokens for the same document. In this repo it is measured on the held-out test split, never on training data.", w:"The primary target of H1. Baseline R² = 0.974."},
+    {t:"Bits per byte (BPB)", b:"A language model's loss converted into bits needed to encode each byte of text. Lower is better. It is comparable across vocabularies because it normalises by bytes, not tokens.", w:"The primary target of H2. Measured from 36 trained language models."},
+    {t:"Entropy", b:"A measure of uncertainty. Byte entropy describes how unpredictable the raw bytes are; token entropy describes the same for tokens. High entropy means more information per symbol. It is one of the cheap baseline features.", w:"Byte entropy is the strongest single predictor in the fitted BPB model."},
+    {t:"Embedding", b:"A dense vector that represents a token. Tokens with similar usage end up close together. In this project, each token is represented by a 64-dimensional vector built from byte trigrams, so the geometry is reproducible without a pretrained model.", w:"The “vocab cloud” topology features are computed on 256 sampled token embeddings."},
+    {t:"Persistent homology", b:"A branch of topological data analysis. Grow a shell around a point cloud; track when connected components and loops appear and disappear. Features that persist across many scales are considered meaningful structure.", w:"The 72 “topology” features summarise these births and deaths for H0 (components) and H1 (loops)."},
+    {t:"H0 and H1", b:"H0 counts connected components; H1 counts loops. A persistence diagram records each feature's birth scale and death scale. Long bars mean strong structure; short bars are often noise.", w:"H0 and H1 descriptors are computed on both the token-embedding cloud and the token co-occurrence graph."},
+    {t:"PCA", b:"Principal component analysis rotates a high-dimensional dataset so the directions with the most variance come first. It is a visualisation and compression tool, not a causal claim.", w:"The 3D map projects the 80 features onto the three directions that explain the most variance."},
+    {t:"R²", b:"The fraction of variance in the target explained by a model. 1.0 is perfect, 0 is no better than predicting the mean, and negative values mean the model is worse than the mean. Out-of-corpus R² can be negative.", w:"H1 baseline 0.974; H2 baseline 0.887. The topology-only models are negative or near zero."},
+    {t:"MAE", b:"Mean absolute error: the average size of the miss, in the target's units. For compression, MAE 0.135 means about 0.135 bytes per token of average error.", w:"Reported beside R² because R² alone can hide the practical size of errors."},
+    {t:"Leave-one-corpus-out (LOCO)", b:"Train on all corpora except one, then predict the held-out corpus. Repeat for each corpus. This tests generalisation to a new language or domain, not memorisation of the dataset.", w:"The core evaluation design for H1 and H2."},
+    {t:"Permutation test", b:"Shuffle the target labels many times, refit, and see how often chance produces an improvement at least as large as the observed one. The p-value is that frequency. It makes no normality assumption.", w:"2,000 permutations for H1 and H2. H1 p = 0.958."},
+    {t:"Bootstrap", b:"Resample the data with replacement many times to estimate the uncertainty of a statistic. Here, corpora are resampled as clusters so that rows from the same corpus are not treated as independent.", w:"2,000 cluster-bootstrap resamples produce the confidence intervals on R² and on deltas."},
+    {t:"p-value", b:"The probability of seeing a result at least this extreme if the null hypothesis were true. It is not the probability that the null is true, and it is not a measure of effect size.", w:"H1 p = 0.958 means the observed loss is utterly ordinary under shuffling."},
+    {t:"Holm correction", b:"When you test several hypotheses, some will look significant by chance. Holm adjusts each p-value upward in a way that controls the family-wise error rate. It is stricter than doing nothing and less strict than Bonferroni.", w:"Applied across H1–H4. Only the H3 exploratory association survives (0.024)."},
+    {t:"Confidence interval", b:"A range that would contain the true value in a specified fraction of repeated samples. A 95% interval spanning zero is compatible with no effect, even if the point estimate looks large.", w:"The surviving H3 interval still spans zero — reason for caution, not triumph."},
+    {t:"Why this is pre-registered", b:"The hypotheses and decision rules were frozen before training. This prevents unconscious p-hacking: you cannot move the goalposts after seeing the result. Deviations are documented publicly.", w:"The protocol is in docs/PROTOCOL.md, with five recorded execution deviations."}
+  ];
+  const learnGrid = $("#learnGrid");
+  function renderLearn(q){
+    const query = (q || "").trim().toLowerCase();
+    const items = TERMS.filter(x => !query || (x.t + " " + x.b + " " + x.w).toLowerCase().includes(query));
+    learnGrid.innerHTML = items.map(x => `<details class="term" ${query ? "open" : ""}><summary>${esc(x.t)}</summary><div class="body"><p style="margin:0 0 8px">${esc(x.b)}</p><p style="margin:0;color:var(--teal);font-size:.78rem"><b style="color:var(--teal)">In this project:</b> ${esc(x.w)}</p></div></details>`).join("");
+    $("#learnCount").textContent = items.length + " of " + TERMS.length + " concepts";
+  }
+  renderLearn("");
+  $("#learnSearch").addEventListener("input", e => renderLearn(e.target.value));
+  $("#learnToggle").addEventListener("click", () => {
+    const anyClosed = $$("#learnGrid details").some(d => !d.open);
+    $$("#learnGrid details").forEach(d => d.open = anyClosed);
+    $("#learnToggle").textContent = anyClosed ? "Close all" : "Open all";
+  });
+
+  /* ---------- quiz ---------- */
+  const QUESTIONS = [
+    {q:"What does a tokenizer actually do?", o:["Encrypts text before it reaches the model","Splits text into tokens and maps each token to an integer ID","Compresses the model weights","Translates one language into another"], a:1, e:"A tokenizer is the interface between raw text and the model. It splits text into chunks (tokens) and maps each chunk to an ID. Everything the model sees is a sequence of those IDs.", d:"Foundation"},
+    {q:"You compare two tokenizers on the same 1 GB of text. Tokenizer A emits 250M tokens; Tokenizer B emits 286M. What does that imply for input cost, all else equal?", o:["A is about 14% cheaper on input tokens","B is about 14% cheaper","They cost the same because the text is the same","Cost depends only on model size"], a:0, e:"286/250 = 1.144, so B needs about 14.4% more tokens for identical content. At a fixed price per token, that is a 14.4% higher input bill.", d:"Business"},
+    {q:"In this benchmark, what happened to held-out compression R² when 72 topology features were added to the eight-feature baseline?", o:["It rose from 0.974 to 0.998","It stayed exactly the same","It fell from 0.974 to 0.843","It became undefined"], a:2, e:"It fell. The baseline R² was 0.974; the full model reached 0.843. The permutation test on the improvement gave p = 0.958, so this is not evidence of a gain.", d:"Results"},
+    {q:"What is leave-one-corpus-out (LOCO) validation?", o:["Train on five corpora, predict the sixth, repeat","Leave out one row at a time","Train on 80% of every corpus with a random split","Use leave-one-out on model layers"], a:0, e:"LOCO hides an entire corpus, fits on the rest, and predicts the hidden one. It tests transfer to a new language or domain, which is much harder than random row splits.", d:"Method"},
+    {q:"Why can the Unigram rows have no BPB value in the explorer?", o:["Unigram tokenizers cannot be evaluated","BPB is always zero for Unigram","The 36 language models were trained only on BPE tokenizers","The data was lost"], a:2, e:"The LM stage intentionally used BPE only, because production decoder-only LLMs are overwhelmingly BPE. Unigram still has compression and the full 80-feature set, so it appears in the topology analysis.", d:"Method"},
+    {q:"H1's permutation test gives p = 0.958 for the observed ΔR² of −0.131. What is the correct reading?", o:["There is a 95.8% chance topology works","The observed result is worse than 95.8% of random shuffles; there is no evidence of a gain","The result is significant at the 5% level","The baseline model is invalid"], a:1, e:"The p-value is the fraction of shuffled-label runs that produced an improvement at least as large as observed. p = 0.958 means the observed change is entirely ordinary under the null — and in the wrong direction.", d:"Statistics"},
+    {q:"Which hypothesis was the only one to survive Holm correction, and what is the caveat?", o:["H1, and there is no caveat","H2, and the effect is huge","H3 co-occurrence H1 persistence, but its bootstrap CI spans zero and it is exploratory","H4 market transfer, but only for tech stocks"], a:2, e:"The H3 association (ρ = −0.718, raw p = 0.0015, Holm-adjusted p = 0.024) survives correction. Its bootstrap interval [−0.877, 0.113] still crosses zero, and it is an exploratory analysis on 18 rows. Treat it as a lead, not a law.", d:"Results"},
+    {q:"What does a lower bits-per-byte (BPB) value mean?", o:["The model needs fewer bits to encode each byte, so it predicts the text better","The model has fewer parameters","The tokenizer has a smaller vocabulary","The text is shorter"], a:0, e:"BPB normalises loss by the number of bytes, which makes it comparable across tokenizers with different vocabularies. Lower is better: fewer bits per byte means better prediction.", d:"Foundation"},
+    {q:"Why does the baseline use only eight features, and why does that matter?", o:["Because more features were unavailable","To make the comparison fair: can 72 expensive descriptors beat the cheap measurements a competent team already has?","Because eight is the legal maximum","To hide the topology result"], a:1, e:"The baseline is deliberately boring. If sophisticated features cannot beat eight cheap statistics out of corpus, the burden of proof is on the sophisticated features. That is exactly what happened.", d:"Method"},
+    {q:"You run an LLM product and want to use this work tomorrow. What is the most defensible first action?", o:["Add persistent homology to your feature pipeline","Measure bytes per token and BPB for your candidate tokenizers on your own traffic, then convert the difference into tokens and cost","Switch to the largest vocabulary available","Ignore tokenization because model size dominates"], a:1, e:"Measure first, on your own distribution. Use the harness and the explorer to translate compression into token volume and budget. The negative result tells you where not to spend engineering time; the measurement tells you where the money is.", d:"Business"}
+  ];
+  let qi = 0, score = 0, answered = false;
+  const qText = $("#qText"), qOpts = $("#qOpts"), qFb = $("#qFb"), qNext = $("#qNext"), qBar = $("#qBar"), qCount = $("#qCount"), qScoreTop = $("#qScoreTop"), qHint = $("#qHint");
+  function renderQ(){
+    answered = false;
+    const q = QUESTIONS[qi];
+    qText.textContent = q.q;
+    qCount.textContent = `Question ${qi+1} of ${QUESTIONS.length}`;
+    qScoreTop.textContent = `Score ${score}`;
+    qBar.style.width = ((qi) / QUESTIONS.length * 100) + "%";
+    qHint.textContent = "Choose one answer";
+    qFb.className = "qfb"; qFb.innerHTML = "";
+    qNext.style.display = "none";
+    qOpts.innerHTML = "";
+    q.o.forEach((opt, i) => {
+      const b = document.createElement("button");
+      b.className = "qopt";
+      b.innerHTML = `<span class="letter">${String.fromCharCode(65+i)}</span><span>${esc(opt)}</span>`;
+      b.addEventListener("click", () => choose(i));
+      qOpts.appendChild(b);
+    });
+  }
+  function choose(i){
+    if(answered) return;
+    answered = true;
+    const q = QUESTIONS[qi];
+    const buttons = $$(".qopt", qOpts);
+    buttons.forEach((b, j) => {
+      b.disabled = true;
+      if(j === q.a) b.classList.add("correct");
+      if(j === i && i !== q.a) b.classList.add("wrong");
+    });
+    if(i === q.a){ score++; qScoreTop.textContent = `Score ${score}`; qFb.className = "qfb show good"; qFb.innerHTML = `<b>Correct.</b> ${esc(q.e)}`; }
+    else { qFb.className = "qfb show bad"; qFb.innerHTML = `<b>Not quite.</b> The correct answer is <b>${String.fromCharCode(65+q.a)}</b>. ${esc(q.e)}`; }
+    qHint.textContent = q.d + " · explanation above";
+    qNext.style.display = "inline-flex";
+    qNext.textContent = qi === QUESTIONS.length - 1 ? "See my result" : "Next question";
+  }
+  qNext.addEventListener("click", () => {
+    qi++;
+    if(qi >= QUESTIONS.length){ finishQuiz(); } else { renderQ(); }
+  });
+  function finishQuiz(){
+    $("#qBody").style.display = "none";
+    $("#qResult").classList.add("show");
+    qBar.style.width = "100%";
+    qCount.textContent = "Complete";
+    $("#qFinal").textContent = score + "/" + QUESTIONS.length;
+    const ratio = score / QUESTIONS.length;
+    let msg, sub;
+    if(ratio === 1){ msg = "Flawless. You can defend this benchmark in a room."; sub = "You understand tokenization economics, the LOCO design, the permutation test, and the one surviving exploratory result. That is more than most interview candidates."; }
+    else if(ratio >= .8){ msg = "Excellent. You are operating above the field."; sub = "Revisit the questions you missed, then read the protocol for the details. You already have the mental model."; }
+    else if(ratio >= .6){ msg = "Solid. The core idea is in place."; sub = "Focus on the difference between R², permutation p-values, and Holm correction. Those three separate a summary from an argument."; }
+    else if(ratio >= .4){ msg = "Good start. The intuition is forming."; sub = "Read the beginner guide sections on LOCO, permutations, and R², then retake this. The second pass will feel very different."; }
+    else { msg = "You are at the beginning — which is exactly where everyone starts."; sub = "Open the beginner guide, read the first five cards, and come back. This page is designed to take you from zero to confident in one sitting."; }
+    $("#qMsg").textContent = msg;
+    $("#qSub").textContent = sub;
+  }
+  $("#qRetry").addEventListener("click", () => {
+    qi = 0; score = 0; answered = false;
+    $("#qResult").classList.remove("show");
+    $("#qBody").style.display = "block";
+    renderQ();
+  });
+  renderQ();
+})();
+</script>
+
+<script type="module">
+const DATA = window.DATA;
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const famColor = {bpe:0x5eead4, unigram:0xf472b6};
+const famHex = {bpe:"#5eead4", unigram:"#f472b6"};
+
+function colorRamp(t){
+  const stops = [[34,211,238],[94,234,212],[251,191,36],[244,114,182]];
+  const x = Math.max(0, Math.min(1, t)) * (stops.length - 1);
+  const i = Math.min(stops.length - 2, Math.floor(x));
+  const f = x - i;
+  const a = stops[i], b = stops[i+1];
+  return `rgb(${Math.round(a[0]+(b[0]-a[0])*f)},${Math.round(a[1]+(b[1]-a[1])*f)},${Math.round(a[2]+(b[2]-a[2])*f)})`;
+}
+function toHex(rgb){
+  const m = rgb.match(/\d+/g);
+  return (m[0]<<16) + (m[1]<<8) + Number(m[2]);
+}
+
+function renderFallback2D(){
+  const mount = document.getElementById("fallback2d");
+  if(!mount || mount.dataset.done) return;
+  const pts = DATA.pca.points;
+  const xs = pts.map(p=>p.x), ys = pts.map(p=>p.y);
+  const xmin=Math.min(...xs), xmax=Math.max(...xs), ymin=Math.min(...ys), ymax=Math.max(...ys);
+  const W=800, H=520, pad=40;
+  const sx = v => pad + (v-xmin)/(xmax-xmin)*(W-2*pad);
+  const sy = v => pad + (ymax-v)/(ymax-ymin)*(H-2*pad);
+  const cmin = Math.min(...pts.map(p=>p.compression)), cmax = Math.max(...pts.map(p=>p.compression));
+  mount.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="2D PCA fallback">` + pts.map(p => {
+    const c = famHex[p.family];
+    return `<circle cx="${sx(p.x).toFixed(1)}" cy="${sy(p.y).toFixed(1)}" r="${(5+Math.log2(p.vocab/8192)*2).toFixed(1)}" fill="${c}" opacity=".8"><title>${p.label} · ${p.family.toUpperCase()} · ${p.vocab} · ${p.compression.toFixed(3)} bytes/token</title></circle>`;
+  }).join("") + `<text x="${W/2}" y="${H-8}" fill="#64748b" font-size="11" text-anchor="middle">PC1 →</text><text x="12" y="${H/2}" fill="#64748b" font-size="11" transform="rotate(-90 12 ${H/2})" text-anchor="middle">PC2 →</text></svg>`;
+  mount.dataset.done = "1";
+}
+
+function webglOK(){
+  try {
+    const c = document.createElement("canvas");
+    return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl")));
+  } catch(e){ return false; }
+}
+
+let THREE, OrbitControls;
+try {
+  THREE = await import("three");
+  ({ OrbitControls } = await import("three/addons/controls/OrbitControls.js"));
+} catch (err) {
+  document.body.classList.add("no-webgl");
+  renderFallback2D();
+}
+
+if (THREE && !webglOK()) {
+  document.body.classList.add("no-webgl");
+  renderFallback2D();
+}
+
+if (THREE && webglOK()) {
+  const basePts = DATA.pca.points;
+  const maxAbs = Math.max(...basePts.flatMap(p => [Math.abs(p.x), Math.abs(p.y), Math.abs(p.z)])) || 1;
+  const SCALE = 3.4 / maxAbs;
+  const cMin = Math.min(...basePts.map(p => p.compression));
+  const cMax = Math.max(...basePts.map(p => p.compression));
+  const bVals = basePts.filter(p => p.bpb !== null).map(p => p.bpb);
+  const bMin = Math.min(...bVals), bMax = Math.max(...bVals);
+  const allColors = {family:null, compression:null, bpb:null};
+
+  function makeLights(scene, intensity){
+    scene.add(new THREE.AmbientLight(0x9fb3c8, .75 * intensity));
+    const key = new THREE.DirectionalLight(0xffffff, 1.6 * intensity);
+    key.position.set(6, 9, 7); scene.add(key);
+    const p1 = new THREE.PointLight(0x5eead4, 28 * intensity, 30); p1.position.set(-7, 4, 5); scene.add(p1);
+    const p2 = new THREE.PointLight(0xf472b6, 22 * intensity, 30); p2.position.set(7, -4, -5); scene.add(p2);
+  }
+  function makeStars(count, radius, color){
+    const g = new THREE.BufferGeometry();
+    const arr = new Float32Array(count * 3);
+    for(let i=0;i<count;i++){
+      const r = radius * (0.55 + Math.random()*0.45);
+      const th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1);
+      arr[i*3] = r*Math.sin(ph)*Math.cos(th);
+      arr[i*3+1] = r*Math.cos(ph)*0.6;
+      arr[i*3+2] = r*Math.sin(ph)*Math.sin(th);
+    }
+    g.setAttribute("position", new THREE.BufferAttribute(arr, 3));
+    const m = new THREE.PointsMaterial({color, size:.03, transparent:true, opacity:.65, depthWrite:false});
+    return new THREE.Points(g, m);
+  }
+
+  /* hero scene */
+  const heroCanvas = document.getElementById("heroCanvas");
+  if (heroCanvas) {
+    const renderer = new THREE.WebGLRenderer({canvas:heroCanvas, alpha:true, antialias:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x05080d, .045);
+    const camera = new THREE.PerspectiveCamera(48, 1, .1, 100);
+    camera.position.set(0, .6, 13);
+    makeLights(scene, .75);
+    const group = new THREE.Group();
+    scene.add(group);
+    basePts.forEach(p => {
+      const r = .07 + (Math.log2(p.vocab) - 13) * .025;
+      const col = famColor[p.family];
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(r, 18, 14), new THREE.MeshStandardMaterial({color:col, emissive:col, emissiveIntensity:.5, roughness:.35, metalness:.15, transparent:true, opacity:.85}));
+      mesh.position.set(p.x*SCALE*.8, p.y*SCALE*.8, p.z*SCALE*.8);
+      group.add(mesh);
+    });
+    group.add(makeStars(420, 11, 0x3b5068));
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(4.6, .006, 8, 140), new THREE.MeshBasicMaterial({color:0x5eead4, transparent:true, opacity:.18}));
+    ring.rotation.x = Math.PI/2.4; ring.rotation.y = .3; scene.add(ring);
+    let running = true;
+    const resize = () => {
+      const w = heroCanvas.clientWidth || window.innerWidth, h = heroCanvas.clientHeight || window.innerHeight;
+      renderer.setSize(w, h, false); camera.aspect = w/h; camera.updateProjectionMatrix();
+    };
+    resize(); window.addEventListener("resize", resize);
+    new IntersectionObserver(es => { running = es[0].isIntersecting; }, {threshold:0}).observe(heroCanvas);
+    const clock = new THREE.Clock();
+    function loop(){
+      requestAnimationFrame(loop);
+      if(!running) return;
+      const t = clock.getElapsedTime();
+      if(!reduce){ group.rotation.y = t * .05; group.rotation.x = Math.sin(t*.12)*.06; }
+      renderer.render(scene, camera);
+    }
+    loop();
+  }
+
+  /* main scene */
+  const canvas = document.getElementById("mapCanvas");
+  const wrap = document.getElementById("sceneWrap");
+  const tooltip = document.getElementById("tooltip");
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x04070c, .028);
+  const camera = new THREE.PerspectiveCamera(42, 1, .1, 120);
+  const HOME = new THREE.Vector3(5.4, 3.4, 7.6);
+  camera.position.copy(HOME);
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.dampingFactor = .06;
+  controls.rotateSpeed = .65;
+  controls.zoomSpeed = .8;
+  controls.minDistance = 4.2;
+  controls.maxDistance = 16;
+  controls.autoRotate = !reduce;
+  controls.autoRotateSpeed = .55;
+  controls.target.set(0,0,0);
+  makeLights(scene, 1);
+  scene.add(makeStars(650, 15, 0x2a3d55));
+
+  const grid = new THREE.GridHelper(12, 24, 0x16324a, 0x0b1a28);
+  grid.position.y = -3.6;
+  grid.material.transparent = true; grid.material.opacity = .38;
+  scene.add(grid);
+
+  const spheres = [];
+  const group = new THREE.Group();
+  scene.add(group);
+  basePts.forEach((p, i) => {
+    const radius = .10 + (Math.log2(p.vocab) - 13) * .035;
+    const geo = new THREE.SphereGeometry(radius, 24, 18);
+    const mat = new THREE.MeshStandardMaterial({color:famColor[p.family], emissive:famColor[p.family], emissiveIntensity:.42, roughness:.32, metalness:.18});
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(p.x*SCALE, p.y*SCALE, p.z*SCALE);
+    mesh.userData = {p, base:radius};
+    group.add(mesh); spheres.push(mesh);
+  });
+
+  function colorFor(p, mode){
+    if(mode === "family") return famColor[p.family];
+    if(mode === "compression") return toHex(colorRamp((p.compression - cMin)/(cMax - cMin)));
+    if(mode === "bpb"){
+      if(p.bpb === null) return 0x475569;
+      return toHex(colorRamp((p.bpb - bMin)/(bMax - bMin)));
+    }
+    return famColor[p.family];
+  }
+  let colorMode = "family";
+  function applyColors(){
+    spheres.forEach(m => {
+      const col = colorFor(m.userData.p, colorMode);
+      m.material.color.setHex(col);
+      m.material.emissive.setHex(col);
+    });
+    const legend = document.getElementById("legend");
+    if(colorMode === "family"){
+      legend.innerHTML = `<span><i style="background:#5eead4"></i>BPE · 18</span><span><i style="background:#f472b6"></i>Unigram · 18</span>`;
+    } else if(colorMode === "compression"){
+      legend.innerHTML = `<span>low</span><span style="width:90px;height:8px;border-radius:4px;background:linear-gradient(90deg,#22d3ee,#5eead4,#fbbf24,#f472b6)"></span><span>high · bytes/token ${cMin.toFixed(1)}–${cMax.toFixed(1)}</span>`;
+    } else {
+      legend.innerHTML = `<span><i style="background:#475569"></i>Unigram (no LM)</span><span style="width:90px;height:8px;border-radius:4px;background:linear-gradient(90deg,#22d3ee,#5eead4,#fbbf24,#f472b6)"></span><span>BPB ${bMin.toFixed(2)}–${bMax.toFixed(2)}</span>`;
+    }
+  }
+  applyColors();
+
+  document.querySelectorAll(".scene-controls [data-color]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      colorMode = btn.dataset.color;
+      document.querySelectorAll(".scene-controls [data-color]").forEach(b => b.classList.toggle("on", b === btn));
+      applyColors();
+    });
+  });
+  const btnRotate = document.getElementById("btnRotate");
+  btnRotate.addEventListener("click", () => {
+    controls.autoRotate = !controls.autoRotate;
+    btnRotate.classList.toggle("on", controls.autoRotate);
+    btnRotate.setAttribute("aria-pressed", String(controls.autoRotate));
+  });
+  document.getElementById("btnReset").addEventListener("click", () => {
+    camera.position.copy(HOME); controls.target.set(0,0,0); controls.update();
+  });
+
+  const ray = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  let hovered = null;
+  canvas.addEventListener("pointermove", ev => {
+    const rect = wrap.getBoundingClientRect();
+    pointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
+    pointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
+    ray.setFromCamera(pointer, camera);
+    const hits = ray.intersectObjects(spheres, false);
+    if(hits.length){
+      const m = hits[0].object;
+      if(hovered && hovered !== m) hovered.scale.setScalar(1);
+      hovered = m;
+      m.scale.setScalar(1.45);
+      const p = m.userData.p;
+      tooltip.innerHTML = `<div class="tt">${p.label} · ${p.family.toUpperCase()}</div><div class="tr">vocab ${p.vocab.toLocaleString()} · compression ${p.compression.toFixed(3)} bytes/token</div><div class="tr">BPB ${p.bpb === null ? "not measured" : p.bpb.toFixed(3)} · H1 persistence ${p.h1_total.toFixed(2)}</div>`;
+      tooltip.style.left = (ev.clientX - rect.left) + "px";
+      tooltip.style.top = (ev.clientY - rect.top - 8) + "px";
+      tooltip.style.opacity = "1";
+      canvas.style.cursor = "pointer";
+    } else {
+      if(hovered){ hovered.scale.setScalar(1); hovered = null; }
+      tooltip.style.opacity = "0";
+      canvas.style.cursor = "grab";
+    }
+  });
+  canvas.addEventListener("pointerleave", () => {
+    if(hovered){ hovered.scale.setScalar(1); hovered = null; }
+    tooltip.style.opacity = "0";
+  });
+
+  const resizeMain = () => {
+    const w = wrap.clientWidth, h = wrap.clientHeight;
+    if(!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h; camera.updateProjectionMatrix();
+  };
+  new ResizeObserver(resizeMain).observe(wrap);
+  resizeMain();
+  document.getElementById("sceneTitle").textContent = `PCA · ${DATA.meta.tokenizers} tokenizers · ${DATA.meta.features} features`;
+
+  const clock = new THREE.Clock();
+  function loop(){
+    requestAnimationFrame(loop);
+    const t = clock.getElapsedTime();
+    if(!reduce){ group.position.y = Math.sin(t*.5)*.06; }
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  loop();
+}
+</script>
+</body>
+</html>

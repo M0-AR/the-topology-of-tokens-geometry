@@ -1,0 +1,369 @@
+
+<section id="map3d">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">04 · The tokenizer landscape</span>
+      <h2>Eighty measurements, projected into three dimensions.</h2>
+      <p>Each glowing sphere is one trained tokenizer. Position comes from a PCA of its 80 measured features: entropy, compression, vocabulary size, persistence, Betti curves, and nearest-neighbour geometry. Colour can show family, compression, or language-model BPB. Drag to orbit; scroll to zoom; hover for the exact numbers.</p>
+    </div>
+    <div class="scene-wrap reveal" id="sceneWrap">
+      <canvas id="mapCanvas" aria-label="Interactive 3D scatter plot of 36 tokenizers. Drag to rotate, scroll to zoom."></canvas>
+      <div class="fallback-2d" id="fallback2d" aria-hidden="true"></div>
+      <div class="scene-ui">
+        <div class="scene-top">
+          <div class="scene-title" id="sceneTitle">PCA · 36 tokenizers · 80 features</div>
+          <div class="scene-controls" role="group" aria-label="3D view controls">
+            <button data-color="family" class="on">Family</button>
+            <button data-color="compression">Compression</button>
+            <button data-color="bpb">BPB</button>
+            <button id="btnRotate" class="on" aria-pressed="true">Auto-rotate</button>
+            <button id="btnReset">Reset</button>
+          </div>
+        </div>
+        <div class="scene-bottom">
+          <div class="legend" id="legend"></div>
+          <div class="hint">drag orbit · scroll zoom · hover inspect</div>
+        </div>
+      </div>
+      <div id="tooltip" role="status" aria-live="polite"></div>
+    </div>
+    <p class="note center" style="margin-top:14px" id="pcaNote">—</p>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">05 · Confirmatory results</span>
+      <h2>The expensive features lost to eight cheap ones.</h2>
+      <p>Leave-one-corpus-out prediction is the hard test: train on five languages, predict the sixth. The baseline uses only vocabulary size, entropy, gzip ratio, type-token ratio, mean token length, and training compression. The full model adds 72 persistent-homology descriptors. Lower error would mean the geometry generalises. It did not.</p>
+    </div>
+    <div class="grid2">
+      <div class="card chart-card reveal">
+        <h3>H1 · Held-out tokenizer compression</h3>
+        <div class="cap">R² with cluster-bootstrap 95% CI · higher is better</div>
+        <div id="chartH1"></div>
+        <table class="result-table" aria-label="H1 exact results">
+          <thead><tr><th>Model</th><th>R²</th><th>MAE</th><th>95% CI</th></tr></thead>
+          <tbody id="h1Table"></tbody>
+        </table>
+        <div class="callout"><b>Permutation test:</b> ΔR² = −0.131, p = 0.958. The observed “improvement” is worse than 95.8% of random label shuffles. Bootstrap p(Δ ≤ 0) = 0.990.</div>
+      </div>
+      <div class="card chart-card reveal">
+        <h3>H2 · Language-model bits per byte</h3>
+        <div class="cap">R² with cluster-bootstrap 95% CI · higher is better</div>
+        <div id="chartH2"></div>
+        <table class="result-table" aria-label="H2 exact results">
+          <thead><tr><th>Model</th><th>R²</th><th>MAE</th><th>95% CI</th></tr></thead>
+          <tbody id="h2Table"></tbody>
+        </table>
+        <div class="callout"><b>Permutation test:</b> ΔR² = −0.332, p = 0.593. Bootstrap p(Δ ≤ 0) = 0.996. Only six clusters, so the baseline CI is wide; the direction is still negative.</div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:20px">
+      <div class="card chart-card reveal">
+        <h3>Measured BPB by vocabulary size</h3>
+        <div class="cap">BPE only · mean of two seeds · lower is better</div>
+        <div id="chartBpb"></div>
+        <div class="legend" id="bpbLegend" style="margin-top:10px;background:none;border:none;padding:0"></div>
+      </div>
+      <div class="card chart-card reveal">
+        <h3>Where topology helped — and where it did not</h3>
+        <div class="cap">Change in MAE when adding topology, by corpus (H1)</div>
+        <div id="chartDelta"></div>
+        <div class="callout" style="border-left-color:var(--teal);background:rgba(94,234,212,.05)">Topology improved held-out compression <b>only for Python code</b> (MAE 0.273 → 0.192). It degraded every natural-language corpus. A benefit that appears in one cluster out of six does not survive leave-one-corpus-out.</div>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:20px">
+      <div class="card chart-card reveal">
+        <h3>H3 · The one surviving association</h3>
+        <div class="cap">Partial Spearman controlling for compression · BPE models only</div>
+        <table class="result-table" aria-label="H3 partial correlations">
+          <thead><tr><th>Topology variable</th><th>ρ</th><th>p</th><th>Bootstrap 95% CI</th><th>Holm</th></tr></thead>
+          <tbody id="h3Table"></tbody>
+        </table>
+        <div class="callout" style="border-left-color:var(--amber);background:rgba(251,191,36,.05)"><b>Read this carefully.</b> The co-occurrence H1 persistence association is the only one that survives Holm correction (adjusted p = 0.024). Its bootstrap interval still crosses zero, and the design is exploratory on 18 BPE runs. It is a lead, not a law.</div>
+      </div>
+      <div class="card chart-card reveal">
+        <h3>H4 · The market stress test</h3>
+        <div class="cap">12 US equities · 10 years of daily bars · LOCO-style transfer</div>
+        <div id="chartMarket"></div>
+        <p class="note" style="margin-top:12px">Adding topology moved compression error by −44.28 bytes per token on a 24-row out-of-market test (95% CI [−92.97, −20.37], p = 0.999) — a large degradation. BPB delta was −8.42 (p = 1.0). Within-market, the full model is “less bad” than baseline for compression (R² −0.214 vs −0.332) but the difference is not significant (bootstrap p = 0.277).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">06 · Explore every row</span>
+      <h2>36 tokenizers. No cherry-picking.</h2>
+      <p>Sort any column. Filter by corpus or family. These are the exact test-split measurements that feed the models and charts above.</p>
+    </div>
+    <div class="table-tools reveal" id="tableFilters" role="group" aria-label="Table filters">
+      <button class="chip on" data-filter="all">All 36</button>
+      <button class="chip" data-filter="bpe">BPE · 18</button>
+      <button class="chip" data-filter="unigram">Unigram · 18</button>
+      <span class="dim small" style="margin-left:auto">Click a column header to sort</span>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="data" id="tokenTable">
+        <thead>
+          <tr>
+            <th data-sort="label">Corpus</th>
+            <th data-sort="family">Family</th>
+            <th data-sort="vocab">Vocab</th>
+            <th data-sort="compression">Bytes / token</th>
+            <th data-sort="bpb">BPB</th>
+            <th data-sort="byte_entropy">Byte entropy</th>
+            <th data-sort="h1_total">H1 persistence</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="note">BPB is shown only for BPE tokenizers because the 36 language models were trained on BPE only. Unigram rows have compression and topology measurements but no language-model BPB. Source files: <a href="results/features.csv">features.csv</a> · <a href="results/bpb.csv">bpb.csv</a>.</p>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">07 · How it was done</span>
+      <h2>A protocol frozen before the answer was known.</h2>
+      <p>The confirmatory decision rules, feature sets, and alpha grid were written down before model training. Five execution deviations are documented, none of which changes a decision rule. That is what makes a negative result trustworthy.</p>
+    </div>
+    <div class="two">
+      <div class="reveal">
+        <div class="timeline">
+          <div class="tl"><span class="n">STEP 01</span><h4>Freeze the protocol</h4><p>Hypotheses, primary targets, feature sets, LOCO design, 2,000 permutations, 2,000 cluster-bootstrap resamples, Holm correction.</p></div>
+          <div class="tl"><span class="n">STEP 02</span><h4>Build six corpora</h4><p>English Wikipedia, Python code, and Chinese, Hungarian, Arabic, and Swahili Wikipedia. Roughly 9.5k train / 1.2k validation / 1.2k test documents per corpus, split by hash.</p></div>
+          <div class="tl"><span class="n">STEP 03</span><h4>Train 36 tokenizers</h4><p>BPE and Unigram at 8,192 / 16,384 / 32,768 vocabulary sizes across six corpora. Byte-reversibility audited: BPE 18/18, Unigram 12/18.</p></div>
+          <div class="tl"><span class="n">STEP 04</span><h4>Measure 80 features</h4><p>Eight cheap statistics plus 72 persistence descriptors from a 256-token embedding cloud and a 256-token co-occurrence graph. Ripser and GUDHI agree on all 24 comparisons.</p></div>
+          <div class="tl"><span class="n">STEP 05</span><h4>Train 36 language models</h4><p>Six-layer decoder, d_model 256, 8 heads, context 1,024, 1,500 steps, two seeds per BPE configuration. 13.4M parameters. 0.695 GPU-hours total.</p></div>
+          <div class="tl"><span class="n">STEP 06</span><h4>Predict the held-out language</h4><p>Leave-one-corpus-out ridge regression with nested alpha selection. Permutation tests and cluster bootstrap. Holm correction across H1–H4.</p></div>
+          <div class="tl"><span class="n">STEP 07</span><h4>Stress-test on markets</h4><p>Twelve US equities over ten years of daily bars. The same feature recipe, transferred out of domain. It did not transfer.</p></div>
+        </div>
+      </div>
+      <div class="card reveal" style="align-self:start">
+        <h3 style="font-size:1.1rem;margin-bottom:12px">What “leave-one-corpus-out” means</h3>
+        <p class="small muted" style="margin-top:0">Imagine you have measurements for English, Chinese, Hungarian, Arabic, Swahili, and Python. To test whether a feature generalises, you hide one language entirely, fit the model on the other five, and predict the hidden one. Repeat six times.</p>
+        <p class="small muted">This is much harder than random cross-validation, which leaks corpus-specific quirks into both train and test. A feature that only memorises “which corpus am I?” fails LOCO. Topology features failed LOCO.</p>
+        <h3 style="font-size:1.1rem;margin:22px 0 12px">The eight-feature baseline</h3>
+        <div class="tagline" id="baselineTags"></div>
+        <p class="note">These are deliberately boring. That is the point: the comparison asks whether 72 sophisticated descriptors beat the measurements any competent team already has.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="learn">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">08 · Beginner guide</span>
+      <h2>Start here. Finish as the smartest person in the room.</h2>
+      <p>No prior machine learning required. Each card explains one idea in plain language, then tells you exactly where it appears in this project. Search the glossary or open all cards.</p>
+    </div>
+    <div class="learn-tools reveal">
+      <input type="text" id="learnSearch" placeholder="Search the guide — try “token”, “p-value”, “BPB”…" aria-label="Search the beginner guide">
+      <button class="btn btn-ghost" id="learnToggle" style="padding:9px 14px;font-size:.82rem">Open all</button>
+      <span class="dim small" id="learnCount"></span>
+    </div>
+    <div class="learn-grid" id="learnGrid"></div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="wrap">
+    <div class="sec-head reveal center" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow" style="justify-content:center">09 · Prove it to yourself</span>
+      <h2>Ten questions. From zero to professional.</h2>
+      <p style="margin-left:auto;margin-right:auto">Immediate feedback, no sign-up, no tracking. If you can answer these, you understand more than most people who interview for tokenizer-adjacent roles.</p>
+    </div>
+    <div class="quiz-shell reveal">
+      <div class="quiz-card" id="quizCard">
+        <div class="quiz-top"><span id="qCount">Question 1 of 10</span><span id="qScoreTop">Score 0</span></div>
+        <div class="qprogress"><i id="qBar"></i></div>
+        <div id="qBody">
+          <div class="qtext" id="qText"></div>
+          <div class="qopts" id="qOpts"></div>
+          <div class="qfb" id="qFb"></div>
+          <div class="qnav">
+            <span class="dim tiny" id="qHint">Choose one answer</span>
+            <button class="btn btn-primary" id="qNext" style="display:none">Next question</button>
+          </div>
+        </div>
+        <div class="qscore" id="qResult">
+          <div class="big" id="qFinal">0/10</div>
+          <div class="msg" id="qMsg"></div>
+          <div class="sub" id="qSub"></div>
+          <button class="btn btn-primary" id="qRetry">Retake the quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="business">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">10 · Where this creates value</span>
+      <h2>Buy evidence, not adjectives.</h2>
+      <p>This is not a claim that topology is useless everywhere. It is a claim that it is useless for this decision, on this evidence — and that the measurement harness itself is the asset. Here is who gets value and how.</p>
+    </div>
+    <div class="use-grid">
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
+        <h3>AI platform teams</h3>
+        <p>Replace tokenizer folklore with held-out bytes-per-token curves. Choose vocabulary size per language and measure the downstream BPB instead of guessing from vocabulary count.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></div>
+        <h3>Finance &amp; procurement</h3>
+        <p>Translate a technical choice into tokens per gigabyte and dollars per month. The explorer gives a defensible range and shows exactly which assumption drives the number.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Research &amp; due diligence</h3>
+        <p>A pre-registered negative result with a frozen protocol, permutation tests, bootstrap intervals, library agreement, and a hashed manifest. Cite it instead of re-running the same dead end.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <h3>Students &amp; career switchers</h3>
+        <p>The beginner guide and quiz cover tokens, BPE, entropy, persistent homology, LOCO, bootstrap, permutations, and Holm correction — the vocabulary of applied ML research.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <h3>Model &amp; data vendors</h3>
+        <p>Use the harness as a neutral third-party reference for tokenizer efficiency claims. Publish measured curves instead of one-number marketing comparisons.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Multilingual product teams</h3>
+        <p>See how the same tokenizer budget behaves across scripts. Arabic and Chinese need materially more bytes per token in this benchmark; that is a product-cost issue, not a footnote.</p>
+      </div>
+    </div>
+    <div class="roi">
+      <div class="card reveal">
+        <h3>The business case in one paragraph</h3>
+        <p>A tokenizer with 14% worse compression raises serving cost by roughly 14% on input tokens for identical text. On a $1M annual inference budget, that is $140k. The measurement takes an afternoon with this repository; the alternative is another quarter of speculative feature engineering.</p>
+        <ul>
+          <li>Use the explorer to size the opportunity.</li>
+          <li>Use the curves to choose vocabulary size per corpus.</li>
+          <li>Use the negative result to cut a workstream that does not predict.</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3>What you can deploy tomorrow</h3>
+        <p>Everything is local and reproducible. No API keys, no proprietary data, no vendor lock-in.</p>
+        <ul>
+          <li><span class="mono small">docker compose run --rm topobpe-cpu all --config configs/default.yaml</span> reproduces the report.</li>
+          <li><span class="mono small">scripts/build_site.py</span> regenerates this page from results.</li>
+          <li>All 332 artifacts are hashed in <a href="artifacts/manifest.json">manifest.json</a>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="evidence" class="tight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">11 · Evidence trail</span>
+      <h2>Every number has a file behind it.</h2>
+    </div>
+    <div class="ev-grid">
+      <div class="card ev reveal"><div class="n" id="evFiles">332</div><div class="l">hashed artifacts</div><div class="s">SHA-256 manifest</div></div>
+      <div class="card ev reveal"><div class="n" id="evTda">24/24</div><div class="l">TDA library agreement</div><div class="s">bottleneck ≤ 2.4 × 10⁻⁷</div></div>
+      <div class="card ev reveal"><div class="n" id="evAudit">30/36</div><div class="l">byte-reversible tokenizers</div><div class="s">BPE 18/18 · Unigram 12/18</div></div>
+      <div class="card ev reveal"><div class="n">14</div><div class="l">tests passing</div><div class="s">ruff clean · Docker verified</div></div>
+    </div>
+    <div class="two" style="margin-top:20px">
+      <div class="card reveal">
+        <h3 style="font-size:1.05rem;margin-bottom:10px">Reproduce it</h3>
+        <p class="small muted">The repository ships a frozen protocol, a Docker image, a Makefile, and a single-command pipeline. The smoke test runs without a GPU; the full run used one RTX 3090 for 0.695 GPU-hours of language-model training.</p>
+        <div class="tagline">
+          <a class="btn btn-ghost" href="docs/REPRODUCIBILITY.md" style="padding:9px 14px;font-size:.82rem">Reproducibility guide</a>
+          <a class="btn btn-ghost" href="results/REPORT.md" style="padding:9px 14px;font-size:.82rem">Generated report</a>
+        </div>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:1.05rem;margin-bottom:10px">Audit it</h3>
+        <p class="small muted">The protocol, data card, methodology audit, and execution deviations are public. The analysis code includes a regression test for the permutation slicing bug found during the audit. The result files are regenerated, not hand-edited.</p>
+        <div class="tagline">
+          <a class="btn btn-ghost" href="docs/PROTOCOL.md" style="padding:9px 14px;font-size:.82rem">Protocol</a>
+          <a class="btn btn-ghost" href="docs/METHODOLOGY_AUDIT.md" style="padding:9px 14px;font-size:.82rem">Methodology audit</a>
+          <a class="btn btn-ghost" href="docs/DATA_CARD.md" style="padding:9px 14px;font-size:.82rem">Data card</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">12 · Questions people actually ask</span>
+      <h2>The short answers.</h2>
+    </div>
+    <div class="faq reveal">
+      <details class="faqitem"><summary>So topology is useless for tokenizers?</summary><div class="body">Not in general — useless <em>for this prediction problem, under this protocol</em>. Persistent homology is a legitimate tool for shape analysis. Here, 72 topology descriptors failed to improve out-of-corpus prediction of compression or BPB beyond eight cheap statistics, and they degraded it. One exploratory partial association survived correction, but its interval crosses zero. The correct claim is narrow and defensible.</div></details>
+      <details class="faqitem"><summary>Why is a negative result worth publishing?</summary><div class="body">Because teams are already spending engineering time on sophisticated tokenizer features without a benchmark. A pre-registered negative result with a frozen protocol, 2,000 permutations, and a public artifact trail prevents repeated dead ends. It also gives reviewers a baseline they can trust: 0.974 R² from eight features is a high bar.</div></details>
+      <details class="faqitem"><summary>Does a lower BPB always mean lower cost?</summary><div class="body">No. BPB measures how well a model predicts the next byte; API pricing is per token. The bridge is bytes per token: for the same text, tokens = bytes ÷ bytes-per-token. A tokenizer with better compression can still be more expensive if the provider prices tokens differently, caches aggressively, or uses a different tokenizer than the one you measured. Always map the measurement onto your actual contract.</div></details>
+      <details class="faqitem"><summary>Why were only BPE tokenizers used for language models?</summary><div class="body">The confirmatory question targets the tokenizers used by production decoder-only LLMs, which are overwhelmingly BPE. Training 36 additional Unigram language models would have doubled GPU cost without changing the primary hypothesis. Unigram rows still have compression and the full 80-feature set, which is why the explorer can show them — but their BPB field is honestly empty.</div></details>
+      <details class="faqitem"><summary>What exactly is persistent homology, in one paragraph?</summary><div class="body">Imagine growing a thin shell around every point in a cloud. At first there are many disconnected blobs. As the shell grows, blobs merge, loops appear, and loops close. Persistent homology records the birth and death of those features across every scale. A long-lived loop is a strong topological signal; a short-lived one is noise. The “persistence” numbers in this repo summarise how much structure survives across scales.</div></details>
+      <details class="faqitem"><summary>Can I use this with my own corpus?</summary><div class="body">Yes. Point the config at a text corpus, train tokenizers with the provided CLI, extract features, and run the same analysis. The pipeline is deliberately modular. The smoke profile runs on CPU in minutes with tiny vocabularies; the full profile needs a GPU for the language-model stage. Start with <a href="docs/REPRODUCIBILITY.md">the reproducibility guide</a>.</div></details>
+      <details class="faqitem"><summary>What is the single most important number?</summary><div class="body">0.974. That is the leave-one-corpus-out R² of the eight-feature baseline for held-out compression. Any added feature set has to beat it out of corpus. Remember that number and you can evaluate most tokenizer-feature claims in one sentence.</div></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="7" cy="9" r="3" stroke="#5eead4" stroke-width="1.5"/><circle cx="25" cy="7" r="3" stroke="#22d3ee" stroke-width="1.5"/><circle cx="17" cy="24" r="3" stroke="#a78bfa" stroke-width="1.5"/><path d="M9.6 10.6 22.4 8.4M8.8 11.7l6.4 9.6M23.4 9.8l-4.9 11.7" stroke="#5eead4" stroke-opacity=".55" stroke-width="1.2"/></svg>
+          TOPOBPE
+        </div>
+        <p>Tokenizer intelligence, measured. A pre-registered benchmark, a cost model, and an honest answer about what predicts language-model economics.</p>
+      </div>
+      <div class="foot">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#summary">Executive summary</a></li>
+          <li><a href="#explorer">Cost explorer</a></li>
+          <li><a href="#map3d">3D tokenizer map</a></li>
+          <li><a href="#quiz">Beginner quiz</a></li>
+        </ul>
+      </div>
+      <div class="foot">
+        <h4>Evidence</h4>
+        <ul>
+          <li><a href="results/REPORT.md">Generated report</a></li>
+          <li><a href="results/analysis.json">analysis.json</a></li>
+          <li><a href="artifacts/manifest.json">Artifact manifest</a></li>
+          <li><a href="docs/PROTOCOL.md">Frozen protocol</a></li>
+        </ul>
+      </div>
+      <div class="foot">
+        <h4>Project</h4>
+        <ul>
+          <li><a href="README.md">README</a></li>
+          <li><a href="docs/REPRODUCIBILITY.md">Reproducibility</a></li>
+          <li><a href="docs/DATA_CARD.md">Data card</a></li>
+          <li><a href="LICENSE">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 TopoBPE contributors · MIT licensed · Results generated from <span class="mono" id="footDate">the frozen protocol</span></span>
+      <span class="mono">36 tokenizers · 6 languages · 36 LM runs · 332 artifacts</span>
+    </div>
+  </div>
+</footer>
+
+<noscript><div style="padding:20px;background:#3b1d1d;color:#fff">This page reads fine without JavaScript, but the 3D map, charts, explorer, and quiz need it. The underlying results are in <a href="results/REPORT.md">results/REPORT.md</a>.</div></noscript>

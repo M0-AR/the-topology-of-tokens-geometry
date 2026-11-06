@@ -1,0 +1,690 @@
+{
+  "corpora": [
+    {
+      "bars": 2726,
+      "corpus": "market_aapl_10y",
+      "created_at": "2026-11-05T10:45:50.997871+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "cached": true,
+        "path": "data/market/raw/nasdaq_AAPL_10y_1d.json",
+        "provider": "nasdaq",
+        "sha256": "0b073e8f13c842ae3ef4c1e9ea4904b027e02a586e88307b69ec72a5b9112566"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 35811,
+          "path": "data/processed/market_aapl_10y/test.jsonl",
+          "records": 462,
+          "sha256": "96f075b315a86fe0f4f80a6edef05fc6eb3a9933a8dc928ec1ee6297bcdebd1f"
+        },
+        "train": {
+          "characters": 152248,
+          "path": "data/processed/market_aapl_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "0bea291984aeb695ede0aa7b8fabd92b5889d54c3897608f1ae64ae8cf7621b3"
+        },
+        "val": {
+          "characters": 19526,
+          "path": "data/processed/market_aapl_10y/val.jsonl",
+          "records": 252,
+          "sha256": "8953927932b3cecf2af91b5eb069643ff94532610a875c23c859456efc7d24cc"
+        }
+      },
+      "ticker": "AAPL",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_aapl_2y",
+      "created_at": "2026-11-05T10:46:10.782219+00:00",
+      "error": "failed to fetch AAPL 2y 1h: HTTP 404",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "AAPL"
+    },
+    {
+      "corpus": "market_aapl_1mo",
+      "created_at": "2026-11-05T10:46:31.514930+00:00",
+      "error": "failed to fetch AAPL 1mo 5m: HTTP 404",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "AAPL"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_msft_10y",
+      "created_at": "2026-11-05T10:46:51.303825+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "cached": true,
+        "path": "data/market/raw/nasdaq_MSFT_10y_1d.json",
+        "provider": "nasdaq",
+        "sha256": "9f8de7d56799f573acc1d5446c98976a467f2a331dbcf6f4a756254dd596620c"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 35797,
+          "path": "data/processed/market_msft_10y/test.jsonl",
+          "records": 462,
+          "sha256": "6a500c71e2bfb539c6c3d4971537a86ad178cf7845e59c546bebbd46620f90c6"
+        },
+        "train": {
+          "characters": 153362,
+          "path": "data/processed/market_msft_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "57bad3780b6402dacc59c840a6a3b421141d96b5e83fc8ce6095963ea45fa546"
+        },
+        "val": {
+          "characters": 19518,
+          "path": "data/processed/market_msft_10y/val.jsonl",
+          "records": 252,
+          "sha256": "f7ae2d2d1a642628b363e6013281cb7446237216181b05b48b5dd8e13b2f10cc"
+        }
+      },
+      "ticker": "MSFT",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_msft_2y",
+      "created_at": "2026-11-05T10:47:10.625385+00:00",
+      "error": "failed to fetch MSFT 2y 1h: HTTP 404",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "MSFT"
+    },
+    {
+      "corpus": "market_msft_1mo",
+      "created_at": "2026-11-05T10:47:30.286549+00:00",
+      "error": "failed to fetch MSFT 1mo 5m: HTTP 404",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "MSFT"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_nvda_10y",
+      "created_at": "2026-11-05T10:37:54.921819+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:37:54.897506+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_NVDA_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "73871c208e1abfe8835304c54830bf811165536deb4213513826e31e7a7a52a1",
+        "ticker": "NVDA",
+        "url": "https://api.nasdaq.com/api/quote/NVDA/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 36206,
+          "path": "data/processed/market_nvda_10y/test.jsonl",
+          "records": 462,
+          "sha256": "3d28628aad84fee0dae37c584321166a9eb94563896918742b8e06880a086438"
+        },
+        "train": {
+          "characters": 145335,
+          "path": "data/processed/market_nvda_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "6547168dfc74b393495e21d0b4103c04217b967f5da368eb8379ee73503f20dc"
+        },
+        "val": {
+          "characters": 19368,
+          "path": "data/processed/market_nvda_10y/val.jsonl",
+          "records": 252,
+          "sha256": "2557ed1df4b340c3d2eef922f225f816c32c00da899d5ca3513e1987cf5dede8"
+        }
+      },
+      "ticker": "NVDA",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_nvda_2y",
+      "created_at": "2026-11-05T10:47:30.287523+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "NVDA"
+    },
+    {
+      "corpus": "market_nvda_1mo",
+      "created_at": "2026-11-05T10:47:30.287533+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "NVDA"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_jpm_10y",
+      "created_at": "2026-11-05T10:38:16.399967+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:38:16.379648+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_JPM_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "97634dcb3994d93b3c96cecb04c06901980c4496d38a1a612fe30856bc94caf4",
+        "ticker": "JPM",
+        "url": "https://api.nasdaq.com/api/quote/JPM/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 34982,
+          "path": "data/processed/market_jpm_10y/test.jsonl",
+          "records": 462,
+          "sha256": "f28dad45f8cb41d095a2371dd87b6eed47bd216db9ba2b5b32e4de3740dab118"
+        },
+        "train": {
+          "characters": 150944,
+          "path": "data/processed/market_jpm_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "025e888a90ce8195779c338922f5cb15a404893c48ba734fa1dba4b0092dc113"
+        },
+        "val": {
+          "characters": 19061,
+          "path": "data/processed/market_jpm_10y/val.jsonl",
+          "records": 252,
+          "sha256": "c8f1e25550c099a60ed45bb9585557a6340f20c8252cbf6c656ccd22ad0bfcdd"
+        }
+      },
+      "ticker": "JPM",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_jpm_2y",
+      "created_at": "2026-11-05T10:47:30.288064+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "JPM"
+    },
+    {
+      "corpus": "market_jpm_1mo",
+      "created_at": "2026-11-05T10:47:30.288073+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "JPM"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_xom_10y",
+      "created_at": "2026-11-05T10:38:38.904786+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:38:38.883845+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_XOM_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "b2f9108b4498818f4d47f1d2be2e8db8c55d7087353354d067547da2ee1f8b4d",
+        "ticker": "XOM",
+        "url": "https://api.nasdaq.com/api/quote/XOM/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 35292,
+          "path": "data/processed/market_xom_10y/test.jsonl",
+          "records": 462,
+          "sha256": "61558c3200747ec52d4d70fa6064e28fb32b88b4fc6ed1c65041d80a577126df"
+        },
+        "train": {
+          "characters": 146660,
+          "path": "data/processed/market_xom_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "e4a8e4496dcbdb455a31c3daaf37afd851639fdc409d94531d9af51b3db6b1f6"
+        },
+        "val": {
+          "characters": 19226,
+          "path": "data/processed/market_xom_10y/val.jsonl",
+          "records": 252,
+          "sha256": "09bf7fd4d3ded06970832402decb46d4f7311aa7040b413f031b79b037109d7f"
+        }
+      },
+      "ticker": "XOM",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_xom_2y",
+      "created_at": "2026-11-05T10:47:30.288666+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "XOM"
+    },
+    {
+      "corpus": "market_xom_1mo",
+      "created_at": "2026-11-05T10:47:30.288673+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "XOM"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_jnj_10y",
+      "created_at": "2026-11-05T10:39:02.476863+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:39:02.452010+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_JNJ_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "bf2faf0e80ede05973baee455ef1e7a0aea72377155b974911e2d23f3409d2a0",
+        "ticker": "JNJ",
+        "url": "https://api.nasdaq.com/api/quote/JNJ/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 34947,
+          "path": "data/processed/market_jnj_10y/test.jsonl",
+          "records": 462,
+          "sha256": "915a3dc874818f430939d769e4470a581c6e1616b5f896c3f40062ce94e9c430"
+        },
+        "train": {
+          "characters": 152096,
+          "path": "data/processed/market_jnj_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "d43d97aeb7cda18d2f217ad6efe80a35f57f1a0e39c653b0317fd05324466377"
+        },
+        "val": {
+          "characters": 19045,
+          "path": "data/processed/market_jnj_10y/val.jsonl",
+          "records": 252,
+          "sha256": "1c2788b4a5cbadf8f198bc5bdc6432a06f5f0dbdcf6fe31ad93916f51ab1caf4"
+        }
+      },
+      "ticker": "JNJ",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_jnj_2y",
+      "created_at": "2026-11-05T10:47:30.289018+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "JNJ"
+    },
+    {
+      "corpus": "market_jnj_1mo",
+      "created_at": "2026-11-05T10:47:30.289025+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "JNJ"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_wmt_10y",
+      "created_at": "2026-11-05T10:39:25.991075+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:39:25.968974+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_WMT_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "9bfee8f76a47feaa9f4e2196d8850f366b550385cb2dd1d93c2079bee8c41266",
+        "ticker": "WMT",
+        "url": "https://api.nasdaq.com/api/quote/WMT/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 34736,
+          "path": "data/processed/market_wmt_10y/test.jsonl",
+          "records": 462,
+          "sha256": "eb76e931cffe5672bf2a713d1a8509bf16a485c0cf7e950889269d8a5656198a"
+        },
+        "train": {
+          "characters": 145801,
+          "path": "data/processed/market_wmt_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "c3f71dc4104a7db2c36854735cc8a0adeb9d43e5acf0dbc78e1fc9beb3551de2"
+        },
+        "val": {
+          "characters": 18229,
+          "path": "data/processed/market_wmt_10y/val.jsonl",
+          "records": 252,
+          "sha256": "1b4077a6f3fc606767fc7edf91f2006d543b0b32312716a6040143047a1426a5"
+        }
+      },
+      "ticker": "WMT",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_wmt_2y",
+      "created_at": "2026-11-05T10:47:30.289243+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "WMT"
+    },
+    {
+      "corpus": "market_wmt_1mo",
+      "created_at": "2026-11-05T10:47:30.289251+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "WMT"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_cat_10y",
+      "created_at": "2026-11-05T10:39:49.328676+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:39:49.278200+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_CAT_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "1ca96c3461860ec677f80a68866afd394894ac3af49d4af7a854c0b27b4a6b5d",
+        "ticker": "CAT",
+        "url": "https://api.nasdaq.com/api/quote/CAT/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 34883,
+          "path": "data/processed/market_cat_10y/test.jsonl",
+          "records": 462,
+          "sha256": "25b1911f8e0e985c525578d60bcbb7f70e113e0d76714748a39c9c191756655a"
+        },
+        "train": {
+          "characters": 150542,
+          "path": "data/processed/market_cat_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "24e24fa33e80d68518f3f12228e20afc688a399871b766cb06cca48da18d3560"
+        },
+        "val": {
+          "characters": 19014,
+          "path": "data/processed/market_cat_10y/val.jsonl",
+          "records": 252,
+          "sha256": "c279b07238df50fd64e2423323d424902f3f9a08526c698154b2e06e80135222"
+        }
+      },
+      "ticker": "CAT",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_cat_2y",
+      "created_at": "2026-11-05T10:47:30.289667+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "CAT"
+    },
+    {
+      "corpus": "market_cat_1mo",
+      "created_at": "2026-11-05T10:47:30.289674+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "CAT"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_ko_10y",
+      "created_at": "2026-11-05T10:40:12.299129+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:40:12.275032+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_KO_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "a1b5c5616b7bf1d5dc536e31b010a5ddc162069a971ff647c5b16d7ce7335e5d",
+        "ticker": "KO",
+        "url": "https://api.nasdaq.com/api/quote/KO/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 33009,
+          "path": "data/processed/market_ko_10y/test.jsonl",
+          "records": 462,
+          "sha256": "2e1637f806db36a6322fbc13f9e74812361a1e964badbf736c55145317ab7170"
+        },
+        "train": {
+          "characters": 143309,
+          "path": "data/processed/market_ko_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "50dc165662a2a37625ca9bf5cfb2b92535d39f57733436e6eb6774127dcf80bb"
+        },
+        "val": {
+          "characters": 17966,
+          "path": "data/processed/market_ko_10y/val.jsonl",
+          "records": 252,
+          "sha256": "62d31a6d7c8b343cd84b0c46918dc27b2425e9f1e65851605d01549e5f881da0"
+        }
+      },
+      "ticker": "KO",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_ko_2y",
+      "created_at": "2026-11-05T10:47:30.290079+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "KO"
+    },
+    {
+      "corpus": "market_ko_1mo",
+      "created_at": "2026-11-05T10:47:30.290087+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "KO"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_dis_10y",
+      "created_at": "2026-11-05T10:40:36.569768+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:40:36.549480+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_DIS_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "c2c27fb5729ecc80a3790ca81f2cc457246e61288a79c4650f57e8949aa2bb95",
+        "ticker": "DIS",
+        "url": "https://api.nasdaq.com/api/quote/DIS/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 34703,
+          "path": "data/processed/market_dis_10y/test.jsonl",
+          "records": 462,
+          "sha256": "aaad52bc14d402fffb744d97442b8c9e922e165ddb3a331b438e53310a824dce"
+        },
+        "train": {
+          "characters": 150434,
+          "path": "data/processed/market_dis_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "0c88f8e1874584e4ab4a075f0171d388a3dfb1b285bff6fd46ef13a3353aa671"
+        },
+        "val": {
+          "characters": 18638,
+          "path": "data/processed/market_dis_10y/val.jsonl",
+          "records": 252,
+          "sha256": "9b2d364145ce09b3c6f95f3170d4a6561759b2f6bec7569074eb69af71ddfb2f"
+        }
+      },
+      "ticker": "DIS",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_dis_2y",
+      "created_at": "2026-11-05T10:47:30.290370+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "DIS"
+    },
+    {
+      "corpus": "market_dis_1mo",
+      "created_at": "2026-11-05T10:47:30.290376+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "DIS"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_gs_10y",
+      "created_at": "2026-11-05T10:41:00.504193+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:41:00.480182+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_GS_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "a1339c2595a107b4f4c252a42db514cc1526c99e07d16027411acb1189756c16",
+        "ticker": "GS",
+        "url": "https://api.nasdaq.com/api/quote/GS/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 34689,
+          "path": "data/processed/market_gs_10y/test.jsonl",
+          "records": 462,
+          "sha256": "6a3b99dd8b399573149e1347aa8be4bfc60b5d1cce4e8e3e51fa128da79e5a78"
+        },
+        "train": {
+          "characters": 149877,
+          "path": "data/processed/market_gs_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "d813e1bf47e531233a7b7ca5180043135df95e693312495c45cdc23a41d2833b"
+        },
+        "val": {
+          "characters": 18758,
+          "path": "data/processed/market_gs_10y/val.jsonl",
+          "records": 252,
+          "sha256": "00c13aaa24218e7cef84fd12bb4ce73fc246f7c32a2d07abb5b1d450b041f5bf"
+        }
+      },
+      "ticker": "GS",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_gs_2y",
+      "created_at": "2026-11-05T10:47:30.290666+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "GS"
+    },
+    {
+      "corpus": "market_gs_1mo",
+      "created_at": "2026-11-05T10:47:30.290672+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "GS"
+    },
+    {
+      "bars": 2726,
+      "corpus": "market_tsla_10y",
+      "created_at": "2026-11-05T10:41:24.269454+00:00",
+      "interval": "1d",
+      "range": "10y",
+      "source": {
+        "accessed_at": "2026-11-05T10:41:24.243236+00:00",
+        "cached": false,
+        "interval": "1d",
+        "path": "data/market/raw/nasdaq_TSLA_10y_1d.json",
+        "provider": "nasdaq",
+        "range": "10y",
+        "sha256": "868ea221ec30f3ba5dc2dc4dfe87ca3bf5291e0037431790a1e20038c503ebc5",
+        "ticker": "TSLA",
+        "url": "https://api.nasdaq.com/api/quote/TSLA/chart"
+      },
+      "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+      "splits": {
+        "test": {
+          "characters": 35903,
+          "path": "data/processed/market_tsla_10y/test.jsonl",
+          "records": 462,
+          "sha256": "d031098aa78034e7d7a9f31e23db53b94b92f7802e6cae2839a518ceeb425b0d"
+        },
+        "train": {
+          "characters": 152271,
+          "path": "data/processed/market_tsla_10y/train.jsonl",
+          "records": 2012,
+          "sha256": "a0cbf98dd868ad988aaea6560068a5938e41ef0e4f870a40632432ffa485d76c"
+        },
+        "val": {
+          "characters": 19622,
+          "path": "data/processed/market_tsla_10y/val.jsonl",
+          "records": 252,
+          "sha256": "9d2e316fed80c2a17ed54ecb7574030a4865c53a5ce16f31a19e051f0d68b19c"
+        }
+      },
+      "ticker": "TSLA",
+      "train_end": "2023-12-31",
+      "val_end": "2024-12-31"
+    },
+    {
+      "corpus": "market_tsla_2y",
+      "created_at": "2026-11-05T10:47:30.290929+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "1h",
+      "range": "2y",
+      "ticker": "TSLA"
+    },
+    {
+      "corpus": "market_tsla_1mo",
+      "created_at": "2026-11-05T10:47:30.290934+00:00",
+      "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+      "interval": "5m",
+      "range": "1mo",
+      "ticker": "TSLA"
+    }
+  ]
+}

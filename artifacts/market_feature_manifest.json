@@ -1,0 +1,34 @@
+{
+  "ranges": [
+    "10y",
+    "2y",
+    "1mo"
+  ],
+  "rows": 24,
+  "skipped": [
+    "market_aapl_2y",
+    "market_msft_2y",
+    "market_nvda_2y",
+    "market_jpm_2y",
+    "market_xom_2y",
+    "market_jnj_2y",
+    "market_wmt_2y",
+    "market_cat_2y",
+    "market_ko_2y",
+    "market_dis_2y",
+    "market_gs_2y",
+    "market_tsla_2y",
+    "market_aapl_1mo",
+    "market_msft_1mo",
+    "market_nvda_1mo",
+    "market_jpm_1mo",
+    "market_xom_1mo",
+    "market_jnj_1mo",
+    "market_wmt_1mo",
+    "market_cat_1mo",
+    "market_ko_1mo",
+    "market_dis_1mo",
+    "market_gs_1mo",
+    "market_tsla_1mo"
+  ]
+}

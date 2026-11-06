@@ -1,0 +1,1666 @@
+{
+  "records": [
+    {
+      "corpus": "wikitext_en",
+      "family": "bpe",
+      "vocab_size": 16384,
+      "vocab_rows": [
+        {
+          "corpus": "wikitext_en",
+          "cloud": "vocab",
+          "points": 128,
+          "h1_num_bars": 114.0,
+          "h1_num_finite_bars": 114.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 5.218381762504578,
+          "h1_max_persistence": 0.15098950266838074,
+          "h1_mean_persistence": 0.04577527861846121,
+          "h1_std_persistence": 0.035543450230068975,
+          "h1_persistence_entropy": 4.436947678569181,
+          "h1_betti_area": 9.038471102714539,
+          "h1_count_0p05": 42.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 12.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 0.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 30.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikitext_en",
+          "cloud": "vocab",
+          "points": 256,
+          "h1_num_bars": 323.0,
+          "h1_num_finite_bars": 323.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 11.517197504639626,
+          "h1_max_persistence": 0.2196531891822815,
+          "h1_mean_persistence": 0.035656958218698534,
+          "h1_std_persistence": 0.03224395590872437,
+          "h1_persistence_entropy": 5.409904344853767,
+          "h1_betti_area": 11.448730063438415,
+          "h1_count_0p05": 85.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 15.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 38.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikitext_en",
+          "cloud": "vocab",
+          "points": 512,
+          "h1_num_bars": 691.0,
+          "h1_num_finite_bars": 691.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 27.45180892944336,
+          "h1_max_persistence": 0.18904751539230347,
+          "h1_mean_persistence": 0.03972765402234929,
+          "h1_std_persistence": 0.03397921808835585,
+          "h1_persistence_entropy": 6.20112545210776,
+          "h1_betti_area": 12.074787747859954,
+          "h1_count_0p05": 210.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 42.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 0.0,
+          "h1_betti_at_0p2": 10.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 38.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "cooc_rows": [
+        {
+          "corpus": "wikitext_en",
+          "cloud": "cooc",
+          "points": 128,
+          "h1_num_bars": 318.0,
+          "h1_num_finite_bars": 318.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 73.43370640277863,
+          "h1_max_persistence": 1.0687663555145264,
+          "h1_mean_persistence": 0.23092360504018436,
+          "h1_std_persistence": 0.19373953629252838,
+          "h1_persistence_entropy": 5.416531032148114,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 260.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 219.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 155.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 58.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikitext_en",
+          "cloud": "cooc",
+          "points": 256,
+          "h1_num_bars": 854.0,
+          "h1_num_finite_bars": 854.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 248.9733121395111,
+          "h1_max_persistence": 1.5212135314941406,
+          "h1_mean_persistence": 0.2915378362289357,
+          "h1_std_persistence": 0.24597592753527836,
+          "h1_persistence_entropy": 6.4124008033239255,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 736.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 648.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 467.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 237.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikitext_en",
+          "cloud": "cooc",
+          "points": 512,
+          "h1_num_bars": 2500.0,
+          "h1_num_finite_bars": 2500.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 817.6767106056213,
+          "h1_max_persistence": 1.6527001857757568,
+          "h1_mean_persistence": 0.32707068424224855,
+          "h1_std_persistence": 0.27248249594711377,
+          "h1_persistence_entropy": 7.494480029914234,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 2218.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 1959.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1474.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 785.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "vocab_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 254,
+            "gudhi_finite": 254,
+            "ripser_zero_persistence": 1,
+            "gudhi_zero_persistence": 1,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 2.186830283523733e-08,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 323,
+            "gudhi_finite": 323,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.896469153412795e-08,
+            "agree": true
+          }
+        }
+      },
+      "cooc_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 254,
+            "gudhi_finite": 254,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 1.1883657169420303e-07,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 854,
+            "gudhi_finite": 854,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.3792271885980654e-07,
+            "agree": true
+          }
+        }
+      },
+      "stability": {
+        "vocab:h1_total_persistence:128-256": {
+          "difference": -6.298815742135048,
+          "relative": -0.5469052466624466
+        },
+        "vocab:h1_total_persistence:128-512": {
+          "difference": -22.23342716693878,
+          "relative": -0.8099075446752211
+        },
+        "vocab:h1_total_persistence:256-512": {
+          "difference": -15.934611424803734,
+          "relative": -0.5804576108539468
+        },
+        "vocab:h1_persistence_entropy:128-256": {
+          "difference": -0.9729566662845857,
+          "relative": -0.17984729567540722
+        },
+        "vocab:h1_persistence_entropy:128-512": {
+          "difference": -1.764177773538579,
+          "relative": -0.28449315969554134
+        },
+        "vocab:h1_persistence_entropy:256-512": {
+          "difference": -0.7912211072539934,
+          "relative": -0.1275931463352443
+        },
+        "vocab:h1_num_bars:128-256": {
+          "difference": -209.0,
+          "relative": -0.6470588235294118
+        },
+        "vocab:h1_num_bars:128-512": {
+          "difference": -577.0,
+          "relative": -0.8350217076700435
+        },
+        "vocab:h1_num_bars:256-512": {
+          "difference": -368.0,
+          "relative": -0.532561505065123
+        },
+        "cooc:h1_total_persistence:128-256": {
+          "difference": -175.53960573673248,
+          "relative": -0.705053904084184
+        },
+        "cooc:h1_total_persistence:128-512": {
+          "difference": -744.2430042028427,
+          "relative": -0.9101922490266487
+        },
+        "cooc:h1_total_persistence:256-512": {
+          "difference": -568.7033984661102,
+          "relative": -0.6955113079408777
+        },
+        "cooc:h1_persistence_entropy:128-256": {
+          "difference": -0.9958697711758111,
+          "relative": -0.1553037312732531
+        },
+        "cooc:h1_persistence_entropy:128-512": {
+          "difference": -2.0779489977661196,
+          "relative": -0.277263931516527
+        },
+        "cooc:h1_persistence_entropy:256-512": {
+          "difference": -1.0820792265903085,
+          "relative": -0.14438349588913266
+        },
+        "cooc:h1_num_bars:128-256": {
+          "difference": -536.0,
+          "relative": -0.6276346604215457
+        },
+        "cooc:h1_num_bars:128-512": {
+          "difference": -2182.0,
+          "relative": -0.8728
+        },
+        "cooc:h1_num_bars:256-512": {
+          "difference": -1646.0,
+          "relative": -0.6584
+        }
+      }
+    },
+    {
+      "corpus": "codeparrot_py",
+      "family": "bpe",
+      "vocab_size": 16384,
+      "vocab_rows": [
+        {
+          "corpus": "codeparrot_py",
+          "cloud": "vocab",
+          "points": 128,
+          "h1_num_bars": 116.0,
+          "h1_num_finite_bars": 116.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 7.873962193727493,
+          "h1_max_persistence": 0.3158434331417084,
+          "h1_mean_persistence": 0.06787898442868529,
+          "h1_std_persistence": 0.06115795989699298,
+          "h1_persistence_entropy": 4.400392033010527,
+          "h1_betti_area": 9.25548899769783,
+          "h1_count_0p05": 63.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 22.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 7.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 29.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "codeparrot_py",
+          "cloud": "vocab",
+          "points": 256,
+          "h1_num_bars": 259.0,
+          "h1_num_finite_bars": 259.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 15.762554436922073,
+          "h1_max_persistence": 0.2534995377063751,
+          "h1_mean_persistence": 0.060859283540239666,
+          "h1_std_persistence": 0.055644256666397475,
+          "h1_persistence_entropy": 5.183695604563598,
+          "h1_betti_area": 24.894073855876922,
+          "h1_count_0p05": 119.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 49.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 13.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 78.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "codeparrot_py",
+          "cloud": "vocab",
+          "points": 512,
+          "h1_num_bars": 576.0,
+          "h1_num_finite_bars": 576.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 32.87367209792137,
+          "h1_max_persistence": 0.3158434331417084,
+          "h1_mean_persistence": 0.0570723473922246,
+          "h1_std_persistence": 0.05238695864990661,
+          "h1_persistence_entropy": 5.983644423370363,
+          "h1_betti_area": 43.784453028440474,
+          "h1_count_0p05": 244.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 98.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 18.0,
+          "h1_betti_at_0p2": 4.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 137.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "cooc_rows": [
+        {
+          "corpus": "codeparrot_py",
+          "cloud": "cooc",
+          "points": 128,
+          "h1_num_bars": 240.0,
+          "h1_num_finite_bars": 240.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 82.21852576732635,
+          "h1_max_persistence": 1.3482351303100586,
+          "h1_mean_persistence": 0.34257719069719317,
+          "h1_std_persistence": 0.3079597902864442,
+          "h1_persistence_entropy": 5.093287472019665,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 204.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 180.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 137.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 78.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "codeparrot_py",
+          "cloud": "cooc",
+          "points": 256,
+          "h1_num_bars": 768.0,
+          "h1_num_finite_bars": 768.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 301.99531388282776,
+          "h1_max_persistence": 1.8741546869277954,
+          "h1_mean_persistence": 0.39322306495159864,
+          "h1_std_persistence": 0.335134073580826,
+          "h1_persistence_entropy": 6.296092433038511,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 686.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 610.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 489.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 298.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "codeparrot_py",
+          "cloud": "cooc",
+          "points": 512,
+          "h1_num_bars": 2331.0,
+          "h1_num_finite_bars": 2331.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 1068.4706137180328,
+          "h1_max_persistence": 1.9511799812316895,
+          "h1_mean_persistence": 0.4583743516593877,
+          "h1_std_persistence": 0.38849513709047756,
+          "h1_persistence_entropy": 7.404905246571072,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 2110.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 1920.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1578.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 1064.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "vocab_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 248,
+            "gudhi_finite": 248,
+            "ripser_zero_persistence": 3,
+            "gudhi_zero_persistence": 3,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 2.6490953208835322e-08,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 259,
+            "gudhi_finite": 260,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 1,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.9613746677092934e-08,
+            "agree": true
+          }
+        }
+      },
+      "cooc_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 254,
+            "gudhi_finite": 254,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 1.1812994804571986e-07,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 768,
+            "gudhi_finite": 768,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.3768037138438558e-07,
+            "agree": true
+          }
+        }
+      },
+      "stability": {
+        "vocab:h1_total_persistence:128-256": {
+          "difference": -7.88859224319458,
+          "relative": -0.5004640760964738
+        },
+        "vocab:h1_total_persistence:128-512": {
+          "difference": -24.999709904193878,
+          "relative": -0.7604781671401605
+        },
+        "vocab:h1_total_persistence:256-512": {
+          "difference": -17.111117660999298,
+          "relative": -0.5205112957880129
+        },
+        "vocab:h1_persistence_entropy:128-256": {
+          "difference": -0.7833035715530707,
+          "relative": -0.15110909885670556
+        },
+        "vocab:h1_persistence_entropy:128-512": {
+          "difference": -1.583252390359836,
+          "relative": -0.26459667024599853
+        },
+        "vocab:h1_persistence_entropy:256-512": {
+          "difference": -0.7999488188067652,
+          "relative": -0.13368923054357965
+        },
+        "vocab:h1_num_bars:128-256": {
+          "difference": -143.0,
+          "relative": -0.5521235521235521
+        },
+        "vocab:h1_num_bars:128-512": {
+          "difference": -460.0,
+          "relative": -0.7986111111111112
+        },
+        "vocab:h1_num_bars:256-512": {
+          "difference": -317.0,
+          "relative": -0.5503472222222222
+        },
+        "cooc:h1_total_persistence:128-256": {
+          "difference": -219.7767881155014,
+          "relative": -0.7277490014324308
+        },
+        "cooc:h1_total_persistence:128-512": {
+          "difference": -986.2520879507065,
+          "relative": -0.9230502695050969
+        },
+        "cooc:h1_total_persistence:256-512": {
+          "difference": -766.4752998352051,
+          "relative": -0.7173573985044349
+        },
+        "cooc:h1_persistence_entropy:128-256": {
+          "difference": -1.2028049610188454,
+          "relative": -0.1910399146472455
+        },
+        "cooc:h1_persistence_entropy:128-512": {
+          "difference": -2.311617774551407,
+          "relative": -0.3121738493037205
+        },
+        "cooc:h1_persistence_entropy:256-512": {
+          "difference": -1.1088128135325617,
+          "relative": -0.1497403108629932
+        },
+        "cooc:h1_num_bars:128-256": {
+          "difference": -528.0,
+          "relative": -0.6875
+        },
+        "cooc:h1_num_bars:128-512": {
+          "difference": -2091.0,
+          "relative": -0.8970398970398971
+        },
+        "cooc:h1_num_bars:256-512": {
+          "difference": -1563.0,
+          "relative": -0.6705276705276705
+        }
+      }
+    },
+    {
+      "corpus": "wikipedia_zh",
+      "family": "bpe",
+      "vocab_size": 16384,
+      "vocab_rows": [
+        {
+          "corpus": "wikipedia_zh",
+          "cloud": "vocab",
+          "points": 128,
+          "h1_num_bars": 132.0,
+          "h1_num_finite_bars": 132.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 6.604937762022018,
+          "h1_max_persistence": 0.18980348110198975,
+          "h1_mean_persistence": 0.05003740728804559,
+          "h1_std_persistence": 0.040267157666418134,
+          "h1_persistence_entropy": 4.573033551748553,
+          "h1_betti_area": 7.170600199699402,
+          "h1_count_0p05": 51.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 21.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 0.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 21.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_zh",
+          "cloud": "vocab",
+          "points": 256,
+          "h1_num_bars": 300.0,
+          "h1_num_finite_bars": 300.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 17.355257004499435,
+          "h1_max_persistence": 0.22198575735092163,
+          "h1_mean_persistence": 0.057850856681664786,
+          "h1_std_persistence": 0.04517330291114694,
+          "h1_persistence_entropy": 5.398426233084928,
+          "h1_betti_area": 26.68582218289375,
+          "h1_count_0p05": 142.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 55.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 2.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 81.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_zh",
+          "cloud": "vocab",
+          "points": 512,
+          "h1_num_bars": 681.0,
+          "h1_num_finite_bars": 681.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 39.598841801285744,
+          "h1_max_persistence": 0.2613283395767212,
+          "h1_mean_persistence": 0.05814807900335645,
+          "h1_std_persistence": 0.04580481419218943,
+          "h1_persistence_entropy": 6.213789138229221,
+          "h1_betti_area": 75.43807772397994,
+          "h1_count_0p05": 333.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 123.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 4.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 234.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "cooc_rows": [
+        {
+          "corpus": "wikipedia_zh",
+          "cloud": "cooc",
+          "points": 128,
+          "h1_num_bars": 278.0,
+          "h1_num_finite_bars": 278.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 57.992836713790894,
+          "h1_max_persistence": 1.156883955001831,
+          "h1_mean_persistence": 0.20860732630860035,
+          "h1_std_persistence": 0.1737040894513407,
+          "h1_persistence_entropy": 5.299546594513226,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 228.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 194.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 115.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 45.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_zh",
+          "cloud": "cooc",
+          "points": 256,
+          "h1_num_bars": 827.0,
+          "h1_num_finite_bars": 827.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 238.65342497825623,
+          "h1_max_persistence": 1.3466463088989258,
+          "h1_mean_persistence": 0.28857729743440896,
+          "h1_std_persistence": 0.23695916206483988,
+          "h1_persistence_entropy": 6.388663463049639,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 712.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 617.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 453.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 232.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_zh",
+          "cloud": "cooc",
+          "points": 512,
+          "h1_num_bars": 2409.0,
+          "h1_num_finite_bars": 2409.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 849.259724855423,
+          "h1_max_persistence": 1.8719978332519531,
+          "h1_mean_persistence": 0.3525362079100967,
+          "h1_std_persistence": 0.3019399076578148,
+          "h1_persistence_entropy": 7.435909709347644,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 2138.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 1870.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1452.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 839.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "vocab_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 254,
+            "gudhi_finite": 254,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 2.680219046702348e-08,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 300,
+            "gudhi_finite": 301,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 1,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.974319968096495e-08,
+            "agree": true
+          }
+        }
+      },
+      "cooc_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 254,
+            "gudhi_finite": 254,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 1.1844355274348572e-07,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 827,
+            "gudhi_finite": 827,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.365106803736694e-07,
+            "agree": true
+          }
+        }
+      },
+      "stability": {
+        "vocab:h1_total_persistence:128-256": {
+          "difference": -10.750319242477417,
+          "relative": -0.6194272570950891
+        },
+        "vocab:h1_total_persistence:128-512": {
+          "difference": -32.993904039263725,
+          "relative": -0.8332037640098968
+        },
+        "vocab:h1_total_persistence:256-512": {
+          "difference": -22.24358479678631,
+          "relative": -0.5617231157519379
+        },
+        "vocab:h1_persistence_entropy:128-256": {
+          "difference": -0.8253926813363748,
+          "relative": -0.15289505602167033
+        },
+        "vocab:h1_persistence_entropy:128-512": {
+          "difference": -1.640755586480668,
+          "relative": -0.26405073458096834
+        },
+        "vocab:h1_persistence_entropy:256-512": {
+          "difference": -0.8153629051442932,
+          "relative": -0.13121830931273792
+        },
+        "vocab:h1_num_bars:128-256": {
+          "difference": -168.0,
+          "relative": -0.56
+        },
+        "vocab:h1_num_bars:128-512": {
+          "difference": -549.0,
+          "relative": -0.8061674008810573
+        },
+        "vocab:h1_num_bars:256-512": {
+          "difference": -381.0,
+          "relative": -0.5594713656387665
+        },
+        "cooc:h1_total_persistence:128-256": {
+          "difference": -180.66058826446533,
+          "relative": -0.7569997718697118
+        },
+        "cooc:h1_total_persistence:128-512": {
+          "difference": -791.2668881416321,
+          "relative": -0.9317136618910504
+        },
+        "cooc:h1_total_persistence:256-512": {
+          "difference": -610.6062998771667,
+          "relative": -0.7189865267437658
+        },
+        "cooc:h1_persistence_entropy:128-256": {
+          "difference": -1.0891168685364132,
+          "relative": -0.17047648147935493
+        },
+        "cooc:h1_persistence_entropy:128-512": {
+          "difference": -2.1363631148344187,
+          "relative": -0.28730353088456784
+        },
+        "cooc:h1_persistence_entropy:256-512": {
+          "difference": -1.0472462462980054,
+          "relative": -0.14083633169745424
+        },
+        "cooc:h1_num_bars:128-256": {
+          "difference": -549.0,
+          "relative": -0.6638452237001209
+        },
+        "cooc:h1_num_bars:128-512": {
+          "difference": -2131.0,
+          "relative": -0.8845994188459941
+        },
+        "cooc:h1_num_bars:256-512": {
+          "difference": -1582.0,
+          "relative": -0.6567040265670403
+        }
+      }
+    },
+    {
+      "corpus": "wikipedia_hu",
+      "family": "bpe",
+      "vocab_size": 16384,
+      "vocab_rows": [
+        {
+          "corpus": "wikipedia_hu",
+          "cloud": "vocab",
+          "points": 128,
+          "h1_num_bars": 107.0,
+          "h1_num_finite_bars": 107.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 5.645291119813919,
+          "h1_max_persistence": 0.21820560097694397,
+          "h1_mean_persistence": 0.052759730091718866,
+          "h1_std_persistence": 0.043428446216892076,
+          "h1_persistence_entropy": 4.355911909640002,
+          "h1_betti_area": 8.585401672124863,
+          "h1_count_0p05": 46.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 16.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 27.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_hu",
+          "cloud": "vocab",
+          "points": 256,
+          "h1_num_bars": 267.0,
+          "h1_num_finite_bars": 267.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 13.909874692559242,
+          "h1_max_persistence": 0.20583541691303253,
+          "h1_mean_persistence": 0.05209690896089604,
+          "h1_std_persistence": 0.04379975968480748,
+          "h1_persistence_entropy": 5.249751805894208,
+          "h1_betti_area": 21.304515260457993,
+          "h1_count_0p05": 113.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 42.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 2.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 67.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_hu",
+          "cloud": "vocab",
+          "points": 512,
+          "h1_num_bars": 592.0,
+          "h1_num_finite_bars": 592.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 27.08296826481819,
+          "h1_max_persistence": 0.22672253847122192,
+          "h1_mean_persistence": 0.045748257204084784,
+          "h1_std_persistence": 0.040796802280370574,
+          "h1_persistence_entropy": 6.018995306329732,
+          "h1_betti_area": 31.083941960334776,
+          "h1_count_0p05": 203.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 71.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 3.0,
+          "h1_betti_at_0p2": 9.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 102.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "cooc_rows": [
+        {
+          "corpus": "wikipedia_hu",
+          "cloud": "cooc",
+          "points": 128,
+          "h1_num_bars": 310.0,
+          "h1_num_finite_bars": 310.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 59.03299069404602,
+          "h1_max_persistence": 0.8426799774169922,
+          "h1_mean_persistence": 0.19042900223885814,
+          "h1_std_persistence": 0.148338685988936,
+          "h1_persistence_entropy": 5.442802975591947,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 261.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 210.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 120.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 31.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_hu",
+          "cloud": "cooc",
+          "points": 256,
+          "h1_num_bars": 946.0,
+          "h1_num_finite_bars": 946.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 236.04014492034912,
+          "h1_max_persistence": 1.2344353199005127,
+          "h1_mean_persistence": 0.24951389526463966,
+          "h1_std_persistence": 0.20430128670854494,
+          "h1_persistence_entropy": 6.5264085666146805,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 809.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 678.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 452.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 211.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_hu",
+          "cloud": "cooc",
+          "points": 512,
+          "h1_num_bars": 2849.0,
+          "h1_num_finite_bars": 2849.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 1009.6942102909088,
+          "h1_max_persistence": 2.156891345977783,
+          "h1_mean_persistence": 0.3544030222151312,
+          "h1_std_persistence": 0.30753884566604117,
+          "h1_persistence_entropy": 7.599341271458163,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 2495.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 2202.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1711.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 1017.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "vocab_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 253,
+            "gudhi_finite": 253,
+            "ripser_zero_persistence": 4,
+            "gudhi_zero_persistence": 4,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 2.680219046702348e-08,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 267,
+            "gudhi_finite": 268,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 1,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.916028241095603e-08,
+            "agree": true
+          }
+        }
+      },
+      "cooc_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 254,
+            "gudhi_finite": 254,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 1.191033329739355e-07,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 946,
+            "gudhi_finite": 946,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 1.1919431353035748e-07,
+            "agree": true
+          }
+        }
+      },
+      "stability": {
+        "vocab:h1_total_persistence:128-256": {
+          "difference": -8.264583572745323,
+          "relative": -0.5941522663152577
+        },
+        "vocab:h1_total_persistence:128-512": {
+          "difference": -21.437677145004272,
+          "relative": -0.7915556720144532
+        },
+        "vocab:h1_total_persistence:256-512": {
+          "difference": -13.17309357225895,
+          "relative": -0.48639770365832835
+        },
+        "vocab:h1_persistence_entropy:128-256": {
+          "difference": -0.8938398962542058,
+          "relative": -0.1702632675416462
+        },
+        "vocab:h1_persistence_entropy:128-512": {
+          "difference": -1.6630833966897294,
+          "relative": -0.2763058138524859
+        },
+        "vocab:h1_persistence_entropy:256-512": {
+          "difference": -0.7692435004355236,
+          "relative": -0.1278026416844963
+        },
+        "vocab:h1_num_bars:128-256": {
+          "difference": -160.0,
+          "relative": -0.599250936329588
+        },
+        "vocab:h1_num_bars:128-512": {
+          "difference": -485.0,
+          "relative": -0.8192567567567568
+        },
+        "vocab:h1_num_bars:256-512": {
+          "difference": -325.0,
+          "relative": -0.5489864864864865
+        },
+        "cooc:h1_total_persistence:128-256": {
+          "difference": -177.0071542263031,
+          "relative": -0.7499027518646606
+        },
+        "cooc:h1_total_persistence:128-512": {
+          "difference": -950.6612195968628,
+          "relative": -0.9415337930114132
+        },
+        "cooc:h1_total_persistence:256-512": {
+          "difference": -773.6540653705597,
+          "relative": -0.7662261083458701
+        },
+        "cooc:h1_persistence_entropy:128-256": {
+          "difference": -1.0836055910227333,
+          "relative": -0.1660339802454034
+        },
+        "cooc:h1_persistence_entropy:128-512": {
+          "difference": -2.1565382958662163,
+          "relative": -0.2837796354752231
+        },
+        "cooc:h1_persistence_entropy:256-512": {
+          "difference": -1.072932704843483,
+          "relative": -0.1411875933080195
+        },
+        "cooc:h1_num_bars:128-256": {
+          "difference": -636.0,
+          "relative": -0.6723044397463002
+        },
+        "cooc:h1_num_bars:128-512": {
+          "difference": -2539.0,
+          "relative": -0.8911898911898912
+        },
+        "cooc:h1_num_bars:256-512": {
+          "difference": -1903.0,
+          "relative": -0.667953667953668
+        }
+      }
+    },
+    {
+      "corpus": "wikipedia_ar",
+      "family": "bpe",
+      "vocab_size": 16384,
+      "vocab_rows": [
+        {
+          "corpus": "wikipedia_ar",
+          "cloud": "vocab",
+          "points": 128,
+          "h1_num_bars": 66.0,
+          "h1_num_finite_bars": 66.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 1.2105324566364288,
+          "h1_max_persistence": 0.08275718986988068,
+          "h1_mean_persistence": 0.01834140085812771,
+          "h1_std_persistence": 0.017340091230346525,
+          "h1_persistence_entropy": 3.8135921561437875,
+          "h1_betti_area": 1.725,
+          "h1_count_0p05": 5.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 0.0,
+          "h1_betti_at_0p1": 1.0,
+          "h1_count_0p2": 0.0,
+          "h1_betti_at_0p2": 11.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_ar",
+          "cloud": "vocab",
+          "points": 256,
+          "h1_num_bars": 179.0,
+          "h1_num_finite_bars": 179.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 3.4894867837429047,
+          "h1_max_persistence": 0.0873987227678299,
+          "h1_mean_persistence": 0.019494339573982708,
+          "h1_std_persistence": 0.017378844196100845,
+          "h1_persistence_entropy": 4.826928761480208,
+          "h1_betti_area": 4.275,
+          "h1_count_0p05": 14.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 0.0,
+          "h1_betti_at_0p1": 13.0,
+          "h1_count_0p2": 0.0,
+          "h1_betti_at_0p2": 22.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_ar",
+          "cloud": "vocab",
+          "points": 512,
+          "h1_num_bars": 465.0,
+          "h1_num_finite_bars": 465.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 8.809640571475029,
+          "h1_max_persistence": 0.23803812265396118,
+          "h1_mean_persistence": 0.018945463594569955,
+          "h1_std_persistence": 0.02070842404482532,
+          "h1_persistence_entropy": 5.719423481387323,
+          "h1_betti_area": 8.175,
+          "h1_count_0p05": 29.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 4.0,
+          "h1_betti_at_0p1": 39.0,
+          "h1_count_0p2": 1.0,
+          "h1_betti_at_0p2": 35.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "cooc_rows": [
+        {
+          "corpus": "wikipedia_ar",
+          "cloud": "cooc",
+          "points": 128,
+          "h1_num_bars": 319.0,
+          "h1_num_finite_bars": 319.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 78.12353229522705,
+          "h1_max_persistence": 0.937222957611084,
+          "h1_mean_persistence": 0.24490135515745157,
+          "h1_std_persistence": 0.2090776472020802,
+          "h1_persistence_entropy": 5.423430905816254,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 271.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 231.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 143.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 61.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_ar",
+          "cloud": "cooc",
+          "points": 256,
+          "h1_num_bars": 1079.0,
+          "h1_num_finite_bars": 1079.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 289.28111696243286,
+          "h1_max_persistence": 1.1064937114715576,
+          "h1_mean_persistence": 0.26810112786138357,
+          "h1_std_persistence": 0.22159678134785651,
+          "h1_persistence_entropy": 6.648686393127701,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 921.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 787.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 559.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 275.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_ar",
+          "cloud": "cooc",
+          "points": 512,
+          "h1_num_bars": 3009.0,
+          "h1_num_finite_bars": 3009.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 984.8799059391022,
+          "h1_max_persistence": 1.6486961841583252,
+          "h1_mean_persistence": 0.3273113678760725,
+          "h1_std_persistence": 0.27984033678084713,
+          "h1_persistence_entropy": 7.6533805495892455,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 2588.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 2258.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1744.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 989.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "vocab_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 255,
+            "gudhi_finite": 255,
+            "ripser_zero_persistence": 2,
+            "gudhi_zero_persistence": 2,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 2.961138767521021e-08,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 179,
+            "gudhi_finite": 179,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.7124898993591273e-08,
+            "agree": true
+          }
+        }
+      },
+      "cooc_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 254,
+            "gudhi_finite": 254,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 1.1909189012726529e-07,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 1079,
+            "gudhi_finite": 1079,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 1.1907728580951016e-07,
+            "agree": true
+          }
+        }
+      },
+      "stability": {
+        "vocab:h1_total_persistence:128-256": {
+          "difference": -2.278954327106476,
+          "relative": -0.6530915485119037
+        },
+        "vocab:h1_total_persistence:128-512": {
+          "difference": -7.5991081148386,
+          "relative": -0.8625900288649636
+        },
+        "vocab:h1_total_persistence:256-512": {
+          "difference": -5.320153787732124,
+          "relative": -0.6039013447334495
+        },
+        "vocab:h1_persistence_entropy:128-256": {
+          "difference": -1.0133366053364208,
+          "relative": -0.20993402956824966
+        },
+        "vocab:h1_persistence_entropy:128-512": {
+          "difference": -1.9058313252435353,
+          "relative": -0.3332208799445727
+        },
+        "vocab:h1_persistence_entropy:256-512": {
+          "difference": -0.8924947199071145,
+          "relative": -0.15604627333708607
+        },
+        "vocab:h1_num_bars:128-256": {
+          "difference": -113.0,
+          "relative": -0.6312849162011173
+        },
+        "vocab:h1_num_bars:128-512": {
+          "difference": -399.0,
+          "relative": -0.8580645161290322
+        },
+        "vocab:h1_num_bars:256-512": {
+          "difference": -286.0,
+          "relative": -0.6150537634408603
+        },
+        "cooc:h1_total_persistence:128-256": {
+          "difference": -211.1575846672058,
+          "relative": -0.7299390533486758
+        },
+        "cooc:h1_total_persistence:128-512": {
+          "difference": -906.7563736438751,
+          "relative": -0.9206770979648176
+        },
+        "cooc:h1_total_persistence:256-512": {
+          "difference": -695.5987889766693,
+          "relative": -0.7062777753734374
+        },
+        "cooc:h1_persistence_entropy:128-256": {
+          "difference": -1.225255487311447,
+          "relative": -0.1842853482423101
+        },
+        "cooc:h1_persistence_entropy:128-512": {
+          "difference": -2.2299496437729918,
+          "relative": -0.29136792941684736
+        },
+        "cooc:h1_persistence_entropy:256-512": {
+          "difference": -1.0046941564615448,
+          "relative": -0.13127455899412535
+        },
+        "cooc:h1_num_bars:128-256": {
+          "difference": -760.0,
+          "relative": -0.7043558850787767
+        },
+        "cooc:h1_num_bars:128-512": {
+          "difference": -2690.0,
+          "relative": -0.8939847125290794
+        },
+        "cooc:h1_num_bars:256-512": {
+          "difference": -1930.0,
+          "relative": -0.6414091060152874
+        }
+      }
+    },
+    {
+      "corpus": "wikipedia_sw",
+      "family": "bpe",
+      "vocab_size": 16384,
+      "vocab_rows": [
+        {
+          "corpus": "wikipedia_sw",
+          "cloud": "vocab",
+          "points": 128,
+          "h1_num_bars": 112.0,
+          "h1_num_finite_bars": 112.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 4.622819319367409,
+          "h1_max_persistence": 0.19786086678504944,
+          "h1_mean_persistence": 0.041275172494351864,
+          "h1_std_persistence": 0.036800714064186724,
+          "h1_persistence_entropy": 4.343773883595656,
+          "h1_betti_area": 5.480544108152389,
+          "h1_count_0p05": 36.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 9.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 0.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 17.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_sw",
+          "cloud": "vocab",
+          "points": 256,
+          "h1_num_bars": 269.0,
+          "h1_num_finite_bars": 269.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 12.263979509472847,
+          "h1_max_persistence": 0.31559720635414124,
+          "h1_mean_persistence": 0.04559100189395111,
+          "h1_std_persistence": 0.040947852983032954,
+          "h1_persistence_entropy": 5.234703798552828,
+          "h1_betti_area": 14.950080090761185,
+          "h1_count_0p05": 97.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 26.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1.0,
+          "h1_betti_at_0p2": 4.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 47.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_sw",
+          "cloud": "vocab",
+          "points": 512,
+          "h1_num_bars": 607.0,
+          "h1_num_finite_bars": 607.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 26.425759240984917,
+          "h1_max_persistence": 0.2590174376964569,
+          "h1_mean_persistence": 0.04353502346126016,
+          "h1_std_persistence": 0.04053858779229909,
+          "h1_persistence_entropy": 6.034775520174054,
+          "h1_betti_area": 26.216666865348817,
+          "h1_count_0p05": 196.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 55.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 6.0,
+          "h1_betti_at_0p2": 37.0,
+          "h1_count_0p4": 0.0,
+          "h1_betti_at_0p4": 60.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "cooc_rows": [
+        {
+          "corpus": "wikipedia_sw",
+          "cloud": "cooc",
+          "points": 128,
+          "h1_num_bars": 256.0,
+          "h1_num_finite_bars": 256.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 78.62298130989075,
+          "h1_max_persistence": 1.5017266273498535,
+          "h1_mean_persistence": 0.30712102074176073,
+          "h1_std_persistence": 0.28268373970642546,
+          "h1_persistence_entropy": 5.166892426902727,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 225.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 194.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 136.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 67.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_sw",
+          "cloud": "cooc",
+          "points": 256,
+          "h1_num_bars": 733.0,
+          "h1_num_finite_bars": 733.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 228.87386965751648,
+          "h1_max_persistence": 2.9186208248138428,
+          "h1_mean_persistence": 0.31224265983290106,
+          "h1_std_persistence": 0.2937588642323375,
+          "h1_persistence_entropy": 6.217168493666247,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 632.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 550.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 407.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 217.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        },
+        {
+          "corpus": "wikipedia_sw",
+          "cloud": "cooc",
+          "points": 512,
+          "h1_num_bars": 2157.0,
+          "h1_num_finite_bars": 2157.0,
+          "h1_num_infinite_bars": 0.0,
+          "h1_total_persistence": 729.1084604263306,
+          "h1_max_persistence": 2.482232093811035,
+          "h1_mean_persistence": 0.338019684944984,
+          "h1_std_persistence": 0.3071347567165296,
+          "h1_persistence_entropy": 7.304112849101362,
+          "h1_betti_area": 0.0,
+          "h1_count_0p05": 1886.0,
+          "h1_betti_at_0p05": 0.0,
+          "h1_count_0p1": 1658.0,
+          "h1_betti_at_0p1": 0.0,
+          "h1_count_0p2": 1266.0,
+          "h1_betti_at_0p2": 0.0,
+          "h1_count_0p4": 682.0,
+          "h1_betti_at_0p4": 0.0,
+          "family": "bpe",
+          "vocab_size": 16384
+        }
+      ],
+      "vocab_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 251,
+            "gudhi_finite": 251,
+            "ripser_zero_persistence": 1,
+            "gudhi_zero_persistence": 1,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 2.680219046702348e-08,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 269,
+            "gudhi_finite": 270,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 1,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.951972866149788e-08,
+            "agree": true
+          }
+        }
+      },
+      "cooc_ripser_gudhi_256": {
+        "tolerance": 1e-06,
+        "dimensions": {
+          "0": {
+            "ripser_finite": 254,
+            "gudhi_finite": 254,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 1,
+            "gudhi_infinite": 1,
+            "bottleneck_distance": 2.375811947175066e-07,
+            "agree": true
+          },
+          "1": {
+            "ripser_finite": 733,
+            "gudhi_finite": 733,
+            "ripser_zero_persistence": 0,
+            "gudhi_zero_persistence": 0,
+            "ripser_infinite": 0,
+            "gudhi_infinite": 0,
+            "bottleneck_distance": 2.3796525550068282e-07,
+            "agree": true
+          }
+        }
+      },
+      "stability": {
+        "vocab:h1_total_persistence:128-256": {
+          "difference": -7.641160190105438,
+          "relative": -0.6230571556486467
+        },
+        "vocab:h1_total_persistence:128-512": {
+          "difference": -21.802939921617508,
+          "relative": -0.8250638977972043
+        },
+        "vocab:h1_total_persistence:256-512": {
+          "difference": -14.16177973151207,
+          "relative": -0.5359081494070346
+        },
+        "vocab:h1_persistence_entropy:128-256": {
+          "difference": -0.8909299149571721,
+          "relative": -0.17019681518627208
+        },
+        "vocab:h1_persistence_entropy:128-512": {
+          "difference": -1.691001636578398,
+          "relative": -0.28020953404570487
+        },
+        "vocab:h1_persistence_entropy:256-512": {
+          "difference": -0.8000717216212259,
+          "relative": -0.13257688193150063
+        },
+        "vocab:h1_num_bars:128-256": {
+          "difference": -157.0,
+          "relative": -0.5836431226765799
+        },
+        "vocab:h1_num_bars:128-512": {
+          "difference": -495.0,
+          "relative": -0.8154859967051071
+        },
+        "vocab:h1_num_bars:256-512": {
+          "difference": -338.0,
+          "relative": -0.556836902800659
+        },
+        "cooc:h1_total_persistence:128-256": {
+          "difference": -150.25088834762573,
+          "relative": -0.656478996804917
+        },
+        "cooc:h1_total_persistence:128-512": {
+          "difference": -650.4854791164398,
+          "relative": -0.892165589103276
+        },
+        "cooc:h1_total_persistence:256-512": {
+          "difference": -500.2345907688141,
+          "relative": -0.6860907778745464
+        },
+        "cooc:h1_persistence_entropy:128-256": {
+          "difference": -1.0502760667635194,
+          "relative": -0.1689315751750158
+        },
+        "cooc:h1_persistence_entropy:128-512": {
+          "difference": -2.1372204221986344,
+          "relative": -0.2926050659884835
+        },
+        "cooc:h1_persistence_entropy:256-512": {
+          "difference": -1.086944355435115,
+          "relative": -0.14881264540824335
+        },
+        "cooc:h1_num_bars:128-256": {
+          "difference": -477.0,
+          "relative": -0.6507503410641201
+        },
+        "cooc:h1_num_bars:128-512": {
+          "difference": -1901.0,
+          "relative": -0.8813166434863235
+        },
+        "cooc:h1_num_bars:256-512": {
+          "difference": -1424.0,
+          "relative": -0.660176170607325
+        }
+      }
+    }
+  ]
+}

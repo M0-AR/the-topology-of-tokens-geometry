@@ -1,0 +1,167 @@
+{
+  "corpora": {
+    "codeparrot_py": {
+      "download_timestamp": "2026-11-05T10:05:38.204630+00:00",
+      "files": {
+        "test": {
+          "characters": 11201193,
+          "documents": 1249,
+          "path": "data/processed/codeparrot_py/test.jsonl",
+          "sha256": "39a8405b9297df7da3ef78f72e3166bb0ceada788625b4ff7e7ba531bc36c9bd"
+        },
+        "train": {
+          "characters": 89487903,
+          "documents": 9570,
+          "path": "data/processed/codeparrot_py/train.jsonl",
+          "sha256": "05cf77b311c1f31747f976c2f808e1fcfa94b37615a1d62faa0bde8c96c5b125"
+        },
+        "val": {
+          "characters": 10584563,
+          "documents": 1181,
+          "path": "data/processed/codeparrot_py/val.jsonl",
+          "sha256": "4e84acabc5490598245307d24211cd0c6ecf8c61cd6d63af03499b42fbeb54f3"
+        }
+      },
+      "hf_config": null,
+      "hf_id": "codeparrot/codeparrot-clean",
+      "hf_revision": "35a59fb025bc0a102f7d96eac09d145b896d487b",
+      "total_characters": 111273659
+    },
+    "wikipedia_ar": {
+      "download_timestamp": "2026-11-05T10:08:34.109053+00:00",
+      "files": {
+        "test": {
+          "characters": 9420568,
+          "documents": 1197,
+          "path": "data/processed/wikipedia_ar/test.jsonl",
+          "sha256": "0efb6b32e14ac68118cfd031152eacdeab23e74fcb16ba706450a491f2ec65fa"
+        },
+        "train": {
+          "characters": 73595975,
+          "documents": 9633,
+          "path": "data/processed/wikipedia_ar/train.jsonl",
+          "sha256": "4abcd7af799d43898b6fb0b522ba6f1bdc177e843710500fc9da74189fb91761"
+        },
+        "val": {
+          "characters": 9560114,
+          "documents": 1170,
+          "path": "data/processed/wikipedia_ar/val.jsonl",
+          "sha256": "a186da66777389bb64b413fbdb871d918758420da175ea698c354e84dfa4baea"
+        }
+      },
+      "hf_config": "20231101.ar",
+      "hf_id": "wikimedia/wikipedia",
+      "hf_revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+      "total_characters": 92576657
+    },
+    "wikipedia_hu": {
+      "download_timestamp": "2026-11-05T10:07:33.909567+00:00",
+      "files": {
+        "test": {
+          "characters": 8949197,
+          "documents": 1267,
+          "path": "data/processed/wikipedia_hu/test.jsonl",
+          "sha256": "e94dd4b3a39c8b82acd9115ef08352bb4a9e14143b38a75111a2571d849ef879"
+        },
+        "train": {
+          "characters": 65824800,
+          "documents": 9556,
+          "path": "data/processed/wikipedia_hu/train.jsonl",
+          "sha256": "416738f68004d3efb05bc60276fdb66af57674e197685777e39d908e1438e039"
+        },
+        "val": {
+          "characters": 7536985,
+          "documents": 1177,
+          "path": "data/processed/wikipedia_hu/val.jsonl",
+          "sha256": "65a0e9fc6d120aaf604c9a9a03faf72c83b29d399f353113e484a84c24e229ab"
+        }
+      },
+      "hf_config": "20231101.hu",
+      "hf_id": "wikimedia/wikipedia",
+      "hf_revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+      "total_characters": 82310982
+    },
+    "wikipedia_sw": {
+      "download_timestamp": "2026-11-05T10:09:40.005611+00:00",
+      "files": {
+        "test": {
+          "characters": 1838005,
+          "documents": 1198,
+          "path": "data/processed/wikipedia_sw/test.jsonl",
+          "sha256": "d1c56804224f62340b9d0864e410e1a2734752036fcb4f89d04e8d41d1110890"
+        },
+        "train": {
+          "characters": 15236234,
+          "documents": 9561,
+          "path": "data/processed/wikipedia_sw/train.jsonl",
+          "sha256": "84a7c8fce0ee273551d36ff48124a7fa7791eadca97bda5f77e960f8a075eb42"
+        },
+        "val": {
+          "characters": 2113510,
+          "documents": 1241,
+          "path": "data/processed/wikipedia_sw/val.jsonl",
+          "sha256": "d69f3b05f52aa6245907519b77c228df7aaa1b00f838842ce5f6e7469b2c85f6"
+        }
+      },
+      "hf_config": "20231101.sw",
+      "hf_id": "wikimedia/wikipedia",
+      "hf_revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+      "total_characters": 19187749
+    },
+    "wikipedia_zh": {
+      "download_timestamp": "2026-11-05T10:06:45.334323+00:00",
+      "files": {
+        "test": {
+          "characters": 4101726,
+          "documents": 1164,
+          "path": "data/processed/wikipedia_zh/test.jsonl",
+          "sha256": "4f040cc7bf2961bdeb3188ea939954133cfa092f6a2e80c8ad38bb1620fefbe2"
+        },
+        "train": {
+          "characters": 37117915,
+          "documents": 9644,
+          "path": "data/processed/wikipedia_zh/train.jsonl",
+          "sha256": "461d4b738eb927e393e24a9e5a533196693d55136cd4558238522e873c83afb0"
+        },
+        "val": {
+          "characters": 4769095,
+          "documents": 1192,
+          "path": "data/processed/wikipedia_zh/val.jsonl",
+          "sha256": "3fc49e63d9c45822d49c8de7c76aab1a58409d9d7e8295365c02be79a60c7acc"
+        }
+      },
+      "hf_config": "20231101.zh",
+      "hf_id": "wikimedia/wikipedia",
+      "hf_revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+      "total_characters": 45988736
+    },
+    "wikitext_en": {
+      "download_timestamp": "2026-11-05T10:05:13.323252+00:00",
+      "files": {
+        "test": {
+          "characters": 899159,
+          "documents": 1218,
+          "path": "data/processed/wikitext_en/test.jsonl",
+          "sha256": "e88904aea2ce2233800a526a1fae679892b1ef51079243a9c1e271ea0e3db806"
+        },
+        "train": {
+          "characters": 7051751,
+          "documents": 9603,
+          "path": "data/processed/wikitext_en/train.jsonl",
+          "sha256": "f9500085b85c96572dce4e37ef35a395773ae047b47c2a3c03c09e9e404075b4"
+        },
+        "val": {
+          "characters": 857987,
+          "documents": 1179,
+          "path": "data/processed/wikitext_en/val.jsonl",
+          "sha256": "6d79d371b81b8675cff7c44c8671b8b6a8c718d2d3bc611a42f1421aee433f4e"
+        }
+      },
+      "hf_config": "wikitext-103-raw-v1",
+      "hf_id": "Salesforce/wikitext",
+      "hf_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+      "total_characters": 8808897
+    }
+  },
+  "created_at": "2026-11-05T10:04:49.338681+00:00"
+}

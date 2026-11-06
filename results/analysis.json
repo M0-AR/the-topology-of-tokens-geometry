@@ -1,0 +1,2104 @@
+{
+  "config_path": "/home/md/src/topobpe/configs/default.yaml",
+  "created_at": "2026-11-05T12:30:03.103101+00:00",
+  "exploratory_within_market": {
+    "corpora": 12,
+    "rows": 24,
+    "status": "ok",
+    "targets": {
+      "bpb": {
+        "bootstrap": {
+          "baseline": {
+            "ci_high": -0.15890214796489113,
+            "ci_low": -5.19298555570173,
+            "iterations": 2000,
+            "mean": -1.160641111875945
+          },
+          "delta_full_minus_baseline": {
+            "ci_high": 2.165438941021215,
+            "ci_low": -2.30060695382604,
+            "iterations": 2000,
+            "mean": 0.02830130874886192,
+            "p_bootstrap": 0.44677661169415295
+          },
+          "full": {
+            "ci_high": -0.16462902870852467,
+            "ci_low": -5.035419993759631,
+            "iterations": 2000,
+            "mean": -1.132339803127083
+          },
+          "topology": {
+            "ci_high": -0.17397710076518974,
+            "ci_low": -9.173443252355735,
+            "iterations": 2000,
+            "mean": -1.7689258364808933
+          }
+        },
+        "metrics": {
+          "baseline": {
+            "mae": 0.31501089979870023,
+            "n": 24.0,
+            "r2": -0.5839564051159944,
+            "rmse": 0.452379481328346
+          },
+          "full": {
+            "mae": 0.3208558810865256,
+            "n": 24.0,
+            "r2": -0.5454665777979377,
+            "rmse": 0.4468493132668754
+          },
+          "topology": {
+            "mae": 0.34215718223798824,
+            "n": 24.0,
+            "r2": -0.8174872451938067,
+            "rmse": 0.48458165847676316
+          }
+        },
+        "selected_alphas": {
+          "baseline": {
+            "market_aapl_10y": 100.0,
+            "market_cat_10y": 100.0,
+            "market_dis_10y": 100.0,
+            "market_gs_10y": 0.1,
+            "market_jnj_10y": 100.0,
+            "market_jpm_10y": 100.0,
+            "market_ko_10y": 100.0,
+            "market_msft_10y": 100.0,
+            "market_nvda_10y": 100.0,
+            "market_tsla_10y": 100.0,
+            "market_wmt_10y": 100.0,
+            "market_xom_10y": 100.0
+          },
+          "full": {
+            "market_aapl_10y": 100.0,
+            "market_cat_10y": 100.0,
+            "market_dis_10y": 100.0,
+            "market_gs_10y": 100.0,
+            "market_jnj_10y": 100.0,
+            "market_jpm_10y": 100.0,
+            "market_ko_10y": 100.0,
+            "market_msft_10y": 100.0,
+            "market_nvda_10y": 100.0,
+            "market_tsla_10y": 100.0,
+            "market_wmt_10y": 100.0,
+            "market_xom_10y": 100.0
+          },
+          "topology": {
+            "market_aapl_10y": 100.0,
+            "market_cat_10y": 100.0,
+            "market_dis_10y": 100.0,
+            "market_gs_10y": 100.0,
+            "market_jnj_10y": 100.0,
+            "market_jpm_10y": 100.0,
+            "market_ko_10y": 100.0,
+            "market_msft_10y": 100.0,
+            "market_nvda_10y": 10.0,
+            "market_tsla_10y": 100.0,
+            "market_wmt_10y": 100.0,
+            "market_xom_10y": 100.0
+          }
+        },
+        "target": "bpb"
+      },
+      "compression": {
+        "bootstrap": {
+          "baseline": {
+            "ci_high": 0.12221316862276944,
+            "ci_low": -1.3783670100821168,
+            "iterations": 2000,
+            "mean": -0.45187375746665753
+          },
+          "delta_full_minus_baseline": {
+            "ci_high": 0.5337420363449867,
+            "ci_low": -0.3036149857382053,
+            "iterations": 2000,
+            "mean": 0.1093523672350934,
+            "p_bootstrap": 0.2773613193403298
+          },
+          "full": {
+            "ci_high": 0.11712381402742172,
+            "ci_low": -1.2839406851224047,
+            "iterations": 2000,
+            "mean": -0.3425213902315642
+          },
+          "topology": {
+            "ci_high": 0.08239255185076425,
+            "ci_low": -0.7015560161465658,
+            "iterations": 2000,
+            "mean": -0.2060619372978986
+          }
+        },
+        "metrics": {
+          "baseline": {
+            "mae": 0.10198657282355705,
+            "n": 24.0,
+            "r2": -0.33326386366053207,
+            "rmse": 0.13115298953958238
+          },
+          "full": {
+            "mae": 0.099586497378524,
+            "n": 24.0,
+            "r2": -0.21367433763008137,
+            "rmse": 0.12513281796731782
+          },
+          "topology": {
+            "mae": 0.09669517288033909,
+            "n": 24.0,
+            "r2": -0.10202190294641245,
+            "rmse": 0.11923815664943906
+          }
+        },
+        "selected_alphas": {
+          "baseline": {
+            "market_aapl_10y": 100.0,
+            "market_cat_10y": 100.0,
+            "market_dis_10y": 100.0,
+            "market_gs_10y": 0.1,
+            "market_jnj_10y": 100.0,
+            "market_jpm_10y": 100.0,
+            "market_ko_10y": 100.0,
+            "market_msft_10y": 100.0,
+            "market_nvda_10y": 100.0,
+            "market_tsla_10y": 100.0,
+            "market_wmt_10y": 100.0,
+            "market_xom_10y": 100.0
+          },
+          "full": {
+            "market_aapl_10y": 100.0,
+            "market_cat_10y": 100.0,
+            "market_dis_10y": 100.0,
+            "market_gs_10y": 10.0,
+            "market_jnj_10y": 100.0,
+            "market_jpm_10y": 100.0,
+            "market_ko_10y": 100.0,
+            "market_msft_10y": 100.0,
+            "market_nvda_10y": 100.0,
+            "market_tsla_10y": 100.0,
+            "market_wmt_10y": 100.0,
+            "market_xom_10y": 100.0
+          },
+          "topology": {
+            "market_aapl_10y": 100.0,
+            "market_cat_10y": 100.0,
+            "market_dis_10y": 100.0,
+            "market_gs_10y": 100.0,
+            "market_jnj_10y": 100.0,
+            "market_jpm_10y": 100.0,
+            "market_ko_10y": 100.0,
+            "market_msft_10y": 100.0,
+            "market_nvda_10y": 100.0,
+            "market_tsla_10y": 100.0,
+            "market_wmt_10y": 100.0,
+            "market_xom_10y": 100.0
+          }
+        },
+        "target": "test_compression"
+      }
+    }
+  },
+  "feature_importance": {
+    "bpb": {
+      "alpha": 100.0,
+      "coefficients": [
+        {
+          "coefficient": 0.015619079565569035,
+          "feature": "byte_entropy"
+        },
+        {
+          "coefficient": 0.01276345374930902,
+          "feature": "vocab_h0_total_persistence"
+        },
+        {
+          "coefficient": 0.012663325318043529,
+          "feature": "vocab_h0_count_0p4"
+        },
+        {
+          "coefficient": 0.012663325318043529,
+          "feature": "vocab_h0_betti_at_0p4"
+        },
+        {
+          "coefficient": 0.012590677493336422,
+          "feature": "vocab_h0_mean_persistence"
+        },
+        {
+          "coefficient": 0.012557776527799288,
+          "feature": "vocab_mean_nn_distance"
+        },
+        {
+          "coefficient": 0.012406674745559681,
+          "feature": "gzip_ratio"
+        },
+        {
+          "coefficient": 0.01175460250394679,
+          "feature": "conditional_entropy"
+        },
+        {
+          "coefficient": 0.01102350372665966,
+          "feature": "vocab_h0_betti_area"
+        },
+        {
+          "coefficient": 0.010210356640886565,
+          "feature": "vocab_h1_count_0p05"
+        },
+        {
+          "coefficient": 0.00962654200563486,
+          "feature": "vocab_h0_count_0p2"
+        },
+        {
+          "coefficient": 0.00962654200563486,
+          "feature": "vocab_h0_betti_at_0p2"
+        },
+        {
+          "coefficient": -0.00890778725296329,
+          "feature": "mean_token_bytes"
+        },
+        {
+          "coefficient": -0.00890778725296329,
+          "feature": "train_compression"
+        },
+        {
+          "coefficient": 0.008900334772165803,
+          "feature": "vocab_h1_total_persistence"
+        },
+        {
+          "coefficient": 0.008890695045840766,
+          "feature": "vocab_h1_count_0p1"
+        },
+        {
+          "coefficient": 0.008485769941862967,
+          "feature": "vocab_h1_mean_persistence"
+        },
+        {
+          "coefficient": 0.007370594499104488,
+          "feature": "vocab_h0_count_0p1"
+        },
+        {
+          "coefficient": 0.007370594499104488,
+          "feature": "vocab_h0_betti_at_0p1"
+        },
+        {
+          "coefficient": 0.00727889578725396,
+          "feature": "vocab_h1_betti_area"
+        },
+        {
+          "coefficient": 0.007127250240356025,
+          "feature": "vocab_h1_betti_at_0p4"
+        },
+        {
+          "coefficient": 0.006777369446684518,
+          "feature": "vocab_h0_persistence_entropy"
+        },
+        {
+          "coefficient": -0.006698738118621737,
+          "feature": "vocab_h1_betti_at_0p1"
+        },
+        {
+          "coefficient": 0.006341043563831045,
+          "feature": "vocab_h1_std_persistence"
+        },
+        {
+          "coefficient": -0.006258618590931374,
+          "feature": "cooc_h1_total_persistence"
+        },
+        {
+          "coefficient": 0.006196070078874752,
+          "feature": "vocab_h1_persistence_entropy"
+        },
+        {
+          "coefficient": -0.006056729925760727,
+          "feature": "vocab_h1_betti_at_0p2"
+        },
+        {
+          "coefficient": 0.005634922126300993,
+          "feature": "vocab_h0_count_0p05"
+        },
+        {
+          "coefficient": 0.005634922126300993,
+          "feature": "vocab_h0_betti_at_0p05"
+        },
+        {
+          "coefficient": -0.005597826741890934,
+          "feature": "type_token_ratio"
+        },
+        {
+          "coefficient": -0.005210332008888571,
+          "feature": "cooc_h1_count_0p4"
+        },
+        {
+          "coefficient": 0.005104878172288836,
+          "feature": "token_entropy"
+        },
+        {
+          "coefficient": -0.005071333576041393,
+          "feature": "cooc_h1_count_0p2"
+        },
+        {
+          "coefficient": 0.004879417552300449,
+          "feature": "vocab_h1_num_bars"
+        },
+        {
+          "coefficient": 0.004879417552300449,
+          "feature": "vocab_h1_num_finite_bars"
+        },
+        {
+          "coefficient": -0.004103640540591071,
+          "feature": "cooc_h0_count_0p05"
+        },
+        {
+          "coefficient": -0.004103640540591071,
+          "feature": "cooc_h0_betti_at_0p05"
+        },
+        {
+          "coefficient": -0.0040405343615914635,
+          "feature": "actual_vocab_size"
+        },
+        {
+          "coefficient": -0.004016021150023991,
+          "feature": "cooc_h0_count_0p1"
+        },
+        {
+          "coefficient": -0.004016021150023991,
+          "feature": "cooc_h0_betti_at_0p1"
+        },
+        {
+          "coefficient": 0.00373910233355387,
+          "feature": "vocab_h0_std_persistence"
+        },
+        {
+          "coefficient": -0.003372066489359171,
+          "feature": "cooc_h1_std_persistence"
+        },
+        {
+          "coefficient": -0.003169720419286293,
+          "feature": "cooc_h1_mean_persistence"
+        },
+        {
+          "coefficient": -0.0030421338963080567,
+          "feature": "cooc_h1_count_0p1"
+        },
+        {
+          "coefficient": -0.0026964253905948205,
+          "feature": "cooc_h1_max_persistence"
+        },
+        {
+          "coefficient": -0.0024787116616306996,
+          "feature": "cooc_h1_count_0p05"
+        },
+        {
+          "coefficient": 0.002452463510917389,
+          "feature": "cooc_h0_persistence_entropy"
+        },
+        {
+          "coefficient": -0.0021496060804275467,
+          "feature": "cooc_h1_num_bars"
+        },
+        {
+          "coefficient": -0.0021496060804275467,
+          "feature": "cooc_h1_num_finite_bars"
+        },
+        {
+          "coefficient": 0.0016823851386170722,
+          "feature": "cooc_h0_betti_area"
+        },
+        {
+          "coefficient": 0.0016532344453403854,
+          "feature": "cooc_h0_max_persistence"
+        },
+        {
+          "coefficient": -0.0016119033540694413,
+          "feature": "cooc_h1_persistence_entropy"
+        },
+        {
+          "coefficient": 0.001418377501099459,
+          "feature": "vocab_h0_max_persistence"
+        },
+        {
+          "coefficient": 0.0013514922261325722,
+          "feature": "cooc_mean_nn_distance"
+        },
+        {
+          "coefficient": 0.0013090293281961829,
+          "feature": "vocab_h1_max_persistence"
+        },
+        {
+          "coefficient": 0.0012414912073138587,
+          "feature": "cooc_h0_total_persistence"
+        },
+        {
+          "coefficient": 0.0012414912073138574,
+          "feature": "cooc_h0_mean_persistence"
+        },
+        {
+          "coefficient": 0.0011368861425714444,
+          "feature": "cooc_h0_count_0p4"
+        },
+        {
+          "coefficient": 0.0011368861425714444,
+          "feature": "cooc_h0_betti_at_0p4"
+        },
+        {
+          "coefficient": -0.0009319166524253111,
+          "feature": "vocab_h0_num_bars"
+        },
+        {
+          "coefficient": -0.0009319166524253111,
+          "feature": "vocab_h0_num_finite_bars"
+        },
+        {
+          "coefficient": -0.0007273954941337246,
+          "feature": "vocab_h1_count_0p4"
+        },
+        {
+          "coefficient": -0.0003532090868827347,
+          "feature": "cooc_h0_count_0p2"
+        },
+        {
+          "coefficient": -0.0003532090868827347,
+          "feature": "cooc_h0_betti_at_0p2"
+        },
+        {
+          "coefficient": 0.00015711142749505252,
+          "feature": "cooc_h0_std_persistence"
+        },
+        {
+          "coefficient": -4.0744716277577725e-05,
+          "feature": "vocab_h1_count_0p2"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "vocab_h0_num_infinite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "vocab_h1_num_infinite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "vocab_h1_betti_at_0p05"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h0_num_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h0_num_finite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h0_num_infinite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_num_infinite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_area"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_at_0p05"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_at_0p1"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_at_0p2"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_at_0p4"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "vocab_num_points"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_num_points"
+        }
+      ]
+    },
+    "compression": {
+      "alpha": 0.1,
+      "coefficients": [
+        {
+          "coefficient": 0.3434169814432086,
+          "feature": "mean_token_bytes"
+        },
+        {
+          "coefficient": 0.3434169814432086,
+          "feature": "train_compression"
+        },
+        {
+          "coefficient": -0.08564082511575255,
+          "feature": "vocab_h1_count_0p05"
+        },
+        {
+          "coefficient": 0.07669371491426276,
+          "feature": "token_entropy"
+        },
+        {
+          "coefficient": -0.06922374951824412,
+          "feature": "vocab_h1_std_persistence"
+        },
+        {
+          "coefficient": 0.06185070804512108,
+          "feature": "cooc_h1_count_0p2"
+        },
+        {
+          "coefficient": 0.061719988619120314,
+          "feature": "actual_vocab_size"
+        },
+        {
+          "coefficient": -0.05550452236585349,
+          "feature": "cooc_h1_mean_persistence"
+        },
+        {
+          "coefficient": 0.05535165283423954,
+          "feature": "vocab_h0_persistence_entropy"
+        },
+        {
+          "coefficient": -0.05463383590153842,
+          "feature": "cooc_h1_std_persistence"
+        },
+        {
+          "coefficient": 0.05398971238147937,
+          "feature": "vocab_h1_betti_area"
+        },
+        {
+          "coefficient": -0.05312452944863233,
+          "feature": "byte_entropy"
+        },
+        {
+          "coefficient": 0.04825421026733462,
+          "feature": "vocab_h1_betti_at_0p1"
+        },
+        {
+          "coefficient": -0.04384653134873079,
+          "feature": "vocab_h1_total_persistence"
+        },
+        {
+          "coefficient": -0.03962911988104674,
+          "feature": "cooc_mean_nn_distance"
+        },
+        {
+          "coefficient": -0.037233030396039105,
+          "feature": "vocab_h0_std_persistence"
+        },
+        {
+          "coefficient": -0.03668996710145356,
+          "feature": "cooc_h1_num_bars"
+        },
+        {
+          "coefficient": -0.03668996710145356,
+          "feature": "cooc_h1_num_finite_bars"
+        },
+        {
+          "coefficient": 0.0361442747477958,
+          "feature": "vocab_h1_count_0p1"
+        },
+        {
+          "coefficient": 0.03556452762335671,
+          "feature": "cooc_h1_count_0p1"
+        },
+        {
+          "coefficient": -0.03343080535992342,
+          "feature": "cooc_h1_max_persistence"
+        },
+        {
+          "coefficient": -0.03329395770603704,
+          "feature": "type_token_ratio"
+        },
+        {
+          "coefficient": 0.027579838065899094,
+          "feature": "cooc_h0_betti_area"
+        },
+        {
+          "coefficient": 0.02702856145106272,
+          "feature": "cooc_h0_max_persistence"
+        },
+        {
+          "coefficient": -0.026367501894237755,
+          "feature": "vocab_h0_count_0p1"
+        },
+        {
+          "coefficient": -0.026367501894237755,
+          "feature": "vocab_h0_betti_at_0p1"
+        },
+        {
+          "coefficient": 0.026331908660273684,
+          "feature": "cooc_h0_count_0p1"
+        },
+        {
+          "coefficient": 0.026331908660273684,
+          "feature": "cooc_h0_betti_at_0p1"
+        },
+        {
+          "coefficient": -0.025482851454218247,
+          "feature": "gzip_ratio"
+        },
+        {
+          "coefficient": 0.023526842507762824,
+          "feature": "vocab_h1_max_persistence"
+        },
+        {
+          "coefficient": -0.021155658521574028,
+          "feature": "cooc_h1_count_0p05"
+        },
+        {
+          "coefficient": -0.02080969777040459,
+          "feature": "vocab_h0_total_persistence"
+        },
+        {
+          "coefficient": -0.02026098095993352,
+          "feature": "cooc_h0_std_persistence"
+        },
+        {
+          "coefficient": 0.019148318172263146,
+          "feature": "conditional_entropy"
+        },
+        {
+          "coefficient": 0.018925909220142118,
+          "feature": "vocab_h1_count_0p2"
+        },
+        {
+          "coefficient": -0.016780607872503794,
+          "feature": "cooc_h1_total_persistence"
+        },
+        {
+          "coefficient": 0.016147918605495387,
+          "feature": "vocab_h0_max_persistence"
+        },
+        {
+          "coefficient": 0.015144274855967976,
+          "feature": "vocab_h1_betti_at_0p2"
+        },
+        {
+          "coefficient": 0.015081787121752045,
+          "feature": "cooc_h0_persistence_entropy"
+        },
+        {
+          "coefficient": -0.013593386363690119,
+          "feature": "cooc_h0_count_0p2"
+        },
+        {
+          "coefficient": -0.013593386363690119,
+          "feature": "cooc_h0_betti_at_0p2"
+        },
+        {
+          "coefficient": -0.013568457979509452,
+          "feature": "cooc_h0_mean_persistence"
+        },
+        {
+          "coefficient": -0.01356845797950941,
+          "feature": "cooc_h0_total_persistence"
+        },
+        {
+          "coefficient": 0.011497284656910765,
+          "feature": "vocab_h1_count_0p4"
+        },
+        {
+          "coefficient": -0.010884870035311106,
+          "feature": "vocab_h0_mean_persistence"
+        },
+        {
+          "coefficient": -0.009830462673450502,
+          "feature": "vocab_h1_betti_at_0p4"
+        },
+        {
+          "coefficient": -0.009505920516865968,
+          "feature": "cooc_h1_persistence_entropy"
+        },
+        {
+          "coefficient": 0.009017441729394504,
+          "feature": "vocab_mean_nn_distance"
+        },
+        {
+          "coefficient": 0.008903139350920714,
+          "feature": "vocab_h0_count_0p05"
+        },
+        {
+          "coefficient": 0.008903139350920714,
+          "feature": "vocab_h0_betti_at_0p05"
+        },
+        {
+          "coefficient": -0.008730359119126174,
+          "feature": "cooc_h0_count_0p4"
+        },
+        {
+          "coefficient": -0.008730359119126174,
+          "feature": "cooc_h0_betti_at_0p4"
+        },
+        {
+          "coefficient": -0.0064273279718431164,
+          "feature": "vocab_h1_mean_persistence"
+        },
+        {
+          "coefficient": -0.0058437296682550405,
+          "feature": "cooc_h0_count_0p05"
+        },
+        {
+          "coefficient": -0.0058437296682550405,
+          "feature": "cooc_h0_betti_at_0p05"
+        },
+        {
+          "coefficient": -0.005302410805272401,
+          "feature": "vocab_h0_num_bars"
+        },
+        {
+          "coefficient": -0.005302410805272401,
+          "feature": "vocab_h0_num_finite_bars"
+        },
+        {
+          "coefficient": 0.005185051061767559,
+          "feature": "vocab_h0_count_0p4"
+        },
+        {
+          "coefficient": 0.005185051061767559,
+          "feature": "vocab_h0_betti_at_0p4"
+        },
+        {
+          "coefficient": 0.004117362263935387,
+          "feature": "vocab_h0_count_0p2"
+        },
+        {
+          "coefficient": 0.004117362263935387,
+          "feature": "vocab_h0_betti_at_0p2"
+        },
+        {
+          "coefficient": -0.0039715910864902,
+          "feature": "vocab_h0_betti_area"
+        },
+        {
+          "coefficient": 0.002477061472716535,
+          "feature": "vocab_h1_num_bars"
+        },
+        {
+          "coefficient": 0.002477061472716535,
+          "feature": "vocab_h1_num_finite_bars"
+        },
+        {
+          "coefficient": 0.0020473560014141468,
+          "feature": "cooc_h1_count_0p4"
+        },
+        {
+          "coefficient": -0.0004596073350108254,
+          "feature": "vocab_h1_persistence_entropy"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "vocab_h0_num_infinite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "vocab_h1_num_infinite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "vocab_h1_betti_at_0p05"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h0_num_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h0_num_finite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h0_num_infinite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_num_infinite_bars"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_area"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_at_0p05"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_at_0p1"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_at_0p2"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_h1_betti_at_0p4"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "vocab_num_points"
+        },
+        {
+          "coefficient": 0.0,
+          "feature": "cooc_num_points"
+        }
+      ]
+    }
+  },
+  "feature_sets": {
+    "baseline": [
+      "actual_vocab_size",
+      "byte_entropy",
+      "token_entropy",
+      "conditional_entropy",
+      "type_token_ratio",
+      "gzip_ratio",
+      "mean_token_bytes",
+      "train_compression"
+    ],
+    "full": [
+      "actual_vocab_size",
+      "byte_entropy",
+      "token_entropy",
+      "conditional_entropy",
+      "type_token_ratio",
+      "gzip_ratio",
+      "mean_token_bytes",
+      "train_compression",
+      "vocab_h0_num_bars",
+      "vocab_h0_num_finite_bars",
+      "vocab_h0_num_infinite_bars",
+      "vocab_h0_total_persistence",
+      "vocab_h0_max_persistence",
+      "vocab_h0_mean_persistence",
+      "vocab_h0_std_persistence",
+      "vocab_h0_persistence_entropy",
+      "vocab_h0_betti_area",
+      "vocab_h0_count_0p05",
+      "vocab_h0_betti_at_0p05",
+      "vocab_h0_count_0p1",
+      "vocab_h0_betti_at_0p1",
+      "vocab_h0_count_0p2",
+      "vocab_h0_betti_at_0p2",
+      "vocab_h0_count_0p4",
+      "vocab_h0_betti_at_0p4",
+      "vocab_h1_num_bars",
+      "vocab_h1_num_finite_bars",
+      "vocab_h1_num_infinite_bars",
+      "vocab_h1_total_persistence",
+      "vocab_h1_max_persistence",
+      "vocab_h1_mean_persistence",
+      "vocab_h1_std_persistence",
+      "vocab_h1_persistence_entropy",
+      "vocab_h1_betti_area",
+      "vocab_h1_count_0p05",
+      "vocab_h1_betti_at_0p05",
+      "vocab_h1_count_0p1",
+      "vocab_h1_betti_at_0p1",
+      "vocab_h1_count_0p2",
+      "vocab_h1_betti_at_0p2",
+      "vocab_h1_count_0p4",
+      "vocab_h1_betti_at_0p4",
+      "cooc_h0_num_bars",
+      "cooc_h0_num_finite_bars",
+      "cooc_h0_num_infinite_bars",
+      "cooc_h0_total_persistence",
+      "cooc_h0_max_persistence",
+      "cooc_h0_mean_persistence",
+      "cooc_h0_std_persistence",
+      "cooc_h0_persistence_entropy",
+      "cooc_h0_betti_area",
+      "cooc_h0_count_0p05",
+      "cooc_h0_betti_at_0p05",
+      "cooc_h0_count_0p1",
+      "cooc_h0_betti_at_0p1",
+      "cooc_h0_count_0p2",
+      "cooc_h0_betti_at_0p2",
+      "cooc_h0_count_0p4",
+      "cooc_h0_betti_at_0p4",
+      "cooc_h1_num_bars",
+      "cooc_h1_num_finite_bars",
+      "cooc_h1_num_infinite_bars",
+      "cooc_h1_total_persistence",
+      "cooc_h1_max_persistence",
+      "cooc_h1_mean_persistence",
+      "cooc_h1_std_persistence",
+      "cooc_h1_persistence_entropy",
+      "cooc_h1_betti_area",
+      "cooc_h1_count_0p05",
+      "cooc_h1_betti_at_0p05",
+      "cooc_h1_count_0p1",
+      "cooc_h1_betti_at_0p1",
+      "cooc_h1_count_0p2",
+      "cooc_h1_betti_at_0p2",
+      "cooc_h1_count_0p4",
+      "cooc_h1_betti_at_0p4",
+      "vocab_mean_nn_distance",
+      "cooc_mean_nn_distance",
+      "vocab_num_points",
+      "cooc_num_points"
+    ],
+    "topology": [
+      "vocab_h0_num_bars",
+      "vocab_h0_num_finite_bars",
+      "vocab_h0_num_infinite_bars",
+      "vocab_h0_total_persistence",
+      "vocab_h0_max_persistence",
+      "vocab_h0_mean_persistence",
+      "vocab_h0_std_persistence",
+      "vocab_h0_persistence_entropy",
+      "vocab_h0_betti_area",
+      "vocab_h0_count_0p05",
+      "vocab_h0_betti_at_0p05",
+      "vocab_h0_count_0p1",
+      "vocab_h0_betti_at_0p1",
+      "vocab_h0_count_0p2",
+      "vocab_h0_betti_at_0p2",
+      "vocab_h0_count_0p4",
+      "vocab_h0_betti_at_0p4",
+      "vocab_h1_num_bars",
+      "vocab_h1_num_finite_bars",
+      "vocab_h1_num_infinite_bars",
+      "vocab_h1_total_persistence",
+      "vocab_h1_max_persistence",
+      "vocab_h1_mean_persistence",
+      "vocab_h1_std_persistence",
+      "vocab_h1_persistence_entropy",
+      "vocab_h1_betti_area",
+      "vocab_h1_count_0p05",
+      "vocab_h1_betti_at_0p05",
+      "vocab_h1_count_0p1",
+      "vocab_h1_betti_at_0p1",
+      "vocab_h1_count_0p2",
+      "vocab_h1_betti_at_0p2",
+      "vocab_h1_count_0p4",
+      "vocab_h1_betti_at_0p4",
+      "cooc_h0_num_bars",
+      "cooc_h0_num_finite_bars",
+      "cooc_h0_num_infinite_bars",
+      "cooc_h0_total_persistence",
+      "cooc_h0_max_persistence",
+      "cooc_h0_mean_persistence",
+      "cooc_h0_std_persistence",
+      "cooc_h0_persistence_entropy",
+      "cooc_h0_betti_area",
+      "cooc_h0_count_0p05",
+      "cooc_h0_betti_at_0p05",
+      "cooc_h0_count_0p1",
+      "cooc_h0_betti_at_0p1",
+      "cooc_h0_count_0p2",
+      "cooc_h0_betti_at_0p2",
+      "cooc_h0_count_0p4",
+      "cooc_h0_betti_at_0p4",
+      "cooc_h1_num_bars",
+      "cooc_h1_num_finite_bars",
+      "cooc_h1_num_infinite_bars",
+      "cooc_h1_total_persistence",
+      "cooc_h1_max_persistence",
+      "cooc_h1_mean_persistence",
+      "cooc_h1_std_persistence",
+      "cooc_h1_persistence_entropy",
+      "cooc_h1_betti_area",
+      "cooc_h1_count_0p05",
+      "cooc_h1_betti_at_0p05",
+      "cooc_h1_count_0p1",
+      "cooc_h1_betti_at_0p1",
+      "cooc_h1_count_0p2",
+      "cooc_h1_betti_at_0p2",
+      "cooc_h1_count_0p4",
+      "cooc_h1_betti_at_0p4",
+      "vocab_mean_nn_distance",
+      "cooc_mean_nn_distance",
+      "vocab_num_points",
+      "cooc_num_points"
+    ]
+  },
+  "h1": {
+    "bootstrap": {
+      "baseline": {
+        "ci_high": 0.9901082956271102,
+        "ci_low": 0.7866586929265722,
+        "iterations": 2000,
+        "mean": 0.9411159734529285
+      },
+      "delta_full_minus_baseline": {
+        "ci_high": -0.0241165419990155,
+        "ci_low": -0.8944348926510577,
+        "iterations": 2000,
+        "mean": -0.21784855860205074,
+        "p_bootstrap": 0.9895052473763118
+      },
+      "full": {
+        "ci_high": 0.8993907381868695,
+        "ci_low": 0.003315847009059736,
+        "iterations": 2000,
+        "mean": 0.7232674148508778
+      },
+      "topology": {
+        "ci_high": -0.21378170289655873,
+        "ci_low": -6.147818296734683,
+        "iterations": 2000,
+        "mean": -1.4901647484324876
+      }
+    },
+    "metrics": {
+      "baseline": {
+        "mae": 0.13495281430154688,
+        "n": 36.0,
+        "r2": 0.9739556542766997,
+        "rmse": 0.1561692423498075
+      },
+      "full": {
+        "mae": 0.3066023060593528,
+        "n": 36.0,
+        "r2": 0.8430030259453236,
+        "rmse": 0.3834285246055714
+      },
+      "topology": {
+        "mae": 0.9246803559380522,
+        "n": 36.0,
+        "r2": -0.7669042796305598,
+        "rmse": 1.2863089422450116
+      }
+    },
+    "per_corpus": [
+      {
+        "corpus": "codeparrot_py",
+        "models": {
+          "baseline": {
+            "mae": 0.27278618677679267,
+            "rmse": 0.2733507827957897
+          },
+          "full": {
+            "mae": 0.19188616034494185,
+            "rmse": 0.23483774909128063
+          },
+          "topology": {
+            "mae": 0.3246630078140096,
+            "rmse": 0.3805412813817138
+          }
+        },
+        "rows": 6
+      },
+      {
+        "corpus": "wikipedia_ar",
+        "models": {
+          "baseline": {
+            "mae": 0.1434528665430137,
+            "rmse": 0.1455814315950356
+          },
+          "full": {
+            "mae": 0.6331466827175615,
+            "rmse": 0.6442074132054969
+          },
+          "topology": {
+            "mae": 2.5006052429018473,
+            "rmse": 2.559932221924757
+          }
+        },
+        "rows": 6
+      },
+      {
+        "corpus": "wikipedia_hu",
+        "models": {
+          "baseline": {
+            "mae": 0.054545706072261245,
+            "rmse": 0.05757209257890027
+          },
+          "full": {
+            "mae": 0.10768174356098707,
+            "rmse": 0.12773942350291315
+          },
+          "topology": {
+            "mae": 0.375026662137485,
+            "rmse": 0.4356633832282341
+          }
+        },
+        "rows": 6
+      },
+      {
+        "corpus": "wikipedia_sw",
+        "models": {
+          "baseline": {
+            "mae": 0.08683351160741852,
+            "rmse": 0.08760282950439761
+          },
+          "full": {
+            "mae": 0.5064541726857843,
+            "rmse": 0.5424366328845318
+          },
+          "topology": {
+            "mae": 1.2415012305034716,
+            "rmse": 1.4559878140877
+          }
+        },
+        "rows": 6
+      },
+      {
+        "corpus": "wikipedia_zh",
+        "models": {
+          "baseline": {
+            "mae": 0.12310470268541056,
+            "rmse": 0.12334591041352339
+          },
+          "full": {
+            "mae": 0.2656481666426253,
+            "rmse": 0.28108430578829013
+          },
+          "topology": {
+            "mae": 0.5282096849985768,
+            "rmse": 0.6871767078299372
+          }
+        },
+        "rows": 6
+      },
+      {
+        "corpus": "wikitext_en",
+        "models": {
+          "baseline": {
+            "mae": 0.12899391212438438,
+            "rmse": 0.1556129000421093
+          },
+          "full": {
+            "mae": 0.13479691040421696,
+            "rmse": 0.1496308567361852
+          },
+          "topology": {
+            "mae": 0.5780763072729219,
+            "rmse": 0.6690026873420492
+          }
+        },
+        "rows": 6
+      }
+    ],
+    "per_group": [
+      {
+        "baseline": {
+          "mae": 0.27278618677679267,
+          "n": 6.0,
+          "r2": -0.16844571955241472,
+          "rmse": 0.2733507827957897
+        },
+        "full": {
+          "mae": 0.19188616034494185,
+          "n": 6.0,
+          "r2": 0.13760999160091847,
+          "rmse": 0.23483774909128063
+        },
+        "group": "codeparrot_py",
+        "n": 6
+      },
+      {
+        "baseline": {
+          "mae": 0.1434528665430137,
+          "n": 6.0,
+          "r2": 0.9297961785790202,
+          "rmse": 0.1455814315950356
+        },
+        "full": {
+          "mae": 0.6331466827175615,
+          "n": 6.0,
+          "r2": -0.37467557923301165,
+          "rmse": 0.6442074132054969
+        },
+        "group": "wikipedia_ar",
+        "n": 6
+      },
+      {
+        "baseline": {
+          "mae": 0.054545706072261245,
+          "n": 6.0,
+          "r2": 0.97222527845156,
+          "rmse": 0.05757209257890027
+        },
+        "full": {
+          "mae": 0.10768174356098707,
+          "n": 6.0,
+          "r2": 0.8632662933178339,
+          "rmse": 0.12773942350291315
+        },
+        "group": "wikipedia_hu",
+        "n": 6
+      },
+      {
+        "baseline": {
+          "mae": 0.08683351160741852,
+          "n": 6.0,
+          "r2": 0.9388402133349927,
+          "rmse": 0.08760282950439761
+        },
+        "full": {
+          "mae": 0.5064541726857843,
+          "n": 6.0,
+          "r2": -1.3449183070850474,
+          "rmse": 0.5424366328845318
+        },
+        "group": "wikipedia_sw",
+        "n": 6
+      },
+      {
+        "baseline": {
+          "mae": 0.12310470268541056,
+          "n": 6.0,
+          "r2": 0.8022697913407344,
+          "rmse": 0.12334591041352339
+        },
+        "full": {
+          "mae": 0.2656481666426253,
+          "n": 6.0,
+          "r2": -0.026825653569468644,
+          "rmse": 0.28108430578829013
+        },
+        "group": "wikipedia_zh",
+        "n": 6
+      },
+      {
+        "baseline": {
+          "mae": 0.12899391212438438,
+          "n": 6.0,
+          "r2": 0.9308845526027587,
+          "rmse": 0.1556129000421093
+        },
+        "full": {
+          "mae": 0.13479691040421696,
+          "n": 6.0,
+          "r2": 0.9360962629823478,
+          "rmse": 0.1496308567361852
+        },
+        "group": "wikitext_en",
+        "n": 6
+      }
+    ],
+    "permutation": {
+      "baseline_alphas": {
+        "codeparrot_py": 0.01,
+        "wikipedia_ar": 0.01,
+        "wikipedia_hu": 0.01,
+        "wikipedia_sw": 0.1,
+        "wikipedia_zh": 0.01,
+        "wikitext_en": 0.1
+      },
+      "full_alphas": {
+        "codeparrot_py": 0.1,
+        "wikipedia_ar": 1.0,
+        "wikipedia_hu": 1.0,
+        "wikipedia_sw": 100.0,
+        "wikipedia_zh": 0.01,
+        "wikitext_en": 1.0
+      },
+      "iterations": 2000,
+      "null_95": -0.0025785110903590322,
+      "null_mean": -0.042922054570065565,
+      "observed_delta_r2": -0.1309526283313761,
+      "p_value": 0.9575212393803099
+    },
+    "selected_alphas": {
+      "baseline": {
+        "codeparrot_py": 0.01,
+        "wikipedia_ar": 0.01,
+        "wikipedia_hu": 0.01,
+        "wikipedia_sw": 0.1,
+        "wikipedia_zh": 0.01,
+        "wikitext_en": 0.1
+      },
+      "full": {
+        "codeparrot_py": 0.1,
+        "wikipedia_ar": 1.0,
+        "wikipedia_hu": 1.0,
+        "wikipedia_sw": 100.0,
+        "wikipedia_zh": 0.01,
+        "wikitext_en": 1.0
+      },
+      "topology": {
+        "codeparrot_py": 100.0,
+        "wikipedia_ar": 100.0,
+        "wikipedia_hu": 100.0,
+        "wikipedia_sw": 0.1,
+        "wikipedia_zh": 100.0,
+        "wikitext_en": 100.0
+      }
+    }
+  },
+  "h2": {
+    "bootstrap": {
+      "baseline": {
+        "ci_high": 0.9415789634345292,
+        "ci_low": -0.39108042024273226,
+        "iterations": 2000,
+        "mean": 0.7577240797840311
+      },
+      "delta_full_minus_baseline": {
+        "ci_high": -0.06758455249180673,
+        "ci_low": -5.619421174230109,
+        "iterations": 2000,
+        "mean": -0.8163263740893879,
+        "p_bootstrap": 0.9955022488755623
+      },
+      "full": {
+        "ci_high": 0.8657242228252173,
+        "ci_low": -6.010501594472841,
+        "iterations": 2000,
+        "mean": -0.058602294305356684
+      },
+      "topology": {
+        "ci_high": 0.787077871518411,
+        "ci_low": -14.811119085014239,
+        "iterations": 2000,
+        "mean": -1.21500081869804
+      }
+    },
+    "metrics": {
+      "baseline": {
+        "mae": 0.09052489933590287,
+        "n": 18.0,
+        "r2": 0.8865783370204509,
+        "rmse": 0.10403772159576492
+      },
+      "full": {
+        "mae": 0.16639946969737437,
+        "n": 18.0,
+        "r2": 0.5546547253504917,
+        "rmse": 0.20615375593689445
+      },
+      "topology": {
+        "mae": 0.22737577493647665,
+        "n": 18.0,
+        "r2": 0.11762756825874099,
+        "rmse": 0.2901808795893765
+      }
+    },
+    "per_corpus": [
+      {
+        "corpus": "codeparrot_py",
+        "models": {
+          "baseline": {
+            "mae": 0.140078250183165,
+            "rmse": 0.1414599635159222
+          },
+          "full": {
+            "mae": 0.33182779588048855,
+            "rmse": 0.33388070597460434
+          },
+          "topology": {
+            "mae": 0.5224705167997729,
+            "rmse": 0.5257134178138914
+          }
+        },
+        "rows": 3
+      },
+      {
+        "corpus": "wikipedia_ar",
+        "models": {
+          "baseline": {
+            "mae": 0.06716283955283082,
+            "rmse": 0.07711915006396645
+          },
+          "full": {
+            "mae": 0.038736550450781726,
+            "rmse": 0.046912670284701904
+          },
+          "topology": {
+            "mae": 0.06349255476709503,
+            "rmse": 0.07058403731403357
+          }
+        },
+        "rows": 3
+      },
+      {
+        "corpus": "wikipedia_hu",
+        "models": {
+          "baseline": {
+            "mae": 0.04280083900214556,
+            "rmse": 0.04385137843382945
+          },
+          "full": {
+            "mae": 0.03764050420480558,
+            "rmse": 0.05060902640484472
+          },
+          "topology": {
+            "mae": 0.04706722976669001,
+            "rmse": 0.060763075990610496
+          }
+        },
+        "rows": 3
+      },
+      {
+        "corpus": "wikipedia_sw",
+        "models": {
+          "baseline": {
+            "mae": 0.05863407788555156,
+            "rmse": 0.05943271622230768
+          },
+          "full": {
+            "mae": 0.1108313400272749,
+            "rmse": 0.11324784354165379
+          },
+          "topology": {
+            "mae": 0.13080665066811026,
+            "rmse": 0.13214699337533642
+          }
+        },
+        "rows": 3
+      },
+      {
+        "corpus": "wikipedia_zh",
+        "models": {
+          "baseline": {
+            "mae": 0.15594583807384277,
+            "rmse": 0.15761759987240195
+          },
+          "full": {
+            "mae": 0.2837251570601486,
+            "rmse": 0.29382586756864326
+          },
+          "topology": {
+            "mae": 0.35462999804165224,
+            "rmse": 0.37141480441049396
+          }
+        },
+        "rows": 3
+      },
+      {
+        "corpus": "wikitext_en",
+        "models": {
+          "baseline": {
+            "mae": 0.07852755131788151,
+            "rmse": 0.09320033029377012
+          },
+          "full": {
+            "mae": 0.19563547056074673,
+            "rmse": 0.19899526123263192
+          },
+          "topology": {
+            "mae": 0.2457876995755397,
+            "rmse": 0.2544975777590151
+          }
+        },
+        "rows": 3
+      }
+    ],
+    "per_group": [
+      {
+        "baseline": {
+          "mae": 0.140078250183165,
+          "n": 3.0,
+          "r2": -13.54868850583231,
+          "rmse": 0.1414599635159222
+        },
+        "full": {
+          "mae": 0.33182779588048855,
+          "n": 3.0,
+          "r2": -80.0474599162731,
+          "rmse": 0.33388070597460434
+        },
+        "group": "codeparrot_py",
+        "n": 3
+      },
+      {
+        "baseline": {
+          "mae": 0.06716283955283082,
+          "n": 3.0,
+          "r2": -2.543609944117904,
+          "rmse": 0.07711915006396645
+        },
+        "full": {
+          "mae": 0.038736550450781726,
+          "n": 3.0,
+          "r2": -0.31129906140336927,
+          "rmse": 0.046912670284701904
+        },
+        "group": "wikipedia_ar",
+        "n": 3
+      },
+      {
+        "baseline": {
+          "mae": 0.04280083900214556,
+          "n": 3.0,
+          "r2": 0.3891773836684731,
+          "rmse": 0.04385137843382945
+        },
+        "full": {
+          "mae": 0.03764050420480558,
+          "n": 3.0,
+          "r2": 0.18641192410038,
+          "rmse": 0.05060902640484472
+        },
+        "group": "wikipedia_hu",
+        "n": 3
+      },
+      {
+        "baseline": {
+          "mae": 0.05863407788555156,
+          "n": 3.0,
+          "r2": -0.3174016616510493,
+          "rmse": 0.05943271622230768
+        },
+        "full": {
+          "mae": 0.1108313400272749,
+          "n": 3.0,
+          "r2": -3.783292409281853,
+          "rmse": 0.11324784354165379
+        },
+        "group": "wikipedia_sw",
+        "n": 3
+      },
+      {
+        "baseline": {
+          "mae": 0.15594583807384277,
+          "n": 3.0,
+          "r2": -7.231278862966278,
+          "rmse": 0.15761759987240195
+        },
+        "full": {
+          "mae": 0.2837251570601486,
+          "n": 3.0,
+          "r2": -27.60473636761911,
+          "rmse": 0.29382586756864326
+        },
+        "group": "wikipedia_zh",
+        "n": 3
+      },
+      {
+        "baseline": {
+          "mae": 0.07852755131788151,
+          "n": 3.0,
+          "r2": -1.1067832630699899,
+          "rmse": 0.09320033029377012
+        },
+        "full": {
+          "mae": 0.19563547056074673,
+          "n": 3.0,
+          "r2": -8.604404124208527,
+          "rmse": 0.19899526123263192
+        },
+        "group": "wikitext_en",
+        "n": 3
+      }
+    ],
+    "permutation": {
+      "baseline_alphas": {
+        "codeparrot_py": 1.0,
+        "wikipedia_ar": 0.1,
+        "wikipedia_hu": 0.1,
+        "wikipedia_sw": 0.01,
+        "wikipedia_zh": 0.1,
+        "wikitext_en": 0.01
+      },
+      "full_alphas": {
+        "codeparrot_py": 10.0,
+        "wikipedia_ar": 100.0,
+        "wikipedia_hu": 100.0,
+        "wikipedia_sw": 100.0,
+        "wikipedia_zh": 0.01,
+        "wikitext_en": 0.01
+      },
+      "iterations": 2000,
+      "null_95": -0.11141769701176445,
+      "null_mean": -0.3289247664665447,
+      "observed_delta_r2": -0.3319236116699592,
+      "p_value": 0.5932033983008496
+    },
+    "selected_alphas": {
+      "baseline": {
+        "codeparrot_py": 1.0,
+        "wikipedia_ar": 0.1,
+        "wikipedia_hu": 0.1,
+        "wikipedia_sw": 0.01,
+        "wikipedia_zh": 0.1,
+        "wikitext_en": 0.01
+      },
+      "full": {
+        "codeparrot_py": 10.0,
+        "wikipedia_ar": 100.0,
+        "wikipedia_hu": 100.0,
+        "wikipedia_sw": 100.0,
+        "wikipedia_zh": 0.01,
+        "wikitext_en": 0.01
+      },
+      "topology": {
+        "codeparrot_py": 10.0,
+        "wikipedia_ar": 100.0,
+        "wikipedia_hu": 100.0,
+        "wikipedia_sw": 100.0,
+        "wikipedia_zh": 0.01,
+        "wikitext_en": 1.0
+      }
+    }
+  },
+  "h3": {
+    "control": "test_compression",
+    "target": "bpb_mean",
+    "variables": [
+      {
+        "ci_high": 0.9239979398883547,
+        "ci_low": -0.4805993428543575,
+        "iterations": 1962,
+        "p_value": 0.09045477261369315,
+        "rho": 0.4361952788972082,
+        "variable": "vocab_h1_total_persistence"
+      },
+      {
+        "ci_high": 0.8376441867338744,
+        "ci_low": -0.46555909750674623,
+        "iterations": 1962,
+        "p_value": 0.25337331334332835,
+        "rho": 0.2921340071960174,
+        "variable": "vocab_h1_persistence_entropy"
+      },
+      {
+        "ci_high": 0.11255262870059655,
+        "ci_low": -0.8766015577304597,
+        "iterations": 1962,
+        "p_value": 0.0014992503748125937,
+        "rho": -0.7176076754662922,
+        "variable": "cooc_h1_total_persistence"
+      },
+      {
+        "ci_high": 0.6971233100406504,
+        "ci_low": -0.6650036043230654,
+        "iterations": 1962,
+        "p_value": 0.48125937031484256,
+        "rho": 0.18202775410921196,
+        "variable": "cooc_h1_persistence_entropy"
+      }
+    ]
+  },
+  "h4_bpb": {
+    "delta_full_minus_baseline": {
+      "ci_high": -4.960171285311709,
+      "ci_low": -66.4587172075538,
+      "p_positive": 1.0,
+      "value": -8.42026278584639
+    },
+    "market_rows": 24,
+    "models": {
+      "baseline": {
+        "alpha": 0.1,
+        "bootstrap": {
+          "ci_high": -5.22005353642658,
+          "ci_low": -86.52658968356026,
+          "mean": -20.39982524686674,
+          "p_positive": 1.0
+        },
+        "metrics": {
+          "mae": 1.1378131598252346,
+          "n": 24.0,
+          "r2": -9.888764071673986,
+          "rmse": 1.1860980177443823
+        }
+      },
+      "full": {
+        "alpha": 100.0,
+        "bootstrap": {
+          "ci_high": -10.196063593212626,
+          "ci_low": -151.39607592598853,
+          "mean": -37.0810540439087,
+          "p_positive": 1.0
+        },
+        "metrics": {
+          "mae": 1.5267663571273768,
+          "n": 24.0,
+          "r2": -18.309026857520376,
+          "rmse": 1.5794703562505943
+        }
+      },
+      "topology": {
+        "alpha": 100.0,
+        "bootstrap": {
+          "ci_high": -9.503522689796508,
+          "ci_low": -138.75309990422153,
+          "mean": -33.960284890795236,
+          "p_positive": 1.0
+        },
+        "metrics": {
+          "mae": 1.463060870995874,
+          "n": 24.0,
+          "r2": -16.92272382209267,
+          "rmse": 1.5217148977234534
+        }
+      }
+    },
+    "public_rows": 18,
+    "status": "ok"
+  },
+  "h4_compression": {
+    "delta_full_minus_baseline": {
+      "ci_high": -20.370666030055656,
+      "ci_low": -92.96540131711002,
+      "p_positive": 0.999000499750125,
+      "value": -44.2834682610703
+    },
+    "market_rows": 24,
+    "models": {
+      "baseline": {
+        "alpha": 0.01,
+        "bootstrap": {
+          "ci_high": -14.959694507095607,
+          "ci_low": -67.44684618312661,
+          "mean": -32.566083356518526,
+          "p_positive": 1.0
+        },
+        "metrics": {
+          "mae": 0.5712881258155345,
+          "n": 24.0,
+          "r2": -26.017811762828057,
+          "rmse": 0.5903984737407794
+        }
+      },
+      "full": {
+        "alpha": 0.01,
+        "bootstrap": {
+          "ci_high": -45.41118455815329,
+          "ci_low": -139.77401717497443,
+          "mean": -83.10546282752897,
+          "p_positive": 1.0
+        },
+        "metrics": {
+          "mae": 0.8774351622237306,
+          "n": 24.0,
+          "r2": -70.30128002389836,
+          "rmse": 0.9591108490796568
+        }
+      },
+      "topology": {
+        "alpha": 100.0,
+        "bootstrap": {
+          "ci_high": -528.7142216190958,
+          "ci_low": -1826.547666528992,
+          "mean": -983.2835687210393,
+          "p_positive": 1.0
+        },
+        "metrics": {
+          "mae": 3.20809784236817,
+          "n": 24.0,
+          "r2": -803.4092208061365,
+          "rmse": 3.221503892423171
+        }
+      }
+    },
+    "public_rows": 18,
+    "status": "ok"
+  },
+  "h5": {
+    "exploratory": true,
+    "target": "test_compression",
+    "top_features": [
+      {
+        "ci_high": 0.9132930869,
+        "ci_low": 0.3898789495,
+        "feature": "vocab_h0_num_bars",
+        "p_value": 1.859e-07,
+        "spearman_rho": 0.7451581413
+      },
+      {
+        "ci_high": 0.9132445405,
+        "ci_low": 0.3834113318,
+        "feature": "vocab_h0_num_finite_bars",
+        "p_value": 1.859e-07,
+        "spearman_rho": 0.7451581413
+      },
+      {
+        "ci_high": -0.2708010336,
+        "ci_low": -0.8516228748,
+        "feature": "vocab_h1_std_persistence",
+        "p_value": 2.3805e-06,
+        "spearman_rho": -0.6965250965
+      },
+      {
+        "ci_high": -0.2418604651,
+        "ci_low": -0.8777777778,
+        "feature": "vocab_h1_mean_persistence",
+        "p_value": 2.83042e-05,
+        "spearman_rho": -0.6380952381
+      },
+      {
+        "ci_high": -0.2212639558,
+        "ci_low": -0.8124591085,
+        "feature": "vocab_h1_count_0p2",
+        "p_value": 5.00649e-05,
+        "spearman_rho": -0.6226698761
+      },
+      {
+        "ci_high": 0.0108527132,
+        "ci_low": -0.8342370256,
+        "feature": "vocab_h1_betti_area",
+        "p_value": 0.0003331011,
+        "spearman_rho": -0.5647361647
+      },
+      {
+        "ci_high": -0.0448858185,
+        "ci_low": -0.7926797964,
+        "feature": "vocab_h1_betti_at_0p4",
+        "p_value": 0.0005308558,
+        "spearman_rho": -0.5486510488
+      },
+      {
+        "ci_high": -0.0513967773,
+        "ci_low": -0.7930700516,
+        "feature": "vocab_h1_count_0p1",
+        "p_value": 0.000645968,
+        "spearman_rho": -0.5416265155
+      },
+      {
+        "ci_high": 0.7748654864,
+        "ci_low": 0.5364041566,
+        "feature": "vocab_h1_betti_at_0p1",
+        "p_value": 0.0007453883,
+        "spearman_rho": 0.5364041566
+      },
+      {
+        "ci_high": -0.2071810778,
+        "ci_low": -0.7128840692,
+        "feature": "vocab_h1_max_persistence",
+        "p_value": 0.0008120411,
+        "spearman_rho": -0.5332389483
+      }
+    ]
+  },
+  "holm": {
+    "adjusted_p": [
+      1.0,
+      1.0,
+      0.0239880059970015,
+      1.0
+    ],
+    "hypotheses": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "raw_p": [
+      0.9575212393803099,
+      0.5932033983008496,
+      0.005997001499250375,
+      1.0
+    ]
+  },
+  "primary_targets": [
+    "compression",
+    "bpb"
+  ],
+  "robustness": {
+    "drop_train_compression": {
+      "removed_features": [
+        "mean_token_bytes",
+        "train_compression"
+      ],
+      "targets": {
+        "bpb": {
+          "metrics": {
+            "baseline": {
+              "mae": 0.16898927429993632,
+              "n": 18.0,
+              "r2": 0.4624531379830418,
+              "rmse": 0.22649102273136326
+            },
+            "full": {
+              "mae": 0.1962048968180576,
+              "n": 18.0,
+              "r2": 0.3781443108642505,
+              "rmse": 0.24360580512524788
+            },
+            "topology": {
+              "mae": 0.22737577493647665,
+              "n": 18.0,
+              "r2": 0.11762756825874099,
+              "rmse": 0.2901808795893765
+            }
+          },
+          "selected_alphas": {
+            "baseline": {
+              "codeparrot_py": 0.01,
+              "wikipedia_ar": 1.0,
+              "wikipedia_hu": 0.1,
+              "wikipedia_sw": 0.01,
+              "wikipedia_zh": 0.1,
+              "wikitext_en": 0.01
+            },
+            "full": {
+              "codeparrot_py": 10.0,
+              "wikipedia_ar": 100.0,
+              "wikipedia_hu": 100.0,
+              "wikipedia_sw": 100.0,
+              "wikipedia_zh": 100.0,
+              "wikitext_en": 1.0
+            },
+            "topology": {
+              "codeparrot_py": 10.0,
+              "wikipedia_ar": 100.0,
+              "wikipedia_hu": 100.0,
+              "wikipedia_sw": 100.0,
+              "wikipedia_zh": 0.01,
+              "wikitext_en": 1.0
+            }
+          },
+          "target": "bpb_mean"
+        },
+        "compression": {
+          "metrics": {
+            "baseline": {
+              "mae": 0.9186745340579774,
+              "n": 36.0,
+              "r2": -0.3389948580318749,
+              "rmse": 1.1197684634677332
+            },
+            "full": {
+              "mae": 0.8002704030099355,
+              "n": 36.0,
+              "r2": -0.3143126643558041,
+              "rmse": 1.109399903610461
+            },
+            "topology": {
+              "mae": 0.9246803559380522,
+              "n": 36.0,
+              "r2": -0.7669042796305598,
+              "rmse": 1.2863089422450116
+            }
+          },
+          "selected_alphas": {
+            "baseline": {
+              "codeparrot_py": 10.0,
+              "wikipedia_ar": 10.0,
+              "wikipedia_hu": 100.0,
+              "wikipedia_sw": 0.1,
+              "wikipedia_zh": 10.0,
+              "wikitext_en": 0.1
+            },
+            "full": {
+              "codeparrot_py": 10.0,
+              "wikipedia_ar": 100.0,
+              "wikipedia_hu": 1.0,
+              "wikipedia_sw": 100.0,
+              "wikipedia_zh": 0.01,
+              "wikitext_en": 100.0
+            },
+            "topology": {
+              "codeparrot_py": 100.0,
+              "wikipedia_ar": 100.0,
+              "wikipedia_hu": 100.0,
+              "wikipedia_sw": 0.1,
+              "wikipedia_zh": 100.0,
+              "wikitext_en": 100.0
+            }
+          },
+          "target": "test_compression"
+        }
+      }
+    },
+    "extended_alpha_grid": {
+      "alphas": [
+        0.01,
+        0.1,
+        1.0,
+        10.0,
+        100.0,
+        1000.0,
+        10000.0
+      ],
+      "targets": {
+        "bpb": {
+          "metrics": {
+            "baseline": {
+              "mae": 0.09052489933590287,
+              "n": 18.0,
+              "r2": 0.8865783370204509,
+              "rmse": 0.10403772159576492
+            },
+            "full": {
+              "mae": 0.16639946969737437,
+              "n": 18.0,
+              "r2": 0.5546547253504917,
+              "rmse": 0.20615375593689445
+            },
+            "topology": {
+              "mae": 0.26569450368279157,
+              "n": 18.0,
+              "r2": -0.24464509687084157,
+              "rmse": 0.3446399302131729
+            }
+          },
+          "selected_alphas": {
+            "baseline": {
+              "codeparrot_py": 1.0,
+              "wikipedia_ar": 0.1,
+              "wikipedia_hu": 0.1,
+              "wikipedia_sw": 0.01,
+              "wikipedia_zh": 0.1,
+              "wikitext_en": 0.01
+            },
+            "full": {
+              "codeparrot_py": 10.0,
+              "wikipedia_ar": 100.0,
+              "wikipedia_hu": 100.0,
+              "wikipedia_sw": 100.0,
+              "wikipedia_zh": 0.01,
+              "wikitext_en": 0.01
+            },
+            "topology": {
+              "codeparrot_py": 10.0,
+              "wikipedia_ar": 100.0,
+              "wikipedia_hu": 100.0,
+              "wikipedia_sw": 100.0,
+              "wikipedia_zh": 1000.0,
+              "wikitext_en": 1.0
+            }
+          },
+          "target": "bpb_mean"
+        },
+        "compression": {
+          "metrics": {
+            "baseline": {
+              "mae": 0.13495281430154688,
+              "n": 36.0,
+              "r2": 0.9739556542766997,
+              "rmse": 0.1561692423498075
+            },
+            "full": {
+              "mae": 0.3066023060593528,
+              "n": 36.0,
+              "r2": 0.8430030259453236,
+              "rmse": 0.3834285246055714
+            },
+            "topology": {
+              "mae": 0.9294794239316617,
+              "n": 36.0,
+              "r2": -0.7618890368713915,
+              "rmse": 1.2844820928834022
+            }
+          },
+          "selected_alphas": {
+            "baseline": {
+              "codeparrot_py": 0.01,
+              "wikipedia_ar": 0.01,
+              "wikipedia_hu": 0.01,
+              "wikipedia_sw": 0.1,
+              "wikipedia_zh": 0.01,
+              "wikitext_en": 0.1
+            },
+            "full": {
+              "codeparrot_py": 0.1,
+              "wikipedia_ar": 1.0,
+              "wikipedia_hu": 1.0,
+              "wikipedia_sw": 100.0,
+              "wikipedia_zh": 0.01,
+              "wikitext_en": 1.0
+            },
+            "topology": {
+              "codeparrot_py": 1000.0,
+              "wikipedia_ar": 100.0,
+              "wikipedia_hu": 1000.0,
+              "wikipedia_sw": 0.1,
+              "wikipedia_zh": 1000.0,
+              "wikitext_en": 100.0
+            }
+          },
+          "target": "test_compression"
+        }
+      }
+    }
+  }
+}

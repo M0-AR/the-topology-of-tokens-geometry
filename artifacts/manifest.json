@@ -1,0 +1,2061 @@
+{
+  "config": {
+    "analysis": {
+      "bootstrap_iterations": 2000,
+      "confidence": 0.95,
+      "outer_folds": "leave_one_corpus_out",
+      "permutation_iterations": 2000,
+      "primary_targets": [
+        "compression",
+        "bpb"
+      ],
+      "ridge_alphas": [
+        0.01,
+        0.1,
+        1.0,
+        10.0,
+        100.0
+      ]
+    },
+    "data": {
+      "corpora": [
+        {
+          "domain": "prose",
+          "field": "text",
+          "hf_config": "wikitext-103-raw-v1",
+          "hf_id": "Salesforce/wikitext",
+          "language": "en",
+          "name": "wikitext_en",
+          "split": "train"
+        },
+        {
+          "domain": "code",
+          "field": "content",
+          "hf_config": null,
+          "hf_id": "codeparrot/codeparrot-clean",
+          "language": "py",
+          "name": "codeparrot_py",
+          "split": "train"
+        },
+        {
+          "domain": "prose",
+          "field": "text",
+          "hf_config": "20231101.zh",
+          "hf_id": "wikimedia/wikipedia",
+          "language": "zh",
+          "name": "wikipedia_zh",
+          "split": "train"
+        },
+        {
+          "domain": "prose",
+          "field": "text",
+          "hf_config": "20231101.hu",
+          "hf_id": "wikimedia/wikipedia",
+          "language": "hu",
+          "name": "wikipedia_hu",
+          "split": "train"
+        },
+        {
+          "domain": "prose",
+          "field": "text",
+          "hf_config": "20231101.ar",
+          "hf_id": "wikimedia/wikipedia",
+          "language": "ar",
+          "name": "wikipedia_ar",
+          "split": "train"
+        },
+        {
+          "domain": "prose",
+          "field": "text",
+          "hf_config": "20231101.sw",
+          "hf_id": "wikimedia/wikipedia",
+          "language": "sw",
+          "name": "wikipedia_sw",
+          "split": "train"
+        }
+      ],
+      "data_dir": "data/processed",
+      "docs_per_corpus": 12000,
+      "max_chars": 200000,
+      "min_chars": 200,
+      "test_fraction": 0.1,
+      "train_fraction": 0.8,
+      "val_fraction": 0.1
+    },
+    "features": {
+      "byte_ngram_dim": 64,
+      "byte_ngram_max": 3,
+      "cooccurrence_docs": 512,
+      "cooccurrence_tokens": 256,
+      "cooccurrence_window": 5,
+      "maxdim": 1,
+      "persistence_thresholds": [
+        0.05,
+        0.1,
+        0.2,
+        0.4
+      ],
+      "vocab_points": 256
+    },
+    "market": {
+      "cache_dir": "data/market",
+      "enabled": true,
+      "endpoint": "https://query1.finance.yahoo.com/v8/finance/chart",
+      "max_retries": 3,
+      "nasdaq_endpoint": "https://api.nasdaq.com/api/quote",
+      "ranges": [
+        {
+          "interval": "1d",
+          "range": "10y"
+        },
+        {
+          "interval": "1h",
+          "range": "2y"
+        },
+        {
+          "interval": "5m",
+          "range": "1mo"
+        }
+      ],
+      "sleep_seconds": 2,
+      "tickers": [
+        "AAPL",
+        "MSFT",
+        "NVDA",
+        "JPM",
+        "XOM",
+        "JNJ",
+        "WMT",
+        "CAT",
+        "KO",
+        "DIS",
+        "GS",
+        "TSLA"
+      ],
+      "train_end": "2023-12-31",
+      "user_agent": "Mozilla/5.0 (research; topobpe)",
+      "val_end": "2024-12-31"
+    },
+    "model": {
+      "batch_size": 16,
+      "bf16": true,
+      "byte_chunk": 2048,
+      "context_length": 1024,
+      "d_ff": 1024,
+      "d_model": 256,
+      "dropout": 0.1,
+      "eval_interval": 250,
+      "grad_clip": 1.0,
+      "learning_rate": 0.0003,
+      "n_heads": 8,
+      "n_layers": 6,
+      "seeds": [
+        13,
+        37
+      ],
+      "steps": 1500,
+      "tokenizer_families": [
+        "bpe"
+      ],
+      "vocab_capacity": 32768,
+      "warmup_steps": 100,
+      "weight_decay": 0.01
+    },
+    "project": {
+      "artifact_dir": "artifacts",
+      "name": "topobpe",
+      "results_dir": "results",
+      "seed": 20261105
+    },
+    "tokenizers": {
+      "byte_level": true,
+      "families": [
+        "bpe",
+        "unigram"
+      ],
+      "min_frequency": 2,
+      "sample_bytes_for_training": 100000000,
+      "special_tokens": [
+        "<pad>",
+        "<bos>",
+        "<eos>",
+        "<unk>"
+      ],
+      "vocab_sizes": [
+        8192,
+        16384,
+        32768
+      ]
+    }
+  },
+  "config_path": "/home/md/src/topobpe/configs/default.yaml",
+  "config_sha256": "89f862400d47385eb8bf6d6a5dc2e9679db923d5ea215b00473e2d7ff6cf4e6e",
+  "created_at": "2026-11-06T10:35:02.978917+00:00",
+  "data_manifest": {
+    "corpora": {
+      "codeparrot_py": {
+        "download_timestamp": "2026-11-05T10:05:38.204630+00:00",
+        "files": {
+          "test": {
+            "characters": 11201193,
+            "documents": 1249,
+            "path": "data/processed/codeparrot_py/test.jsonl",
+            "sha256": "39a8405b9297df7da3ef78f72e3166bb0ceada788625b4ff7e7ba531bc36c9bd"
+          },
+          "train": {
+            "characters": 89487903,
+            "documents": 9570,
+            "path": "data/processed/codeparrot_py/train.jsonl",
+            "sha256": "05cf77b311c1f31747f976c2f808e1fcfa94b37615a1d62faa0bde8c96c5b125"
+          },
+          "val": {
+            "characters": 10584563,
+            "documents": 1181,
+            "path": "data/processed/codeparrot_py/val.jsonl",
+            "sha256": "4e84acabc5490598245307d24211cd0c6ecf8c61cd6d63af03499b42fbeb54f3"
+          }
+        },
+        "hf_config": null,
+        "hf_id": "codeparrot/codeparrot-clean",
+        "hf_revision": "35a59fb025bc0a102f7d96eac09d145b896d487b",
+        "total_characters": 111273659
+      },
+      "wikipedia_ar": {
+        "download_timestamp": "2026-11-05T10:08:34.109053+00:00",
+        "files": {
+          "test": {
+            "characters": 9420568,
+            "documents": 1197,
+            "path": "data/processed/wikipedia_ar/test.jsonl",
+            "sha256": "0efb6b32e14ac68118cfd031152eacdeab23e74fcb16ba706450a491f2ec65fa"
+          },
+          "train": {
+            "characters": 73595975,
+            "documents": 9633,
+            "path": "data/processed/wikipedia_ar/train.jsonl",
+            "sha256": "4abcd7af799d43898b6fb0b522ba6f1bdc177e843710500fc9da74189fb91761"
+          },
+          "val": {
+            "characters": 9560114,
+            "documents": 1170,
+            "path": "data/processed/wikipedia_ar/val.jsonl",
+            "sha256": "a186da66777389bb64b413fbdb871d918758420da175ea698c354e84dfa4baea"
+          }
+        },
+        "hf_config": "20231101.ar",
+        "hf_id": "wikimedia/wikipedia",
+        "hf_revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+        "total_characters": 92576657
+      },
+      "wikipedia_hu": {
+        "download_timestamp": "2026-11-05T10:07:33.909567+00:00",
+        "files": {
+          "test": {
+            "characters": 8949197,
+            "documents": 1267,
+            "path": "data/processed/wikipedia_hu/test.jsonl",
+            "sha256": "e94dd4b3a39c8b82acd9115ef08352bb4a9e14143b38a75111a2571d849ef879"
+          },
+          "train": {
+            "characters": 65824800,
+            "documents": 9556,
+            "path": "data/processed/wikipedia_hu/train.jsonl",
+            "sha256": "416738f68004d3efb05bc60276fdb66af57674e197685777e39d908e1438e039"
+          },
+          "val": {
+            "characters": 7536985,
+            "documents": 1177,
+            "path": "data/processed/wikipedia_hu/val.jsonl",
+            "sha256": "65a0e9fc6d120aaf604c9a9a03faf72c83b29d399f353113e484a84c24e229ab"
+          }
+        },
+        "hf_config": "20231101.hu",
+        "hf_id": "wikimedia/wikipedia",
+        "hf_revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+        "total_characters": 82310982
+      },
+      "wikipedia_sw": {
+        "download_timestamp": "2026-11-05T10:09:40.005611+00:00",
+        "files": {
+          "test": {
+            "characters": 1838005,
+            "documents": 1198,
+            "path": "data/processed/wikipedia_sw/test.jsonl",
+            "sha256": "d1c56804224f62340b9d0864e410e1a2734752036fcb4f89d04e8d41d1110890"
+          },
+          "train": {
+            "characters": 15236234,
+            "documents": 9561,
+            "path": "data/processed/wikipedia_sw/train.jsonl",
+            "sha256": "84a7c8fce0ee273551d36ff48124a7fa7791eadca97bda5f77e960f8a075eb42"
+          },
+          "val": {
+            "characters": 2113510,
+            "documents": 1241,
+            "path": "data/processed/wikipedia_sw/val.jsonl",
+            "sha256": "d69f3b05f52aa6245907519b77c228df7aaa1b00f838842ce5f6e7469b2c85f6"
+          }
+        },
+        "hf_config": "20231101.sw",
+        "hf_id": "wikimedia/wikipedia",
+        "hf_revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+        "total_characters": 19187749
+      },
+      "wikipedia_zh": {
+        "download_timestamp": "2026-11-05T10:06:45.334323+00:00",
+        "files": {
+          "test": {
+            "characters": 4101726,
+            "documents": 1164,
+            "path": "data/processed/wikipedia_zh/test.jsonl",
+            "sha256": "4f040cc7bf2961bdeb3188ea939954133cfa092f6a2e80c8ad38bb1620fefbe2"
+          },
+          "train": {
+            "characters": 37117915,
+            "documents": 9644,
+            "path": "data/processed/wikipedia_zh/train.jsonl",
+            "sha256": "461d4b738eb927e393e24a9e5a533196693d55136cd4558238522e873c83afb0"
+          },
+          "val": {
+            "characters": 4769095,
+            "documents": 1192,
+            "path": "data/processed/wikipedia_zh/val.jsonl",
+            "sha256": "3fc49e63d9c45822d49c8de7c76aab1a58409d9d7e8295365c02be79a60c7acc"
+          }
+        },
+        "hf_config": "20231101.zh",
+        "hf_id": "wikimedia/wikipedia",
+        "hf_revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+        "total_characters": 45988736
+      },
+      "wikitext_en": {
+        "download_timestamp": "2026-11-05T10:05:13.323252+00:00",
+        "files": {
+          "test": {
+            "characters": 899159,
+            "documents": 1218,
+            "path": "data/processed/wikitext_en/test.jsonl",
+            "sha256": "e88904aea2ce2233800a526a1fae679892b1ef51079243a9c1e271ea0e3db806"
+          },
+          "train": {
+            "characters": 7051751,
+            "documents": 9603,
+            "path": "data/processed/wikitext_en/train.jsonl",
+            "sha256": "f9500085b85c96572dce4e37ef35a395773ae047b47c2a3c03c09e9e404075b4"
+          },
+          "val": {
+            "characters": 857987,
+            "documents": 1179,
+            "path": "data/processed/wikitext_en/val.jsonl",
+            "sha256": "6d79d371b81b8675cff7c44c8671b8b6a8c718d2d3bc611a42f1421aee433f4e"
+          }
+        },
+        "hf_config": "wikitext-103-raw-v1",
+        "hf_id": "Salesforce/wikitext",
+        "hf_revision": "b08601e04326c79dfdd32d625aee71d232d685c3",
+        "total_characters": 8808897
+      }
+    },
+    "created_at": "2026-11-05T10:04:49.338681+00:00"
+  },
+  "environment": {
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "datasets": "5.0.0",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_total_memory_gb": 23.556,
+    "gudhi": "3.13.0",
+    "machine": "x86_64",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "pandas": "2.2.3",
+    "persim": "unknown",
+    "platform": "Linux-7.0.0-42-generic-x86_64-with-glibc2.43",
+    "processor": "",
+    "python": "3.12.13 (main, May  8 2026, 18:32:55) [Clang 22.1.3 ]",
+    "ripser": "0.6.15",
+    "scipy": "1.18.1",
+    "sklearn": "1.9.1",
+    "statsmodels": "0.15.0",
+    "tokenizers": "0.22.2",
+    "torch": "2.13.0+cu130",
+    "transformers": "5.15.1"
+  },
+  "files": {
+    "artifacts/data_manifest.json": "c2aff609306063ce1a5de678924b46f3778fe66b459b36c467b9b12c9f43f979",
+    "artifacts/features/codeparrot_py/bpe_16384_08748c0a61a8.json": "1e7fa76dbc689a78f7bd4101187a064afda79808ddb41170bf71214ec797a126",
+    "artifacts/features/codeparrot_py/bpe_32768_08748c0a61a8.json": "08970e8eaf93de151ad3b72e6fb72e816e74dc1e0fb5050be80eadc870ce091e",
+    "artifacts/features/codeparrot_py/bpe_8192_08748c0a61a8.json": "9a4d9965a18f80b39af898d171daa75155cbf57b1a1794b1503a275fe33194cf",
+    "artifacts/features/codeparrot_py/unigram_16384_08748c0a61a8.json": "93d86026edd1bf1fdb3564c6a105271180becb3fc13c1a28f1369b143aa880df",
+    "artifacts/features/codeparrot_py/unigram_32768_08748c0a61a8.json": "5d70a07792a7b7dd1075a1c44740824c88e8171f2e9ac40ba301c75853e202b0",
+    "artifacts/features/codeparrot_py/unigram_8192_08748c0a61a8.json": "4e7a0a723125725a0630784c6dd7b1024e2a6dc7dac417200432139655e53425",
+    "artifacts/features/market_aapl_10y/bpe_1024_08748c0a61a8.json": "0711d1b37e9c8c190f3897071895ba693e07fa33f09d5f4c063db39af8852401",
+    "artifacts/features/market_aapl_10y/bpe_2048_08748c0a61a8.json": "4d5a0b1b35c224ddaab573e2ae0a65f2132d375ea6442a11238751147c9bd4af",
+    "artifacts/features/market_cat_10y/bpe_1024_08748c0a61a8.json": "89c8c5ad43f9c7ccef2e66987810f3a0b0ce077aefebe8d1542a957ead9116cc",
+    "artifacts/features/market_cat_10y/bpe_2048_08748c0a61a8.json": "76f0547b5c1d8cd76a416855dd54ef587c91da33f701fb34b34ccd9ea13f78af",
+    "artifacts/features/market_dis_10y/bpe_1024_08748c0a61a8.json": "a8a5a29216863b5628584a59fb40941128c138ef5121d62283e2ab3de0f930fb",
+    "artifacts/features/market_dis_10y/bpe_2048_08748c0a61a8.json": "875654e71821b6403b122c7b2f3637a98b1c763dfaae1504b2454d998f8b94a5",
+    "artifacts/features/market_gs_10y/bpe_1024_08748c0a61a8.json": "99b339f04cc9413a33c050fc93bea114f6b9a930967d5973f1dcaac85114773d",
+    "artifacts/features/market_gs_10y/bpe_2048_08748c0a61a8.json": "c8ed4223f2c18fb9c8d7be4b524a941b596685b0d93b2e875463ad116a8e19fa",
+    "artifacts/features/market_jnj_10y/bpe_1024_08748c0a61a8.json": "6360e0a49c41f6abe12d809bd4207a86b57133ac1c0fb9222af1c956c2b619cc",
+    "artifacts/features/market_jnj_10y/bpe_2048_08748c0a61a8.json": "106be0bc39ba87fbb3b39a49334d522214d0dab0934d1bc8837e05d39791bc93",
+    "artifacts/features/market_jpm_10y/bpe_1024_08748c0a61a8.json": "fa1e73e99ae5220ba9d3955c283e63ff0d3ca2c1c3fbc3b65b68866f017ac03d",
+    "artifacts/features/market_jpm_10y/bpe_2048_08748c0a61a8.json": "01553a0ec51619a045ff5979a5889654d79d7a7c62c800f8f8c551eaa52d7c0e",
+    "artifacts/features/market_ko_10y/bpe_1024_08748c0a61a8.json": "4e59b3849cc1371a6f96c70b35328fee48333dc58be346c83fbe2c4f6cca1a05",
+    "artifacts/features/market_ko_10y/bpe_2048_08748c0a61a8.json": "41b405f43fb5f1866d18dccd03657a536089ce7cfe79d2df6c386a2a58d519c1",
+    "artifacts/features/market_msft_10y/bpe_1024_08748c0a61a8.json": "f2a144a95264324c553130071803fce0928a543f039dd77c1fe7763d5285a4e0",
+    "artifacts/features/market_msft_10y/bpe_2048_08748c0a61a8.json": "50533a4a1f037258717dea30aacabe04d216e7ba585bb03bc39ef037dc2069df",
+    "artifacts/features/market_nvda_10y/bpe_1024_08748c0a61a8.json": "fa001fded56338adcd020215109fec4f8d08f60af2555ca2d509bf19cbe8806a",
+    "artifacts/features/market_nvda_10y/bpe_2048_08748c0a61a8.json": "8bdbebe0ceeabc3492dbd287d89f3e043123233e4072cbde9c7dc231c3b07713",
+    "artifacts/features/market_tsla_10y/bpe_1024_08748c0a61a8.json": "7d6ae96b1194e0edbfae7d05ed3aa74ce1c80aa2543effa8f78e2d8bb1adcddb",
+    "artifacts/features/market_tsla_10y/bpe_2048_08748c0a61a8.json": "1e3a3b69dade7db5e9345e6624229b125be22a8c1270a69b5172e3ea7db55f64",
+    "artifacts/features/market_wmt_10y/bpe_1024_08748c0a61a8.json": "20826dd86b8515c60b37d359cacb1f50b0b0e2b3c708d1b2f98b2aee4ee84641",
+    "artifacts/features/market_wmt_10y/bpe_2048_08748c0a61a8.json": "c00d3e1d0a2a245f9987bfb5cd9548e2d95854420ac1116a4d7df9929a0fe702",
+    "artifacts/features/market_xom_10y/bpe_1024_08748c0a61a8.json": "5302b4bdab22029e08b9c5183e887aa83ded4fe9efd2ac0d0bcd54965f772644",
+    "artifacts/features/market_xom_10y/bpe_2048_08748c0a61a8.json": "eb736fe35ea2c7b684f84eaeb5df0acb76584eb9ac0d60d33c9373742949b1d6",
+    "artifacts/features/wikipedia_ar/bpe_16384_08748c0a61a8.json": "73b8b52217af9bd1c4f7098bc438c2e59aa8d0b2d3c4e8d4f5d3662d28d2c592",
+    "artifacts/features/wikipedia_ar/bpe_32768_08748c0a61a8.json": "bc172068d85d462638399682f6d2f41dc4f8965751e16a245bff26d6a5cc0a92",
+    "artifacts/features/wikipedia_ar/bpe_8192_08748c0a61a8.json": "656c847b9c9f15458dca56e200f98f4b6d1c5693c93735ada8d363c941924ae9",
+    "artifacts/features/wikipedia_ar/unigram_16384_08748c0a61a8.json": "106e94c1012e325e117b8f8c33184d2b21b4eac0efc782b7da49498d610ac78f",
+    "artifacts/features/wikipedia_ar/unigram_32768_08748c0a61a8.json": "10236ca90fa2685f20531834d58acf195adb9e3ad9a2437c93125fab7241a8f4",
+    "artifacts/features/wikipedia_ar/unigram_8192_08748c0a61a8.json": "c702c968b91defe2732ebf457414b0e49543a390f38466396737e0d590b9add3",
+    "artifacts/features/wikipedia_hu/bpe_16384_08748c0a61a8.json": "a1397b11bdaab49c7d847566a2c1f860c555bccd0feb28b6644e9e566ae84ab3",
+    "artifacts/features/wikipedia_hu/bpe_32768_08748c0a61a8.json": "541252b8a777d86ce6cc5e348fa9392755078b047be998c9f7f1868ec356cfe3",
+    "artifacts/features/wikipedia_hu/bpe_8192_08748c0a61a8.json": "f9aa383b82014dc807f456d4c48a707f309bda5c268d82c3277f144b8ce24498",
+    "artifacts/features/wikipedia_hu/unigram_16384_08748c0a61a8.json": "d34bba9820b966ac2c324dbfaf6020cb497295ec24ca42f2903e54023929ce88",
+    "artifacts/features/wikipedia_hu/unigram_32768_08748c0a61a8.json": "998e1264af1073730368e5534d2b87abeae78b904c2d4a20cf9f6d0a9e45a720",
+    "artifacts/features/wikipedia_hu/unigram_8192_08748c0a61a8.json": "139af6bee65b19498e397fc36ea04bb8b9537a8ada593ab0a4d9dbc418c8c357",
+    "artifacts/features/wikipedia_sw/bpe_16384_08748c0a61a8.json": "32b940dd14d46e5e08fbba6eb197ee4e51da138830d30a1769bb004bf3647a2a",
+    "artifacts/features/wikipedia_sw/bpe_32768_08748c0a61a8.json": "a85686cb591a9249bcd0ff65d252343fb7ac1dd85f523b107f522c3b63b40c6c",
+    "artifacts/features/wikipedia_sw/bpe_8192_08748c0a61a8.json": "f1c58957582863d298b6dfea7eba371db7dced6cc86fd65b2c29c689c623170b",
+    "artifacts/features/wikipedia_sw/unigram_16384_08748c0a61a8.json": "a7bad43eb4170c543148588ddfe99fc0ceb81d2bb94eb9bb30ebe45720d2e29d",
+    "artifacts/features/wikipedia_sw/unigram_32768_08748c0a61a8.json": "74754a97734e08ec8e34b820baddd2dfba6952206b83f4233c624a46351ac648",
+    "artifacts/features/wikipedia_sw/unigram_8192_08748c0a61a8.json": "70f52b41bce18bd5b9ce6c7f00e93a4a8b7271ff0d555d54891e51526f2253a9",
+    "artifacts/features/wikipedia_zh/bpe_16384_08748c0a61a8.json": "f97161ba9c9edbc7fce76622206a5cab9c992eac8092f64786e9e0469cfec3d2",
+    "artifacts/features/wikipedia_zh/bpe_32768_08748c0a61a8.json": "59a7a51422988ed38454a953048fb2f617c95872cf91764f3f17f6df80937433",
+    "artifacts/features/wikipedia_zh/bpe_8192_08748c0a61a8.json": "14ec9dcac62a961b3a3ff12862f2041b5f1c09b781f9e31f17dfa4bd2d55a371",
+    "artifacts/features/wikipedia_zh/unigram_16384_08748c0a61a8.json": "df3b2ee9fd8be52e50b0c7e557f0f97e3efbedd31ef2ed88cb78e0f030c4af38",
+    "artifacts/features/wikipedia_zh/unigram_32768_08748c0a61a8.json": "62553de585e7c336c3c8e1d1f8f968cbe1c459337f57b81a8666a18b78d26ac8",
+    "artifacts/features/wikipedia_zh/unigram_8192_08748c0a61a8.json": "d73065dbb5a786dcd43e8ad7affaa3e31834fcbc75744eb9387edcc03d6359a5",
+    "artifacts/features/wikitext_en/bpe_16384_08748c0a61a8.json": "5bd4cc1e777bf5d5c657d74c96ebd113636e4bcf2be3221d3fcf5df8f9252ffe",
+    "artifacts/features/wikitext_en/bpe_32768_08748c0a61a8.json": "695d6d186ffa99889300fe5289a04ae2f1e655990c7747ed13106e1c5fb25b53",
+    "artifacts/features/wikitext_en/bpe_8192_08748c0a61a8.json": "17e22e2b9cd95a3a09c45f7de423c8109d118ce168ce087c0e4c156d305bc068",
+    "artifacts/features/wikitext_en/unigram_16384_08748c0a61a8.json": "9202a8ee435e90689cf4309637b6c105e20d02f5eaf8b001995908bf6c18430e",
+    "artifacts/features/wikitext_en/unigram_32768_08748c0a61a8.json": "333d4b34c362a5b2eca32259bc9aa5ba42d292a543f7c606f649a1d0efdcf42b",
+    "artifacts/features/wikitext_en/unigram_8192_08748c0a61a8.json": "301c55d6bc49bb40c8e4d6d7207ce6181d913f5ac5db4a1c4969e8e39091e427",
+    "artifacts/lm/codeparrot_py/bpe_16384_seed13_main_bf9cc0969fc7.json": "f5508849a0fc484945f7f29ddc4db368bacc590f96b7bf13b733536d1a8e8784",
+    "artifacts/lm/codeparrot_py/bpe_16384_seed37_main_bf9cc0969fc7.json": "0423e71b9f1868fd08c487e87bba7c5a0feb1d3529b0e240dc1f7eb39a1982c9",
+    "artifacts/lm/codeparrot_py/bpe_32768_seed13_main_bf9cc0969fc7.json": "5ae800541bb34bfdefe519c1cea6c20f0da2093cff204b99df228a7bb6c85b7d",
+    "artifacts/lm/codeparrot_py/bpe_32768_seed37_main_bf9cc0969fc7.json": "b7446d77324c64c4ab883e34852b5b707a8e580af2c6a45cfd48042a0a2acc4c",
+    "artifacts/lm/codeparrot_py/bpe_8192_seed13_main_bf9cc0969fc7.json": "ec7e1fcd4fe047685e288ff3c81f29000a67208f98e397ed9c5896f38eeb2292",
+    "artifacts/lm/codeparrot_py/bpe_8192_seed37_main_bf9cc0969fc7.json": "5d745c7554ba3708fcc038681c63b577dda1c8ad94cf2b520e4adbafde2fa286",
+    "artifacts/lm/market_aapl_10y/bpe_1024_seed13_market_575cf841adb6.json": "ffd8f0bb920a08a75d6e92de318124aa6b7343de04dd477f37804f9c0dff4425",
+    "artifacts/lm/market_aapl_10y/bpe_2048_seed13_market_575cf841adb6.json": "6073d41858471f29548efefaec00264affc94c6b7d9d6f1a9667f25d09017ae5",
+    "artifacts/lm/market_cat_10y/bpe_1024_seed13_market_575cf841adb6.json": "552c1198a284fd7427e37ef26fbf8d7662e10d1e2fdf81836913b638041b38e6",
+    "artifacts/lm/market_cat_10y/bpe_2048_seed13_market_575cf841adb6.json": "a6312bb14d4a534c4e73bc03b0f211ab6dd46ac1f02d9fc787814d9d28018931",
+    "artifacts/lm/market_dis_10y/bpe_1024_seed13_market_575cf841adb6.json": "d3d5fe5c36b374965b22740509f4241d3e2424c1fd851a39f95a2c060831429d",
+    "artifacts/lm/market_dis_10y/bpe_2048_seed13_market_575cf841adb6.json": "ad41f700589a78ce1e701bd34b3f0472bd337c2fbc624493f820c3c56caf90d9",
+    "artifacts/lm/market_gs_10y/bpe_1024_seed13_market_575cf841adb6.json": "3b27065874555447fef95cc197d05dd47876d3bf15327bfd54d391e014e4eb56",
+    "artifacts/lm/market_gs_10y/bpe_2048_seed13_market_575cf841adb6.json": "3c6577b29a3c241cd9397bc1a72c01f714259cf4d41bf0ffe78a30fda60a645a",
+    "artifacts/lm/market_jnj_10y/bpe_1024_seed13_market_575cf841adb6.json": "c477930c83f44cad3acf865c2bec45186619086a291b2dc4171c4af5a29626e9",
+    "artifacts/lm/market_jnj_10y/bpe_2048_seed13_market_575cf841adb6.json": "2a2dc280c67cfcb40528ba36e6e2332eac9914c02e3a47a33defef937398cfa7",
+    "artifacts/lm/market_jpm_10y/bpe_1024_seed13_market_575cf841adb6.json": "0386d464d4c8f7a3e866321d2d0a4565f45a0e919348aa5818f0dbf5526384e6",
+    "artifacts/lm/market_jpm_10y/bpe_2048_seed13_market_575cf841adb6.json": "366d917064fc1bbd984915f054c2453bf6949395f0c34c04ff1ea2e05951d998",
+    "artifacts/lm/market_ko_10y/bpe_1024_seed13_market_575cf841adb6.json": "fceea1a532bc317b299a70d00ad191f147f5eca07d1f794a34a710d0b40fce97",
+    "artifacts/lm/market_ko_10y/bpe_2048_seed13_market_575cf841adb6.json": "8205bfb5610e0e099b63d373a2110afa0bdb4f1b6f016a71b52258b888352d3a",
+    "artifacts/lm/market_msft_10y/bpe_1024_seed13_market_575cf841adb6.json": "f480086c1747a236a6b575efd22a4d4844b20f8334077bd91addea48df1b6600",
+    "artifacts/lm/market_msft_10y/bpe_2048_seed13_market_575cf841adb6.json": "6b4ceaa64135aaa343b15af697ce518ff706fef86ba0e4102d70c6f28dad4235",
+    "artifacts/lm/market_nvda_10y/bpe_1024_seed13_market_575cf841adb6.json": "0406f31853bf9dd6e34a63f2ecfa0e786bc0aa09e4837f0d7c62ed1ef1dc1b1b",
+    "artifacts/lm/market_nvda_10y/bpe_2048_seed13_market_575cf841adb6.json": "292ce1c38af65ad3ae1b783601f68db500e641cd715ed44a36897aa905a9492e",
+    "artifacts/lm/market_tsla_10y/bpe_1024_seed13_market_575cf841adb6.json": "3aba41554050e7baa4c91f5ae73ffca7e29fe2e05198250674bc04238ae6f64a",
+    "artifacts/lm/market_tsla_10y/bpe_2048_seed13_market_575cf841adb6.json": "6efece3991959a249ba763a2565fde27f1ca171a900b7a0af9044f661a5cb219",
+    "artifacts/lm/market_wmt_10y/bpe_1024_seed13_market_575cf841adb6.json": "8d75cb68e41509c1fdd211431584ebc881fe2172b22cde2dbacf979ebc47c1be",
+    "artifacts/lm/market_wmt_10y/bpe_2048_seed13_market_575cf841adb6.json": "29bcdadd9102d1451fcfb8ce44cd6425480469a3d60f8f89869472cd3f87dbc5",
+    "artifacts/lm/market_xom_10y/bpe_1024_seed13_market_575cf841adb6.json": "cccfda36965a0f816ab241538288c5b36c0116d060db999ee1411f39242b3d85",
+    "artifacts/lm/market_xom_10y/bpe_2048_seed13_market_575cf841adb6.json": "88e488f2afa79fc659ce1ce2156f9eae6a2a8b489f241cfc2c9d6826591b3c0f",
+    "artifacts/lm/wikipedia_ar/bpe_16384_seed13_main_bf9cc0969fc7.json": "6289577e3786c4ec77114916784dde95a0691721a3c4229e1a5cc5a8effc2e75",
+    "artifacts/lm/wikipedia_ar/bpe_16384_seed37_main_bf9cc0969fc7.json": "a17bf349f7827443b7816d84180c48edc5e8e92d4d35aa4be41a6c40f6b4e49e",
+    "artifacts/lm/wikipedia_ar/bpe_32768_seed13_main_bf9cc0969fc7.json": "aeb343c256090e6c80f766e470d6da1d3b1c65efb72613124b12f074d915bd43",
+    "artifacts/lm/wikipedia_ar/bpe_32768_seed37_main_bf9cc0969fc7.json": "d81355aeb2ea595c6a9949d3628ab7d80450c5362299a48f5a8b7f7b54141092",
+    "artifacts/lm/wikipedia_ar/bpe_8192_seed13_main_bf9cc0969fc7.json": "d9e942e884ac57c2c4012f16a95bbd8ed36359953f8311d50834e8722ea04eeb",
+    "artifacts/lm/wikipedia_ar/bpe_8192_seed37_main_bf9cc0969fc7.json": "2fc98b8539223bd11e0f94b151e4e5bca1243c1c027c09113266d69fbfc89790",
+    "artifacts/lm/wikipedia_hu/bpe_16384_seed13_main_bf9cc0969fc7.json": "3a18fe64fb3719ab3438de014bb3af1e65ebf97657eef3a703f373446a7b2b9d",
+    "artifacts/lm/wikipedia_hu/bpe_16384_seed37_main_bf9cc0969fc7.json": "96ee8fba0f98d8567dd1d822e5c66367f7f9a77570c7d907c436d253a10aba83",
+    "artifacts/lm/wikipedia_hu/bpe_32768_seed13_main_bf9cc0969fc7.json": "085d9379217424f2d5bc4776fa9379af036d9a7d65e956e6d7c1a43ed22095cf",
+    "artifacts/lm/wikipedia_hu/bpe_32768_seed37_main_bf9cc0969fc7.json": "33cc18bc3d649c920d2432696ed4d1c4d335a2e4d8b6884d320e51d70a45a8e5",
+    "artifacts/lm/wikipedia_hu/bpe_8192_seed13_main_bf9cc0969fc7.json": "66b11e488b4a5a2798845ada76acb17c69203644119a8631f95ecd2b7b3d53dd",
+    "artifacts/lm/wikipedia_hu/bpe_8192_seed37_main_bf9cc0969fc7.json": "d4f9a1c9013cb6347e8a1f82dfe4620ab8000a838c76f0007f85e37c4962562f",
+    "artifacts/lm/wikipedia_sw/bpe_16384_seed13_main_bf9cc0969fc7.json": "740b571eb370010e3cd23dd6900aa434b85348f2475ad428ceabe52517cf8aa6",
+    "artifacts/lm/wikipedia_sw/bpe_16384_seed37_main_bf9cc0969fc7.json": "76e0084ad4aabca8bb217bad271f2e5f005bbf58cfa24a804e98f41308a46892",
+    "artifacts/lm/wikipedia_sw/bpe_32768_seed13_main_bf9cc0969fc7.json": "a065a4d108690dee5a2c5739b54fed270e341a8ef6b810c6709f5c7c224c6f49",
+    "artifacts/lm/wikipedia_sw/bpe_32768_seed37_main_bf9cc0969fc7.json": "e9828b8b02e912d6e174330af469da6a8c82120106947ca7efaab59fad070609",
+    "artifacts/lm/wikipedia_sw/bpe_8192_seed13_main_bf9cc0969fc7.json": "95440dd11dd478ddccc44f8f176560aa401d409b2c2936863a9f55916b8945f2",
+    "artifacts/lm/wikipedia_sw/bpe_8192_seed37_main_bf9cc0969fc7.json": "1c778db7420cc24423d8a3850c810e8b8fb121821d77c2c8e730240d7978f90d",
+    "artifacts/lm/wikipedia_zh/bpe_16384_seed13_main_bf9cc0969fc7.json": "d23313c756a6d163f4797c01cb053f5f3ee801883683c5041891f2c71ca50cf5",
+    "artifacts/lm/wikipedia_zh/bpe_16384_seed37_main_bf9cc0969fc7.json": "484dadda0019720209a83a99f3b8b56a6977315487f4bfdd79f08787d1889ad3",
+    "artifacts/lm/wikipedia_zh/bpe_32768_seed13_main_bf9cc0969fc7.json": "e275245fa0ac63de7e4bbb9cd8a4ede0f5ad8dbe884f00a7227100a299e9fcff",
+    "artifacts/lm/wikipedia_zh/bpe_32768_seed37_main_bf9cc0969fc7.json": "5cdee35072f9eda2fc9d12e7376aff87e4c33da991a6ad25e03b03e9abf495a6",
+    "artifacts/lm/wikipedia_zh/bpe_8192_seed13_main_bf9cc0969fc7.json": "b02f730727da82434fd45f5708bad67d7623505812ea03d8c45ab4da2ac3382f",
+    "artifacts/lm/wikipedia_zh/bpe_8192_seed37_main_bf9cc0969fc7.json": "330d148b10c588ae84bbe1654fa211b49659c71b7c52748d0389859639ddec8b",
+    "artifacts/lm/wikitext_en/bpe_16384_seed13_main_bf9cc0969fc7.json": "c8624ca27585f1528f45eebef3011dc0d9c9e790f05c4541e553e415b1cd8e76",
+    "artifacts/lm/wikitext_en/bpe_16384_seed37_main_bf9cc0969fc7.json": "4b497587c29c3d9a222e9e624fc624ee0cb1aea53106b9e6a6454e48a28ce105",
+    "artifacts/lm/wikitext_en/bpe_32768_seed13_main_bf9cc0969fc7.json": "8233135aa0f8ce4504f7c47d048e427c539bd95b31afb9c6ad5a1e5049ae665e",
+    "artifacts/lm/wikitext_en/bpe_32768_seed37_main_bf9cc0969fc7.json": "97b59a11605ce8f90744000426caae6a40c5053c5630e85a33d63b23697f9962",
+    "artifacts/lm/wikitext_en/bpe_8192_seed13_main_bf9cc0969fc7.json": "041c05f85c78835dbc6297ee0d99dc554a5faeb0aaddbe2df6a00a02a5e160e7",
+    "artifacts/lm/wikitext_en/bpe_8192_seed37_main_bf9cc0969fc7.json": "4d19432c2055d9453983b2e236654224b16266dec80864d3fe35a8561e8209ac",
+    "artifacts/market_feature_manifest.json": "2f1ab15bf367271abaa68a36a0ed5ae728cab069e7c45ae19fc08816a5699aba",
+    "artifacts/market_manifest.json": "61059aafd84415075f4c442e1d80e4845c68f693e7013a5fa2985a7941e0f3bd",
+    "artifacts/tokenizer_manifest.json": "aba9047a7cb457fc6f36c4e3ec07b790fcfd5426a7015f08da193f0e326ec957",
+    "artifacts/tokenizers/codeparrot_py/bpe_16384.json": "2791e5cb80b184266054ede58f2288eeb393a36359efba2125826ec95b1e12d0",
+    "artifacts/tokenizers/codeparrot_py/bpe_16384.meta.json": "218d26eb921b381b3e40f935440801b5a2bdc7fd1328614999376a81278a1e39",
+    "artifacts/tokenizers/codeparrot_py/bpe_32768.json": "dc1f9d8b61d48b3a86034040bea6993a4796947869a762cdc7ed5001db06406d",
+    "artifacts/tokenizers/codeparrot_py/bpe_32768.meta.json": "a78e7a0b8bea7203475cc3b2c7c7eb5111e252cfcfd6df0d9595a13e475f3bb1",
+    "artifacts/tokenizers/codeparrot_py/bpe_8192.json": "11d405483cfa6840105d1fbc43a9221bbb5fe7d129d0f3b5d6d26dcd2e67b5b6",
+    "artifacts/tokenizers/codeparrot_py/bpe_8192.meta.json": "5685f84462706694f80f174cbf6978813b219fef8a5d127064a03b8e331e939e",
+    "artifacts/tokenizers/codeparrot_py/unigram_16384.json": "ca395259626679e412f7db041c32b45b7c1269436e6f847a4ee36fffbdf64658",
+    "artifacts/tokenizers/codeparrot_py/unigram_16384.meta.json": "07119c6fbb5148dc2952ffed9e24a4034105341a659a2362c833eda929d4e52b",
+    "artifacts/tokenizers/codeparrot_py/unigram_32768.json": "26b2f9e1b156606d339cffeb1e4868c49da6f96b625ff731ed68b072926346b0",
+    "artifacts/tokenizers/codeparrot_py/unigram_32768.meta.json": "8aabadeeba9fd959ce36b59e180f3c870e0811d45c92030c8837bf45433b3f98",
+    "artifacts/tokenizers/codeparrot_py/unigram_8192.json": "8072022d58ae3b9ff48ef8c5d146982f4b785de927bb95ee7fa14167fda31a28",
+    "artifacts/tokenizers/codeparrot_py/unigram_8192.meta.json": "add4cba247eecb02f15fda570685c4e9ede5c019856fc027dce6f8a239a03ae7",
+    "artifacts/tokenizers/market_aapl_10y/bpe_1024.json": "d35ff49a2db5d143c91e1e318544378db0b1da2d6cbf60f672b3947685edc591",
+    "artifacts/tokenizers/market_aapl_10y/bpe_1024.meta.json": "4b2bc9c7a6d086238c875f40e3340d853f2cc09e7d0f0861763512cac2c17013",
+    "artifacts/tokenizers/market_aapl_10y/bpe_2048.json": "33c2249c9b9fc1718770fe976ab4deb3d11eaf947efd8b5a53a6cc39b04878e0",
+    "artifacts/tokenizers/market_aapl_10y/bpe_2048.meta.json": "1c1d5e02f263ab33e7e8c06b1d995d878405db1f84b03c4dcc28e8f5013e1c26",
+    "artifacts/tokenizers/market_cat_10y/bpe_1024.json": "3decb791a31016e2aa47a8b83ad7695208dbd192798300c03f52e1b7149cef10",
+    "artifacts/tokenizers/market_cat_10y/bpe_1024.meta.json": "02ecf07dddaea06730603ef863e7db4d4e0f906e1825269608ff929788f87d5d",
+    "artifacts/tokenizers/market_cat_10y/bpe_2048.json": "209e3a7dcfb8e9f249bca73e02b3e2fc698d731dbd8a0b31563669424334b79f",
+    "artifacts/tokenizers/market_cat_10y/bpe_2048.meta.json": "4359641565b0af9f1473993a43fcd0888a374df5ad608e3c8b740d5bf66c51dd",
+    "artifacts/tokenizers/market_dis_10y/bpe_1024.json": "1f4721ad508b5ae9b5b01ecc97510c6f5ff32efdc9b501154b9bdbffb0f4756d",
+    "artifacts/tokenizers/market_dis_10y/bpe_1024.meta.json": "60b43929705aefcdbdc38b24ffc6daeeba3cdd42da04437fc3bc2696edb73626",
+    "artifacts/tokenizers/market_dis_10y/bpe_2048.json": "18bb804502742f2a0808b27f663f2b17cc2f49c5105b1330d136cf0638f5a7cd",
+    "artifacts/tokenizers/market_dis_10y/bpe_2048.meta.json": "3dc5bae2ebf20238f71372334b9da71f57ade861d61bbc70787e9a4d45bb5fc9",
+    "artifacts/tokenizers/market_gs_10y/bpe_1024.json": "3e628eba0ad5978652beddbddbfd974e966544bd643fcd527d0409a71d86d7a5",
+    "artifacts/tokenizers/market_gs_10y/bpe_1024.meta.json": "51d988e8b7fd81a48f553106bf86f1c00e43d928a6eae25829090975ef5441d3",
+    "artifacts/tokenizers/market_gs_10y/bpe_2048.json": "36dc92aaa4fd6f2a40ae75b288d3d12cf3a4ba56ba6061e4b36dc8906888c110",
+    "artifacts/tokenizers/market_gs_10y/bpe_2048.meta.json": "e6b5b43b3896297e495d4b151f31e198a2fd65514fdb71b674b9efceb1780992",
+    "artifacts/tokenizers/market_jnj_10y/bpe_1024.json": "5bed303bbb9ef941b4ad6369d56f840e6304aa89694d740e40ccd431b5b5a20f",
+    "artifacts/tokenizers/market_jnj_10y/bpe_1024.meta.json": "2c72c705b64bda000f4ced1e675a590ace99b521995e8c26f69c4c8b49f84ffa",
+    "artifacts/tokenizers/market_jnj_10y/bpe_2048.json": "fa102ae2ba6aaf3adfe24cc94261c73c042160a874dddcfafe0a98c29240f766",
+    "artifacts/tokenizers/market_jnj_10y/bpe_2048.meta.json": "48d395fea3f7f448d6f4d8c650a175203a99745ef3423b4f7043a791d2287bb5",
+    "artifacts/tokenizers/market_jpm_10y/bpe_1024.json": "d22f81a1154ad5b49b2bb46b40bf2bcfa8553affae003b5b283c47f9160142bf",
+    "artifacts/tokenizers/market_jpm_10y/bpe_1024.meta.json": "1b11a022acf79c804a6d1e9c07f61a59ca27756fb34fdcb7d166056e6bf4ae90",
+    "artifacts/tokenizers/market_jpm_10y/bpe_2048.json": "e47dabab6dad7949dac28a2ec6fb3209a98b8cb130194b6506f39dbfe1797443",
+    "artifacts/tokenizers/market_jpm_10y/bpe_2048.meta.json": "f967d01c9d09b84bce85bbd1bed25d95422d8c9e48859f85a0300b5c2929a87e",
+    "artifacts/tokenizers/market_ko_10y/bpe_1024.json": "86b4924faf6685001f7004fc59852f377bf60c6546ccb3f5b0252bb7ea236b82",
+    "artifacts/tokenizers/market_ko_10y/bpe_1024.meta.json": "785681f0e82c0aef250a117af3b82887bf41bab3f61b8b2ca772e01ee603c852",
+    "artifacts/tokenizers/market_ko_10y/bpe_2048.json": "ca6e3cc247d95a414239389ea98fcf4e9580c7bb7efbd66b547b7c755c77cec7",
+    "artifacts/tokenizers/market_ko_10y/bpe_2048.meta.json": "739d59221254956aab3141592c0b007cbe4bc1e99bf124fcb862936bfc6d2573",
+    "artifacts/tokenizers/market_msft_10y/bpe_1024.json": "962d69a916b895613b228e6b378584987e723531c7ee6585757d1ab2928863e2",
+    "artifacts/tokenizers/market_msft_10y/bpe_1024.meta.json": "5894f94b648763ed6f314235a91c23131bec22c0b0d74e557263ddb8678a093a",
+    "artifacts/tokenizers/market_msft_10y/bpe_2048.json": "25e0aa247833e9b7dcabe314a85351eccdc7d73ce320a89351552eeae21c254d",
+    "artifacts/tokenizers/market_msft_10y/bpe_2048.meta.json": "8dfa04ad80a432d2e70215a896de5569168991fb71e78e8d4db73921a8314a17",
+    "artifacts/tokenizers/market_nvda_10y/bpe_1024.json": "ec94227818ed48bb2c21784dd360d0d0e2f948f605b92ab12dbcbd0a4c674bd5",
+    "artifacts/tokenizers/market_nvda_10y/bpe_1024.meta.json": "856a7ff1238a1158c374d7aa0d943d93b8bb8a9d7316b3ef08bdbae35a5b2e06",
+    "artifacts/tokenizers/market_nvda_10y/bpe_2048.json": "cfc2acbf9592d0894f0077f4a12723f7c033b3be347f47a50e198253bfa7feae",
+    "artifacts/tokenizers/market_nvda_10y/bpe_2048.meta.json": "03f60439e451865d418911dff0e7be7c9b209e9463f38754c2d9660bfb22edc7",
+    "artifacts/tokenizers/market_tsla_10y/bpe_1024.json": "4e9c4e3afa85f1209cd87a5659738b2130c0375b057b853f8b1235391f8c864b",
+    "artifacts/tokenizers/market_tsla_10y/bpe_1024.meta.json": "4eaf9c03ed2b817bcced9f389b5d6e513987bb04c63f43306c2ce199b70c01a2",
+    "artifacts/tokenizers/market_tsla_10y/bpe_2048.json": "e5a41371227e6f64e5bb07ab23f38cfd734fd29d96155b30cab53668c6345644",
+    "artifacts/tokenizers/market_tsla_10y/bpe_2048.meta.json": "625ce11e18fca532965d011ba2f3b64220c4019486ea2bcfb630a2719b692930",
+    "artifacts/tokenizers/market_wmt_10y/bpe_1024.json": "b5c56efea8ea4f3fe8f48425f80a95e7cb8e68aaf835b1c27745206c9a2990e4",
+    "artifacts/tokenizers/market_wmt_10y/bpe_1024.meta.json": "dfbe7bff8284cc342063918a9272d299c039ce803b7348f4bbb98075a07f2896",
+    "artifacts/tokenizers/market_wmt_10y/bpe_2048.json": "15e8ddf52981507f22f6b7156cacf4518a0af65e1a69dd3ba30139224a2315db",
+    "artifacts/tokenizers/market_wmt_10y/bpe_2048.meta.json": "6ce95fd55bc185e59fc0305fb8fb0ad4d3a07d50b09e0c5df9ddff0b6258e706",
+    "artifacts/tokenizers/market_xom_10y/bpe_1024.json": "695bc60b465e3689246b4843d565f6764cbd1fdc191874d80843fb927286bc68",
+    "artifacts/tokenizers/market_xom_10y/bpe_1024.meta.json": "9a24ba23dc38ad568fe2513a08a92b2ad54186a6cf4a4f76cb92c24cacf518d0",
+    "artifacts/tokenizers/market_xom_10y/bpe_2048.json": "89bd08884747a73752407d8a0bed2fffefb02ff648f56a29284a692fd83c31ee",
+    "artifacts/tokenizers/market_xom_10y/bpe_2048.meta.json": "1563e6783f22f75ecff96e4f4bc938bd88f56ceb47e0d2545932da1a863c56c8",
+    "artifacts/tokenizers/wikipedia_ar/bpe_16384.json": "8d815b9c30aad4cbeb9b3519ce821fa1470e35e92b14edf14aad096143ee1f90",
+    "artifacts/tokenizers/wikipedia_ar/bpe_16384.meta.json": "465a09ed74ffdee2e0b0c6bd4316a60ecd1232e333e667caada1f2694ed0a0d6",
+    "artifacts/tokenizers/wikipedia_ar/bpe_32768.json": "22e87f116f1e159abb02449e8725f143a700697328eb6b5032660254fa854611",
+    "artifacts/tokenizers/wikipedia_ar/bpe_32768.meta.json": "196df2f0403fca8a9036199a006f29773d66f9c1a7bfc7afa2245a4eff39395a",
+    "artifacts/tokenizers/wikipedia_ar/bpe_8192.json": "ea372fae5a499ddfcfda64454ff2bae8647b15bd193c86e38bb87d023522735a",
+    "artifacts/tokenizers/wikipedia_ar/bpe_8192.meta.json": "7afbb689ee96384bae2cc49a0221c6e9c90f6773eca319643ca99f1fb9643db8",
+    "artifacts/tokenizers/wikipedia_ar/unigram_16384.json": "1c5f94e464c8bd1409a43f1f427092b771d6e0c036d7770cb87c7f032e7526a4",
+    "artifacts/tokenizers/wikipedia_ar/unigram_16384.meta.json": "a489047cf212d6d00a2534eb0eb321614632d577d630c21765173c2a20d843b9",
+    "artifacts/tokenizers/wikipedia_ar/unigram_32768.json": "865f2ebaca92adfddb420c04a26ffbcf0579b0f030b531e3dc5561deb786cc45",
+    "artifacts/tokenizers/wikipedia_ar/unigram_32768.meta.json": "e04ccf675c2b017410d836197765b772f0521ac86b1f4a97b40fb8139d511819",
+    "artifacts/tokenizers/wikipedia_ar/unigram_8192.json": "e03deb8920fb15bdbe62c7f305cbd6ae4a79ade97a44615465f515150b269336",
+    "artifacts/tokenizers/wikipedia_ar/unigram_8192.meta.json": "d4e81920abae47ccb19ba275428edb960386d2262f0c47d91ece4553b93187e4",
+    "artifacts/tokenizers/wikipedia_hu/bpe_16384.json": "18d1b60ba3c77bf05bb1ddbf856fb4241677702555b3971c3f19080fec5704ad",
+    "artifacts/tokenizers/wikipedia_hu/bpe_16384.meta.json": "6afa710bf328b6ecf5c9f03b7b804cfab8d2402e948bea0bed0ec3751cb4128b",
+    "artifacts/tokenizers/wikipedia_hu/bpe_32768.json": "1940d077c63330f46c7e75650af189fa6cc98e609e509f39f257491c787a2418",
+    "artifacts/tokenizers/wikipedia_hu/bpe_32768.meta.json": "8843a641720eaa7ff97f2b9271987d73b9af6a763cc2d8ce2c74b9c184b50932",
+    "artifacts/tokenizers/wikipedia_hu/bpe_8192.json": "1dea2b862f855a939f4088383bb851e07f2f8a401c0cdf8dae726cfb95992745",
+    "artifacts/tokenizers/wikipedia_hu/bpe_8192.meta.json": "72576bfba0262abc489085ecb7138c0f36137a8a8fa21f398dc993d382a03e63",
+    "artifacts/tokenizers/wikipedia_hu/unigram_16384.json": "182083ead93044b95601ecb0dda6ab6dccfe17582fa709e0cd141edec454cb2b",
+    "artifacts/tokenizers/wikipedia_hu/unigram_16384.meta.json": "15f11516a16f5db300c7038c0c01f4b8fa05894ba568272af0039eeb3e01b500",
+    "artifacts/tokenizers/wikipedia_hu/unigram_32768.json": "d7e454b911d9b62543bac9166a22a1a3a13bf46b80ea2e786080670fefc9e36a",
+    "artifacts/tokenizers/wikipedia_hu/unigram_32768.meta.json": "237fdb887dc7b4d45278ef3281b88b9428a675e5dad5b87e9d728e1fb47c0bf8",
+    "artifacts/tokenizers/wikipedia_hu/unigram_8192.json": "45b23d92585c8f6b3e1ee8cc87b5dcf7b4d7f908bf106b9daa17422e24fc138e",
+    "artifacts/tokenizers/wikipedia_hu/unigram_8192.meta.json": "54d70ffb135206dae644cd0490abce25e05a2c101beaec25691532e30929cf61",
+    "artifacts/tokenizers/wikipedia_sw/bpe_16384.json": "fd0db58821d61efd61b0606661e016c6921c66319dffa3844682158f8cab4e72",
+    "artifacts/tokenizers/wikipedia_sw/bpe_16384.meta.json": "608451c504880df1e5824b724c048fc93aee4c4f66467341f6e22a25c8702be2",
+    "artifacts/tokenizers/wikipedia_sw/bpe_32768.json": "cba3c4beac129f129908017644c69189ebf65659de1394aff141acdffb7f3a83",
+    "artifacts/tokenizers/wikipedia_sw/bpe_32768.meta.json": "92037313c40d31b811e231bd0d36d2a52ceb4c97df507179540cf2d87f4b8377",
+    "artifacts/tokenizers/wikipedia_sw/bpe_8192.json": "3a0c2df5a6992546baedea26816d67d99e80e7716f9e13f71b852086768201a6",
+    "artifacts/tokenizers/wikipedia_sw/bpe_8192.meta.json": "9e53336cd9807f6157e72c5370da69ca6aab3f0bbcfd23768e1a7c88a43e3baf",
+    "artifacts/tokenizers/wikipedia_sw/unigram_16384.json": "e0e925ffbddb5d3debf5a31cf058daee7420b208a3425f958bd0786907718181",
+    "artifacts/tokenizers/wikipedia_sw/unigram_16384.meta.json": "6d4a65800afd4134ae69622c0cb6d986190825b057a09255cfd9d7b13b0512b3",
+    "artifacts/tokenizers/wikipedia_sw/unigram_32768.json": "2371614b19bdeba256dfe2adeb938c875a92c24c8c50e7b72b60052b6459fc42",
+    "artifacts/tokenizers/wikipedia_sw/unigram_32768.meta.json": "3a8b805de29c2f7eb45359e0b2a4b0b7c5b05a1f0e12d52b15ac580683ff255e",
+    "artifacts/tokenizers/wikipedia_sw/unigram_8192.json": "17f7acce53042bc36ed7e5e59ab92ed1167ee57519fa55326feb70cf5cb327eb",
+    "artifacts/tokenizers/wikipedia_sw/unigram_8192.meta.json": "a60b8dcf54449a009ee323e77cc86ce30973f0da54049a979f9451b592b2be17",
+    "artifacts/tokenizers/wikipedia_zh/bpe_16384.json": "9464f2a3a7a061132a7d29bf4d278df3a03dae211fc9ba0aa2a856c85ac5fdf6",
+    "artifacts/tokenizers/wikipedia_zh/bpe_16384.meta.json": "2e9360652f8c7768205a6038e9cc83f879c75ae5893d80912b833c22c25d7f4b",
+    "artifacts/tokenizers/wikipedia_zh/bpe_32768.json": "b765ec5600390c4224dc088cdf6a4b9c9fd8e4f63e1e1d4e4055fc2ed9640fda",
+    "artifacts/tokenizers/wikipedia_zh/bpe_32768.meta.json": "761563cb776aabd808a4098287d2de6ed727b3fc06fa55914b06bb7b8742fa16",
+    "artifacts/tokenizers/wikipedia_zh/bpe_8192.json": "6cd1ccd5092c6fd5344e937a11cf98ff9d70714c992ccf091760910b2402ff3c",
+    "artifacts/tokenizers/wikipedia_zh/bpe_8192.meta.json": "694e8e8052afe6b0e6ce0ab467552ab02653e251cb505ac370b3bd81cffe2c31",
+    "artifacts/tokenizers/wikipedia_zh/unigram_16384.json": "c9f400aaeb9cdd7999b3586303e7c92832288451782ee94128336088b801d75f",
+    "artifacts/tokenizers/wikipedia_zh/unigram_16384.meta.json": "b1129aacc8d85930901a18014f3916d5be8afd025736678817c762323896b8cf",
+    "artifacts/tokenizers/wikipedia_zh/unigram_32768.json": "361cbe78df860b20bf1afe4ca11ad1fe8ea9f76a73a1b5b75029aeafa6acaeac",
+    "artifacts/tokenizers/wikipedia_zh/unigram_32768.meta.json": "1fca238d8dbe8afccb8ed1d8865376973d659d8b33862783ee5189ffb5f3901d",
+    "artifacts/tokenizers/wikipedia_zh/unigram_8192.json": "88ec2b2531a6f4f65f021f3510bef565edf65ef0236bfc32b61a5c05ebe2a007",
+    "artifacts/tokenizers/wikipedia_zh/unigram_8192.meta.json": "8bfcc114307286ce3c70e97db96f4a6baa4a9eaa5abc3930b279eaf782e57337",
+    "artifacts/tokenizers/wikitext_en/bpe_16384.json": "e925288cb3753503077e635a75cd46b447781749e394ac6de905c4dcc2f9e557",
+    "artifacts/tokenizers/wikitext_en/bpe_16384.meta.json": "c92287148aca31b55d712faa2090d86078b20ad5366808a52ed7492858a23ee2",
+    "artifacts/tokenizers/wikitext_en/bpe_32768.json": "69b2903546061263dc25fc1c40496d4a0e128268e1d8371009e8024b015675d7",
+    "artifacts/tokenizers/wikitext_en/bpe_32768.meta.json": "81971ca6c26ec582694444c199c54b37f515d02e17e48333d9ed25e9b117249b",
+    "artifacts/tokenizers/wikitext_en/bpe_8192.json": "9ae2d60b43f65da2a710021e63c1f8c3afcea7f73653e11baab196229908b849",
+    "artifacts/tokenizers/wikitext_en/bpe_8192.meta.json": "c73b667008ecb7642bc10d4c87746117339b831e2dba464e39f5cfe7b7d1011a",
+    "artifacts/tokenizers/wikitext_en/unigram_16384.json": "6e5a38c511d2a1c7dee11337dd5b1ae872ed9ce32cf666cd9f3327dde343f9f3",
+    "artifacts/tokenizers/wikitext_en/unigram_16384.meta.json": "733db1da23fb031761f2f83990d929b3be21ddfc3e8a6da089e721258b059207",
+    "artifacts/tokenizers/wikitext_en/unigram_32768.json": "07f69746f9ab61c689eb87e1e21aff432d62cf9f2d45a9f2e0397348a12e4876",
+    "artifacts/tokenizers/wikitext_en/unigram_32768.meta.json": "6fc5cb48114fca1c039c432b677ad699a166149eb1e23f3ebc1968fc7da1e05a",
+    "artifacts/tokenizers/wikitext_en/unigram_8192.json": "af84fcea049fa668297e20d436c50c3adca5edff4a471036f4fc7d659a275e32",
+    "artifacts/tokenizers/wikitext_en/unigram_8192.meta.json": "592c8d31981ea945044179a40c23ebcf31c2aa239da530eb2736f0d0a3242cfd",
+    "artifacts/topology/codeparrot_py/bpe_16384_diagnostics.json": "bb07f7d3a6c9d4edef8788ccfc60316778a53adb54d52c68f284caa305d56d28",
+    "artifacts/topology/codeparrot_py/bpe_32768_diagnostics.json": "d7274a3636231b25af44ed167313cb2db4e958e96758925f686c981c25ec231f",
+    "artifacts/topology/codeparrot_py/bpe_8192_diagnostics.json": "01c131e700204857c0497bd3083fca04af97fb72508da58a0fd4c360853a4ff0",
+    "artifacts/topology/codeparrot_py/unigram_16384_diagnostics.json": "94290d177d1602b94c3dc5d771b8980c2900deb0f016997b105320e8e5222c12",
+    "artifacts/topology/codeparrot_py/unigram_32768_diagnostics.json": "4c0cd87caa1614479c4189fef4801e8a5db9ab22c039872812466f68a4140836",
+    "artifacts/topology/codeparrot_py/unigram_8192_diagnostics.json": "2d14972e998370b64526186adcb91ebe7fdf12cd0cc5862f08aea637de942d9e",
+    "artifacts/topology/market_aapl_10y/bpe_1024_diagnostics.json": "9bc831137ecbf9d31159e675055b9e3472ac05566b3ed708e6717bb9016bd19b",
+    "artifacts/topology/market_aapl_10y/bpe_2048_diagnostics.json": "e5a0310d3f57db88372749351a79a9b5dd15943896e40f2469988e4d477ccbb4",
+    "artifacts/topology/market_cat_10y/bpe_1024_diagnostics.json": "7b2a9fa804aa3f61876c98c94903d46e3963a324ca60537d66c1e8088bffd1f4",
+    "artifacts/topology/market_cat_10y/bpe_2048_diagnostics.json": "b353f51ee853616144e0783e783c6cf3c16246994ee03b7e7eb1fa6beab10efd",
+    "artifacts/topology/market_dis_10y/bpe_1024_diagnostics.json": "d6a9b37f579fa8a80e362c518f5571a97a0f5ccedb29f480ee5309aba80a353b",
+    "artifacts/topology/market_dis_10y/bpe_2048_diagnostics.json": "7d3835db352e5621327566c64e67a822c6b5049bb22d5fe56b3ecff5daf1e0e3",
+    "artifacts/topology/market_gs_10y/bpe_1024_diagnostics.json": "84e170f5c35d83f1ff62ed3c3ca1beedad77961bc9b84ef24960e80d83fb03e0",
+    "artifacts/topology/market_gs_10y/bpe_2048_diagnostics.json": "2422bc8da5a3f8520ed5b16b637296f7a5937c5770631ad9c21e891333cfb209",
+    "artifacts/topology/market_jnj_10y/bpe_1024_diagnostics.json": "9c6bcc10b87b369c6814614bd8e16f8b709809392dae2222fb0700e7649fb92b",
+    "artifacts/topology/market_jnj_10y/bpe_2048_diagnostics.json": "51e3c0e0c897037fae8730bfc5ddb136245fb9d3ffb57e78d7a27e428ea232c3",
+    "artifacts/topology/market_jpm_10y/bpe_1024_diagnostics.json": "7d87bcbc2e9b19ddeaa7edc2661081a32a90ab0f00c06ffa7f18f9e37eb1258a",
+    "artifacts/topology/market_jpm_10y/bpe_2048_diagnostics.json": "55a9f26ee3060319a780f076effe773b6b719a32856e8f2bfaa646a932715bab",
+    "artifacts/topology/market_ko_10y/bpe_1024_diagnostics.json": "9331471a7405ee79d5992a08c2b882a9a8418edf658565cc68c419e89fb40292",
+    "artifacts/topology/market_ko_10y/bpe_2048_diagnostics.json": "472b0f0aac73b1329493cfcdbc6b43ad12c8c8702f4f795734f664e5fe1b6375",
+    "artifacts/topology/market_msft_10y/bpe_1024_diagnostics.json": "a0f467ff1015099e987aee712b7fa20d1ecab256dc983c12e26343c0e884cfd2",
+    "artifacts/topology/market_msft_10y/bpe_2048_diagnostics.json": "14d173a83078fb2a0de6a17cde1caeb731bb8735d35c7a8c025a9bfb73bcf50e",
+    "artifacts/topology/market_nvda_10y/bpe_1024_diagnostics.json": "b6f56f1e39670f6e03e480a390fb4abe5b75be5fa02138674ca5d5bf9ca42d33",
+    "artifacts/topology/market_nvda_10y/bpe_2048_diagnostics.json": "61dfd883286c03d8e2b304be0dec3d90d17ed6f1443b463ded77ce50aaf5a798",
+    "artifacts/topology/market_tsla_10y/bpe_1024_diagnostics.json": "0cd6438ca60bc1aed790f73bb70a670f4c9e0fd59e8acd33e42a4a15ea4527af",
+    "artifacts/topology/market_tsla_10y/bpe_2048_diagnostics.json": "1eee8b3cd4419d0c19b7a2bf80103a42241a8abf1ee6bccb14b8ce8014a103eb",
+    "artifacts/topology/market_wmt_10y/bpe_1024_diagnostics.json": "6e90721ddf7db8041d21869a415df3363ef2d76a78e537c13b8dc4baad20be7b",
+    "artifacts/topology/market_wmt_10y/bpe_2048_diagnostics.json": "fd4f8cc1a5f950dc45bdda52df88aee94b0b93e1fb6cc173f3fb9d0dc690fd4f",
+    "artifacts/topology/market_xom_10y/bpe_1024_diagnostics.json": "6eec85b91a05f44fe894c227a7c9a16b4a9247a2e2d9ed253fba6369e9ca4f13",
+    "artifacts/topology/market_xom_10y/bpe_2048_diagnostics.json": "5c07afd3d2ebaae1db2e97cd33d055348876627fdd19e3cd74507d0fc6f0030a",
+    "artifacts/topology/wikipedia_ar/bpe_16384_diagnostics.json": "c10fa445b9bcfd38a8428aa476022fa22c1e46cc72f0d1be50b71b56eae3049c",
+    "artifacts/topology/wikipedia_ar/bpe_32768_diagnostics.json": "c0ed5766718a5cf4c85f0142c1aaf79ddcdd6cf2dbd6c318ed909c725af42ce0",
+    "artifacts/topology/wikipedia_ar/bpe_8192_diagnostics.json": "e9714d774eabdfa651a5eaec64220c25226e6a13fd697078004a6d8b90cd6dc0",
+    "artifacts/topology/wikipedia_ar/unigram_16384_diagnostics.json": "3d439abc1425bfb1bfcdb122b5fe45dd4e472d1a88ce280d95b473c8dc08f7bc",
+    "artifacts/topology/wikipedia_ar/unigram_32768_diagnostics.json": "52cace3d415b9f6cfdd4f6b9c5dd83b34578878dc501cb8388e0bbf32f16ee94",
+    "artifacts/topology/wikipedia_ar/unigram_8192_diagnostics.json": "18f6b35c411941ecb788c457906afbe87c69d9e3cdc3a4011fd544d396d48ed1",
+    "artifacts/topology/wikipedia_hu/bpe_16384_diagnostics.json": "ffda332277288b7d648f308d40e6af751bdef9a3b36292c0f13c0f1f43ee57f7",
+    "artifacts/topology/wikipedia_hu/bpe_32768_diagnostics.json": "70ad22db220f2f8c149d1e8a05859c62e4f6e7bc76ad2e13fb8bfdbfd4dfc3ef",
+    "artifacts/topology/wikipedia_hu/bpe_8192_diagnostics.json": "15dc4c622c1d1611e2cb487061a9253277bcf20cab838994b1990e460288c309",
+    "artifacts/topology/wikipedia_hu/unigram_16384_diagnostics.json": "85ce510642ecb5b85ae549a464c846085394e4b2f4338ab04040026b08cdf29d",
+    "artifacts/topology/wikipedia_hu/unigram_32768_diagnostics.json": "8a8684fdb4d625c2367b231b70f66d770a62e5bf3a7497125350f923b384dcfc",
+    "artifacts/topology/wikipedia_hu/unigram_8192_diagnostics.json": "577f90305eb1846606e345fb653626b448e55ea4070ce15ea3b072ecff98f1b5",
+    "artifacts/topology/wikipedia_sw/bpe_16384_diagnostics.json": "2736df1c5d2a999db51189730fc0807befcf727fd8eb58253add7b31493d84f0",
+    "artifacts/topology/wikipedia_sw/bpe_32768_diagnostics.json": "cec65bf1877f92873ddf161e76483f0b1bfb3376bfef45c99e1331c1127d01d4",
+    "artifacts/topology/wikipedia_sw/bpe_8192_diagnostics.json": "183fe1b7950183a2afb5b371139b58704ed94abb24a91c91bd32b5bfebea02ab",
+    "artifacts/topology/wikipedia_sw/unigram_16384_diagnostics.json": "61309cbc98af2e57a34ed67c514c51a0d46cd5306c6d01d5fe5b5e6fbc2d49c4",
+    "artifacts/topology/wikipedia_sw/unigram_32768_diagnostics.json": "06a73dd6da44e1daaed1b276af3103c73d99152e3e6908c9b46e17e730bb2efa",
+    "artifacts/topology/wikipedia_sw/unigram_8192_diagnostics.json": "36da6060a729f6a7627c119ca6d08a6ed0bc7f1d8275ba0145dfddd13a12a789",
+    "artifacts/topology/wikipedia_zh/bpe_16384_diagnostics.json": "8f961be723c95f1f4ab992dce789724468f490a450025629ae136e645b56b729",
+    "artifacts/topology/wikipedia_zh/bpe_32768_diagnostics.json": "6cc89c054bf1bc0a5a04451492d028c37bf475e2a6460fd4590901a4af17479e",
+    "artifacts/topology/wikipedia_zh/bpe_8192_diagnostics.json": "bc16bb566d01ed52fc5a83779ecc9825aa1e4477226dc8ff48eca108473b9f91",
+    "artifacts/topology/wikipedia_zh/unigram_16384_diagnostics.json": "acf7a60dd9bb911b58d2e9bd51f9f5d5d44de6c0b2acc5ec36a9264217aff286",
+    "artifacts/topology/wikipedia_zh/unigram_32768_diagnostics.json": "6521e6967922a82b983c61926a1ca2ab4f22467d3f33d506786c4cdd5fed6257",
+    "artifacts/topology/wikipedia_zh/unigram_8192_diagnostics.json": "431997941ee152f93197a7342c8f9d9d1ec2ab33321372972ce43771a90f728d",
+    "artifacts/topology/wikitext_en/bpe_16384_diagnostics.json": "0a54f4583becd62a925a746248e3bfd77858bd2129177d5e9fd3213c2762e249",
+    "artifacts/topology/wikitext_en/bpe_32768_diagnostics.json": "602b642b7c88ec7f83ca82822244e90bfc32db6d26832511e0ae1ea33ebb2bf3",
+    "artifacts/topology/wikitext_en/bpe_8192_diagnostics.json": "9ba919ab94d8f17af46b56848848c7e68aef12e964a4445a4b2ef5f35000c1c6",
+    "artifacts/topology/wikitext_en/unigram_16384_diagnostics.json": "34af272ae0ce52d84f64f4533c06a6090d9ceb04ccab48116f7508f591016074",
+    "artifacts/topology/wikitext_en/unigram_32768_diagnostics.json": "312ff4e29e14ac3b2a3b0e5f49479cb29d372b4d5e312ed96cf4aea40bd3c99e",
+    "artifacts/topology/wikitext_en/unigram_8192_diagnostics.json": "c7b1253bc64f20bf7e26032a35dd623c6ed9fcc186785a5aadca16d9b887d6ab",
+    "results/analysis.json": "0cdd328d9b5ba4373e59921603052d60202e84e047b8f47b060a57710456937f",
+    "results/bpb.csv": "dc55e110eec9f559f4ec2337d491c1bc852b3016606c11b0825b406d809f657d",
+    "results/features.csv": "41a23f28de6d48902b35d681d78f703185444c0ccd01830a3ec7acaac22c5d2d",
+    "results/figures/fig1_persistence_examples.pdf": "4ce5487559cb06e45826f6a5690101bf4de6c5bb940681ebd04444954044e7e0",
+    "results/figures/fig1_persistence_examples.png": "6b4aead1ad7d7906ac0fc7c2b0b7fa48061d31eca51250aa1eb9298527d16c0e",
+    "results/figures/fig2_compression_scatter.pdf": "43b324d0f60fd8c1afe39cd68a96bec81b447fafcf2f5c12bed9c8e07bd7b4d7",
+    "results/figures/fig2_compression_scatter.png": "cc979e7c513089d8d5483bfebc23998106f84cc50afe4b4c4b5bf0135a2afe0b",
+    "results/figures/fig3_loco_r2.pdf": "f939bf51cc1803574909dfe2b97ed6ea216abb0108979c72e8b2d37ca6e09dd1",
+    "results/figures/fig3_loco_r2.png": "73af6bb56a9f8dbbe0e140bfd8852e9695c4e98d3d3e841c6542570f91baca66",
+    "results/figures/fig4_bpb.pdf": "67d93552785c224d35779e1ba7199c8aa5cfc1c13a05216a6b93e9604e632c27",
+    "results/figures/fig4_bpb.png": "c506155c0b476b20ae2ab279554df5b81961f2135a61709c9a267deab0a1460f",
+    "results/figures/fig5_market.pdf": "9f449b17a8c6e4474b11f5d07f7114954617297b24a43e34ca4325f15c68829b",
+    "results/figures/fig5_market.png": "85026148f6823262684a802a499bc575951c051e2401001002126b22834d546c",
+    "results/figures/fig6_feature_importance.pdf": "d69fefe3f79b525f825e1cb9844ce016236b336bdf0a13565dd899469164a6c6",
+    "results/figures/fig6_feature_importance.png": "9b47025b526e78b9a83004c28c51485ee70154f360bfe3e5eee1f8c9fbdf179f",
+    "results/market_bpb.csv": "72365be7384a36aa010ee2a473540f57c910cb6940c05183ec4fbd0ece573fa3",
+    "results/market_features.csv": "2fddf270294c5acfd593c872046051f1a1dfe145486e9e82d18c6e30f90267a7",
+    "results/tables/bpb_summary.csv": "7296bee0461a11cf19f366a8dff0f797c5168f4a44242ba2c02e8aa83f0387e6",
+    "results/tables/feature_importance_bpb.csv": "6c4b687d6893ed0d93bde78a9ab8b78cd3f334d945d1ca4f4c1903ef9c4a2527",
+    "results/tables/feature_importance_compression.csv": "76ca3785f77fa813dfe7f9985106169c5db0ed784982fd0ef06aece11af6a3aa",
+    "results/tables/h1_predictions.csv": "85f2a4ff59b2dad5b9209763bcfda7d72bd9c0928a555450345a3b6c92d60a86",
+    "results/tables/h2_predictions.csv": "f3512a87c0c9c100d4ddae02d150507cf06780e0a5cc1b4b8f0021b85f083482",
+    "results/tables/h3_partial_spearman.csv": "5f6bff719ce9f677f0c5083f3e6b336a5f43d41c877bedda7e769e656355ff20",
+    "results/tables/h5_feature_correlations.csv": "c5a886e94497baab69e8cacb04aa548521885a8978094d10e47c47a6e795a9c0",
+    "results/tables/tda_library_agreement.csv": "d98164812d9d1d62368de4984a3190829f5dd3bcbe4962b6d7370a7c5beae54d",
+    "results/tables/tda_stability.csv": "1830433184a34065ef72499c4fc5c4f0fdb71b68a971e901d7f8bcb76f8205ab",
+    "results/tables/tokenizer_byte_audit.csv": "953cb2688257aed2921344b4444269c0e718a53f04cb2be8e83c4527c97c1908",
+    "results/tda_stability.json": "3bb3bcae06a1a9d42f66e8c834d2306eebcd70ed0534cf1a018b48036d45c4a5"
+  },
+  "git_commit": null,
+  "market_manifest": {
+    "corpora": [
+      {
+        "bars": 2726,
+        "corpus": "market_aapl_10y",
+        "created_at": "2026-11-05T10:45:50.997871+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "cached": true,
+          "path": "data/market/raw/nasdaq_AAPL_10y_1d.json",
+          "provider": "nasdaq",
+          "sha256": "0b073e8f13c842ae3ef4c1e9ea4904b027e02a586e88307b69ec72a5b9112566"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 35811,
+            "path": "data/processed/market_aapl_10y/test.jsonl",
+            "records": 462,
+            "sha256": "96f075b315a86fe0f4f80a6edef05fc6eb3a9933a8dc928ec1ee6297bcdebd1f"
+          },
+          "train": {
+            "characters": 152248,
+            "path": "data/processed/market_aapl_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "0bea291984aeb695ede0aa7b8fabd92b5889d54c3897608f1ae64ae8cf7621b3"
+          },
+          "val": {
+            "characters": 19526,
+            "path": "data/processed/market_aapl_10y/val.jsonl",
+            "records": 252,
+            "sha256": "8953927932b3cecf2af91b5eb069643ff94532610a875c23c859456efc7d24cc"
+          }
+        },
+        "ticker": "AAPL",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_aapl_2y",
+        "created_at": "2026-11-05T10:46:10.782219+00:00",
+        "error": "failed to fetch AAPL 2y 1h: HTTP 404",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "AAPL"
+      },
+      {
+        "corpus": "market_aapl_1mo",
+        "created_at": "2026-11-05T10:46:31.514930+00:00",
+        "error": "failed to fetch AAPL 1mo 5m: HTTP 404",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "AAPL"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_msft_10y",
+        "created_at": "2026-11-05T10:46:51.303825+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "cached": true,
+          "path": "data/market/raw/nasdaq_MSFT_10y_1d.json",
+          "provider": "nasdaq",
+          "sha256": "9f8de7d56799f573acc1d5446c98976a467f2a331dbcf6f4a756254dd596620c"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 35797,
+            "path": "data/processed/market_msft_10y/test.jsonl",
+            "records": 462,
+            "sha256": "6a500c71e2bfb539c6c3d4971537a86ad178cf7845e59c546bebbd46620f90c6"
+          },
+          "train": {
+            "characters": 153362,
+            "path": "data/processed/market_msft_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "57bad3780b6402dacc59c840a6a3b421141d96b5e83fc8ce6095963ea45fa546"
+          },
+          "val": {
+            "characters": 19518,
+            "path": "data/processed/market_msft_10y/val.jsonl",
+            "records": 252,
+            "sha256": "f7ae2d2d1a642628b363e6013281cb7446237216181b05b48b5dd8e13b2f10cc"
+          }
+        },
+        "ticker": "MSFT",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_msft_2y",
+        "created_at": "2026-11-05T10:47:10.625385+00:00",
+        "error": "failed to fetch MSFT 2y 1h: HTTP 404",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "MSFT"
+      },
+      {
+        "corpus": "market_msft_1mo",
+        "created_at": "2026-11-05T10:47:30.286549+00:00",
+        "error": "failed to fetch MSFT 1mo 5m: HTTP 404",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "MSFT"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_nvda_10y",
+        "created_at": "2026-11-05T10:37:54.921819+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:37:54.897506+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_NVDA_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "73871c208e1abfe8835304c54830bf811165536deb4213513826e31e7a7a52a1",
+          "ticker": "NVDA",
+          "url": "https://api.nasdaq.com/api/quote/NVDA/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 36206,
+            "path": "data/processed/market_nvda_10y/test.jsonl",
+            "records": 462,
+            "sha256": "3d28628aad84fee0dae37c584321166a9eb94563896918742b8e06880a086438"
+          },
+          "train": {
+            "characters": 145335,
+            "path": "data/processed/market_nvda_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "6547168dfc74b393495e21d0b4103c04217b967f5da368eb8379ee73503f20dc"
+          },
+          "val": {
+            "characters": 19368,
+            "path": "data/processed/market_nvda_10y/val.jsonl",
+            "records": 252,
+            "sha256": "2557ed1df4b340c3d2eef922f225f816c32c00da899d5ca3513e1987cf5dede8"
+          }
+        },
+        "ticker": "NVDA",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_nvda_2y",
+        "created_at": "2026-11-05T10:47:30.287523+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "NVDA"
+      },
+      {
+        "corpus": "market_nvda_1mo",
+        "created_at": "2026-11-05T10:47:30.287533+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "NVDA"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_jpm_10y",
+        "created_at": "2026-11-05T10:38:16.399967+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:38:16.379648+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_JPM_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "97634dcb3994d93b3c96cecb04c06901980c4496d38a1a612fe30856bc94caf4",
+          "ticker": "JPM",
+          "url": "https://api.nasdaq.com/api/quote/JPM/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 34982,
+            "path": "data/processed/market_jpm_10y/test.jsonl",
+            "records": 462,
+            "sha256": "f28dad45f8cb41d095a2371dd87b6eed47bd216db9ba2b5b32e4de3740dab118"
+          },
+          "train": {
+            "characters": 150944,
+            "path": "data/processed/market_jpm_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "025e888a90ce8195779c338922f5cb15a404893c48ba734fa1dba4b0092dc113"
+          },
+          "val": {
+            "characters": 19061,
+            "path": "data/processed/market_jpm_10y/val.jsonl",
+            "records": 252,
+            "sha256": "c8f1e25550c099a60ed45bb9585557a6340f20c8252cbf6c656ccd22ad0bfcdd"
+          }
+        },
+        "ticker": "JPM",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_jpm_2y",
+        "created_at": "2026-11-05T10:47:30.288064+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "JPM"
+      },
+      {
+        "corpus": "market_jpm_1mo",
+        "created_at": "2026-11-05T10:47:30.288073+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "JPM"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_xom_10y",
+        "created_at": "2026-11-05T10:38:38.904786+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:38:38.883845+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_XOM_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "b2f9108b4498818f4d47f1d2be2e8db8c55d7087353354d067547da2ee1f8b4d",
+          "ticker": "XOM",
+          "url": "https://api.nasdaq.com/api/quote/XOM/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 35292,
+            "path": "data/processed/market_xom_10y/test.jsonl",
+            "records": 462,
+            "sha256": "61558c3200747ec52d4d70fa6064e28fb32b88b4fc6ed1c65041d80a577126df"
+          },
+          "train": {
+            "characters": 146660,
+            "path": "data/processed/market_xom_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "e4a8e4496dcbdb455a31c3daaf37afd851639fdc409d94531d9af51b3db6b1f6"
+          },
+          "val": {
+            "characters": 19226,
+            "path": "data/processed/market_xom_10y/val.jsonl",
+            "records": 252,
+            "sha256": "09bf7fd4d3ded06970832402decb46d4f7311aa7040b413f031b79b037109d7f"
+          }
+        },
+        "ticker": "XOM",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_xom_2y",
+        "created_at": "2026-11-05T10:47:30.288666+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "XOM"
+      },
+      {
+        "corpus": "market_xom_1mo",
+        "created_at": "2026-11-05T10:47:30.288673+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "XOM"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_jnj_10y",
+        "created_at": "2026-11-05T10:39:02.476863+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:39:02.452010+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_JNJ_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "bf2faf0e80ede05973baee455ef1e7a0aea72377155b974911e2d23f3409d2a0",
+          "ticker": "JNJ",
+          "url": "https://api.nasdaq.com/api/quote/JNJ/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 34947,
+            "path": "data/processed/market_jnj_10y/test.jsonl",
+            "records": 462,
+            "sha256": "915a3dc874818f430939d769e4470a581c6e1616b5f896c3f40062ce94e9c430"
+          },
+          "train": {
+            "characters": 152096,
+            "path": "data/processed/market_jnj_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "d43d97aeb7cda18d2f217ad6efe80a35f57f1a0e39c653b0317fd05324466377"
+          },
+          "val": {
+            "characters": 19045,
+            "path": "data/processed/market_jnj_10y/val.jsonl",
+            "records": 252,
+            "sha256": "1c2788b4a5cbadf8f198bc5bdc6432a06f5f0dbdcf6fe31ad93916f51ab1caf4"
+          }
+        },
+        "ticker": "JNJ",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_jnj_2y",
+        "created_at": "2026-11-05T10:47:30.289018+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "JNJ"
+      },
+      {
+        "corpus": "market_jnj_1mo",
+        "created_at": "2026-11-05T10:47:30.289025+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "JNJ"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_wmt_10y",
+        "created_at": "2026-11-05T10:39:25.991075+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:39:25.968974+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_WMT_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "9bfee8f76a47feaa9f4e2196d8850f366b550385cb2dd1d93c2079bee8c41266",
+          "ticker": "WMT",
+          "url": "https://api.nasdaq.com/api/quote/WMT/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 34736,
+            "path": "data/processed/market_wmt_10y/test.jsonl",
+            "records": 462,
+            "sha256": "eb76e931cffe5672bf2a713d1a8509bf16a485c0cf7e950889269d8a5656198a"
+          },
+          "train": {
+            "characters": 145801,
+            "path": "data/processed/market_wmt_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "c3f71dc4104a7db2c36854735cc8a0adeb9d43e5acf0dbc78e1fc9beb3551de2"
+          },
+          "val": {
+            "characters": 18229,
+            "path": "data/processed/market_wmt_10y/val.jsonl",
+            "records": 252,
+            "sha256": "1b4077a6f3fc606767fc7edf91f2006d543b0b32312716a6040143047a1426a5"
+          }
+        },
+        "ticker": "WMT",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_wmt_2y",
+        "created_at": "2026-11-05T10:47:30.289243+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "WMT"
+      },
+      {
+        "corpus": "market_wmt_1mo",
+        "created_at": "2026-11-05T10:47:30.289251+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "WMT"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_cat_10y",
+        "created_at": "2026-11-05T10:39:49.328676+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:39:49.278200+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_CAT_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "1ca96c3461860ec677f80a68866afd394894ac3af49d4af7a854c0b27b4a6b5d",
+          "ticker": "CAT",
+          "url": "https://api.nasdaq.com/api/quote/CAT/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 34883,
+            "path": "data/processed/market_cat_10y/test.jsonl",
+            "records": 462,
+            "sha256": "25b1911f8e0e985c525578d60bcbb7f70e113e0d76714748a39c9c191756655a"
+          },
+          "train": {
+            "characters": 150542,
+            "path": "data/processed/market_cat_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "24e24fa33e80d68518f3f12228e20afc688a399871b766cb06cca48da18d3560"
+          },
+          "val": {
+            "characters": 19014,
+            "path": "data/processed/market_cat_10y/val.jsonl",
+            "records": 252,
+            "sha256": "c279b07238df50fd64e2423323d424902f3f9a08526c698154b2e06e80135222"
+          }
+        },
+        "ticker": "CAT",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_cat_2y",
+        "created_at": "2026-11-05T10:47:30.289667+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "CAT"
+      },
+      {
+        "corpus": "market_cat_1mo",
+        "created_at": "2026-11-05T10:47:30.289674+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "CAT"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_ko_10y",
+        "created_at": "2026-11-05T10:40:12.299129+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:40:12.275032+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_KO_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "a1b5c5616b7bf1d5dc536e31b010a5ddc162069a971ff647c5b16d7ce7335e5d",
+          "ticker": "KO",
+          "url": "https://api.nasdaq.com/api/quote/KO/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 33009,
+            "path": "data/processed/market_ko_10y/test.jsonl",
+            "records": 462,
+            "sha256": "2e1637f806db36a6322fbc13f9e74812361a1e964badbf736c55145317ab7170"
+          },
+          "train": {
+            "characters": 143309,
+            "path": "data/processed/market_ko_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "50dc165662a2a37625ca9bf5cfb2b92535d39f57733436e6eb6774127dcf80bb"
+          },
+          "val": {
+            "characters": 17966,
+            "path": "data/processed/market_ko_10y/val.jsonl",
+            "records": 252,
+            "sha256": "62d31a6d7c8b343cd84b0c46918dc27b2425e9f1e65851605d01549e5f881da0"
+          }
+        },
+        "ticker": "KO",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_ko_2y",
+        "created_at": "2026-11-05T10:47:30.290079+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "KO"
+      },
+      {
+        "corpus": "market_ko_1mo",
+        "created_at": "2026-11-05T10:47:30.290087+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "KO"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_dis_10y",
+        "created_at": "2026-11-05T10:40:36.569768+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:40:36.549480+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_DIS_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "c2c27fb5729ecc80a3790ca81f2cc457246e61288a79c4650f57e8949aa2bb95",
+          "ticker": "DIS",
+          "url": "https://api.nasdaq.com/api/quote/DIS/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 34703,
+            "path": "data/processed/market_dis_10y/test.jsonl",
+            "records": 462,
+            "sha256": "aaad52bc14d402fffb744d97442b8c9e922e165ddb3a331b438e53310a824dce"
+          },
+          "train": {
+            "characters": 150434,
+            "path": "data/processed/market_dis_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "0c88f8e1874584e4ab4a075f0171d388a3dfb1b285bff6fd46ef13a3353aa671"
+          },
+          "val": {
+            "characters": 18638,
+            "path": "data/processed/market_dis_10y/val.jsonl",
+            "records": 252,
+            "sha256": "9b2d364145ce09b3c6f95f3170d4a6561759b2f6bec7569074eb69af71ddfb2f"
+          }
+        },
+        "ticker": "DIS",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_dis_2y",
+        "created_at": "2026-11-05T10:47:30.290370+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "DIS"
+      },
+      {
+        "corpus": "market_dis_1mo",
+        "created_at": "2026-11-05T10:47:30.290376+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "DIS"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_gs_10y",
+        "created_at": "2026-11-05T10:41:00.504193+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:41:00.480182+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_GS_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "a1339c2595a107b4f4c252a42db514cc1526c99e07d16027411acb1189756c16",
+          "ticker": "GS",
+          "url": "https://api.nasdaq.com/api/quote/GS/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 34689,
+            "path": "data/processed/market_gs_10y/test.jsonl",
+            "records": 462,
+            "sha256": "6a3b99dd8b399573149e1347aa8be4bfc60b5d1cce4e8e3e51fa128da79e5a78"
+          },
+          "train": {
+            "characters": 149877,
+            "path": "data/processed/market_gs_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "d813e1bf47e531233a7b7ca5180043135df95e693312495c45cdc23a41d2833b"
+          },
+          "val": {
+            "characters": 18758,
+            "path": "data/processed/market_gs_10y/val.jsonl",
+            "records": 252,
+            "sha256": "00c13aaa24218e7cef84fd12bb4ce73fc246f7c32a2d07abb5b1d450b041f5bf"
+          }
+        },
+        "ticker": "GS",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_gs_2y",
+        "created_at": "2026-11-05T10:47:30.290666+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "GS"
+      },
+      {
+        "corpus": "market_gs_1mo",
+        "created_at": "2026-11-05T10:47:30.290672+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "GS"
+      },
+      {
+        "bars": 2726,
+        "corpus": "market_tsla_10y",
+        "created_at": "2026-11-05T10:41:24.269454+00:00",
+        "interval": "1d",
+        "range": "10y",
+        "source": {
+          "accessed_at": "2026-11-05T10:41:24.243236+00:00",
+          "cached": false,
+          "interval": "1d",
+          "path": "data/market/raw/nasdaq_TSLA_10y_1d.json",
+          "provider": "nasdaq",
+          "range": "10y",
+          "sha256": "868ea221ec30f3ba5dc2dc4dfe87ca3bf5291e0037431790a1e20038c503ebc5",
+          "ticker": "TSLA",
+          "url": "https://api.nasdaq.com/api/quote/TSLA/chart"
+        },
+        "split_policy": "fixed dates for 10y daily; chronological 60/20/20 otherwise",
+        "splits": {
+          "test": {
+            "characters": 35903,
+            "path": "data/processed/market_tsla_10y/test.jsonl",
+            "records": 462,
+            "sha256": "d031098aa78034e7d7a9f31e23db53b94b92f7802e6cae2839a518ceeb425b0d"
+          },
+          "train": {
+            "characters": 152271,
+            "path": "data/processed/market_tsla_10y/train.jsonl",
+            "records": 2012,
+            "sha256": "a0cbf98dd868ad988aaea6560068a5938e41ef0e4f870a40632432ffa485d76c"
+          },
+          "val": {
+            "characters": 19622,
+            "path": "data/processed/market_tsla_10y/val.jsonl",
+            "records": 252,
+            "sha256": "9d2e316fed80c2a17ed54ecb7574030a4865c53a5ce16f31a19e051f0d68b19c"
+          }
+        },
+        "ticker": "TSLA",
+        "train_end": "2023-12-31",
+        "val_end": "2024-12-31"
+      },
+      {
+        "corpus": "market_tsla_2y",
+        "created_at": "2026-11-05T10:47:30.290929+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "1h",
+        "range": "2y",
+        "ticker": "TSLA"
+      },
+      {
+        "corpus": "market_tsla_1mo",
+        "created_at": "2026-11-05T10:47:30.290934+00:00",
+        "error": "skipped after repeated provider unavailability for this window; excluded from analysis",
+        "interval": "5m",
+        "range": "1mo",
+        "ticker": "TSLA"
+      }
+    ]
+  },
+  "tokenizer_manifest": {
+    "tokenizers": [
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikitext_en",
+        "created_at": "2026-11-05T10:13:59.089695+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 7064636,
+        "sample_documents": 9603,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "9ae2d60b43f65da2a710021e63c1f8c3afcea7f73653e11baab196229908b849"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikitext_en",
+        "created_at": "2026-11-05T10:14:00.391332+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 7064636,
+        "sample_documents": 9603,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "e925288cb3753503077e635a75cd46b447781749e394ac6de905c4dcc2f9e557"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikitext_en",
+        "created_at": "2026-11-05T10:14:01.902243+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 7064636,
+        "sample_documents": 9603,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "69b2903546061263dc25fc1c40496d4a0e128268e1d8371009e8024b015675d7"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikitext_en",
+        "created_at": "2026-11-05T10:14:03.287334+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 7064636,
+        "sample_documents": 9603,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "af84fcea049fa668297e20d436c50c3adca5edff4a471036f4fc7d659a275e32"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikitext_en",
+        "created_at": "2026-11-05T10:14:04.379349+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 7064636,
+        "sample_documents": 9603,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "6e5a38c511d2a1c7dee11337dd5b1ae872ed9ce32cf666cd9f3327dde343f9f3"
+      },
+      {
+        "actual_vocab_size": 29379,
+        "corpus": "wikitext_en",
+        "created_at": "2026-11-05T10:14:05.094569+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 7064636,
+        "sample_documents": 9603,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "07f69746f9ab61c689eb87e1e21aff432d62cf9f2d45a9f2e0397348a12e4876"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "codeparrot_py",
+        "created_at": "2026-11-05T10:14:09.415632+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 89529635,
+        "sample_documents": 9570,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "11d405483cfa6840105d1fbc43a9221bbb5fe7d129d0f3b5d6d26dcd2e67b5b6"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "codeparrot_py",
+        "created_at": "2026-11-05T10:14:13.863977+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 89529635,
+        "sample_documents": 9570,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "2791e5cb80b184266054ede58f2288eeb393a36359efba2125826ec95b1e12d0"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "codeparrot_py",
+        "created_at": "2026-11-05T10:14:18.833567+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 89529635,
+        "sample_documents": 9570,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "dc1f9d8b61d48b3a86034040bea6993a4796947869a762cdc7ed5001db06406d"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "codeparrot_py",
+        "created_at": "2026-11-05T10:14:30.390257+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 89529635,
+        "sample_documents": 9570,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "8072022d58ae3b9ff48ef8c5d146982f4b785de927bb95ee7fa14167fda31a28"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "codeparrot_py",
+        "created_at": "2026-11-05T10:14:40.484913+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 89529635,
+        "sample_documents": 9570,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "ca395259626679e412f7db041c32b45b7c1269436e6f847a4ee36fffbdf64658"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "codeparrot_py",
+        "created_at": "2026-11-05T10:14:49.861408+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 89529635,
+        "sample_documents": 9570,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "26b2f9e1b156606d339cffeb1e4868c49da6f96b625ff731ed68b072926346b0"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikipedia_zh",
+        "created_at": "2026-11-05T10:17:49.181408+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 97666245,
+        "sample_documents": 9644,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "6cd1ccd5092c6fd5344e937a11cf98ff9d70714c992ccf091760910b2402ff3c"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikipedia_zh",
+        "created_at": "2026-11-05T10:18:38.453939+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 97666245,
+        "sample_documents": 9644,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "9464f2a3a7a061132a7d29bf4d278df3a03dae211fc9ba0aa2a856c85ac5fdf6"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikipedia_zh",
+        "created_at": "2026-11-05T10:19:31.596391+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 97666245,
+        "sample_documents": 9644,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "b765ec5600390c4224dc088cdf6a4b9c9fd8e4f63e1e1d4e4055fc2ed9640fda"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikipedia_zh",
+        "created_at": "2026-11-05T10:22:46.085677+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 97666245,
+        "sample_documents": 9644,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "88ec2b2531a6f4f65f021f3510bef565edf65ef0236bfc32b61a5c05ebe2a007"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikipedia_zh",
+        "created_at": "2026-11-05T10:25:40.402412+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 97666245,
+        "sample_documents": 9644,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "c9f400aaeb9cdd7999b3586303e7c92832288451782ee94128336088b801d75f"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikipedia_zh",
+        "created_at": "2026-11-05T10:28:08.507001+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 97666245,
+        "sample_documents": 9644,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "361cbe78df860b20bf1afe4ca11ad1fe8ea9f76a73a1b5b75029aeafa6acaeac"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikipedia_hu",
+        "created_at": "2026-11-05T10:28:15.106644+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 72382753,
+        "sample_documents": 9556,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "1dea2b862f855a939f4088383bb851e07f2f8a401c0cdf8dae726cfb95992745"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikipedia_hu",
+        "created_at": "2026-11-05T10:28:22.472776+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 72382753,
+        "sample_documents": 9556,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "18d1b60ba3c77bf05bb1ddbf856fb4241677702555b3971c3f19080fec5704ad"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikipedia_hu",
+        "created_at": "2026-11-05T10:28:31.446058+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 72382753,
+        "sample_documents": 9556,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "1940d077c63330f46c7e75650af189fa6cc98e609e509f39f257491c787a2418"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikipedia_hu",
+        "created_at": "2026-11-05T10:29:07.517307+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 72382753,
+        "sample_documents": 9556,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "45b23d92585c8f6b3e1ee8cc87b5dcf7b4d7f908bf106b9daa17422e24fc138e"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikipedia_hu",
+        "created_at": "2026-11-05T10:29:39.987213+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 72382753,
+        "sample_documents": 9556,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "182083ead93044b95601ecb0dda6ab6dccfe17582fa709e0cd141edec454cb2b"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikipedia_hu",
+        "created_at": "2026-11-05T10:30:07.469688+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 72382753,
+        "sample_documents": 9556,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "d7e454b911d9b62543bac9166a22a1a3a13bf46b80ea2e786080670fefc9e36a"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikipedia_ar",
+        "created_at": "2026-11-05T10:30:12.793575+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 100000000,
+        "sample_documents": 7201,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "ea372fae5a499ddfcfda64454ff2bae8647b15bd193c86e38bb87d023522735a"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikipedia_ar",
+        "created_at": "2026-11-05T10:30:19.002425+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 100000000,
+        "sample_documents": 7201,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "8d815b9c30aad4cbeb9b3519ce821fa1470e35e92b14edf14aad096143ee1f90"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikipedia_ar",
+        "created_at": "2026-11-05T10:30:25.289762+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 100000000,
+        "sample_documents": 7201,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "22e87f116f1e159abb02449e8725f143a700697328eb6b5032660254fa854611"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikipedia_ar",
+        "created_at": "2026-11-05T10:30:57.451035+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 100000000,
+        "sample_documents": 7201,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "e03deb8920fb15bdbe62c7f305cbd6ae4a79ade97a44615465f515150b269336"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikipedia_ar",
+        "created_at": "2026-11-05T10:31:29.281691+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 100000000,
+        "sample_documents": 7201,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "1c5f94e464c8bd1409a43f1f427092b771d6e0c036d7770cb87c7f032e7526a4"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikipedia_ar",
+        "created_at": "2026-11-05T10:31:56.439829+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 100000000,
+        "sample_documents": 7201,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "865f2ebaca92adfddb420c04a26ffbcf0579b0f030b531e3dc5561deb786cc45"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikipedia_sw",
+        "created_at": "2026-11-05T10:31:58.219105+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 15275642,
+        "sample_documents": 9561,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "3a0c2df5a6992546baedea26816d67d99e80e7716f9e13f71b852086768201a6"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikipedia_sw",
+        "created_at": "2026-11-05T10:32:00.405288+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 15275642,
+        "sample_documents": 9561,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "fd0db58821d61efd61b0606661e016c6921c66319dffa3844682158f8cab4e72"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikipedia_sw",
+        "created_at": "2026-11-05T10:32:03.061450+00:00",
+        "family": "bpe",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 15275642,
+        "sample_documents": 9561,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "cba3c4beac129f129908017644c69189ebf65659de1394aff141acdffb7f3a83"
+      },
+      {
+        "actual_vocab_size": 8192,
+        "corpus": "wikipedia_sw",
+        "created_at": "2026-11-05T10:32:08.461606+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 8192,
+        "sample_bytes": 15275642,
+        "sample_documents": 9561,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "17f7acce53042bc36ed7e5e59ab92ed1167ee57519fa55326feb70cf5cb327eb"
+      },
+      {
+        "actual_vocab_size": 16384,
+        "corpus": "wikipedia_sw",
+        "created_at": "2026-11-05T10:32:13.144415+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 16384,
+        "sample_bytes": 15275642,
+        "sample_documents": 9561,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "e0e925ffbddb5d3debf5a31cf058daee7420b208a3425f958bd0786907718181"
+      },
+      {
+        "actual_vocab_size": 32768,
+        "corpus": "wikipedia_sw",
+        "created_at": "2026-11-05T10:32:16.816054+00:00",
+        "family": "unigram",
+        "format": "tokenizers.Tokenizer",
+        "min_frequency": 2,
+        "requested_vocab_size": 32768,
+        "sample_bytes": 15275642,
+        "sample_documents": 9561,
+        "special_tokens": [
+          "<pad>",
+          "<bos>",
+          "<eos>",
+          "<unk>"
+        ],
+        "tokenizer_sha256": "2371614b19bdeba256dfe2adeb938c875a92c24c8c50e7b72b60052b6459fc42"
+      }
+    ]
+  }
+}
