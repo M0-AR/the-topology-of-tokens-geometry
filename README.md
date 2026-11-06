@@ -11,6 +11,8 @@
 
 **Explore:** [Live interactive preview](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [Demo GIF](docs/assets/topobpe-demo.gif) · [Generated report](results/REPORT.md) · [Frozen protocol](docs/PROTOCOL.md)
 
+**All preview entry points work:** [site root](https://m0-ar.github.io/the-topology-of-tokens-geometry/) · [preview.html](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [docs/preview.html](https://m0-ar.github.io/the-topology-of-tokens-geometry/docs/preview.html).
+
 ![TopoBPE interactive preview](docs/assets/site-hero.png)
 
 ## The 60-second tour
@@ -204,7 +206,7 @@ The preview is responsive and keyboard-accessible. On mobile, the navigation col
 |---|---|
 | ![Mobile hero](docs/assets/site-mobile-hero.png) | ![Mobile menu](docs/assets/site-mobile-menu.png) |
 
-**Open the preview:** [`preview.html`](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html). GitHub Pages serves it from the repository root; `index.html` redirects there automatically.
+**Open the preview:** use the [site root](https://m0-ar.github.io/the-topology-of-tokens-geometry/), [`preview.html`](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html), or the [`docs/preview.html` mirror](https://m0-ar.github.io/the-topology-of-tokens-geometry/docs/preview.html). Each `index.html` redirects to its local `preview.html`, so all three paths render the same showcase.
 
 ---
 

@@ -1,0 +1,1556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TopoBPE — The geometry of language, measured</title>
+<meta name="description" content="We trained 36 tokenizers in 6 languages and tested whether the shape of a vocabulary predicts LLM cost. It does not. Explore the evidence, the cost model, and a beginner-to-professional guide.">
+<meta name="theme-color" content="#05080d">
+<meta property="og:title" content="TopoBPE — The geometry of language, measured">
+<meta property="og:description" content="36 tokenizers. 6 languages. 36 language models. One honest answer about what predicts tokenizer economics.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --bg:#05080d; --bg2:#071019; --panel:rgba(12,20,32,.78); --panel2:rgba(9,15,25,.92);
+  --line:rgba(148,163,184,.16); --line2:rgba(148,163,184,.28);
+  --text:#e9f0f8; --muted:#8fa3bd; --dim:#64748b;
+  --teal:#5eead4; --cyan:#22d3ee; --amber:#fbbf24; --pink:#f472b6;
+  --green:#34d399; --red:#fb7185; --violet:#a78bfa;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  --display:'Space Grotesk','Inter',system-ui,sans-serif;
+  --max:1180px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(1200px 700px at 12% -10%,rgba(94,234,212,.10),transparent 60%),
+  radial-gradient(1000px 600px at 90% 0%,rgba(34,211,238,.07),transparent 60%),
+  radial-gradient(900px 700px at 50% 110%,rgba(244,114,182,.05),transparent 60%),var(--bg)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.35;background-image:linear-gradient(rgba(148,163,184,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.055) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.1;letter-spacing:-.02em;margin:0}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+img{max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+::selection{background:rgba(94,234,212,.28);color:#fff}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;z-index:99;background:var(--teal);color:#04121a;padding:10px 16px;border-radius:8px;font-weight:600}
+.skip:focus{left:8px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.dim{color:var(--dim)}
+.small{font-size:.85rem}
+.tiny{font-size:.74rem}
+.center{text-align:center}
+section{position:relative;padding:104px 0}
+section.tight{padding:72px 0}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--teal);opacity:.7}
+.sec-head{max-width:760px;margin-bottom:44px}
+.sec-head h2{font-size:clamp(1.9rem,4vw,3.1rem);font-weight:600;margin-bottom:16px}
+.sec-head p{color:var(--muted);font-size:1.05rem;margin:0;max-width:660px}
+.grad{background:linear-gradient(100deg,#fff 10%,var(--teal) 45%,var(--cyan) 70%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.card{background:linear-gradient(180deg,rgba(16,26,41,.86),rgba(8,13,22,.78));border:1px solid var(--line);border-radius:18px;padding:26px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.5),transparent);opacity:.5}
+.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line2);border-radius:999px;padding:5px 11px;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:rgba(148,163,184,.06)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal)}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 20px;border-radius:10px;font-weight:600;font-size:.95rem;border:1px solid transparent;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;text-decoration:none}
+.btn:hover{transform:translateY(-1px);text-decoration:none}
+.btn-primary{background:linear-gradient(135deg,var(--teal),#38d9c0);color:#04141a;box-shadow:0 8px 32px rgba(94,234,212,.22)}
+.btn-primary:hover{box-shadow:0 12px 40px rgba(94,234,212,.32)}
+.btn-ghost{border-color:var(--line2);color:var(--text);background:rgba(148,163,184,.05)}
+.btn-ghost:hover{background:rgba(148,163,184,.11)}
+.kbd{font-family:var(--mono);font-size:.72rem;border:1px solid var(--line2);border-bottom-width:2px;border-radius:5px;padding:1px 6px;color:var(--muted);background:rgba(0,0,0,.25)}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(16px);background:rgba(5,8,13,.72);border-bottom:1px solid transparent;transition:border-color .2s,background .2s}
+.nav.scrolled{border-bottom-color:var(--line);background:rgba(5,8,13,.9)}
+.nav-in{max-width:var(--max);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;letter-spacing:.08em;font-size:.9rem;color:var(--text);text-decoration:none}
+.brand:hover{text-decoration:none}
+.brand svg{width:26px;height:26px}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{color:var(--muted);font-size:.82rem;font-weight:500;padding:7px 10px;border-radius:7px;text-decoration:none;white-space:nowrap;transition:color .15s,background .15s}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(148,163,184,.09)}
+.nav-cta{display:inline-flex;align-items:center;gap:7px;background:rgba(94,234,212,.12);border:1px solid rgba(94,234,212,.3);color:var(--teal);padding:8px 13px;border-radius:8px;font-size:.8rem;font-weight:600;text-decoration:none;white-space:nowrap}
+.nav-cta:hover{background:rgba(94,234,212,.18);text-decoration:none}
+.nav-burger{display:none;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid var(--line);background:rgba(255,255,255,.04);border-radius:9px;color:var(--text);cursor:pointer}
+.nav-burger svg{width:18px;height:18px}
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--teal),var(--cyan),var(--violet));z-index:60;transition:width .08s linear}
+@media(max-width:900px){
+  .nav-burger{display:inline-flex}
+  .nav-links{position:fixed;inset:62px 14px auto 14px;display:none;flex-direction:column;gap:2px;background:rgba(10,15,23,.96);border:1px solid var(--line2);border-radius:14px;padding:10px;backdrop-filter:blur(14px);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+  .nav.open .nav-links{display:flex}
+  .nav-cta{display:none}
+}
+
+/* hero */
+.hero{min-height:100svh;display:flex;align-items:center;padding:120px 0 60px;overflow:hidden}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:.65;pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,13,.94) 0%,rgba(5,8,13,.72) 45%,rgba(5,8,13,.25) 75%,rgba(5,8,13,.6) 100%),linear-gradient(0deg,var(--bg) 0%,transparent 30%);pointer-events:none}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;width:100%}
+.hero h1{font-size:clamp(2.6rem,6.2vw,5.3rem);font-weight:600;letter-spacing:-.035em;margin:18px 0 22px}
+.hero h1 .line{display:block}
+.hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);color:#b6c5d8;max-width:620px;margin:0 0 30px}
+.hero-sub strong{color:var(--text);font-weight:600}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:640px}
+.hstat .n{font-family:var(--display);font-size:1.55rem;font-weight:600;color:var(--text);line-height:1.1}
+.hstat .l{font-size:.72rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+.verdict{background:linear-gradient(180deg,rgba(13,22,36,.9),rgba(7,12,20,.88));border:1px solid var(--line);border-radius:20px;padding:8px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.verdict-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 10px}
+.verdict-top .t{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;color:var(--teal);font-family:var(--mono)}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(94,234,212,.5)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(94,234,212,0)}}
+.vrow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:13px 16px;border-top:1px solid var(--line)}
+.vrow .tag{font-family:var(--mono);font-size:.68rem;color:var(--dim);width:26px}
+.vrow .vt{font-size:.86rem;font-weight:600;color:var(--text)}
+.vrow .vs{font-size:.72rem;color:var(--muted);margin-top:2px}
+.status{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.08em;padding:3px 8px;border-radius:999px}
+.status.no{color:var(--red);background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.25)}
+.status.mid{color:var(--amber);background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25)}
+.verdict-foot{padding:12px 16px 14px;font-size:.68rem;color:var(--dim);border-top:1px solid var(--line)}
+@media(max-width:980px){.hero-grid{grid-template-columns:1fr;gap:36px}.verdict{max-width:560px}.hero{min-height:auto;padding-top:120px}}
+
+/* summary */
+.lede{font-size:clamp(1.12rem,2vw,1.4rem);line-height:1.65;color:#c8d5e5;max-width:900px}
+.lede strong{color:#fff;font-weight:600}
+.lede .hl{color:var(--teal)}
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.sum-card{padding:24px}
+.sum-card .k{font-family:var(--display);font-size:2rem;font-weight:600;line-height:1;margin-bottom:8px}
+.sum-card .k small{font-size:.9rem;color:var(--muted);font-weight:400}
+.sum-card .d{font-size:.86rem;color:var(--muted);line-height:1.55}
+.sum-card.teal .k{color:var(--teal)}.sum-card.amber .k{color:var(--amber)}.sum-card.pink .k{color:var(--pink)}
+@media(max-width:820px){.summary-grid{grid-template-columns:1fr}}
+
+/* problem */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.two .card h3{font-size:1.25rem;margin-bottom:10px;font-weight:600}
+.two .card p{color:var(--muted);margin:0 0 12px;font-size:.93rem}
+.two .card p:last-child{margin-bottom:0}
+.two .card b{color:var(--text)}
+.checklist{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:9px}
+.checklist li{display:flex;gap:10px;font-size:.9rem;color:var(--muted)}
+.checklist svg{flex:0 0 16px;margin-top:4px;color:var(--teal)}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+
+/* explorer */
+.exp{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}
+.exp-controls{padding:24px;position:sticky;top:96px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:7px;font-family:var(--mono)}
+select,input[type=number],input[type=text]{width:100%;background:rgba(5,10,18,.9);border:1px solid var(--line2);color:var(--text);border-radius:9px;padding:10px 12px;font-family:var(--sans);font-size:.9rem;appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238fa3bd' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+input:focus,select:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px rgba(94,234,212,.12)}
+.two-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.exp-out{display:grid;gap:16px}
+.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.metric{background:linear-gradient(180deg,rgba(16,26,41,.86),rgba(8,13,22,.78));border:1px solid var(--line);border-radius:14px;padding:18px}
+.metric .l{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);margin-bottom:6px}
+.metric .v{font-family:var(--display);font-size:1.75rem;font-weight:600;line-height:1;color:var(--text)}
+.metric .v small{font-size:.78rem;color:var(--muted);font-weight:400}
+.metric .s{font-size:.72rem;color:var(--muted);margin-top:6px}
+.cost-box{padding:24px}
+.cost-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.cost-top .big{font-family:var(--display);font-size:2.3rem;font-weight:600;color:var(--teal);line-height:1}
+.cost-bars{display:grid;gap:8px;margin-top:16px}
+.cbar{display:grid;grid-template-columns:80px 1fr 90px;gap:10px;align-items:center;font-size:.78rem;color:var(--muted)}
+.cbar .track{height:10px;border-radius:6px;background:rgba(148,163,184,.1);overflow:hidden}
+.cbar .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--teal),var(--cyan));transition:width .5s ease}
+.cbar.current .fill{background:linear-gradient(90deg,var(--amber),var(--pink))}
+.cbar .val{text-align:right;font-family:var(--mono);font-size:.72rem;color:var(--text)}
+.note{font-size:.72rem;color:var(--dim);line-height:1.5;margin-top:14px}
+.tagline{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@media(max-width:900px){.exp{grid-template-columns:1fr}.exp-controls{position:static}.metric-row{grid-template-columns:1fr 1fr}}
+</style>
+<style>
+/* 3d */
+.scene-wrap{position:relative;border:1px solid var(--line);border-radius:22px;overflow:hidden;background:radial-gradient(900px 500px at 50% 40%,rgba(34,211,238,.08),rgba(5,8,13,.6) 60%),#04070c;height:600px}
+#map3d{width:100%;height:100%;display:block;cursor:grab}
+#map3d:active{cursor:grabbing}
+.scene-ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:18px}
+.scene-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.scene-title{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:rgba(5,8,13,.6);border:1px solid var(--line);padding:8px 12px;border-radius:9px;backdrop-filter:blur(8px)}
+.scene-controls{display:flex;gap:6px;flex-wrap:wrap;pointer-events:auto}
+.scene-controls button{background:rgba(5,8,13,.72);border:1px solid var(--line);color:var(--muted);padding:7px 11px;border-radius:8px;font-size:.72rem;font-weight:600;backdrop-filter:blur(8px)}
+.scene-controls button:hover{color:var(--text);border-color:var(--line2)}
+.scene-controls button.on{color:var(--teal);border-color:rgba(94,234,212,.4);background:rgba(94,234,212,.1)}
+.scene-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.72rem;color:var(--muted);background:rgba(5,8,13,.6);border:1px solid var(--line);padding:9px 12px;border-radius:9px;backdrop-filter:blur(8px)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.hint{font-size:.68rem;color:var(--dim);background:rgba(5,8,13,.6);border:1px solid var(--line);padding:7px 10px;border-radius:8px;backdrop-filter:blur(8px)}
+#tooltip{position:absolute;pointer-events:none;z-index:5;background:rgba(5,10,18,.96);border:1px solid rgba(94,234,212,.35);border-radius:10px;padding:10px 12px;font-size:.76rem;line-height:1.5;color:var(--text);box-shadow:0 12px 40px rgba(0,0,0,.5);opacity:0;transform:translate(-50%,-110%);transition:opacity .12s;min-width:170px}
+#tooltip .tt{font-weight:600;color:var(--teal);margin-bottom:3px}
+#tooltip .tr{color:var(--muted);font-size:.7rem}
+.fallback-2d{display:none;position:absolute;inset:0;padding:24px}
+.no-webgl #map3d,.no-webgl #heroCanvas{display:none}
+.no-webgl .fallback-2d{display:block}
+.fallback-2d svg{width:100%;height:100%}
+@media(max-width:700px){.scene-wrap{height:470px}.scene-ui{padding:12px}.hint{display:none}}
+
+/* results */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.chart-card{padding:22px 20px}
+.chart-card h3{font-size:1rem;font-weight:600;margin-bottom:4px}
+.chart-card .cap{font-size:.76rem;color:var(--dim);margin-bottom:12px}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.result-table{width:100%;border-collapse:collapse;font-size:.84rem;margin-top:6px}
+.result-table th{text-align:left;font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--dim);font-weight:600;padding:10px 8px;border-bottom:1px solid var(--line)}
+.result-table td{padding:11px 8px;border-bottom:1px solid rgba(148,163,184,.08);color:var(--muted)}
+.result-table td:first-child{color:var(--text);font-weight:500}
+.result-table .mono{color:var(--text)}
+.result-table tr:last-child td{border-bottom:none}
+.badge{display:inline-block;font-family:var(--mono);font-size:.64rem;padding:2px 7px;border-radius:5px;background:rgba(148,163,184,.1);color:var(--muted)}
+.badge.ok{background:rgba(52,211,153,.1);color:var(--green)}
+.badge.bad{background:rgba(251,113,133,.1);color:var(--red)}
+.callout{border-left:2px solid var(--amber);background:rgba(251,191,36,.05);padding:14px 18px;border-radius:0 10px 10px 0;font-size:.84rem;color:var(--muted);margin-top:18px}
+.callout b{color:var(--text)}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+
+/* data table */
+.table-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.chip{background:rgba(148,163,184,.07);border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:999px;font-size:.76rem;font-weight:500}
+.chip.on{color:var(--teal);border-color:rgba(94,234,212,.4);background:rgba(94,234,212,.1)}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+table.data{width:100%;border-collapse:collapse;font-size:.8rem;min-width:760px}
+table.data th{position:sticky;top:0;background:#0a111c;text-align:left;font-size:.65rem;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer;white-space:nowrap;user-select:none}
+table.data th:hover{color:var(--teal)}
+table.data td{padding:10px 14px;border-bottom:1px solid rgba(148,163,184,.07);color:var(--muted);white-space:nowrap}
+table.data tr:hover td{background:rgba(94,234,212,.03)}
+table.data td.num{font-family:var(--mono);color:var(--text)}
+table.data td .fam{font-family:var(--mono);font-size:.66rem;padding:2px 6px;border-radius:4px}
+.fam.bpe{background:rgba(94,234,212,.1);color:var(--teal)}
+.fam.unigram{background:rgba(244,114,182,.1);color:var(--pink)}
+.bar-cell{display:flex;align-items:center;gap:8px}
+.bar-cell .mini{height:5px;border-radius:3px;background:linear-gradient(90deg,var(--teal),var(--cyan))}
+
+/* method */
+.timeline{position:relative;margin-top:10px;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:linear-gradient(var(--teal),rgba(94,234,212,.1))}
+.tl{position:relative;padding:0 0 26px 18px}
+.tl::before{content:"";position:absolute;left:-24px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--teal);box-shadow:0 0 14px rgba(94,234,212,.4)}
+.tl h4{font-size:.95rem;font-weight:600;margin-bottom:4px}
+.tl p{font-size:.84rem;color:var(--muted);margin:0}
+.tl .n{font-family:var(--mono);font-size:.66rem;color:var(--dim)}
+
+/* learn */
+.learn-tools{display:flex;gap:12px;align-items:center;margin-bottom:22px;flex-wrap:wrap}
+.learn-tools input{max-width:340px}
+.learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+details.term{background:rgba(10,17,28,.7);border:1px solid var(--line);border-radius:12px;padding:0;overflow:hidden}
+details.term summary{padding:16px 18px;cursor:pointer;font-weight:600;font-size:.92rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+details.term summary::-webkit-details-marker{display:none}
+details.term summary::after{content:"+";font-family:var(--mono);color:var(--teal);font-size:1.1rem;font-weight:400;transition:transform .2s}
+details.term[open] summary::after{transform:rotate(45deg)}
+details.term[open] summary{color:var(--teal)}
+details.term .body{padding:0 18px 18px;font-size:.85rem;color:var(--muted);line-height:1.65}
+details.term .body b{color:var(--text)}
+details.term .body code{font-family:var(--mono);font-size:.78rem;background:rgba(94,234,212,.07);color:var(--teal);padding:1px 5px;border-radius:4px}
+@media(max-width:820px){.learn-grid{grid-template-columns:1fr}}
+
+/* quiz */
+.quiz-shell{max-width:820px;margin:0 auto}
+.quiz-card{background:linear-gradient(180deg,rgba(16,26,41,.92),rgba(8,13,22,.9));border:1px solid var(--line);border-radius:20px;padding:30px;position:relative;overflow:hidden}
+.quiz-card::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,var(--violet),transparent)}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-size:.72rem;color:var(--dim);font-family:var(--mono)}
+.qprogress{height:5px;background:rgba(148,163,184,.12);border-radius:99px;overflow:hidden;margin-bottom:24px}
+.qprogress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--cyan),var(--violet));transition:width .35s ease}
+.qtext{font-family:var(--display);font-size:1.35rem;font-weight:600;line-height:1.35;margin-bottom:20px}
+.qopts{display:grid;gap:9px}
+.qopt{text-align:left;background:rgba(5,10,18,.6);border:1px solid var(--line);border-radius:10px;padding:13px 16px;font-size:.9rem;color:var(--muted);transition:border-color .15s,background .15s,color .15s;display:flex;gap:11px;align-items:flex-start}
+.qopt:hover:not(:disabled){border-color:var(--line2);color:var(--text);background:rgba(148,163,184,.06)}
+.qopt .letter{font-family:var(--mono);font-size:.7rem;border:1px solid var(--line2);border-radius:4px;padding:1px 6px;color:var(--dim);flex:0 0 auto;margin-top:2px}
+.qopt.correct{border-color:rgba(52,211,153,.55);background:rgba(52,211,153,.1);color:#d1fae5}
+.qopt.wrong{border-color:rgba(251,113,133,.5);background:rgba(251,113,133,.08);color:#ffe4e6}
+.qopt:disabled{cursor:default}
+.qfb{margin-top:18px;padding:14px 16px;border-radius:10px;font-size:.85rem;line-height:1.6;display:none}
+.qfb.show{display:block;animation:fade .25s ease}
+.qfb.good{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.25);color:#d1fae5}
+.qfb.bad{background:rgba(251,113,133,.07);border:1px solid rgba(251,113,133,.25);color:#ffe4e6}
+.qfb b{color:#fff}
+.qnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}
+.qscore{display:none;text-align:center;padding:20px 0}
+.qscore.show{display:block;animation:fade .3s ease}
+.qscore .big{font-family:var(--display);font-size:4rem;font-weight:700;line-height:1;background:linear-gradient(120deg,var(--teal),var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.qscore .msg{font-size:1.05rem;font-weight:600;margin:14px 0 6px}
+.qscore .sub{color:var(--muted);font-size:.88rem;max-width:520px;margin:0 auto 22px}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(max-width:600px){.quiz-card{padding:20px}.qtext{font-size:1.12rem}}
+
+/* business */
+.use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.use{padding:24px}
+.use .ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(94,234,212,.09);border:1px solid rgba(94,234,212,.2);color:var(--teal);margin-bottom:16px}
+.use h3{font-size:1rem;font-weight:600;margin-bottom:7px}
+.use p{font-size:.84rem;color:var(--muted);margin:0}
+@media(max-width:900px){.use-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.use-grid{grid-template-columns:1fr}}
+.roi{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+.roi .card{padding:24px}
+.roi h3{font-size:1.05rem;margin-bottom:8px}
+.roi p{font-size:.86rem;color:var(--muted);margin:0 0 10px}
+.roi ul{margin:0;padding-left:18px;color:var(--muted);font-size:.84rem}
+.roi li{margin-bottom:6px}
+@media(max-width:780px){.roi{grid-template-columns:1fr}}
+
+/* evidence */
+.ev-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ev{padding:20px}
+.ev .n{font-family:var(--display);font-size:1.5rem;font-weight:600;color:var(--teal);line-height:1}
+.ev .l{font-size:.76rem;color:var(--muted);margin-top:6px}
+.ev .s{font-size:.68rem;color:var(--dim);margin-top:4px}
+@media(max-width:900px){.ev-grid{grid-template-columns:1fr 1fr}}
+
+/* faq */
+.faq{max-width:860px}
+details.faqitem{border-bottom:1px solid var(--line);padding:18px 0}
+details.faqitem summary{cursor:pointer;font-weight:500;font-size:.98rem;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+details.faqitem summary::-webkit-details-marker{display:none}
+details.faqitem summary::after{content:"+";font-family:var(--mono);color:var(--teal);font-size:1.1rem;transition:transform .2s}
+details.faqitem[open] summary::after{transform:rotate(45deg)}
+details.faqitem .body{font-size:.88rem;color:var(--muted);padding-top:10px;max-width:760px}
+details.faqitem .body code{font-family:var(--mono);font-size:.78rem;color:var(--teal);background:rgba(94,234,212,.07);padding:1px 5px;border-radius:4px}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:56px 0 36px;background:rgba(4,7,12,.7)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px}
+.foot-brand{font-family:var(--display);font-weight:700;letter-spacing:.08em;display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.foot-brand svg{width:22px;height:22px}
+.foot p{font-size:.8rem;color:var(--dim);max-width:300px;margin:0}
+.foot h4{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--dim);margin-bottom:12px;font-family:var(--mono);font-weight:600}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot li a{font-size:.82rem;color:var(--muted)}
+.foot li a:hover{color:var(--teal)}
+.foot-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:24px;font-size:.72rem;color:var(--dim)}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.foot-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr}.metric-row{grid-template-columns:1fr}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{animation-duration:.001ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#summary">Skip to content</a>
+<div class="progress" id="progress"></div>
+
+<nav class="nav" id="nav" aria-label="Main navigation">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="TopoBPE home">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="7" cy="9" r="3" stroke="#5eead4" stroke-width="1.5"/>
+        <circle cx="25" cy="7" r="3" stroke="#22d3ee" stroke-width="1.5"/>
+        <circle cx="17" cy="24" r="3" stroke="#a78bfa" stroke-width="1.5"/>
+        <path d="M9.6 10.6 22.4 8.4M8.8 11.7l6.4 9.6M23.4 9.8l-4.9 11.7" stroke="#5eead4" stroke-opacity=".55" stroke-width="1.2"/>
+      </svg>
+      TOPOBPE
+    </a>
+    <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#summary">Summary</a>
+      <a href="#explorer">Cost explorer</a>
+      <a href="#map3d">3D map</a>
+      <a href="#results">Results</a>
+      <a href="#data">Data</a>
+      <a href="#learn">Learn</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#business">Business</a>
+    </div>
+    <a class="nav-cta" href="#quiz">Test yourself
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+</nav>
+
+<main id="top">
+<header class="hero">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Tokenizer intelligence · evidence first</span>
+      <h1><span class="line">The geometry</span><span class="line">of language,</span><span class="line grad">measured.</span></h1>
+      <p class="hero-sub">We trained <strong>36 tokenizers</strong> across <strong>6 languages</strong>, then trained <strong>36 language models</strong> to find out whether the mathematical shape of a vocabulary predicts what it costs to run. The answer is a clean, useful <strong>no</strong> — and knowing it is worth real money.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#explorer">Explore the cost model
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#learn">Start from zero</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="n" id="hsTok">36</div><div class="l">tokenizers</div></div>
+        <div class="hstat"><div class="n" id="hsLang">6</div><div class="l">languages</div></div>
+        <div class="hstat"><div class="n" id="hsRuns">36</div><div class="l">LM runs</div></div>
+        <div class="hstat"><div class="n" id="hsPerm">2,000</div><div class="l">permutations</div></div>
+      </div>
+    </div>
+    <aside class="verdict" aria-label="Headline verdict">
+      <div class="verdict-top">
+        <span class="t">Pre-registered verdict</span>
+        <span class="live"><i></i>verified</span>
+      </div>
+      <div class="vrow">
+        <span class="tag">H1</span>
+        <div><div class="vt">Compression prediction</div><div class="vs">R² 0.974 → 0.843 · p = 0.958</div></div>
+        <span class="status no">no gain</span>
+      </div>
+      <div class="vrow">
+        <span class="tag">H2</span>
+        <div><div class="vt">Bits-per-byte prediction</div><div class="vs">R² 0.887 → 0.555 · p = 0.593</div></div>
+        <span class="status no">no gain</span>
+      </div>
+      <div class="vrow">
+        <span class="tag">H3</span>
+        <div><div class="vt">Partial association</div><div class="vs">ρ = −0.718 · Holm p = 0.024</div></div>
+        <span class="status mid">exploratory</span>
+      </div>
+      <div class="vrow">
+        <span class="tag">H4</span>
+        <div><div class="vt">Market transfer</div><div class="vs">Δ = −44.28 · p = 0.999</div></div>
+        <span class="status no">no transfer</span>
+      </div>
+      <div class="verdict-foot">Holm-corrected across four hypotheses · 2,000 permutations · 2,000 bootstrap resamples</div>
+    </aside>
+  </div>
+</header>
+
+<section id="summary">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">01 · The 30-second version</span>
+      <h2 class="lede">Every large language model converts text into <span class="hl">tokens</span> before it thinks. The tokenizer decides how many tokens that is. More tokens means more compute, more memory, more latency, and a bigger bill. <strong>Most teams pick a tokenizer by habit, not by measurement.</strong></h2>
+      <p class="lede" style="margin-top:18px">TopoBPE is a controlled, pre-registered benchmark that asks whether a sophisticated description of a tokenizer's <em>shape</em> — persistent homology — predicts its economics better than simple, cheap statistics. On 36 tokenizers, 6 languages, and 36 trained language models, it does not. The simple baseline explains <strong>97.4%</strong> of held-out compression variance; adding 72 topology features drops that to <strong>84.3%</strong> and fails the permutation test. One exploratory association survives correction, with a confidence interval that spans zero. The honest conclusion is the valuable one: <strong>measure the basics, skip the expensive geometry, and spend the savings elsewhere.</strong></p>
+    </div>
+    <div class="summary-grid">
+      <div class="card sum-card teal reveal"><div class="k">0.974</div><div class="d"><b>Baseline R²</b> for predicting held-out bytes-per-token using only eight cheap statistics. The obvious features already work.</div></div>
+      <div class="card sum-card amber reveal"><div class="k">−0.131</div><div class="d"><b>Change in R²</b> when 72 topology features are added. More information made out-of-corpus prediction worse, not better.</div></div>
+      <div class="card sum-card pink reveal"><div class="k">$0</div><div class="d"><b>Incremental value</b> of topology features for this decision. The benchmark tells you where not to spend engineering time.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="problem" class="tight">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:36px">
+      <span class="eyebrow">02 · Why this matters</span>
+      <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:600;max-width:760px">Tokens are the unit economics of AI. Tokenizers set the exchange rate.</h2>
+    </div>
+    <div class="two">
+      <div class="card reveal">
+        <h3>The hidden tax on every prompt</h3>
+        <p>If your workload processes one billion bytes of text per month, a tokenizer that emits <b>4.0 bytes per token</b> needs 250 million tokens. One that emits <b>3.5</b> needs 286 million — <b>14% more tokens for the same content</b>.</p>
+        <p>At $0.50 per million input tokens, that difference is <b>$18,000 a year</b> on a single workload. At frontier-model prices, it is a line item a CFO will ask about. Yet tokenizer selection is usually inherited from a base model or chosen by leaderboard vibes.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>No public benchmark separated tokenizer quality from model quality.</span></li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Topology tooling is expensive to build and hard to justify without evidence.</span></li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3>What this repository gives you</h3>
+        <p>A frozen protocol, a reproducible pipeline, 36 trained tokenizers, 36 language-model runs, 80 measured features per tokenizer, and every result file needed to defend the conclusion in a technical or budget review.</p>
+        <p>It is three things at once: <b>a benchmark</b>, <b>a cost calculator</b>, and <b>a teaching tool</b> that takes a newcomer from “what is a token?” to reading a partial Spearman correlation with confidence.</p>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Use the measured curves to choose a vocabulary size for your corpus.</span></li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Use the negative result to avoid buying complexity that does not predict.</span></li>
+          <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Reproduce every number in Docker, down to the hashed manifest.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="explorer">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">03 · Interactive cost explorer</span>
+      <h2>Put a number on your tokenizer.</h2>
+      <p>Pick a corpus, a tokenizer family, and a vocabulary size. Every value below is measured, not modelled. Adjust your monthly text volume and token price to translate compression into budget.</p>
+    </div>
+    <div class="exp">
+      <div class="card exp-controls reveal">
+        <div class="field">
+          <label for="exCorpus">Corpus</label>
+          <select id="exCorpus"></select>
+        </div>
+        <div class="two-fields">
+          <div class="field">
+            <label for="exFamily">Family</label>
+            <select id="exFamily"><option value="bpe">BPE</option><option value="unigram">Unigram</option></select>
+          </div>
+          <div class="field">
+            <label for="exVocab">Vocabulary</label>
+            <select id="exVocab"><option value="8192">8,192</option><option value="16384">16,384</option><option value="32768">32,768</option></select>
+          </div>
+        </div>
+        <div class="two-fields">
+          <div class="field">
+            <label for="exVolume">Text / month (GB)</label>
+            <input id="exVolume" type="number" min="0" step="1" value="100">
+          </div>
+          <div class="field">
+            <label for="exPrice">Price / 1M tokens ($)</label>
+            <input id="exPrice" type="number" min="0" step="0.01" value="0.50">
+          </div>
+        </div>
+        <div class="tagline" id="exTags"></div>
+        <p class="note">Compression is measured as held-out bytes per token. Tokens per GB = 1,000,000,000 ÷ bytes per token. Cost is a relative input-token estimate; it excludes output tokens, caching, and provider-specific pricing.</p>
+      </div>
+      <div class="exp-out">
+        <div class="metric-row reveal">
+          <div class="metric"><div class="l">Bytes per token</div><div class="v" id="exComp">—</div><div class="s">held-out test split</div></div>
+          <div class="metric"><div class="l">Bits per byte</div><div class="v" id="exBpb">—</div><div class="s" id="exBpbSub">BPE language model</div></div>
+          <div class="metric"><div class="l">Tokens for 1 GB</div><div class="v" id="exTokGb">—</div><div class="s">lower is cheaper</div></div>
+        </div>
+        <div class="card cost-box reveal">
+          <div class="cost-top">
+            <div>
+              <div class="tiny" style="text-transform:uppercase;letter-spacing:.1em;color:var(--dim);margin-bottom:6px">Estimated monthly input cost</div>
+              <div class="big" id="exCost">—</div>
+            </div>
+            <div class="center">
+              <div class="tiny" style="color:var(--dim)">vs. best config in this corpus</div>
+              <div class="mono" id="exSave" style="font-size:1.05rem;color:var(--green)">—</div>
+            </div>
+          </div>
+          <div class="cost-bars" id="exBars"></div>
+          <p class="note" id="exNote">—</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="map3d">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">04 · The tokenizer landscape</span>
+      <h2>Eighty measurements, projected into three dimensions.</h2>
+      <p>Each glowing sphere is one trained tokenizer. Position comes from a PCA of its 80 measured features: entropy, compression, vocabulary size, persistence, Betti curves, and nearest-neighbour geometry. Colour can show family, compression, or language-model BPB. Drag to orbit; scroll to zoom; hover for the exact numbers.</p>
+    </div>
+    <div class="scene-wrap reveal" id="sceneWrap">
+      <canvas id="mapCanvas" aria-label="Interactive 3D scatter plot of 36 tokenizers. Drag to rotate, scroll to zoom."></canvas>
+      <div class="fallback-2d" id="fallback2d" aria-hidden="true"></div>
+      <div class="scene-ui">
+        <div class="scene-top">
+          <div class="scene-title" id="sceneTitle">PCA · 36 tokenizers · 80 features</div>
+          <div class="scene-controls" role="group" aria-label="3D view controls">
+            <button data-color="family" class="on">Family</button>
+            <button data-color="compression">Compression</button>
+            <button data-color="bpb">BPB</button>
+            <button id="btnRotate" class="on" aria-pressed="true">Auto-rotate</button>
+            <button id="btnReset">Reset</button>
+          </div>
+        </div>
+        <div class="scene-bottom">
+          <div class="legend" id="legend"></div>
+          <div class="hint">drag orbit · scroll zoom · hover inspect</div>
+        </div>
+      </div>
+      <div id="tooltip" role="status" aria-live="polite"></div>
+    </div>
+    <p class="note center" style="margin-top:14px" id="pcaNote">—</p>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">05 · Confirmatory results</span>
+      <h2>The expensive features lost to eight cheap ones.</h2>
+      <p>Leave-one-corpus-out prediction is the hard test: train on five languages, predict the sixth. The baseline uses only vocabulary size, entropy, gzip ratio, type-token ratio, mean token length, and training compression. The full model adds 72 persistent-homology descriptors. Lower error would mean the geometry generalises. It did not.</p>
+    </div>
+    <div class="grid2">
+      <div class="card chart-card reveal">
+        <h3>H1 · Held-out tokenizer compression</h3>
+        <div class="cap">R² with cluster-bootstrap 95% CI · higher is better</div>
+        <div id="chartH1"></div>
+        <table class="result-table" aria-label="H1 exact results">
+          <thead><tr><th>Model</th><th>R²</th><th>MAE</th><th>95% CI</th></tr></thead>
+          <tbody id="h1Table"></tbody>
+        </table>
+        <div class="callout"><b>Permutation test:</b> ΔR² = −0.131, p = 0.958. The observed “improvement” is worse than 95.8% of random label shuffles. Bootstrap p(Δ ≤ 0) = 0.990.</div>
+      </div>
+      <div class="card chart-card reveal">
+        <h3>H2 · Language-model bits per byte</h3>
+        <div class="cap">R² with cluster-bootstrap 95% CI · higher is better</div>
+        <div id="chartH2"></div>
+        <table class="result-table" aria-label="H2 exact results">
+          <thead><tr><th>Model</th><th>R²</th><th>MAE</th><th>95% CI</th></tr></thead>
+          <tbody id="h2Table"></tbody>
+        </table>
+        <div class="callout"><b>Permutation test:</b> ΔR² = −0.332, p = 0.593. Bootstrap p(Δ ≤ 0) = 0.996. Only six clusters, so the baseline CI is wide; the direction is still negative.</div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:20px">
+      <div class="card chart-card reveal">
+        <h3>Measured BPB by vocabulary size</h3>
+        <div class="cap">BPE only · mean of two seeds · lower is better</div>
+        <div id="chartBpb"></div>
+        <div class="legend" id="bpbLegend" style="margin-top:10px;background:none;border:none;padding:0"></div>
+      </div>
+      <div class="card chart-card reveal">
+        <h3>Where topology helped — and where it did not</h3>
+        <div class="cap">Change in MAE when adding topology, by corpus (H1)</div>
+        <div id="chartDelta"></div>
+        <div class="callout" style="border-left-color:var(--teal);background:rgba(94,234,212,.05)">Topology improved held-out compression <b>only for Python code</b> (MAE 0.273 → 0.192). It degraded every natural-language corpus. A benefit that appears in one cluster out of six does not survive leave-one-corpus-out.</div>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:20px">
+      <div class="card chart-card reveal">
+        <h3>H3 · The one surviving association</h3>
+        <div class="cap">Partial Spearman controlling for compression · BPE models only</div>
+        <table class="result-table" aria-label="H3 partial correlations">
+          <thead><tr><th>Topology variable</th><th>ρ</th><th>p</th><th>Bootstrap 95% CI</th><th>Holm</th></tr></thead>
+          <tbody id="h3Table"></tbody>
+        </table>
+        <div class="callout" style="border-left-color:var(--amber);background:rgba(251,191,36,.05)"><b>Read this carefully.</b> The co-occurrence H1 persistence association is the only one that survives Holm correction (adjusted p = 0.024). Its bootstrap interval still crosses zero, and the design is exploratory on 18 BPE runs. It is a lead, not a law.</div>
+      </div>
+      <div class="card chart-card reveal">
+        <h3>H4 · The market stress test</h3>
+        <div class="cap">12 US equities · 10 years of daily bars · LOCO-style transfer</div>
+        <div id="chartMarket"></div>
+        <p class="note" style="margin-top:12px">Adding topology moved compression error by −44.28 bytes per token on a 24-row out-of-market test (95% CI [−92.97, −20.37], p = 0.999) — a large degradation. BPB delta was −8.42 (p = 1.0). Within-market, the full model is “less bad” than baseline for compression (R² −0.214 vs −0.332) but the difference is not significant (bootstrap p = 0.277).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">06 · Explore every row</span>
+      <h2>36 tokenizers. No cherry-picking.</h2>
+      <p>Sort any column. Filter by corpus or family. These are the exact test-split measurements that feed the models and charts above.</p>
+    </div>
+    <div class="table-tools reveal" id="tableFilters" role="group" aria-label="Table filters">
+      <button class="chip on" data-filter="all">All 36</button>
+      <button class="chip" data-filter="bpe">BPE · 18</button>
+      <button class="chip" data-filter="unigram">Unigram · 18</button>
+      <span class="dim small" style="margin-left:auto">Click a column header to sort</span>
+    </div>
+    <div class="table-scroll reveal">
+      <table class="data" id="tokenTable">
+        <thead>
+          <tr>
+            <th data-sort="label">Corpus</th>
+            <th data-sort="family">Family</th>
+            <th data-sort="vocab">Vocab</th>
+            <th data-sort="compression">Bytes / token</th>
+            <th data-sort="bpb">BPB</th>
+            <th data-sort="byte_entropy">Byte entropy</th>
+            <th data-sort="h1_total">H1 persistence</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="note">BPB is shown only for BPE tokenizers because the 36 language models were trained on BPE only. Unigram rows have compression and topology measurements but no language-model BPB. Source files: <a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/results/features.csv">features.csv</a> · <a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/results/bpb.csv">bpb.csv</a>.</p>
+  </div>
+</section>
+
+<section id="method">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">07 · How it was done</span>
+      <h2>A protocol frozen before the answer was known.</h2>
+      <p>The confirmatory decision rules, feature sets, and alpha grid were written down before model training. Five execution deviations are documented, none of which changes a decision rule. That is what makes a negative result trustworthy.</p>
+    </div>
+    <div class="two">
+      <div class="reveal">
+        <div class="timeline">
+          <div class="tl"><span class="n">STEP 01</span><h4>Freeze the protocol</h4><p>Hypotheses, primary targets, feature sets, LOCO design, 2,000 permutations, 2,000 cluster-bootstrap resamples, Holm correction.</p></div>
+          <div class="tl"><span class="n">STEP 02</span><h4>Build six corpora</h4><p>English Wikipedia, Python code, and Chinese, Hungarian, Arabic, and Swahili Wikipedia. Roughly 9.5k train / 1.2k validation / 1.2k test documents per corpus, split by hash.</p></div>
+          <div class="tl"><span class="n">STEP 03</span><h4>Train 36 tokenizers</h4><p>BPE and Unigram at 8,192 / 16,384 / 32,768 vocabulary sizes across six corpora. Byte-reversibility audited: BPE 18/18, Unigram 12/18.</p></div>
+          <div class="tl"><span class="n">STEP 04</span><h4>Measure 80 features</h4><p>Eight cheap statistics plus 72 persistence descriptors from a 256-token embedding cloud and a 256-token co-occurrence graph. Ripser and GUDHI agree on all 24 comparisons.</p></div>
+          <div class="tl"><span class="n">STEP 05</span><h4>Train 36 language models</h4><p>Six-layer decoder, d_model 256, 8 heads, context 1,024, 1,500 steps, two seeds per BPE configuration. 13.4M parameters. 0.695 GPU-hours total.</p></div>
+          <div class="tl"><span class="n">STEP 06</span><h4>Predict the held-out language</h4><p>Leave-one-corpus-out ridge regression with nested alpha selection. Permutation tests and cluster bootstrap. Holm correction across H1–H4.</p></div>
+          <div class="tl"><span class="n">STEP 07</span><h4>Stress-test on markets</h4><p>Twelve US equities over ten years of daily bars. The same feature recipe, transferred out of domain. It did not transfer.</p></div>
+        </div>
+      </div>
+      <div class="card reveal" style="align-self:start">
+        <h3 style="font-size:1.1rem;margin-bottom:12px">What “leave-one-corpus-out” means</h3>
+        <p class="small muted" style="margin-top:0">Imagine you have measurements for English, Chinese, Hungarian, Arabic, Swahili, and Python. To test whether a feature generalises, you hide one language entirely, fit the model on the other five, and predict the hidden one. Repeat six times.</p>
+        <p class="small muted">This is much harder than random cross-validation, which leaks corpus-specific quirks into both train and test. A feature that only memorises “which corpus am I?” fails LOCO. Topology features failed LOCO.</p>
+        <h3 style="font-size:1.1rem;margin:22px 0 12px">The eight-feature baseline</h3>
+        <div class="tagline" id="baselineTags"></div>
+        <p class="note">These are deliberately boring. That is the point: the comparison asks whether 72 sophisticated descriptors beat the measurements any competent team already has.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="learn">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">08 · Beginner guide</span>
+      <h2>Start here. Finish as the smartest person in the room.</h2>
+      <p>No prior machine learning required. Each card explains one idea in plain language, then tells you exactly where it appears in this project. Search the glossary or open all cards.</p>
+    </div>
+    <div class="learn-tools reveal">
+      <input type="text" id="learnSearch" placeholder="Search the guide — try “token”, “p-value”, “BPB”…" aria-label="Search the beginner guide">
+      <button class="btn btn-ghost" id="learnToggle" style="padding:9px 14px;font-size:.82rem">Open all</button>
+      <span class="dim small" id="learnCount"></span>
+    </div>
+    <div class="learn-grid" id="learnGrid"></div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="wrap">
+    <div class="sec-head reveal center" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow" style="justify-content:center">09 · Prove it to yourself</span>
+      <h2>Ten questions. From zero to professional.</h2>
+      <p style="margin-left:auto;margin-right:auto">Immediate feedback, no sign-up, no tracking. If you can answer these, you understand more than most people who interview for tokenizer-adjacent roles.</p>
+    </div>
+    <div class="quiz-shell reveal">
+      <div class="quiz-card" id="quizCard">
+        <div class="quiz-top"><span id="qCount">Question 1 of 10</span><span id="qScoreTop">Score 0</span></div>
+        <div class="qprogress"><i id="qBar"></i></div>
+        <div id="qBody">
+          <div class="qtext" id="qText"></div>
+          <div class="qopts" id="qOpts"></div>
+          <div class="qfb" id="qFb"></div>
+          <div class="qnav">
+            <span class="dim tiny" id="qHint">Choose one answer</span>
+            <button class="btn btn-primary" id="qNext" style="display:none">Next question</button>
+          </div>
+        </div>
+        <div class="qscore" id="qResult">
+          <div class="big" id="qFinal">0/10</div>
+          <div class="msg" id="qMsg"></div>
+          <div class="sub" id="qSub"></div>
+          <button class="btn btn-primary" id="qRetry">Retake the quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="business">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">10 · Where this creates value</span>
+      <h2>Buy evidence, not adjectives.</h2>
+      <p>This is not a claim that topology is useless everywhere. It is a claim that it is useless for this decision, on this evidence — and that the measurement harness itself is the asset. Here is who gets value and how.</p>
+    </div>
+    <div class="use-grid">
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
+        <h3>AI platform teams</h3>
+        <p>Replace tokenizer folklore with held-out bytes-per-token curves. Choose vocabulary size per language and measure the downstream BPB instead of guessing from vocabulary count.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></div>
+        <h3>Finance &amp; procurement</h3>
+        <p>Translate a technical choice into tokens per gigabyte and dollars per month. The explorer gives a defensible range and shows exactly which assumption drives the number.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Research &amp; due diligence</h3>
+        <p>A pre-registered negative result with a frozen protocol, permutation tests, bootstrap intervals, library agreement, and a hashed manifest. Cite it instead of re-running the same dead end.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+        <h3>Students &amp; career switchers</h3>
+        <p>The beginner guide and quiz cover tokens, BPE, entropy, persistent homology, LOCO, bootstrap, permutations, and Holm correction — the vocabulary of applied ML research.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+        <h3>Model &amp; data vendors</h3>
+        <p>Use the harness as a neutral third-party reference for tokenizer efficiency claims. Publish measured curves instead of one-number marketing comparisons.</p>
+      </div>
+      <div class="card use reveal">
+        <div class="ico"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Multilingual product teams</h3>
+        <p>See how the same tokenizer budget behaves across scripts. Arabic and Chinese need materially more bytes per token in this benchmark; that is a product-cost issue, not a footnote.</p>
+      </div>
+    </div>
+    <div class="roi">
+      <div class="card reveal">
+        <h3>The business case in one paragraph</h3>
+        <p>A tokenizer with 14% worse compression raises serving cost by roughly 14% on input tokens for identical text. On a $1M annual inference budget, that is $140k. The measurement takes an afternoon with this repository; the alternative is another quarter of speculative feature engineering.</p>
+        <ul>
+          <li>Use the explorer to size the opportunity.</li>
+          <li>Use the curves to choose vocabulary size per corpus.</li>
+          <li>Use the negative result to cut a workstream that does not predict.</li>
+        </ul>
+      </div>
+      <div class="card reveal">
+        <h3>What you can deploy tomorrow</h3>
+        <p>Everything is local and reproducible. No API keys, no proprietary data, no vendor lock-in.</p>
+        <ul>
+          <li><span class="mono small">docker compose run --rm topobpe-cpu all --config configs/default.yaml</span> reproduces the report.</li>
+          <li><span class="mono small">scripts/build_site.py</span> regenerates this page from results.</li>
+          <li>All 332 artifacts are hashed in <a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/artifacts/manifest.json">manifest.json</a>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="evidence" class="tight">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">11 · Evidence trail</span>
+      <h2>Every number has a file behind it.</h2>
+    </div>
+    <div class="ev-grid">
+      <div class="card ev reveal"><div class="n" id="evFiles">332</div><div class="l">hashed artifacts</div><div class="s">SHA-256 manifest</div></div>
+      <div class="card ev reveal"><div class="n" id="evTda">24/24</div><div class="l">TDA library agreement</div><div class="s">bottleneck ≤ 2.4 × 10⁻⁷</div></div>
+      <div class="card ev reveal"><div class="n" id="evAudit">30/36</div><div class="l">byte-reversible tokenizers</div><div class="s">BPE 18/18 · Unigram 12/18</div></div>
+      <div class="card ev reveal"><div class="n">14</div><div class="l">tests passing</div><div class="s">ruff clean · Docker verified</div></div>
+    </div>
+    <div class="two" style="margin-top:20px">
+      <div class="card reveal">
+        <h3 style="font-size:1.05rem;margin-bottom:10px">Reproduce it</h3>
+        <p class="small muted">The repository ships a frozen protocol, a Docker image, a Makefile, and a single-command pipeline. The smoke test runs without a GPU; the full run used one RTX 3090 for 0.695 GPU-hours of language-model training.</p>
+        <div class="tagline">
+          <a class="btn btn-ghost" href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/docs/REPRODUCIBILITY.md" style="padding:9px 14px;font-size:.82rem">Reproducibility guide</a>
+          <a class="btn btn-ghost" href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/results/REPORT.md" style="padding:9px 14px;font-size:.82rem">Generated report</a>
+        </div>
+      </div>
+      <div class="card reveal">
+        <h3 style="font-size:1.05rem;margin-bottom:10px">Audit it</h3>
+        <p class="small muted">The protocol, data card, methodology audit, and execution deviations are public. The analysis code includes a regression test for the permutation slicing bug found during the audit. The result files are regenerated, not hand-edited.</p>
+        <div class="tagline">
+          <a class="btn btn-ghost" href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/docs/PROTOCOL.md" style="padding:9px 14px;font-size:.82rem">Protocol</a>
+          <a class="btn btn-ghost" href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/docs/METHODOLOGY_AUDIT.md" style="padding:9px 14px;font-size:.82rem">Methodology audit</a>
+          <a class="btn btn-ghost" href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/docs/DATA_CARD.md" style="padding:9px 14px;font-size:.82rem">Data card</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">12 · Questions people actually ask</span>
+      <h2>The short answers.</h2>
+    </div>
+    <div class="faq reveal">
+      <details class="faqitem"><summary>So topology is useless for tokenizers?</summary><div class="body">Not in general — useless <em>for this prediction problem, under this protocol</em>. Persistent homology is a legitimate tool for shape analysis. Here, 72 topology descriptors failed to improve out-of-corpus prediction of compression or BPB beyond eight cheap statistics, and they degraded it. One exploratory partial association survived correction, but its interval crosses zero. The correct claim is narrow and defensible.</div></details>
+      <details class="faqitem"><summary>Why is a negative result worth publishing?</summary><div class="body">Because teams are already spending engineering time on sophisticated tokenizer features without a benchmark. A pre-registered negative result with a frozen protocol, 2,000 permutations, and a public artifact trail prevents repeated dead ends. It also gives reviewers a baseline they can trust: 0.974 R² from eight features is a high bar.</div></details>
+      <details class="faqitem"><summary>Does a lower BPB always mean lower cost?</summary><div class="body">No. BPB measures how well a model predicts the next byte; API pricing is per token. The bridge is bytes per token: for the same text, tokens = bytes ÷ bytes-per-token. A tokenizer with better compression can still be more expensive if the provider prices tokens differently, caches aggressively, or uses a different tokenizer than the one you measured. Always map the measurement onto your actual contract.</div></details>
+      <details class="faqitem"><summary>Why were only BPE tokenizers used for language models?</summary><div class="body">The confirmatory question targets the tokenizers used by production decoder-only LLMs, which are overwhelmingly BPE. Training 36 additional Unigram language models would have doubled GPU cost without changing the primary hypothesis. Unigram rows still have compression and the full 80-feature set, which is why the explorer can show them — but their BPB field is honestly empty.</div></details>
+      <details class="faqitem"><summary>What exactly is persistent homology, in one paragraph?</summary><div class="body">Imagine growing a thin shell around every point in a cloud. At first there are many disconnected blobs. As the shell grows, blobs merge, loops appear, and loops close. Persistent homology records the birth and death of those features across every scale. A long-lived loop is a strong topological signal; a short-lived one is noise. The “persistence” numbers in this repo summarise how much structure survives across scales.</div></details>
+      <details class="faqitem"><summary>Can I use this with my own corpus?</summary><div class="body">Yes. Point the config at a text corpus, train tokenizers with the provided CLI, extract features, and run the same analysis. The pipeline is deliberately modular. The smoke profile runs on CPU in minutes with tiny vocabularies; the full profile needs a GPU for the language-model stage. Start with <a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/docs/REPRODUCIBILITY.md">the reproducibility guide</a>.</div></details>
+      <details class="faqitem"><summary>What is the single most important number?</summary><div class="body">0.974. That is the leave-one-corpus-out R² of the eight-feature baseline for held-out compression. Any added feature set has to beat it out of corpus. Remember that number and you can evaluate most tokenizer-feature claims in one sentence.</div></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="7" cy="9" r="3" stroke="#5eead4" stroke-width="1.5"/><circle cx="25" cy="7" r="3" stroke="#22d3ee" stroke-width="1.5"/><circle cx="17" cy="24" r="3" stroke="#a78bfa" stroke-width="1.5"/><path d="M9.6 10.6 22.4 8.4M8.8 11.7l6.4 9.6M23.4 9.8l-4.9 11.7" stroke="#5eead4" stroke-opacity=".55" stroke-width="1.2"/></svg>
+          TOPOBPE
+        </div>
+        <p>Tokenizer intelligence, measured. A pre-registered benchmark, a cost model, and an honest answer about what predicts language-model economics.</p>
+      </div>
+      <div class="foot">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#summary">Executive summary</a></li>
+          <li><a href="#explorer">Cost explorer</a></li>
+          <li><a href="#map3d">3D tokenizer map</a></li>
+          <li><a href="#quiz">Beginner quiz</a></li>
+        </ul>
+      </div>
+      <div class="foot">
+        <h4>Evidence</h4>
+        <ul>
+          <li><a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/results/REPORT.md">Generated report</a></li>
+          <li><a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/results/analysis.json">analysis.json</a></li>
+          <li><a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/artifacts/manifest.json">Artifact manifest</a></li>
+          <li><a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/docs/PROTOCOL.md">Frozen protocol</a></li>
+        </ul>
+      </div>
+      <div class="foot">
+        <h4>Project</h4>
+        <ul>
+          <li><a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/README.md">README</a></li>
+          <li><a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/docs/REPRODUCIBILITY.md">Reproducibility</a></li>
+          <li><a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/docs/DATA_CARD.md">Data card</a></li>
+          <li><a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/LICENSE">MIT license</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 TopoBPE contributors · MIT licensed · Results generated from <span class="mono" id="footDate">the frozen protocol</span></span>
+      <span class="mono">36 tokenizers · 6 languages · 36 LM runs · 332 artifacts</span>
+    </div>
+  </div>
+</footer>
+
+<noscript><div style="padding:20px;background:#3b1d1d;color:#fff">This page reads fine without JavaScript, but the 3D map, charts, explorer, and quiz need it. The underlying results are in <a href="https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main/results/REPORT.md">results/REPORT.md</a>.</div></noscript>
+
+<script>window.DATA = {"meta":{"created_at":"2026-11-05T12:30:03.103101+00:00","git_commit":null,"files":332,"tokenizers":36,"lm_runs":36,"market_series":12,"permutations":2000,"bootstrap":2000,"languages":6,"features":80,"baseline_features":8,"topology_features":72,"pca_explained":[33.5,16.4,14.1]},"corpora":[{"id":"wikitext_en","label":"English Wikipedia","language":"English","script":"Latin","source":"WikiText-103","train_bytes":7064636,"test_bytes":900779,"train_tokens":1719550,"families":["bpe","unigram"]},{"id":"codeparrot_py","label":"Python code","language":"Python","script":"Code","source":"CodeParrot","train_bytes":89529635,"test_bytes":11202477,"train_tokens":25785384,"families":["bpe","unigram"]},{"id":"wikipedia_zh","label":"Chinese Wikipedia","language":"Chinese","script":"Han","source":"Wikimedia","train_bytes":97666245,"test_bytes":10842171,"train_tokens":27976511,"families":["bpe","unigram"]},{"id":"wikipedia_hu","label":"Hungarian Wikipedia","language":"Hungarian","script":"Latin","source":"Wikimedia","train_bytes":72382753,"test_bytes":9838209,"train_tokens":19343608,"families":["bpe","unigram"]},{"id":"wikipedia_ar","label":"Arabic Wikipedia","language":"Arabic","script":"Arabic","source":"Wikimedia","train_bytes":131654139,"test_bytes":16786101,"train_tokens":22681210,"families":["bpe","unigram"]},{"id":"wikipedia_sw","label":"Swahili Wikipedia","language":"Swahili","script":"Latin","source":"Wikimedia","train_bytes":15275642,"test_bytes":1843799,"train_tokens":4093725,"families":["bpe","unigram"]}],"tokenizers":[{"corpus":"codeparrot_py","label":"Python code","family":"bpe","vocab":8192,"actual_vocab":8192.0,"compression":3.4105718964645364,"train_compression":3.47210788096078,"bytes_per_token":3.47210788096078,"bpb":2.01404103036686,"bpb_std":0.0028133885478283,"byte_entropy":4.804652102107702,"token_entropy":9.88628765352757,"h1_total":17.536324113607407,"cooc_h1_total":267.0257360935211},{"corpus":"codeparrot_py","label":"Python code","family":"bpe","vocab":16384,"actual_vocab":16384.0,"compression":3.610458668583224,"train_compression":3.6889779252111374,"bytes_per_token":3.6889779252111374,"bpb":1.952838160967473,"bpb_std":0.0041343607862738,"byte_entropy":4.804652102107702,"token_entropy":10.027270371577334,"h1_total":17.501257926225662,"cooc_h1_total":301.99531388282776},{"corpus":"codeparrot_py","label":"Python code","family":"bpe","vocab":32768,"actual_vocab":32768.0,"compression":3.735708073614525,"train_compression":3.835433198373629,"bytes_per_token":3.835433198373629,"bpb":1.9253004590065723,"bpb_std":0.006147507067138,"byte_entropy":4.804652102107702,"token_entropy":10.102940647887657,"h1_total":16.74877281486988,"cooc_h1_total":315.1842317581177},{"corpus":"codeparrot_py","label":"Python code","family":"unigram","vocab":8192,"actual_vocab":8192.0,"compression":3.0241027082140493,"train_compression":3.080745311479142,"bytes_per_token":3.080745311479142,"bpb":null,"bpb_std":null,"byte_entropy":4.804652102107702,"token_entropy":8.59253862679942,"h1_total":13.59789463877678,"cooc_h1_total":347.7019901275635},{"corpus":"codeparrot_py","label":"Python code","family":"unigram","vocab":16384,"actual_vocab":16384.0,"compression":3.1486143398351896,"train_compression":3.2161435834889924,"bytes_per_token":3.2161435834889924,"bpb":null,"bpb_std":null,"byte_entropy":4.804652102107702,"token_entropy":8.780202919288845,"h1_total":14.689281940460203,"cooc_h1_total":362.2252522110939},{"corpus":"codeparrot_py","label":"Python code","family":"unigram","vocab":32768,"actual_vocab":32768.0,"compression":3.2194347060515724,"train_compression":3.2922460358114574,"bytes_per_token":3.2922460358114574,"bpb":null,"bpb_std":null,"byte_entropy":4.804652102107702,"token_entropy":8.880671859027979,"h1_total":13.132668152451515,"cooc_h1_total":369.2286956906319},{"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"bpe","vocab":8192,"actual_vocab":8192.0,"compression":5.737864963753155,"train_compression":5.804546538742862,"bytes_per_token":5.804546538742862,"bpb":1.5505806616745152,"bpb_std":6.029803057849912e-05,"byte_entropy":4.089158645339174,"token_entropy":10.976954758913395,"h1_total":3.878191135823727,"cooc_h1_total":322.78742361068726},{"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"bpe","vocab":16384,"actual_vocab":16384.0,"compression":6.396739915363554,"train_compression":6.474645759734606,"bytes_per_token":6.474645759734606,"bpb":1.497310938007674,"bpb_std":0.0015958807235227,"byte_entropy":4.089158645339174,"token_entropy":11.55305324512231,"h1_total":4.233480200171471,"cooc_h1_total":289.28111696243286},{"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"bpe","vocab":32768,"actual_vocab":32768.0,"compression":6.993637602929094,"train_compression":7.077012189602274,"bytes_per_token":7.077012189602274,"bpb":1.4502962359015263,"bpb_std":0.0007113741548297,"byte_entropy":4.089158645339174,"token_entropy":12.002941428068674,"h1_total":3.9518540427088737,"cooc_h1_total":263.74372363090515},{"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"unigram","vocab":8192,"actual_vocab":8192.0,"compression":5.274720271194281,"train_compression":5.322414324861144,"bytes_per_token":5.322414324861144,"bpb":null,"bpb_std":null,"byte_entropy":4.089158645339174,"token_entropy":9.955338902018532,"h1_total":5.699121214449406,"cooc_h1_total":308.43514370918274},{"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"unigram","vocab":16384,"actual_vocab":16384.0,"compression":5.72904666520364,"train_compression":5.780193548075517,"bytes_per_token":5.780193548075517,"bpb":null,"bpb_std":null,"byte_entropy":4.089158645339174,"token_entropy":10.40258503834815,"h1_total":3.938897281885147,"cooc_h1_total":295.4187798500061},{"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"unigram","vocab":32768,"actual_vocab":32768.0,"compression":6.074853132822647,"train_compression":6.128513042778796,"bytes_per_token":6.128513042778796,"bpb":null,"bpb_std":null,"byte_entropy":4.089158645339174,"token_entropy":10.733564279231391,"h1_total":3.991449989378452,"cooc_h1_total":305.0979120731354},{"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"bpe","vocab":8192,"actual_vocab":8192.0,"compression":3.751981303799153,"train_compression":3.7419468487988383,"bytes_per_token":3.7419468487988383,"bpb":2.17583912829323,"bpb_std":0.0007763898773681,"byte_entropy":5.12027721428478,"token_entropy":10.748851994980548,"h1_total":13.775684580206873,"cooc_h1_total":255.4727829694748},{"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"bpe","vocab":16384,"actual_vocab":16384.0,"compression":4.199863223461018,"train_compression":4.195308770632333,"bytes_per_token":4.195308770632333,"bpb":2.1070157153641604,"bpb_std":0.0006480029215473,"byte_entropy":5.12027721428478,"token_entropy":11.23478917931009,"h1_total":13.332748755812643,"cooc_h1_total":236.04014492034912},{"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"bpe","vocab":32768,"actual_vocab":32768.0,"compression":4.622280157411653,"train_compression":4.621210382911902,"bytes_per_token":4.621210382911902,"bpb":2.038402924616164,"bpb_std":0.0016270288799471,"byte_entropy":5.12027721428478,"token_entropy":11.622248648189483,"h1_total":10.4622183740139,"cooc_h1_total":233.7764668464661},{"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"unigram","vocab":8192,"actual_vocab":8192.0,"compression":3.564212057055164,"train_compression":3.5624243881050264,"bytes_per_token":3.5624243881050264,"bpb":null,"bpb_std":null,"byte_entropy":5.12027721428478,"token_entropy":9.964268799382443,"h1_total":14.17312689125538,"cooc_h1_total":302.16763174533844},{"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"unigram","vocab":16384,"actual_vocab":16384.0,"compression":3.916546839917833,"train_compression":3.918905933754817,"bytes_per_token":3.918905933754817,"bpb":null,"bpb_std":null,"byte_entropy":5.12027721428478,"token_entropy":10.360114251017029,"h1_total":12.912525162100792,"cooc_h1_total":299.1150542497635},{"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"unigram","vocab":32768,"actual_vocab":32768.0,"compression":4.204025061234397,"train_compression":4.211201159589669,"bytes_per_token":4.211201159589669,"bpb":null,"bpb_std":null,"byte_entropy":5.12027721428478,"token_entropy":10.642267523206977,"h1_total":12.147309452295303,"cooc_h1_total":316.8831443786621},{"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"bpe","vocab":8192,"actual_vocab":8192.0,"compression":3.656227567471098,"train_compression":3.731477321998913,"bytes_per_token":3.731477321998913,"bpb":2.0571266250434608,"bpb_std":0.0023189354952975,"byte_entropy":4.694932785623008,"token_entropy":10.455492070721268,"h1_total":13.74930714070797,"cooc_h1_total":219.72311878204343},{"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"bpe","vocab":16384,"actual_vocab":16384.0,"compression":3.9945383248840938,"train_compression":4.099978366980819,"bytes_per_token":4.099978366980819,"bpb":1.981773376606407,"bpb_std":0.0059571948022761,"byte_entropy":4.694932785623008,"token_entropy":10.785233973545912,"h1_total":11.148612171411514,"cooc_h1_total":228.87386965751648},{"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"bpe","vocab":32768,"actual_vocab":32768.0,"compression":4.268675755955151,"train_compression":4.409229117296441,"bytes_per_token":4.409229117296441,"bpb":1.93109322474311,"bpb_std":0.0020826799293112,"byte_entropy":4.694932785623008,"token_entropy":11.001593780947658,"h1_total":8.666976973414421,"cooc_h1_total":287.92291617393494},{"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"unigram","vocab":8192,"actual_vocab":8192.0,"compression":3.23064860062973,"train_compression":3.2957760821935245,"bytes_per_token":3.2957760821935245,"bpb":null,"bpb_std":null,"byte_entropy":4.694932785623008,"token_entropy":9.635011501659502,"h1_total":11.721849121153356,"cooc_h1_total":252.50035762786865},{"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"unigram","vocab":16384,"actual_vocab":16384.0,"compression":3.4003061346808177,"train_compression":3.4794176326057955,"bytes_per_token":3.4794176326057955,"bpb":null,"bpb_std":null,"byte_entropy":4.694932785623008,"token_entropy":9.885483501961556,"h1_total":12.142065912485124,"cooc_h1_total":272.1352891921997},{"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"unigram","vocab":32768,"actual_vocab":32768.0,"compression":3.516546161607107,"train_compression":3.609575855445339,"bytes_per_token":3.609575855445339,"bpb":null,"bpb_std":null,"byte_entropy":4.694932785623008,"token_entropy":10.051280766152498,"h1_total":10.11987280845642,"cooc_h1_total":293.55538153648376},{"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"bpe","vocab":8192,"actual_vocab":8192.0,"compression":3.4926163993825363,"train_compression":3.4910087608851583,"bytes_per_token":3.4910087608851583,"bpb":2.599788455814929,"bpb_std":0.0036655348047516,"byte_entropy":6.077552468158622,"token_entropy":11.147148275749698,"h1_total":17.86691504716873,"cooc_h1_total":247.16483652591705},{"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"bpe","vocab":16384,"actual_vocab":16384.0,"compression":3.854896818604757,"train_compression":3.869986936954589,"bytes_per_token":3.869986936954589,"bpb":2.520776363104684,"bpb_std":0.0041087063571978,"byte_entropy":6.077552468158622,"token_entropy":11.65812637623598,"h1_total":17.515299022197723,"cooc_h1_total":238.65342497825625},{"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"bpe","vocab":32768,"actual_vocab":32768.0,"compression":4.1983172146103165,"train_compression":4.232261184278749,"bytes_per_token":4.232261184278749,"bpb":2.465945078140817,"bpb_std":0.0008521604985987,"byte_entropy":6.077552468158622,"token_entropy":12.14761303593142,"h1_total":17.6794735789299,"cooc_h1_total":242.4630310535431},{"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"unigram","vocab":8192,"actual_vocab":8192.0,"compression":3.4339475933765957,"train_compression":3.4376719980027155,"bytes_per_token":3.4376719980027155,"bpb":null,"bpb_std":null,"byte_entropy":6.077552468158622,"token_entropy":10.903618578643377,"h1_total":17.85764291882515,"cooc_h1_total":235.6564065217972},{"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"unigram","vocab":16384,"actual_vocab":16384.0,"compression":3.76103185656826,"train_compression":3.782832546113444,"bytes_per_token":3.782832546113444,"bpb":null,"bpb_std":null,"byte_entropy":6.077552468158622,"token_entropy":11.332948359454434,"h1_total":17.529381543397903,"cooc_h1_total":229.57309699058533},{"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"unigram","vocab":32768,"actual_vocab":32768.0,"compression":4.06458052481072,"train_compression":4.100668157077038,"bytes_per_token":4.100668157077038,"bpb":null,"bpb_std":null,"byte_entropy":6.077552468158622,"token_entropy":11.76523628101902,"h1_total":17.804819613695145,"cooc_h1_total":234.3733239173889},{"corpus":"wikitext_en","label":"English Wikipedia","family":"bpe","vocab":8192,"actual_vocab":8192.0,"compression":4.077694383080433,"train_compression":4.108421389316972,"bytes_per_token":4.108421389316972,"bpb":1.967145539525831,"bpb_std":0.0004637520339285,"byte_entropy":4.548466479596622,"token_entropy":10.378447806107904,"h1_total":15.095205470919607,"cooc_h1_total":260.5644669532776},{"corpus":"wikitext_en","label":"English Wikipedia","family":"bpe","vocab":16384,"actual_vocab":16384.0,"compression":4.52907666626443,"train_compression":4.57431195630708,"bytes_per_token":4.57431195630708,"bpb":1.872679871935629,"bpb_std":6.877770073048931e-05,"byte_entropy":4.548466479596622,"token_entropy":10.62760784260854,"h1_total":12.534948602318764,"cooc_h1_total":248.9733121395111},{"corpus":"wikitext_en","label":"English Wikipedia","family":"bpe","vocab":32768,"actual_vocab":32768.0,"compression":4.831960991519196,"train_compression":4.9258374006414725,"bytes_per_token":4.9258374006414725,"bpb":1.811005629617061,"bpb_std":0.002633785775216,"byte_entropy":4.548466479596622,"token_entropy":10.70150161534774,"h1_total":12.719721674919128,"cooc_h1_total":309.92584133148193},{"corpus":"wikitext_en","label":"English Wikipedia","family":"unigram","vocab":8192,"actual_vocab":8192.0,"compression":3.254565096432468,"train_compression":3.2959305640180605,"bytes_per_token":3.2959305640180605,"bpb":null,"bpb_std":null,"byte_entropy":4.548466479596622,"token_entropy":8.918846480693961,"h1_total":12.859592363238336,"cooc_h1_total":313.0192701816559},{"corpus":"wikitext_en","label":"English Wikipedia","family":"unigram","vocab":16384,"actual_vocab":16384.0,"compression":3.4209698797239767,"train_compression":3.47617601920188,"bytes_per_token":3.47617601920188,"bpb":null,"bpb_std":null,"byte_entropy":4.548466479596622,"token_entropy":9.103584665888157,"h1_total":11.171074494719504,"cooc_h1_total":326.9826385974884},{"corpus":"wikitext_en","label":"English Wikipedia","family":"unigram","vocab":32768,"actual_vocab":29379.0,"compression":3.4910126032833646,"train_compression":3.5420639890659147,"bytes_per_token":3.5420639890659147,"bpb":null,"bpb_std":null,"byte_entropy":4.548466479596622,"token_entropy":9.190997687686808,"h1_total":14.367424324154854,"cooc_h1_total":341.3759927749634}],"pca":{"points":[{"x":3.5716187775620907,"y":4.671127506849376,"z":-2.400280531660783,"corpus":"codeparrot_py","label":"Python code","family":"bpe","vocab":8192,"compression":3.4105718964645364,"train_compression":3.47210788096078,"bpb":2.01404103036686,"byte_entropy":4.804652102107702,"bytes_per_token":3.47210788096078,"h1_total":17.536324113607407,"h0_bars":242.0,"cooc_h1_total":267.0257360935211},{"x":2.8318501399540463,"y":5.159138694054877,"z":-1.3590853505602072,"corpus":"codeparrot_py","label":"Python code","family":"bpe","vocab":16384,"compression":3.610458668583224,"train_compression":3.6889779252111374,"bpb":1.952838160967473,"byte_entropy":4.804652102107702,"bytes_per_token":3.6889779252111374,"h1_total":17.501257926225662,"h0_bars":249.0,"cooc_h1_total":301.99531388282776},{"x":3.0283407144369723,"y":5.548057510909395,"z":-1.3494028769896234,"corpus":"codeparrot_py","label":"Python code","family":"bpe","vocab":32768,"compression":3.735708073614525,"train_compression":3.835433198373629,"bpb":1.9253004590065723,"byte_entropy":4.804652102107702,"bytes_per_token":3.835433198373629,"h1_total":16.74877281486988,"h0_bars":247.0,"cooc_h1_total":315.1842317581177},{"x":1.0157802859173863,"y":7.066460965880789,"z":-4.324576646447821,"corpus":"codeparrot_py","label":"Python code","family":"unigram","vocab":8192,"compression":3.0241027082140493,"train_compression":3.080745311479142,"bpb":null,"byte_entropy":4.804652102107702,"bytes_per_token":3.080745311479142,"h1_total":13.59789463877678,"h0_bars":237.0,"cooc_h1_total":347.7019901275635},{"x":1.930563279131258,"y":8.161248312331274,"z":-0.776803926009117,"corpus":"codeparrot_py","label":"Python code","family":"unigram","vocab":16384,"compression":3.1486143398351896,"train_compression":3.2161435834889924,"bpb":null,"byte_entropy":4.804652102107702,"bytes_per_token":3.2161435834889924,"h1_total":14.689281940460203,"h0_bars":239.0,"cooc_h1_total":362.2252522110939},{"x":0.9250735214647887,"y":6.563810075432124,"z":-0.6697673902096155,"corpus":"codeparrot_py","label":"Python code","family":"unigram","vocab":32768,"compression":3.2194347060515724,"train_compression":3.2922460358114574,"bpb":null,"byte_entropy":4.804652102107702,"bytes_per_token":3.2922460358114574,"h1_total":13.132668152451515,"h0_bars":242.0,"cooc_h1_total":369.2286956906319},{"x":-11.0866323428562,"y":-1.2446168649499727,"z":-1.5103800739924875,"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"bpe","vocab":8192,"compression":5.737864963753155,"train_compression":5.804546538742862,"bpb":1.5505806616745152,"byte_entropy":4.089158645339174,"bytes_per_token":5.804546538742862,"h1_total":3.878191135823727,"h0_bars":251.0,"cooc_h1_total":322.78742361068726},{"x":-11.464082821162563,"y":-1.199532183002501,"z":-0.2567639612754325,"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"bpe","vocab":16384,"compression":6.396739915363554,"train_compression":6.474645759734606,"bpb":1.4973109380076741,"byte_entropy":4.089158645339174,"bytes_per_token":6.474645759734606,"h1_total":4.233480200171471,"h0_bars":255.0,"cooc_h1_total":289.28111696243286},{"x":-9.212965034708112,"y":-0.9345902382624761,"z":2.4771167207159075,"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"bpe","vocab":32768,"compression":6.993637602929094,"train_compression":7.077012189602274,"bpb":1.4502962359015263,"byte_entropy":4.089158645339174,"bytes_per_token":7.077012189602274,"h1_total":3.9518540427088737,"h0_bars":256.0,"cooc_h1_total":263.74372363090515},{"x":-7.71353023418902,"y":0.2182757123186497,"z":1.4084794521589672,"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"unigram","vocab":8192,"compression":5.274720271194281,"train_compression":5.322414324861144,"bpb":null,"byte_entropy":4.089158645339174,"bytes_per_token":5.322414324861144,"h1_total":5.699121214449406,"h0_bars":253.0,"cooc_h1_total":308.43514370918274},{"x":-8.982603407307478,"y":-0.19444132314063137,"z":2.003705348803762,"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"unigram","vocab":16384,"compression":5.72904666520364,"train_compression":5.780193548075517,"bpb":null,"byte_entropy":4.089158645339174,"bytes_per_token":5.780193548075517,"h1_total":3.938897281885147,"h0_bars":255.0,"cooc_h1_total":295.4187798500061},{"x":-9.451388104284336,"y":0.23009486262943457,"z":1.0701130160776484,"corpus":"wikipedia_ar","label":"Arabic Wikipedia","family":"unigram","vocab":32768,"compression":6.074853132822647,"train_compression":6.128513042778796,"bpb":null,"byte_entropy":4.089158645339174,"bytes_per_token":6.128513042778796,"h1_total":3.991449989378452,"h0_bars":256.0,"cooc_h1_total":305.0979120731354},{"x":0.10155190223747572,"y":-2.9997346788422012,"z":-4.526169496808434,"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"bpe","vocab":8192,"compression":3.751981303799153,"train_compression":3.7419468487988383,"bpb":2.17583912829323,"byte_entropy":5.12027721428478,"bytes_per_token":3.7419468487988383,"h1_total":13.775684580206873,"h0_bars":251.0,"cooc_h1_total":255.4727829694748},{"x":0.08818655442086136,"y":-2.6412870361206693,"z":-3.9338303919227964,"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"bpe","vocab":16384,"compression":4.199863223461018,"train_compression":4.195308770632333,"bpb":2.1070157153641604,"byte_entropy":5.12027721428478,"bytes_per_token":4.195308770632333,"h1_total":13.332748755812643,"h0_bars":251.0,"cooc_h1_total":236.04014492034912},{"x":-0.37269642888586846,"y":-3.377432830199382,"z":-2.872162058819586,"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"bpe","vocab":32768,"compression":4.622280157411653,"train_compression":4.621210382911902,"bpb":2.0384029246161637,"byte_entropy":5.12027721428478,"bytes_per_token":4.621210382911902,"h1_total":10.4622183740139,"h0_bars":255.0,"cooc_h1_total":233.7764668464661},{"x":0.3856835078582736,"y":-1.462920013208915,"z":-4.745067286762046,"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"unigram","vocab":8192,"compression":3.564212057055164,"train_compression":3.5624243881050264,"bpb":null,"byte_entropy":5.12027721428478,"bytes_per_token":3.5624243881050264,"h1_total":14.17312689125538,"h0_bars":251.0,"cooc_h1_total":302.16763174533844},{"x":0.03204050561141334,"y":-1.3061627741388282,"z":-5.940112942780711,"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"unigram","vocab":16384,"compression":3.916546839917833,"train_compression":3.918905933754817,"bpb":null,"byte_entropy":5.12027721428478,"bytes_per_token":3.918905933754817,"h1_total":12.912525162100792,"h0_bars":248.0,"cooc_h1_total":299.1150542497635},{"x":0.4177617263366822,"y":-0.4581672107659676,"z":0.07096110728729027,"corpus":"wikipedia_hu","label":"Hungarian Wikipedia","family":"unigram","vocab":32768,"compression":4.204025061234397,"train_compression":4.211201159589669,"bpb":null,"byte_entropy":5.12027721428478,"bytes_per_token":4.211201159589669,"h1_total":12.147309452295303,"h0_bars":246.0,"cooc_h1_total":316.8831443786621},{"x":3.2211788689110916,"y":0.9750755314405686,"z":6.157349214547578,"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"bpe","vocab":8192,"compression":3.656227567471098,"train_compression":3.731477321998913,"bpb":2.0571266250434608,"byte_entropy":4.694932785623008,"bytes_per_token":3.731477321998913,"h1_total":13.74930714070797,"h0_bars":252.0,"cooc_h1_total":219.72311878204343},{"x":1.7596739124539014,"y":0.3933752882369614,"z":5.756526043323322,"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"bpe","vocab":16384,"compression":3.9945383248840938,"train_compression":4.099978366980819,"bpb":1.981773376606407,"byte_entropy":4.694932785623008,"bytes_per_token":4.099978366980819,"h1_total":11.148612171411514,"h0_bars":253.0,"cooc_h1_total":228.87386965751648},{"x":0.0908412468622768,"y":0.09220222228289708,"z":5.245510562209933,"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"bpe","vocab":32768,"compression":4.268675755955151,"train_compression":4.409229117296441,"bpb":1.93109322474311,"byte_entropy":4.694932785623008,"bytes_per_token":4.409229117296441,"h1_total":8.666976973414421,"h0_bars":255.0,"cooc_h1_total":287.92291617393494},{"x":1.548528744166761,"y":2.752147759563185,"z":3.603201352038189,"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"unigram","vocab":8192,"compression":3.23064860062973,"train_compression":3.2957760821935245,"bpb":null,"byte_entropy":4.694932785623008,"bytes_per_token":3.2957760821935245,"h1_total":11.721849121153356,"h0_bars":242.0,"cooc_h1_total":252.50035762786865},{"x":1.9806615613190297,"y":1.38888688722793,"z":4.081644282127901,"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"unigram","vocab":16384,"compression":3.4003061346808177,"train_compression":3.4794176326057955,"bpb":null,"byte_entropy":4.694932785623008,"bytes_per_token":3.4794176326057955,"h1_total":12.142065912485124,"h0_bars":251.0,"cooc_h1_total":272.1352891921997},{"x":0.6720835068233705,"y":1.239586700873772,"z":4.149283860862092,"corpus":"wikipedia_sw","label":"Swahili Wikipedia","family":"unigram","vocab":32768,"compression":3.516546161607107,"train_compression":3.609575855445339,"bpb":null,"byte_entropy":4.694932785623008,"bytes_per_token":3.609575855445339,"h1_total":10.11987280845642,"h0_bars":254.0,"cooc_h1_total":293.55538153648376},{"x":5.109288734633693,"y":-3.0755430019735788,"z":-0.5273655604166497,"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"bpe","vocab":8192,"compression":3.4926163993825363,"train_compression":3.4910087608851583,"bpb":2.599788455814929,"byte_entropy":6.077552468158622,"bytes_per_token":3.4910087608851583,"h1_total":17.86691504716873,"h0_bars":252.0,"cooc_h1_total":247.16483652591705},{"x":4.645659898384833,"y":-3.475842262863815,"z":0.030053006390610537,"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"bpe","vocab":16384,"compression":3.854896818604757,"train_compression":3.869986936954589,"bpb":2.5207763631046833,"byte_entropy":6.077552468158622,"bytes_per_token":3.869986936954589,"h1_total":17.515299022197723,"h0_bars":254.0,"cooc_h1_total":238.65342497825625},{"x":5.537157301885883,"y":-4.952203822465355,"z":-1.89198790502679,"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"bpe","vocab":32768,"compression":4.1983172146103165,"train_compression":4.232261184278749,"bpb":2.465945078140817,"byte_entropy":6.077552468158622,"bytes_per_token":4.232261184278749,"h1_total":17.6794735789299,"h0_bars":253.0,"cooc_h1_total":242.4630310535431},{"x":4.841049335981407,"y":-2.516175932466222,"z":-0.36233431559752943,"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"unigram","vocab":8192,"compression":3.4339475933765957,"train_compression":3.4376719980027155,"bpb":null,"byte_entropy":6.077552468158622,"bytes_per_token":3.4376719980027155,"h1_total":17.85764291882515,"h0_bars":252.0,"cooc_h1_total":235.6564065217972},{"x":4.994362246186883,"y":-3.9338204081700687,"z":1.7177369600289296,"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"unigram","vocab":16384,"compression":3.76103185656826,"train_compression":3.782832546113444,"bpb":null,"byte_entropy":6.077552468158622,"bytes_per_token":3.782832546113444,"h1_total":17.529381543397903,"h0_bars":252.0,"cooc_h1_total":229.57309699058533},{"x":6.446065094392344,"y":-4.118443180132239,"z":4.45183444426379,"corpus":"wikipedia_zh","label":"Chinese Wikipedia","family":"unigram","vocab":32768,"compression":4.06458052481072,"train_compression":4.100668157077038,"bpb":null,"byte_entropy":6.077552468158622,"bytes_per_token":4.100668157077038,"h1_total":17.804819613695145,"h0_bars":251.0,"cooc_h1_total":234.3733239173889},{"x":0.7344055629001085,"y":-2.47609673041856,"z":-0.14049860920759752,"corpus":"wikitext_en","label":"English Wikipedia","family":"bpe","vocab":8192,"compression":4.077694383080433,"train_compression":4.108421389316972,"bpb":1.967145539525831,"byte_entropy":4.548466479596622,"bytes_per_token":4.108421389316972,"h1_total":15.095205470919607,"h0_bars":255.0,"cooc_h1_total":260.5644669532776},{"x":0.5984751621223501,"y":-2.662972819315635,"z":0.9970880691838828,"corpus":"wikitext_en","label":"English Wikipedia","family":"bpe","vocab":16384,"compression":4.52907666626443,"train_compression":4.57431195630708,"bpb":1.872679871935629,"byte_entropy":4.548466479596622,"bytes_per_token":4.57431195630708,"h1_total":12.534948602318764,"h0_bars":256.0,"cooc_h1_total":248.9733121395111},{"x":0.2648999112960305,"y":-1.7881613227232953,"z":-1.9821629393233595,"corpus":"wikitext_en","label":"English Wikipedia","family":"bpe","vocab":32768,"compression":4.831960991519196,"train_compression":4.9258374006414725,"bpb":1.811005629617061,"byte_entropy":4.548466479596622,"bytes_per_token":4.9258374006414725,"h1_total":12.719721674919128,"h0_bars":256.0,"cooc_h1_total":309.92584133148193},{"x":0.7861139135767907,"y":-0.4702537376931619,"z":-3.311659869370576,"corpus":"wikitext_en","label":"English Wikipedia","family":"unigram","vocab":8192,"compression":3.254565096432468,"train_compression":3.2959305640180605,"bpb":null,"byte_entropy":4.548466479596622,"bytes_per_token":3.2959305640180605,"h1_total":12.859592363238336,"h0_bars":247.0,"cooc_h1_total":313.0192701816559},{"x":-0.43613479594380755,"y":1.132595824873584,"z":-0.31516690103596456,"corpus":"wikitext_en","label":"English Wikipedia","family":"unigram","vocab":16384,"compression":3.4209698797239767,"train_compression":3.47617601920188,"bpb":null,"byte_entropy":4.548466479596622,"bytes_per_token":3.47617601920188,"h1_total":11.171074494719504,"h0_bars":246.0,"cooc_h1_total":326.9826385974884},{"x":1.1611372525093937,"y":-0.30368548405134554,"z":-0.025024405802678815,"corpus":"wikitext_en","label":"English Wikipedia","family":"unigram","vocab":32768,"compression":3.4910126032833646,"train_compression":3.5420639890659147,"bpb":null,"byte_entropy":4.548466479596622,"bytes_per_token":3.5420639890659147,"h1_total":14.367424324154854,"h0_bars":252.0,"cooc_h1_total":341.3759927749634}]},"h1":{"metrics":{"baseline":{"r2":0.9739556542766997,"mae":0.13495281430154688,"rmse":0.1561692423498075,"n":36.0},"full":{"r2":0.8430030259453236,"mae":0.3066023060593528,"rmse":0.3834285246055714,"n":36.0},"topology":{"r2":-0.7669042796305598,"mae":0.9246803559380522,"rmse":1.2863089422450116,"n":36.0}},"bootstrap":{"baseline":{"ci_high":0.9901082956271102,"ci_low":0.7866586929265722,"iterations":2000,"mean":0.9411159734529285},"delta_full_minus_baseline":{"ci_high":-0.0241165419990155,"ci_low":-0.8944348926510577,"iterations":2000,"mean":-0.21784855860205074,"p_bootstrap":0.9895052473763118},"full":{"ci_high":0.8993907381868695,"ci_low":0.003315847009059736,"iterations":2000,"mean":0.7232674148508778},"topology":{"ci_high":-0.21378170289655873,"ci_low":-6.147818296734683,"iterations":2000,"mean":-1.4901647484324876}},"permutation":{"baseline_alphas":{"codeparrot_py":0.01,"wikipedia_ar":0.01,"wikipedia_hu":0.01,"wikipedia_sw":0.1,"wikipedia_zh":0.01,"wikitext_en":0.1},"full_alphas":{"codeparrot_py":0.1,"wikipedia_ar":1.0,"wikipedia_hu":1.0,"wikipedia_sw":100.0,"wikipedia_zh":0.01,"wikitext_en":1.0},"iterations":2000,"null_95":-0.0025785110903590322,"null_mean":-0.042922054570065565,"observed_delta_r2":-0.1309526283313761,"p_value":0.9575212393803099},"per_group":[{"baseline":{"mae":0.27278618677679267,"n":6.0,"r2":-0.16844571955241472,"rmse":0.2733507827957897},"full":{"mae":0.19188616034494185,"n":6.0,"r2":0.13760999160091847,"rmse":0.23483774909128063},"group":"codeparrot_py","n":6},{"baseline":{"mae":0.1434528665430137,"n":6.0,"r2":0.9297961785790202,"rmse":0.1455814315950356},"full":{"mae":0.6331466827175615,"n":6.0,"r2":-0.37467557923301165,"rmse":0.6442074132054969},"group":"wikipedia_ar","n":6},{"baseline":{"mae":0.054545706072261245,"n":6.0,"r2":0.97222527845156,"rmse":0.05757209257890027},"full":{"mae":0.10768174356098707,"n":6.0,"r2":0.8632662933178339,"rmse":0.12773942350291315},"group":"wikipedia_hu","n":6},{"baseline":{"mae":0.08683351160741852,"n":6.0,"r2":0.9388402133349927,"rmse":0.08760282950439761},"full":{"mae":0.5064541726857843,"n":6.0,"r2":-1.3449183070850474,"rmse":0.5424366328845318},"group":"wikipedia_sw","n":6},{"baseline":{"mae":0.12310470268541056,"n":6.0,"r2":0.8022697913407344,"rmse":0.12334591041352339},"full":{"mae":0.2656481666426253,"n":6.0,"r2":-0.026825653569468644,"rmse":0.28108430578829013},"group":"wikipedia_zh","n":6},{"baseline":{"mae":0.12899391212438438,"n":6.0,"r2":0.9308845526027587,"rmse":0.1556129000421093},"full":{"mae":0.13479691040421696,"n":6.0,"r2":0.9360962629823478,"rmse":0.1496308567361852},"group":"wikitext_en","n":6}]},"h2":{"metrics":{"baseline":{"r2":0.8865783370204509,"mae":0.09052489933590287,"rmse":0.10403772159576492,"n":18.0},"full":{"r2":0.5546547253504917,"mae":0.16639946969737437,"rmse":0.20615375593689445,"n":18.0},"topology":{"r2":0.11762756825874099,"mae":0.22737577493647665,"rmse":0.2901808795893765,"n":18.0}},"bootstrap":{"baseline":{"ci_high":0.9415789634345292,"ci_low":-0.39108042024273226,"iterations":2000,"mean":0.7577240797840311},"delta_full_minus_baseline":{"ci_high":-0.06758455249180673,"ci_low":-5.619421174230109,"iterations":2000,"mean":-0.8163263740893879,"p_bootstrap":0.9955022488755623},"full":{"ci_high":0.8657242228252173,"ci_low":-6.010501594472841,"iterations":2000,"mean":-0.058602294305356684},"topology":{"ci_high":0.787077871518411,"ci_low":-14.811119085014239,"iterations":2000,"mean":-1.21500081869804}},"permutation":{"baseline_alphas":{"codeparrot_py":1.0,"wikipedia_ar":0.1,"wikipedia_hu":0.1,"wikipedia_sw":0.01,"wikipedia_zh":0.1,"wikitext_en":0.01},"full_alphas":{"codeparrot_py":10.0,"wikipedia_ar":100.0,"wikipedia_hu":100.0,"wikipedia_sw":100.0,"wikipedia_zh":0.01,"wikitext_en":0.01},"iterations":2000,"null_95":-0.11141769701176445,"null_mean":-0.3289247664665447,"observed_delta_r2":-0.3319236116699592,"p_value":0.5932033983008496},"per_group":[{"baseline":{"mae":0.140078250183165,"n":3.0,"r2":-13.54868850583231,"rmse":0.1414599635159222},"full":{"mae":0.33182779588048855,"n":3.0,"r2":-80.0474599162731,"rmse":0.33388070597460434},"group":"codeparrot_py","n":3},{"baseline":{"mae":0.06716283955283082,"n":3.0,"r2":-2.543609944117904,"rmse":0.07711915006396645},"full":{"mae":0.038736550450781726,"n":3.0,"r2":-0.31129906140336927,"rmse":0.046912670284701904},"group":"wikipedia_ar","n":3},{"baseline":{"mae":0.04280083900214556,"n":3.0,"r2":0.3891773836684731,"rmse":0.04385137843382945},"full":{"mae":0.03764050420480558,"n":3.0,"r2":0.18641192410038,"rmse":0.05060902640484472},"group":"wikipedia_hu","n":3},{"baseline":{"mae":0.05863407788555156,"n":3.0,"r2":-0.3174016616510493,"rmse":0.05943271622230768},"full":{"mae":0.1108313400272749,"n":3.0,"r2":-3.783292409281853,"rmse":0.11324784354165379},"group":"wikipedia_sw","n":3},{"baseline":{"mae":0.15594583807384277,"n":3.0,"r2":-7.231278862966278,"rmse":0.15761759987240195},"full":{"mae":0.2837251570601486,"n":3.0,"r2":-27.60473636761911,"rmse":0.29382586756864326},"group":"wikipedia_zh","n":3},{"baseline":{"mae":0.07852755131788151,"n":3.0,"r2":-1.1067832630699899,"rmse":0.09320033029377012},"full":{"mae":0.19563547056074673,"n":3.0,"r2":-8.604404124208527,"rmse":0.19899526123263192},"group":"wikitext_en","n":3}]},"h3":{"control":"test_compression","target":"bpb_mean","variables":[{"ci_high":0.9239979398883547,"ci_low":-0.4805993428543575,"iterations":1962,"p_value":0.09045477261369315,"rho":0.4361952788972082,"variable":"vocab_h1_total_persistence"},{"ci_high":0.8376441867338744,"ci_low":-0.46555909750674623,"iterations":1962,"p_value":0.25337331334332835,"rho":0.2921340071960174,"variable":"vocab_h1_persistence_entropy"},{"ci_high":0.11255262870059655,"ci_low":-0.8766015577304597,"iterations":1962,"p_value":0.0014992503748125937,"rho":-0.7176076754662922,"variable":"cooc_h1_total_persistence"},{"ci_high":0.6971233100406504,"ci_low":-0.6650036043230654,"iterations":1962,"p_value":0.48125937031484256,"rho":0.18202775410921196,"variable":"cooc_h1_persistence_entropy"}]},"holm":{"adjusted_p":[1.0,1.0,0.0239880059970015,1.0],"hypotheses":["H1","H2","H3","H4"],"raw_p":[0.9575212393803099,0.5932033983008496,0.005997001499250375,1.0]},"h4":{"compression":{"delta_full_minus_baseline":{"ci_high":-20.370666030055656,"ci_low":-92.96540131711002,"p_positive":0.999000499750125,"value":-44.2834682610703},"market_rows":24,"models":{"baseline":{"alpha":0.01,"bootstrap":{"ci_high":-14.959694507095607,"ci_low":-67.44684618312661,"mean":-32.566083356518526,"p_positive":1.0},"metrics":{"mae":0.5712881258155345,"n":24.0,"r2":-26.017811762828057,"rmse":0.5903984737407794}},"full":{"alpha":0.01,"bootstrap":{"ci_high":-45.41118455815329,"ci_low":-139.77401717497443,"mean":-83.10546282752897,"p_positive":1.0},"metrics":{"mae":0.8774351622237306,"n":24.0,"r2":-70.30128002389836,"rmse":0.9591108490796568}},"topology":{"alpha":100.0,"bootstrap":{"ci_high":-528.7142216190958,"ci_low":-1826.547666528992,"mean":-983.2835687210393,"p_positive":1.0},"metrics":{"mae":3.20809784236817,"n":24.0,"r2":-803.4092208061365,"rmse":3.221503892423171}}},"public_rows":18,"status":"ok"},"bpb":{"delta_full_minus_baseline":{"ci_high":-4.960171285311709,"ci_low":-66.4587172075538,"p_positive":1.0,"value":-8.42026278584639},"market_rows":24,"models":{"baseline":{"alpha":0.1,"bootstrap":{"ci_high":-5.22005353642658,"ci_low":-86.52658968356026,"mean":-20.39982524686674,"p_positive":1.0},"metrics":{"mae":1.1378131598252346,"n":24.0,"r2":-9.888764071673986,"rmse":1.1860980177443823}},"full":{"alpha":100.0,"bootstrap":{"ci_high":-10.196063593212626,"ci_low":-151.39607592598853,"mean":-37.0810540439087,"p_positive":1.0},"metrics":{"mae":1.5267663571273768,"n":24.0,"r2":-18.309026857520376,"rmse":1.5794703562505943}},"topology":{"alpha":100.0,"bootstrap":{"ci_high":-9.503522689796508,"ci_low":-138.75309990422153,"mean":-33.960284890795236,"p_positive":1.0},"metrics":{"mae":1.463060870995874,"n":24.0,"r2":-16.92272382209267,"rmse":1.5217148977234534}}},"public_rows":18,"status":"ok"},"within":{"corpora":12,"rows":24,"status":"ok","targets":{"bpb":{"bootstrap":{"baseline":{"ci_high":-0.15890214796489113,"ci_low":-5.19298555570173,"iterations":2000,"mean":-1.160641111875945},"delta_full_minus_baseline":{"ci_high":2.165438941021215,"ci_low":-2.30060695382604,"iterations":2000,"mean":0.02830130874886192,"p_bootstrap":0.44677661169415295},"full":{"ci_high":-0.16462902870852467,"ci_low":-5.035419993759631,"iterations":2000,"mean":-1.132339803127083},"topology":{"ci_high":-0.17397710076518974,"ci_low":-9.173443252355735,"iterations":2000,"mean":-1.7689258364808933}},"metrics":{"baseline":{"mae":0.31501089979870023,"n":24.0,"r2":-0.5839564051159944,"rmse":0.452379481328346},"full":{"mae":0.3208558810865256,"n":24.0,"r2":-0.5454665777979377,"rmse":0.4468493132668754},"topology":{"mae":0.34215718223798824,"n":24.0,"r2":-0.8174872451938067,"rmse":0.48458165847676316}},"selected_alphas":{"baseline":{"market_aapl_10y":100.0,"market_cat_10y":100.0,"market_dis_10y":100.0,"market_gs_10y":0.1,"market_jnj_10y":100.0,"market_jpm_10y":100.0,"market_ko_10y":100.0,"market_msft_10y":100.0,"market_nvda_10y":100.0,"market_tsla_10y":100.0,"market_wmt_10y":100.0,"market_xom_10y":100.0},"full":{"market_aapl_10y":100.0,"market_cat_10y":100.0,"market_dis_10y":100.0,"market_gs_10y":100.0,"market_jnj_10y":100.0,"market_jpm_10y":100.0,"market_ko_10y":100.0,"market_msft_10y":100.0,"market_nvda_10y":100.0,"market_tsla_10y":100.0,"market_wmt_10y":100.0,"market_xom_10y":100.0},"topology":{"market_aapl_10y":100.0,"market_cat_10y":100.0,"market_dis_10y":100.0,"market_gs_10y":100.0,"market_jnj_10y":100.0,"market_jpm_10y":100.0,"market_ko_10y":100.0,"market_msft_10y":100.0,"market_nvda_10y":10.0,"market_tsla_10y":100.0,"market_wmt_10y":100.0,"market_xom_10y":100.0}},"target":"bpb"},"compression":{"bootstrap":{"baseline":{"ci_high":0.12221316862276944,"ci_low":-1.3783670100821168,"iterations":2000,"mean":-0.45187375746665753},"delta_full_minus_baseline":{"ci_high":0.5337420363449867,"ci_low":-0.3036149857382053,"iterations":2000,"mean":0.1093523672350934,"p_bootstrap":0.2773613193403298},"full":{"ci_high":0.11712381402742172,"ci_low":-1.2839406851224047,"iterations":2000,"mean":-0.3425213902315642},"topology":{"ci_high":0.08239255185076425,"ci_low":-0.7015560161465658,"iterations":2000,"mean":-0.2060619372978986}},"metrics":{"baseline":{"mae":0.10198657282355705,"n":24.0,"r2":-0.33326386366053207,"rmse":0.13115298953958238},"full":{"mae":0.099586497378524,"n":24.0,"r2":-0.21367433763008137,"rmse":0.12513281796731782},"topology":{"mae":0.09669517288033909,"n":24.0,"r2":-0.10202190294641245,"rmse":0.11923815664943906}},"selected_alphas":{"baseline":{"market_aapl_10y":100.0,"market_cat_10y":100.0,"market_dis_10y":100.0,"market_gs_10y":0.1,"market_jnj_10y":100.0,"market_jpm_10y":100.0,"market_ko_10y":100.0,"market_msft_10y":100.0,"market_nvda_10y":100.0,"market_tsla_10y":100.0,"market_wmt_10y":100.0,"market_xom_10y":100.0},"full":{"market_aapl_10y":100.0,"market_cat_10y":100.0,"market_dis_10y":100.0,"market_gs_10y":10.0,"market_jnj_10y":100.0,"market_jpm_10y":100.0,"market_ko_10y":100.0,"market_msft_10y":100.0,"market_nvda_10y":100.0,"market_tsla_10y":100.0,"market_wmt_10y":100.0,"market_xom_10y":100.0},"topology":{"market_aapl_10y":100.0,"market_cat_10y":100.0,"market_dis_10y":100.0,"market_gs_10y":100.0,"market_jnj_10y":100.0,"market_jpm_10y":100.0,"market_ko_10y":100.0,"market_msft_10y":100.0,"market_nvda_10y":100.0,"market_tsla_10y":100.0,"market_wmt_10y":100.0,"market_xom_10y":100.0}},"target":"test_compression"}}}},"importance":{"bpb":{"alpha":100.0,"coefficients":[{"coefficient":0.015619079565569035,"feature":"byte_entropy"},{"coefficient":0.01276345374930902,"feature":"vocab_h0_total_persistence"},{"coefficient":0.012663325318043529,"feature":"vocab_h0_count_0p4"},{"coefficient":0.012663325318043529,"feature":"vocab_h0_betti_at_0p4"},{"coefficient":0.012590677493336422,"feature":"vocab_h0_mean_persistence"},{"coefficient":0.012557776527799288,"feature":"vocab_mean_nn_distance"},{"coefficient":0.012406674745559681,"feature":"gzip_ratio"},{"coefficient":0.01175460250394679,"feature":"conditional_entropy"},{"coefficient":0.01102350372665966,"feature":"vocab_h0_betti_area"},{"coefficient":0.010210356640886565,"feature":"vocab_h1_count_0p05"},{"coefficient":0.00962654200563486,"feature":"vocab_h0_count_0p2"},{"coefficient":0.00962654200563486,"feature":"vocab_h0_betti_at_0p2"},{"coefficient":-0.00890778725296329,"feature":"mean_token_bytes"},{"coefficient":-0.00890778725296329,"feature":"train_compression"},{"coefficient":0.008900334772165803,"feature":"vocab_h1_total_persistence"},{"coefficient":0.008890695045840766,"feature":"vocab_h1_count_0p1"},{"coefficient":0.008485769941862967,"feature":"vocab_h1_mean_persistence"},{"coefficient":0.007370594499104488,"feature":"vocab_h0_count_0p1"},{"coefficient":0.007370594499104488,"feature":"vocab_h0_betti_at_0p1"},{"coefficient":0.00727889578725396,"feature":"vocab_h1_betti_area"},{"coefficient":0.007127250240356025,"feature":"vocab_h1_betti_at_0p4"},{"coefficient":0.006777369446684518,"feature":"vocab_h0_persistence_entropy"},{"coefficient":-0.006698738118621737,"feature":"vocab_h1_betti_at_0p1"},{"coefficient":0.006341043563831045,"feature":"vocab_h1_std_persistence"},{"coefficient":-0.006258618590931374,"feature":"cooc_h1_total_persistence"},{"coefficient":0.006196070078874752,"feature":"vocab_h1_persistence_entropy"},{"coefficient":-0.006056729925760727,"feature":"vocab_h1_betti_at_0p2"},{"coefficient":0.005634922126300993,"feature":"vocab_h0_count_0p05"},{"coefficient":0.005634922126300993,"feature":"vocab_h0_betti_at_0p05"},{"coefficient":-0.005597826741890934,"feature":"type_token_ratio"},{"coefficient":-0.005210332008888571,"feature":"cooc_h1_count_0p4"},{"coefficient":0.005104878172288836,"feature":"token_entropy"},{"coefficient":-0.005071333576041393,"feature":"cooc_h1_count_0p2"},{"coefficient":0.004879417552300449,"feature":"vocab_h1_num_bars"},{"coefficient":0.004879417552300449,"feature":"vocab_h1_num_finite_bars"},{"coefficient":-0.004103640540591071,"feature":"cooc_h0_count_0p05"},{"coefficient":-0.004103640540591071,"feature":"cooc_h0_betti_at_0p05"},{"coefficient":-0.0040405343615914635,"feature":"actual_vocab_size"},{"coefficient":-0.004016021150023991,"feature":"cooc_h0_count_0p1"},{"coefficient":-0.004016021150023991,"feature":"cooc_h0_betti_at_0p1"},{"coefficient":0.00373910233355387,"feature":"vocab_h0_std_persistence"},{"coefficient":-0.003372066489359171,"feature":"cooc_h1_std_persistence"},{"coefficient":-0.003169720419286293,"feature":"cooc_h1_mean_persistence"},{"coefficient":-0.0030421338963080567,"feature":"cooc_h1_count_0p1"},{"coefficient":-0.0026964253905948205,"feature":"cooc_h1_max_persistence"},{"coefficient":-0.0024787116616306996,"feature":"cooc_h1_count_0p05"},{"coefficient":0.002452463510917389,"feature":"cooc_h0_persistence_entropy"},{"coefficient":-0.0021496060804275467,"feature":"cooc_h1_num_bars"},{"coefficient":-0.0021496060804275467,"feature":"cooc_h1_num_finite_bars"},{"coefficient":0.0016823851386170722,"feature":"cooc_h0_betti_area"},{"coefficient":0.0016532344453403854,"feature":"cooc_h0_max_persistence"},{"coefficient":-0.0016119033540694413,"feature":"cooc_h1_persistence_entropy"},{"coefficient":0.001418377501099459,"feature":"vocab_h0_max_persistence"},{"coefficient":0.0013514922261325722,"feature":"cooc_mean_nn_distance"},{"coefficient":0.0013090293281961829,"feature":"vocab_h1_max_persistence"},{"coefficient":0.0012414912073138587,"feature":"cooc_h0_total_persistence"},{"coefficient":0.0012414912073138574,"feature":"cooc_h0_mean_persistence"},{"coefficient":0.0011368861425714444,"feature":"cooc_h0_count_0p4"},{"coefficient":0.0011368861425714444,"feature":"cooc_h0_betti_at_0p4"},{"coefficient":-0.0009319166524253111,"feature":"vocab_h0_num_bars"},{"coefficient":-0.0009319166524253111,"feature":"vocab_h0_num_finite_bars"},{"coefficient":-0.0007273954941337246,"feature":"vocab_h1_count_0p4"},{"coefficient":-0.0003532090868827347,"feature":"cooc_h0_count_0p2"},{"coefficient":-0.0003532090868827347,"feature":"cooc_h0_betti_at_0p2"},{"coefficient":0.00015711142749505252,"feature":"cooc_h0_std_persistence"},{"coefficient":-4.0744716277577725e-05,"feature":"vocab_h1_count_0p2"},{"coefficient":0.0,"feature":"vocab_h0_num_infinite_bars"},{"coefficient":0.0,"feature":"vocab_h1_num_infinite_bars"},{"coefficient":0.0,"feature":"vocab_h1_betti_at_0p05"},{"coefficient":0.0,"feature":"cooc_h0_num_bars"},{"coefficient":0.0,"feature":"cooc_h0_num_finite_bars"},{"coefficient":0.0,"feature":"cooc_h0_num_infinite_bars"},{"coefficient":0.0,"feature":"cooc_h1_num_infinite_bars"},{"coefficient":0.0,"feature":"cooc_h1_betti_area"},{"coefficient":0.0,"feature":"cooc_h1_betti_at_0p05"},{"coefficient":0.0,"feature":"cooc_h1_betti_at_0p1"},{"coefficient":0.0,"feature":"cooc_h1_betti_at_0p2"},{"coefficient":0.0,"feature":"cooc_h1_betti_at_0p4"},{"coefficient":0.0,"feature":"vocab_num_points"},{"coefficient":0.0,"feature":"cooc_num_points"}]},"compression":{"alpha":0.1,"coefficients":[{"coefficient":0.3434169814432086,"feature":"mean_token_bytes"},{"coefficient":0.3434169814432086,"feature":"train_compression"},{"coefficient":-0.08564082511575255,"feature":"vocab_h1_count_0p05"},{"coefficient":0.07669371491426276,"feature":"token_entropy"},{"coefficient":-0.06922374951824412,"feature":"vocab_h1_std_persistence"},{"coefficient":0.06185070804512108,"feature":"cooc_h1_count_0p2"},{"coefficient":0.061719988619120314,"feature":"actual_vocab_size"},{"coefficient":-0.05550452236585349,"feature":"cooc_h1_mean_persistence"},{"coefficient":0.05535165283423954,"feature":"vocab_h0_persistence_entropy"},{"coefficient":-0.05463383590153842,"feature":"cooc_h1_std_persistence"},{"coefficient":0.05398971238147937,"feature":"vocab_h1_betti_area"},{"coefficient":-0.05312452944863233,"feature":"byte_entropy"},{"coefficient":0.04825421026733462,"feature":"vocab_h1_betti_at_0p1"},{"coefficient":-0.04384653134873079,"feature":"vocab_h1_total_persistence"},{"coefficient":-0.03962911988104674,"feature":"cooc_mean_nn_distance"},{"coefficient":-0.037233030396039105,"feature":"vocab_h0_std_persistence"},{"coefficient":-0.03668996710145356,"feature":"cooc_h1_num_bars"},{"coefficient":-0.03668996710145356,"feature":"cooc_h1_num_finite_bars"},{"coefficient":0.0361442747477958,"feature":"vocab_h1_count_0p1"},{"coefficient":0.03556452762335671,"feature":"cooc_h1_count_0p1"},{"coefficient":-0.03343080535992342,"feature":"cooc_h1_max_persistence"},{"coefficient":-0.03329395770603704,"feature":"type_token_ratio"},{"coefficient":0.027579838065899094,"feature":"cooc_h0_betti_area"},{"coefficient":0.02702856145106272,"feature":"cooc_h0_max_persistence"},{"coefficient":-0.026367501894237755,"feature":"vocab_h0_count_0p1"},{"coefficient":-0.026367501894237755,"feature":"vocab_h0_betti_at_0p1"},{"coefficient":0.026331908660273684,"feature":"cooc_h0_count_0p1"},{"coefficient":0.026331908660273684,"feature":"cooc_h0_betti_at_0p1"},{"coefficient":-0.025482851454218247,"feature":"gzip_ratio"},{"coefficient":0.023526842507762824,"feature":"vocab_h1_max_persistence"},{"coefficient":-0.021155658521574028,"feature":"cooc_h1_count_0p05"},{"coefficient":-0.02080969777040459,"feature":"vocab_h0_total_persistence"},{"coefficient":-0.02026098095993352,"feature":"cooc_h0_std_persistence"},{"coefficient":0.019148318172263146,"feature":"conditional_entropy"},{"coefficient":0.018925909220142118,"feature":"vocab_h1_count_0p2"},{"coefficient":-0.016780607872503794,"feature":"cooc_h1_total_persistence"},{"coefficient":0.016147918605495387,"feature":"vocab_h0_max_persistence"},{"coefficient":0.015144274855967976,"feature":"vocab_h1_betti_at_0p2"},{"coefficient":0.015081787121752045,"feature":"cooc_h0_persistence_entropy"},{"coefficient":-0.013593386363690119,"feature":"cooc_h0_count_0p2"},{"coefficient":-0.013593386363690119,"feature":"cooc_h0_betti_at_0p2"},{"coefficient":-0.013568457979509452,"feature":"cooc_h0_mean_persistence"},{"coefficient":-0.01356845797950941,"feature":"cooc_h0_total_persistence"},{"coefficient":0.011497284656910765,"feature":"vocab_h1_count_0p4"},{"coefficient":-0.010884870035311106,"feature":"vocab_h0_mean_persistence"},{"coefficient":-0.009830462673450502,"feature":"vocab_h1_betti_at_0p4"},{"coefficient":-0.009505920516865968,"feature":"cooc_h1_persistence_entropy"},{"coefficient":0.009017441729394504,"feature":"vocab_mean_nn_distance"},{"coefficient":0.008903139350920714,"feature":"vocab_h0_count_0p05"},{"coefficient":0.008903139350920714,"feature":"vocab_h0_betti_at_0p05"},{"coefficient":-0.008730359119126174,"feature":"cooc_h0_count_0p4"},{"coefficient":-0.008730359119126174,"feature":"cooc_h0_betti_at_0p4"},{"coefficient":-0.0064273279718431164,"feature":"vocab_h1_mean_persistence"},{"coefficient":-0.0058437296682550405,"feature":"cooc_h0_count_0p05"},{"coefficient":-0.0058437296682550405,"feature":"cooc_h0_betti_at_0p05"},{"coefficient":-0.005302410805272401,"feature":"vocab_h0_num_bars"},{"coefficient":-0.005302410805272401,"feature":"vocab_h0_num_finite_bars"},{"coefficient":0.005185051061767559,"feature":"vocab_h0_count_0p4"},{"coefficient":0.005185051061767559,"feature":"vocab_h0_betti_at_0p4"},{"coefficient":0.004117362263935387,"feature":"vocab_h0_count_0p2"},{"coefficient":0.004117362263935387,"feature":"vocab_h0_betti_at_0p2"},{"coefficient":-0.0039715910864902,"feature":"vocab_h0_betti_area"},{"coefficient":0.002477061472716535,"feature":"vocab_h1_num_bars"},{"coefficient":0.002477061472716535,"feature":"vocab_h1_num_finite_bars"},{"coefficient":0.0020473560014141468,"feature":"cooc_h1_count_0p4"},{"coefficient":-0.0004596073350108254,"feature":"vocab_h1_persistence_entropy"},{"coefficient":0.0,"feature":"vocab_h0_num_infinite_bars"},{"coefficient":0.0,"feature":"vocab_h1_num_infinite_bars"},{"coefficient":0.0,"feature":"vocab_h1_betti_at_0p05"},{"coefficient":0.0,"feature":"cooc_h0_num_bars"},{"coefficient":0.0,"feature":"cooc_h0_num_finite_bars"},{"coefficient":0.0,"feature":"cooc_h0_num_infinite_bars"},{"coefficient":0.0,"feature":"cooc_h1_num_infinite_bars"},{"coefficient":0.0,"feature":"cooc_h1_betti_area"},{"coefficient":0.0,"feature":"cooc_h1_betti_at_0p05"},{"coefficient":0.0,"feature":"cooc_h1_betti_at_0p1"},{"coefficient":0.0,"feature":"cooc_h1_betti_at_0p2"},{"coefficient":0.0,"feature":"cooc_h1_betti_at_0p4"},{"coefficient":0.0,"feature":"vocab_num_points"},{"coefficient":0.0,"feature":"cooc_num_points"}]}},"h5":{"exploratory":true,"target":"test_compression","top_features":[{"ci_high":0.9132930869,"ci_low":0.3898789495,"feature":"vocab_h0_num_bars","p_value":1.859e-07,"spearman_rho":0.7451581413},{"ci_high":0.9132445405,"ci_low":0.3834113318,"feature":"vocab_h0_num_finite_bars","p_value":1.859e-07,"spearman_rho":0.7451581413},{"ci_high":-0.2708010336,"ci_low":-0.8516228748,"feature":"vocab_h1_std_persistence","p_value":2.3805e-06,"spearman_rho":-0.6965250965},{"ci_high":-0.2418604651,"ci_low":-0.8777777778,"feature":"vocab_h1_mean_persistence","p_value":2.83042e-05,"spearman_rho":-0.6380952381},{"ci_high":-0.2212639558,"ci_low":-0.8124591085,"feature":"vocab_h1_count_0p2","p_value":5.00649e-05,"spearman_rho":-0.6226698761},{"ci_high":0.0108527132,"ci_low":-0.8342370256,"feature":"vocab_h1_betti_area","p_value":0.0003331011,"spearman_rho":-0.5647361647},{"ci_high":-0.0448858185,"ci_low":-0.7926797964,"feature":"vocab_h1_betti_at_0p4","p_value":0.0005308558,"spearman_rho":-0.5486510488},{"ci_high":-0.0513967773,"ci_low":-0.7930700516,"feature":"vocab_h1_count_0p1","p_value":0.000645968,"spearman_rho":-0.5416265155},{"ci_high":0.7748654864,"ci_low":0.5364041566,"feature":"vocab_h1_betti_at_0p1","p_value":0.0007453883,"spearman_rho":0.5364041566},{"ci_high":-0.2071810778,"ci_low":-0.7128840692,"feature":"vocab_h1_max_persistence","p_value":0.0008120411,"spearman_rho":-0.5332389483}]},"robustness":{"drop_train_compression":{"bpb":{"metrics":{"baseline":{"mae":0.16898927429993632,"n":18.0,"r2":0.4624531379830418,"rmse":0.22649102273136326},"full":{"mae":0.1962048968180576,"n":18.0,"r2":0.3781443108642505,"rmse":0.24360580512524788},"topology":{"mae":0.22737577493647665,"n":18.0,"r2":0.11762756825874099,"rmse":0.2901808795893765}},"selected_alphas":{"baseline":{"codeparrot_py":0.01,"wikipedia_ar":1.0,"wikipedia_hu":0.1,"wikipedia_sw":0.01,"wikipedia_zh":0.1,"wikitext_en":0.01},"full":{"codeparrot_py":10.0,"wikipedia_ar":100.0,"wikipedia_hu":100.0,"wikipedia_sw":100.0,"wikipedia_zh":100.0,"wikitext_en":1.0},"topology":{"codeparrot_py":10.0,"wikipedia_ar":100.0,"wikipedia_hu":100.0,"wikipedia_sw":100.0,"wikipedia_zh":0.01,"wikitext_en":1.0}},"target":"bpb_mean"},"compression":{"metrics":{"baseline":{"mae":0.9186745340579774,"n":36.0,"r2":-0.3389948580318749,"rmse":1.1197684634677332},"full":{"mae":0.8002704030099355,"n":36.0,"r2":-0.3143126643558041,"rmse":1.109399903610461},"topology":{"mae":0.9246803559380522,"n":36.0,"r2":-0.7669042796305598,"rmse":1.2863089422450116}},"selected_alphas":{"baseline":{"codeparrot_py":10.0,"wikipedia_ar":10.0,"wikipedia_hu":100.0,"wikipedia_sw":0.1,"wikipedia_zh":10.0,"wikitext_en":0.1},"full":{"codeparrot_py":10.0,"wikipedia_ar":100.0,"wikipedia_hu":1.0,"wikipedia_sw":100.0,"wikipedia_zh":0.01,"wikitext_en":100.0},"topology":{"codeparrot_py":100.0,"wikipedia_ar":100.0,"wikipedia_hu":100.0,"wikipedia_sw":0.1,"wikipedia_zh":100.0,"wikitext_en":100.0}},"target":"test_compression"}},"target_permutation":null},"market":[{"id":"market_aapl_10y","ticker":"AAPL","compression":2.01706657654613,"bpb":2.8543572990943433,"byte_entropy":3.540278382738939,"bytes_per_token":2.227997775631457},{"id":"market_aapl_10y","ticker":"AAPL","compression":2.189337898147582,"bpb":2.8543572990943433,"byte_entropy":3.540278382738939,"bytes_per_token":2.34026069847516},{"id":"market_cat_10y","ticker":"CAT","compression":2.022320134500551,"bpb":2.824101187102094,"byte_entropy":3.427491315810394,"bytes_per_token":2.276421043081157},{"id":"market_cat_10y","ticker":"CAT","compression":2.151014367638897,"bpb":2.824101187102094,"byte_entropy":3.427491315810394,"bytes_per_token":2.3379717347414197},{"id":"market_dis_10y","ticker":"DIS","compression":2.178741838272225,"bpb":2.2408869447221873,"byte_entropy":3.3864181223485685,"bytes_per_token":2.267450448413596},{"id":"market_dis_10y","ticker":"DIS","compression":2.225978191148172,"bpb":2.2408869447221873,"byte_entropy":3.3864181223485685,"bytes_per_token":2.3315148321502743},{"id":"market_gs_10y","ticker":"GS","compression":1.966608084358524,"bpb":3.078363260662594,"byte_entropy":3.370269719638822,"bytes_per_token":2.270210091034399},{"id":"market_gs_10y","ticker":"GS","compression":2.0300210674157304,"bpb":3.078363260662594,"byte_entropy":3.370269719638822,"bytes_per_token":2.3309020217729395},{"id":"market_jnj_10y","ticker":"JNJ","compression":2.125859237179877,"bpb":2.648073353691146,"byte_entropy":3.389021016352069,"bytes_per_token":2.308612367566255},{"id":"market_jnj_10y","ticker":"JNJ","compression":2.204162724692526,"bpb":2.648073353691146,"byte_entropy":3.389021016352069,"bytes_per_token":2.3651178702494247},{"id":"market_jpm_10y","ticker":"JPM","compression":2.0175327296845262,"bpb":2.9515986322174212,"byte_entropy":3.3896787432461144,"bytes_per_token":2.2785031775023774},{"id":"market_jpm_10y","ticker":"JPM","compression":2.1084925562051717,"bpb":2.9515986322174212,"byte_entropy":3.3896787432461144,"bytes_per_token":2.340797717263197},{"id":"market_ko_10y","ticker":"KO","compression":2.086272279105044,"bpb":2.8004382904284566,"byte_entropy":3.3431577568676047,"bytes_per_token":2.1700990338895787},{"id":"market_ko_10y","ticker":"KO","compression":2.125225341231007,"bpb":2.8004382904284566,"byte_entropy":3.3431577568676047,"bytes_per_token":2.2350821922081163},{"id":"market_msft_10y","ticker":"MSFT","compression":2.049524791022558,"bpb":2.762953790172218,"byte_entropy":3.459231748816971,"bytes_per_token":2.299728582782252},{"id":"market_msft_10y","ticker":"MSFT","compression":2.165577737447066,"bpb":2.762953790172218,"byte_entropy":3.459231748816971,"bytes_per_token":2.377594840550052},{"id":"market_nvda_10y","ticker":"NVDA","compression":1.9559181027497163,"bpb":2.8363615958488753,"byte_entropy":3.6557149739033945,"bytes_per_token":1.9463379357448003},{"id":"market_nvda_10y","ticker":"NVDA","compression":2.101090993500464,"bpb":2.8363615958488753,"byte_entropy":3.6557149739033945,"bytes_per_token":2.063128158537278},{"id":"market_tsla_10y","ticker":"TSLA","compression":2.0480889903023387,"bpb":2.7910544216419098,"byte_entropy":3.7857589137119847,"bytes_per_token":1.9859535174896317},{"id":"market_tsla_10y","ticker":"TSLA","compression":2.275077624992079,"bpb":2.7910544216419098,"byte_entropy":3.7857589137119847,"bytes_per_token":2.112088216935988},{"id":"market_wmt_10y","ticker":"WMT","compression":1.779872924779668,"bpb":3.8148084907718003,"byte_entropy":3.769052026345546,"bytes_per_token":2.0324945981738343},{"id":"market_wmt_10y","ticker":"WMT","compression":1.9179504168737231,"bpb":3.8148084907718003,"byte_entropy":3.769052026345546,"bytes_per_token":2.1885469828880217},{"id":"market_xom_10y","ticker":"XOM","compression":2.1765032377428306,"bpb":2.500403387974264,"byte_entropy":3.4019172423362947,"bytes_per_token":2.2076377703852},{"id":"market_xom_10y","ticker":"XOM","compression":2.24832770593107,"bpb":2.500403387974264,"byte_entropy":3.4019172423362947,"bytes_per_token":2.2752800273046017}],"tda":{"stability_records":6,"all_agree":true,"max_bottleneck":2.3796525550068282e-07,"comparisons":24},"audit":{"total":36,"reversible":30,"bpe_reversible":18,"bpe_total":18,"unigram_reversible":12,"unigram_total":18},"bpb_summary":[{"corpus":"codeparrot_py","family":"bpe","requested_vocab_size":8192,"bpb_mean":2.01404103036686,"bpb_std":0.0028133885478283,"bpb_seeds":2,"bpb_min":2.0120516642465778,"bpb_max":2.0160303964871416},{"corpus":"codeparrot_py","family":"bpe","requested_vocab_size":16384,"bpb_mean":1.952838160967473,"bpb_std":0.0041343607862738,"bpb_seeds":2,"bpb_min":1.949914726419627,"bpb_max":1.9557615955153191},{"corpus":"codeparrot_py","family":"bpe","requested_vocab_size":32768,"bpb_mean":1.9253004590065723,"bpb_std":0.006147507067138,"bpb_seeds":2,"bpb_min":1.9209535150720067,"bpb_max":1.9296474029411377},{"corpus":"wikipedia_ar","family":"bpe","requested_vocab_size":8192,"bpb_mean":1.5505806616745152,"bpb_std":6.029803057849912e-05,"bpb_seeds":2,"bpb_min":1.550538024528201,"bpb_max":1.5506232988208295},{"corpus":"wikipedia_ar","family":"bpe","requested_vocab_size":16384,"bpb_mean":1.497310938007674,"bpb_std":0.0015958807235227,"bpb_seeds":2,"bpb_min":1.4961824799261063,"bpb_max":1.498439396089242},{"corpus":"wikipedia_ar","family":"bpe","requested_vocab_size":32768,"bpb_mean":1.4502962359015263,"bpb_std":0.0007113741548297,"bpb_seeds":2,"bpb_min":1.4497932184126854,"bpb_max":1.4507992533903673},{"corpus":"wikipedia_hu","family":"bpe","requested_vocab_size":8192,"bpb_mean":2.17583912829323,"bpb_std":0.0007763898773681,"bpb_seeds":2,"bpb_min":2.1752901377460985,"bpb_max":2.1763881188403618},{"corpus":"wikipedia_hu","family":"bpe","requested_vocab_size":16384,"bpb_mean":2.1070157153641604,"bpb_std":0.0006480029215473,"bpb_seeds":2,"bpb_min":2.106557508104106,"bpb_max":2.1074739226242154},{"corpus":"wikipedia_hu","family":"bpe","requested_vocab_size":32768,"bpb_mean":2.038402924616164,"bpb_std":0.0016270288799471,"bpb_seeds":2,"bpb_min":2.0372524414619666,"bpb_max":2.0395534077703603},{"corpus":"wikipedia_sw","family":"bpe","requested_vocab_size":8192,"bpb_mean":2.0571266250434608,"bpb_std":0.0023189354952975,"bpb_seeds":2,"bpb_min":2.0554868900296017,"bpb_max":2.05876636005732},{"corpus":"wikipedia_sw","family":"bpe","requested_vocab_size":16384,"bpb_mean":1.981773376606407,"bpb_std":0.0059571948022761,"bpb_seeds":2,"bpb_min":1.977561003764868,"bpb_max":1.9859857494479456},{"corpus":"wikipedia_sw","family":"bpe","requested_vocab_size":32768,"bpb_mean":1.93109322474311,"bpb_std":0.0020826799293112,"bpb_seeds":2,"bpb_min":1.9296205476420527,"bpb_max":1.9325659018441672},{"corpus":"wikipedia_zh","family":"bpe","requested_vocab_size":8192,"bpb_mean":2.599788455814929,"bpb_std":0.0036655348047516,"bpb_seeds":2,"bpb_min":2.5971965312978136,"bpb_max":2.602380380332044},{"corpus":"wikipedia_zh","family":"bpe","requested_vocab_size":16384,"bpb_mean":2.520776363104684,"bpb_std":0.0041087063571978,"bpb_seeds":2,"bpb_min":2.5178710689776045,"bpb_max":2.523681657231762},{"corpus":"wikipedia_zh","family":"bpe","requested_vocab_size":32768,"bpb_mean":2.465945078140817,"bpb_std":0.0008521604985987,"bpb_seeds":2,"bpb_min":2.465342509673598,"bpb_max":2.4665476466080354},{"corpus":"wikitext_en","family":"bpe","requested_vocab_size":8192,"bpb_mean":1.967145539525831,"bpb_std":0.0004637520339285,"bpb_seeds":2,"bpb_min":1.966817617317851,"bpb_max":1.967473461733811},{"corpus":"wikitext_en","family":"bpe","requested_vocab_size":16384,"bpb_mean":1.872679871935629,"bpb_std":6.877770073048931e-05,"bpb_seeds":2,"bpb_min":1.872631238757048,"bpb_max":1.87272850511421},{"corpus":"wikitext_en","family":"bpe","requested_vocab_size":32768,"bpb_mean":1.811005629617061,"bpb_std":0.002633785775216,"bpb_seeds":2,"bpb_min":1.8091432618352128,"bpb_max":1.8128679973989088}]};</script>
+<script>
+(function(){
+  "use strict";
+  const DATA = window.DATA;
+  const $ = (s, el) => (el || document).querySelector(s);
+  const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
+  const fmt = (n, d) => (n === null || n === undefined || Number.isNaN(n)) ? "—" : Number(n).toFixed(d === undefined ? 2 : d);
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  const labelOf = id => (DATA.corpora.find(c => c.id === id) || {label:id}).label;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- nav / progress / reveal ---------- */
+  const nav = $("#nav"), progress = $("#progress");
+  function onScroll(){
+    const y = window.scrollY;
+    nav.classList.toggle("scrolled", y > 10);
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  const burger = $("#navBurger"), navBox = $("#navLinks");
+  if (burger && navBox) {
+    const closeNav = () => { nav.classList.remove("open"); burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "Open menu"); };
+    burger.addEventListener("click", e => {
+      e.stopPropagation();
+      const open = nav.classList.toggle("open");
+      burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+    navBox.addEventListener("click", e => { if (e.target.closest("a")) closeNav(); });
+    document.addEventListener("click", e => { if (nav.classList.contains("open") && !nav.contains(e.target)) closeNav(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeNav(); });
+  }
+  const links = $$(".nav-links a");
+  const secs = links.map(a => document.getElementById(a.getAttribute("href").slice(1))).filter(Boolean);
+  const navObs = new IntersectionObserver(es => {
+    es.forEach(e => { if(e.isIntersecting){ links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id)); } });
+  }, {rootMargin:"-45% 0px -50% 0px"});
+  secs.forEach(s => navObs.observe(s));
+  const revObs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); revObs.unobserve(e.target); } }), {threshold:.08});
+  $$(".reveal").forEach(el => { if(reduce) el.classList.add("in"); else revObs.observe(el); });
+
+  /* ---------- hero counters ---------- */
+  $("#hsTok").textContent = DATA.meta.tokenizers;
+  $("#hsLang").textContent = DATA.meta.languages;
+  $("#hsRuns").textContent = DATA.meta.lm_runs;
+  $("#hsPerm").textContent = DATA.meta.permutations.toLocaleString();
+  $("#evFiles").textContent = DATA.meta.files || 332;
+  $("#footDate").textContent = (DATA.meta.created_at || "").slice(0,10) || "the frozen protocol";
+
+  /* ---------- baseline tags ---------- */
+  const baseline = ["actual_vocab_size","byte_entropy","token_entropy","conditional_entropy","type_token_ratio","gzip_ratio","mean_token_bytes","train_compression"];
+  $("#baselineTags").innerHTML = baseline.map(b => `<span class="pill" style="text-transform:none;letter-spacing:0;font-family:var(--mono);font-size:.66rem">${esc(b)}</span>`).join("");
+  $("#pcaNote").textContent = `PCA of the 80 measured features · PC1 ${DATA.meta.pca_explained[0]}% · PC2 ${DATA.meta.pca_explained[1]}% · PC3 ${DATA.meta.pca_explained[2]}% of variance · each point is a real tokenizer, not an illustration.`;
+
+  /* ---------- explorer ---------- */
+  const exCorpus = $("#exCorpus"), exFamily = $("#exFamily"), exVocab = $("#exVocab"), exVolume = $("#exVolume"), exPrice = $("#exPrice");
+  DATA.corpora.forEach(c => { const o = document.createElement("option"); o.value = c.id; o.textContent = `${c.label} (${c.language})`; exCorpus.appendChild(o); });
+  function rowsFor(){ return DATA.tokenizers.filter(r => r.corpus === exCorpus.value && r.family === exFamily.value); }
+  function currentRow(){
+    const rows = rowsFor();
+    return rows.find(r => r.vocab === Number(exVocab.value)) || rows[0];
+  }
+  function costFor(row, gb, price){
+    const t = (gb * 1e9) / row.compression;
+    return {tokens:t, cost:(t / 1e6) * price};
+  }
+  function renderExplorer(){
+    const row = currentRow();
+    if(!row) return;
+    const gb = Math.max(0, Number(exVolume.value) || 0);
+    const price = Math.max(0, Number(exPrice.value) || 0);
+    const rows = rowsFor().sort((a,b) => a.vocab - b.vocab);
+    const best = rows.slice().sort((a,b) => b.compression - a.compression)[0];
+    const worst = rows.slice().sort((a,b) => a.compression - b.compression)[0];
+    const c = costFor(row, gb, price), cb = costFor(best, gb, price), cw = costFor(worst, gb, price);
+    $("#exComp").textContent = fmt(row.compression, 3);
+    $("#exBpb").textContent = row.bpb === null ? "—" : fmt(row.bpb, 3);
+    $("#exBpbSub").textContent = row.bpb === null ? "not measured for Unigram" : "BPE language model · mean of 2 seeds";
+    $("#exTokGb").textContent = (1e9 / row.compression / 1e6).toFixed(1) + "M";
+    $("#exCost").textContent = "$" + c.cost.toLocaleString(undefined, {maximumFractionDigits:0});
+    const save = c.cost - cb.cost;
+    $("#exSave").textContent = save > 0.5 ? "$" + save.toLocaleString(undefined, {maximumFractionDigits:0}) + " / mo" : "already optimal";
+    $("#exSave").style.color = save > 0.5 ? "var(--amber)" : "var(--green)";
+    $("#exBars").innerHTML = rows.map(r => {
+      const rc = costFor(r, gb, price).cost;
+      const w = Math.max(2, (rc / Math.max(cw.cost, 1)) * 100);
+      return `<div class="cbar ${r.vocab === row.vocab ? "current" : ""}"><span class="mono">${r.vocab.toLocaleString()}</span><div class="track"><div class="fill" style="width:${w}%"></div></div><span class="val">$${rc.toLocaleString(undefined,{maximumFractionDigits:0})}</span></div>`;
+    }).join("");
+    const diff = row.compression >= best.compression ? 0 : ((best.compression / row.compression) - 1) * 100;
+    $("#exNote").innerHTML = `Same text volume, ${gb.toLocaleString()} GB/month at $${price.toFixed(2)} per 1M input tokens. Best config in this corpus: <b style="color:var(--teal)">${best.vocab.toLocaleString()}</b> at ${fmt(best.compression,3)} bytes/token. This configuration needs <b style="color:${diff>0?"var(--amber)":"var(--green)"}">${diff.toFixed(1)}% ${diff>0?"more":"fewer"}</b> tokens than the best. Price is illustrative; substitute your contract rate.`;
+    $("#exTags").innerHTML = `<span class="pill" style="text-transform:none">${DATA.meta.topology_features} topology features</span><span class="pill" style="text-transform:none">${DATA.meta.baseline_features} baseline features</span><span class="pill" style="text-transform:none">held-out split</span>`;
+  }
+  ["change","input"].forEach(ev => { exCorpus.addEventListener(ev, renderExplorer); exFamily.addEventListener(ev, renderExplorer); exVocab.addEventListener(ev, renderExplorer); exVolume.addEventListener(ev, renderExplorer); exPrice.addEventListener(ev, renderExplorer); });
+  renderExplorer();
+
+  /* ---------- chart helpers ---------- */
+  const NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, txt){ const n = document.createElementNS(NS, tag); if(attrs) for(const k in attrs) n.setAttribute(k, attrs[k]); if(txt !== undefined) n.textContent = txt; return n; }
+  function svgRoot(w, h){ const s = el("svg", {viewBox:`0 0 ${w} ${h}`, role:"img"}); s.style.width = "100%"; s.style.height = "auto"; return s; }
+
+  function r2Chart(mount, d, title){
+    const W = 460, H = 280, pad = {l:40, r:16, t:18, b:44};
+    const s = svgRoot(W, H); s.setAttribute("aria-label", title);
+    const minV = -1.0, maxV = 1.1;
+    const y = v => pad.t + (maxV - v) / (maxV - minV) * (H - pad.t - pad.b);
+    for(let v = -1; v <= 1; v += .5){
+      s.appendChild(el("line", {x1:pad.l, x2:W-pad.r, y1:y(v), y2:y(v), stroke:"rgba(148,163,184,.12)", "stroke-width":1}));
+      s.appendChild(el("text", {x:pad.l-8, y:y(v)+4, fill:"#64748b", "font-size":10, "text-anchor":"end", "font-family":"var(--mono)"}, v.toFixed(1)));
+    }
+    s.appendChild(el("line", {x1:pad.l, x2:W-pad.r, y1:y(0), y2:y(0), stroke:"rgba(148,163,184,.35)", "stroke-width":1}));
+    const order = [["baseline","Baseline","#5eead4"],["full","+ Topology","#fbbf24"],["topology","Topology only","#f472b6"]];
+    const bw = (W - pad.l - pad.r) / 3;
+    order.forEach(([key, lab, col], i) => {
+      const m = d.metrics[key];
+      if(!m) return;
+      const x = pad.l + i * bw + bw/2;
+      const top = y(Math.max(0, m.r2)), bot = y(Math.min(0, m.r2));
+      s.appendChild(el("rect", {x:x-38, y:Math.min(top,bot), width:76, height:Math.max(2, Math.abs(bot-top)), rx:5, fill:col, opacity:key==="baseline"? .9 : .75}));
+      s.appendChild(el("text", {x, y: m.r2 >= 0 ? top-8 : bot+14, fill:col, "font-size":12, "font-weight":700, "text-anchor":"middle", "font-family":"var(--mono)"}, m.r2.toFixed(3)));
+      s.appendChild(el("text", {x, y:H-18, fill:"#8fa3bd", "font-size":11, "text-anchor":"middle"}, lab));
+      const b = d.bootstrap[key];
+      if(b){
+        const lo = Math.max(minV, b.ci_low), hi = Math.min(maxV, b.ci_high);
+        if(hi > lo){
+          const cx = x;
+          s.appendChild(el("line", {x1:cx-5, x2:cx+5, y1:y(lo), y2:y(lo), stroke:"#e9f0f8", "stroke-width":1, opacity:.55}));
+          s.appendChild(el("line", {x1:cx-5, x2:cx+5, y1:y(hi), y2:y(hi), stroke:"#e9f0f8", "stroke-width":1, opacity:.55}));
+          s.appendChild(el("line", {x1:cx, x2:cx, y1:y(lo), y2:y(hi), stroke:"#e9f0f8", "stroke-width":1, opacity:.55, "stroke-dasharray":"2 3"}));
+        }
+      }
+    });
+    s.appendChild(el("text", {x:14, y:pad.t+4, fill:"#64748b", "font-size":10, transform:"rotate(-90 14 " + (pad.t+4) + ")"}, "R²"));
+    mount.appendChild(s);
+  }
+
+  function bpbChart(mount){
+    const W = 720, H = 340, pad = {l:44, r:120, t:18, b:44};
+    const s = svgRoot(W, H); s.setAttribute("aria-label", "Bits per byte by vocabulary size for six corpora");
+    const xs = [8192, 16384, 32768];
+    const x = v => pad.l + (Math.log2(v) - Math.log2(8192)) / (Math.log2(32768) - Math.log2(8192)) * (W - pad.l - pad.r);
+    const ymin = 1.35, ymax = 2.7;
+    const y = v => pad.t + (ymax - v) / (ymax - ymin) * (H - pad.t - pad.b);
+    [1.5,1.75,2.0,2.25,2.5].forEach(v => {
+      s.appendChild(el("line", {x1:pad.l, x2:W-pad.r, y1:y(v), y2:y(v), stroke:"rgba(148,163,184,.1)", "stroke-width":1}));
+      s.appendChild(el("text", {x:pad.l-8, y:y(v)+3, fill:"#64748b", "font-size":10, "text-anchor":"end", "font-family":"var(--mono)"}, v.toFixed(2)));
+    });
+    xs.forEach(v => s.appendChild(el("text", {x:x(v), y:H-18, fill:"#8fa3bd", "font-size":11, "text-anchor":"middle", "font-family":"var(--mono)"}, (v/1024)+"k")));
+    s.appendChild(el("text", {x:W-pad.r+8, y:pad.t+10, fill:"#64748b", "font-size":10}, "BPB"));
+    const colors = {"wikitext_en":"#5eead4","codeparrot_py":"#fbbf24","wikipedia_zh":"#f472b6","wikipedia_hu":"#a78bfa","wikipedia_ar":"#22d3ee","wikipedia_sw":"#fb7185"};
+    DATA.corpora.forEach(c => {
+      const rows = DATA.bpb_summary.filter(d => d.corpus === c.id).sort((a,b) => a.requested_vocab_size - b.requested_vocab_size);
+      if(!rows.length) return;
+      const path = rows.map((d,i) => (i?"L":"M") + x(d.requested_vocab_size).toFixed(1) + "," + y(d.bpb_mean).toFixed(1)).join(" ");
+      s.appendChild(el("path", {d:path, fill:"none", stroke:colors[c.id] || "#94a3b8", "stroke-width":2.2, "stroke-linecap":"round", opacity:.9}));
+      rows.forEach(d => s.appendChild(el("circle", {cx:x(d.requested_vocab_size), cy:y(d.bpb_mean), r:3.2, fill:colors[c.id] || "#94a3b8"})));
+      const last = rows[rows.length-1];
+      s.appendChild(el("text", {x:x(last.requested_vocab_size)+9, y:y(last.bpb_mean)+3.5, fill:colors[c.id] || "#94a3b8", "font-size":10, "font-family":"var(--mono)"}, c.label.replace(" Wikipedia","").replace("Python code","Python")));
+    });
+    mount.appendChild(s);
+    $("#bpbLegend").innerHTML = DATA.corpora.map(c => `<span><i style="background:${colors[c.id]}"></i>${esc(c.label)}</span>`).join("");
+  }
+
+  function deltaChart(mount){
+    const groups = DATA.h1.per_group.slice().sort((a,b) => (a.full.mae - a.baseline.mae) - (b.full.mae - b.baseline.mae));
+    const W = 520, H = 300, pad = {l:110, r:24, t:16, b:34};
+    const s = svgRoot(W, H); s.setAttribute("aria-label", "Change in MAE by corpus when adding topology");
+    const maxAbs = Math.max(...groups.map(g => Math.abs(g.full.mae - g.baseline.mae)), .1);
+    const x = v => pad.l + (v + maxAbs) / (2*maxAbs) * (W - pad.l - pad.r);
+    s.appendChild(el("line", {x1:x(0), x2:x(0), y1:pad.t, y2:H-pad.b, stroke:"rgba(148,163,184,.4)", "stroke-width":1}));
+    groups.forEach((g, i) => {
+      const delta = g.full.mae - g.baseline.mae;
+      const yy = pad.t + i * ((H-pad.t-pad.b)/groups.length) + 8;
+      const w = Math.abs(x(delta) - x(0));
+      s.appendChild(el("rect", {x: delta < 0 ? x(delta) : x(0), y:yy, width:Math.max(2,w), height:15, rx:4, fill: delta < 0 ? "#5eead4" : "#fb7185", opacity:.8}));
+      s.appendChild(el("text", {x:pad.l-10, y:yy+12, fill:"#b6c5d8", "font-size":10.5, "text-anchor":"end"}, labelOf(g.group)));
+      s.appendChild(el("text", {x: delta < 0 ? x(delta)-6 : x(delta)+6, y:yy+12, fill: delta < 0 ? "#5eead4" : "#fb7185", "font-size":10, "text-anchor": delta < 0 ? "end" : "start", "font-family":"var(--mono)"}, (delta>0?"+":"") + delta.toFixed(3)));
+    });
+    s.appendChild(el("text", {x:x(0), y:H-8, fill:"#64748b", "font-size":9.5, "text-anchor":"middle"}, "← better with topology · worse with topology →"));
+    mount.appendChild(s);
+  }
+
+  function marketChart(mount){
+    const W = 520, H = 300, pad = {l:46, r:20, t:18, b:42};
+    const s = svgRoot(W, H); s.setAttribute("aria-label", "Market compression versus bits per byte");
+    const xs = DATA.market.map(m => m.compression), ys = DATA.market.map(m => m.bpb);
+    const xmin = Math.min(...xs)*.98, xmax = Math.max(...xs)*1.02;
+    const ymin = Math.min(...ys)*.98, ymax = Math.max(...ys)*1.02;
+    const x = v => pad.l + (v-xmin)/(xmax-xmin)*(W-pad.l-pad.r);
+    const y = v => pad.t + (ymax-v)/(ymax-ymin)*(H-pad.t-pad.b);
+    for(let i=0;i<=4;i++){
+      const v = ymin + (ymax-ymin)*i/4;
+      s.appendChild(el("line", {x1:pad.l, x2:W-pad.r, y1:y(v), y2:y(v), stroke:"rgba(148,163,184,.1)"}));
+      s.appendChild(el("text", {x:pad.l-7, y:y(v)+3, fill:"#64748b", "font-size":9, "text-anchor":"end", "font-family":"var(--mono)"}, v.toFixed(1)));
+    }
+    DATA.market.forEach(m => {
+      s.appendChild(el("circle", {cx:x(m.compression), cy:y(m.bpb), r:5.5, fill:"#22d3ee", opacity:.75, stroke:"#05080d", "stroke-width":1.5}));
+      s.appendChild(el("text", {x:x(m.compression), y:y(m.bpb)-10, fill:"#8fa3bd", "font-size":8.5, "text-anchor":"middle", "font-family":"var(--mono)"}, m.ticker));
+    });
+    s.appendChild(el("text", {x:(pad.l+W-pad.r)/2, y:H-10, fill:"#64748b", "font-size":10, "text-anchor":"middle"}, "compression · bytes per token →"));
+    s.appendChild(el("text", {x:12, y:pad.t+6, fill:"#64748b", "font-size":10, transform:`rotate(-90 12 ${pad.t+6})`}, "BPB"));
+    mount.appendChild(s);
+  }
+
+  r2Chart($("#chartH1"), DATA.h1, "H1 R squared by model");
+  r2Chart($("#chartH2"), DATA.h2, "H2 R squared by model");
+  bpbChart($("#chartBpb"));
+  deltaChart($("#chartDelta"));
+  marketChart($("#chartMarket"));
+
+  /* ---------- result tables ---------- */
+  function metricRow(m, b, label){
+    return `<tr><td>${label}</td><td class="mono">${fmt(m.r2,3)}</td><td class="mono">${fmt(m.mae,3)}</td><td class="mono">[${fmt(b?b.ci_low:null,2)}, ${fmt(b?b.ci_high:null,2)}]</td></tr>`;
+  }
+  $("#h1Table").innerHTML = [["baseline","Baseline",DATA.h1.metrics.baseline],["full","+ Topology",DATA.h1.metrics.full],["topology","Topology only",DATA.h1.metrics.topology]].map(([k,l,m]) => metricRow(m, DATA.h1.bootstrap[k], l)).join("");
+  $("#h2Table").innerHTML = [["baseline","Baseline",DATA.h2.metrics.baseline],["full","+ Topology",DATA.h2.metrics.full],["topology","Topology only",DATA.h2.metrics.topology]].map(([k,l,m]) => metricRow(m, DATA.h2.bootstrap[k], l)).join("");
+
+  const h3 = DATA.h3.variables.slice().sort((a,b) => a.p_value - b.p_value);
+  $("#h3Table").innerHTML = h3.map(v => {
+    const isCooc = v.variable === "cooc_h1_total_persistence";
+    return `<tr><td>${esc(v.variable)}</td><td class="mono">${fmt(v.rho,3)}</td><td class="mono">${v.p_value < 0.001 ? v.p_value.toExponential(2) : fmt(v.p_value,3)}</td><td class="mono">[${fmt(v.ci_low,2)}, ${fmt(v.ci_high,2)}]</td><td><span class="badge ${isCooc?"ok":""}">${isCooc?"0.024":"1.000"}</span></td></tr>`;
+  }).join("");
+
+  /* ---------- data table ---------- */
+  let sortKey = "compression", sortDir = -1, filter = "all";
+  function renderTable(){
+    const tbody = $("#tokenTable tbody");
+    let rows = DATA.tokenizers.filter(r => filter === "all" || r.family === filter);
+    rows.sort((a,b) => {
+      const av = a[sortKey], bv = b[sortKey];
+      if(av === null && bv === null) return 0;
+      if(av === null) return 1;
+      if(bv === null) return -1;
+      return (av > bv ? 1 : av < bv ? -1 : 0) * sortDir;
+    });
+    const maxC = Math.max(...rows.map(r => r.compression));
+    tbody.innerHTML = rows.map(r => `<tr>
+      <td>${esc(r.label)}</td>
+      <td><span class="fam ${r.family}">${r.family.toUpperCase()}</span></td>
+      <td class="num">${r.vocab.toLocaleString()}</td>
+      <td><div class="bar-cell"><span class="num">${fmt(r.compression,3)}</span><span class="mini" style="width:${Math.round(r.compression/maxC*54)}px"></span></div></td>
+      <td class="num">${r.bpb === null ? "—" : fmt(r.bpb,3)}</td>
+      <td class="num">${fmt(r.byte_entropy,2)}</td>
+      <td class="num">${fmt(r.h1_total,2)}</td>
+    </tr>`).join("");
+  }
+  $$("#tableFilters .chip").forEach(ch => ch.addEventListener("click", () => {
+    filter = ch.dataset.filter;
+    $$("#tableFilters .chip").forEach(c => c.classList.toggle("on", c === ch));
+    renderTable();
+  }));
+  $$("#tokenTable th").forEach(th => th.addEventListener("click", () => {
+    const k = th.dataset.sort;
+    if(sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = k === "label" || k === "family" ? 1 : -1; }
+    renderTable();
+  }));
+  renderTable();
+
+  /* ---------- beginner guide ---------- */
+  const TERMS = [
+    {t:"Token", b:"A token is a chunk of text that a model treats as one unit. It can be a whole word, part of a word, a punctuation mark, or a single byte. The model never sees raw text; it sees a sequence of token IDs.", w:"Every cost and prediction in this project is ultimately about tokens."},
+    {t:"Tokenizer", b:"The algorithm that splits text into tokens and maps each token to an integer ID. Different tokenizers on the same sentence can produce very different token counts, which is why tokenizer choice is an economic decision.", w:"We train 36 of them: 2 families × 3 vocabulary sizes × 6 corpora."},
+    {t:"BPE (byte-pair encoding)", b:"Start with individual bytes. Repeatedly merge the most frequent adjacent pair into a new token. Frequent words become one token; rare words stay as several pieces. It is simple, fast, and the dominant choice in production LLMs.", w:"18 of the 36 tokenizers are BPE, and all 36 language models use BPE."},
+    {t:"Unigram", b:"Start with a large candidate vocabulary and remove tokens that hurt the likelihood of the training text. The result is a probabilistic vocabulary. It often compresses differently from BPE, especially on non-Latin scripts.", w:"The other 18 tokenizers. Compared on compression and topology, but not on LM BPB."},
+    {t:"Compression (bytes per token)", b:"How many bytes of original text one token represents on average. Higher is better: fewer tokens for the same document. In this repo it is measured on the held-out test split, never on training data.", w:"The primary target of H1. Baseline R² = 0.974."},
+    {t:"Bits per byte (BPB)", b:"A language model's loss converted into bits needed to encode each byte of text. Lower is better. It is comparable across vocabularies because it normalises by bytes, not tokens.", w:"The primary target of H2. Measured from 36 trained language models."},
+    {t:"Entropy", b:"A measure of uncertainty. Byte entropy describes how unpredictable the raw bytes are; token entropy describes the same for tokens. High entropy means more information per symbol. It is one of the cheap baseline features.", w:"Byte entropy is the strongest single predictor in the fitted BPB model."},
+    {t:"Embedding", b:"A dense vector that represents a token. Tokens with similar usage end up close together. In this project, each token is represented by a 64-dimensional vector built from byte trigrams, so the geometry is reproducible without a pretrained model.", w:"The “vocab cloud” topology features are computed on 256 sampled token embeddings."},
+    {t:"Persistent homology", b:"A branch of topological data analysis. Grow a shell around a point cloud; track when connected components and loops appear and disappear. Features that persist across many scales are considered meaningful structure.", w:"The 72 “topology” features summarise these births and deaths for H0 (components) and H1 (loops)."},
+    {t:"H0 and H1", b:"H0 counts connected components; H1 counts loops. A persistence diagram records each feature's birth scale and death scale. Long bars mean strong structure; short bars are often noise.", w:"H0 and H1 descriptors are computed on both the token-embedding cloud and the token co-occurrence graph."},
+    {t:"PCA", b:"Principal component analysis rotates a high-dimensional dataset so the directions with the most variance come first. It is a visualisation and compression tool, not a causal claim.", w:"The 3D map projects the 80 features onto the three directions that explain the most variance."},
+    {t:"R²", b:"The fraction of variance in the target explained by a model. 1.0 is perfect, 0 is no better than predicting the mean, and negative values mean the model is worse than the mean. Out-of-corpus R² can be negative.", w:"H1 baseline 0.974; H2 baseline 0.887. The topology-only models are negative or near zero."},
+    {t:"MAE", b:"Mean absolute error: the average size of the miss, in the target's units. For compression, MAE 0.135 means about 0.135 bytes per token of average error.", w:"Reported beside R² because R² alone can hide the practical size of errors."},
+    {t:"Leave-one-corpus-out (LOCO)", b:"Train on all corpora except one, then predict the held-out corpus. Repeat for each corpus. This tests generalisation to a new language or domain, not memorisation of the dataset.", w:"The core evaluation design for H1 and H2."},
+    {t:"Permutation test", b:"Shuffle the target labels many times, refit, and see how often chance produces an improvement at least as large as the observed one. The p-value is that frequency. It makes no normality assumption.", w:"2,000 permutations for H1 and H2. H1 p = 0.958."},
+    {t:"Bootstrap", b:"Resample the data with replacement many times to estimate the uncertainty of a statistic. Here, corpora are resampled as clusters so that rows from the same corpus are not treated as independent.", w:"2,000 cluster-bootstrap resamples produce the confidence intervals on R² and on deltas."},
+    {t:"p-value", b:"The probability of seeing a result at least this extreme if the null hypothesis were true. It is not the probability that the null is true, and it is not a measure of effect size.", w:"H1 p = 0.958 means the observed loss is utterly ordinary under shuffling."},
+    {t:"Holm correction", b:"When you test several hypotheses, some will look significant by chance. Holm adjusts each p-value upward in a way that controls the family-wise error rate. It is stricter than doing nothing and less strict than Bonferroni.", w:"Applied across H1–H4. Only the H3 exploratory association survives (0.024)."},
+    {t:"Confidence interval", b:"A range that would contain the true value in a specified fraction of repeated samples. A 95% interval spanning zero is compatible with no effect, even if the point estimate looks large.", w:"The surviving H3 interval still spans zero — reason for caution, not triumph."},
+    {t:"Why this is pre-registered", b:"The hypotheses and decision rules were frozen before training. This prevents unconscious p-hacking: you cannot move the goalposts after seeing the result. Deviations are documented publicly.", w:"The protocol is in docs/PROTOCOL.md, with five recorded execution deviations."}
+  ];
+  const learnGrid = $("#learnGrid");
+  function renderLearn(q){
+    const query = (q || "").trim().toLowerCase();
+    const items = TERMS.filter(x => !query || (x.t + " " + x.b + " " + x.w).toLowerCase().includes(query));
+    learnGrid.innerHTML = items.map(x => `<details class="term" ${query ? "open" : ""}><summary>${esc(x.t)}</summary><div class="body"><p style="margin:0 0 8px">${esc(x.b)}</p><p style="margin:0;color:var(--teal);font-size:.78rem"><b style="color:var(--teal)">In this project:</b> ${esc(x.w)}</p></div></details>`).join("");
+    $("#learnCount").textContent = items.length + " of " + TERMS.length + " concepts";
+  }
+  renderLearn("");
+  $("#learnSearch").addEventListener("input", e => renderLearn(e.target.value));
+  $("#learnToggle").addEventListener("click", () => {
+    const anyClosed = $$("#learnGrid details").some(d => !d.open);
+    $$("#learnGrid details").forEach(d => d.open = anyClosed);
+    $("#learnToggle").textContent = anyClosed ? "Close all" : "Open all";
+  });
+
+  /* ---------- quiz ---------- */
+  const QUESTIONS = [
+    {q:"What does a tokenizer actually do?", o:["Encrypts text before it reaches the model","Splits text into tokens and maps each token to an integer ID","Compresses the model weights","Translates one language into another"], a:1, e:"A tokenizer is the interface between raw text and the model. It splits text into chunks (tokens) and maps each chunk to an ID. Everything the model sees is a sequence of those IDs.", d:"Foundation"},
+    {q:"You compare two tokenizers on the same 1 GB of text. Tokenizer A emits 250M tokens; Tokenizer B emits 286M. What does that imply for input cost, all else equal?", o:["A is about 14% cheaper on input tokens","B is about 14% cheaper","They cost the same because the text is the same","Cost depends only on model size"], a:0, e:"286/250 = 1.144, so B needs about 14.4% more tokens for identical content. At a fixed price per token, that is a 14.4% higher input bill.", d:"Business"},
+    {q:"In this benchmark, what happened to held-out compression R² when 72 topology features were added to the eight-feature baseline?", o:["It rose from 0.974 to 0.998","It stayed exactly the same","It fell from 0.974 to 0.843","It became undefined"], a:2, e:"It fell. The baseline R² was 0.974; the full model reached 0.843. The permutation test on the improvement gave p = 0.958, so this is not evidence of a gain.", d:"Results"},
+    {q:"What is leave-one-corpus-out (LOCO) validation?", o:["Train on five corpora, predict the sixth, repeat","Leave out one row at a time","Train on 80% of every corpus with a random split","Use leave-one-out on model layers"], a:0, e:"LOCO hides an entire corpus, fits on the rest, and predicts the hidden one. It tests transfer to a new language or domain, which is much harder than random row splits.", d:"Method"},
+    {q:"Why can the Unigram rows have no BPB value in the explorer?", o:["Unigram tokenizers cannot be evaluated","BPB is always zero for Unigram","The 36 language models were trained only on BPE tokenizers","The data was lost"], a:2, e:"The LM stage intentionally used BPE only, because production decoder-only LLMs are overwhelmingly BPE. Unigram still has compression and the full 80-feature set, so it appears in the topology analysis.", d:"Method"},
+    {q:"H1's permutation test gives p = 0.958 for the observed ΔR² of −0.131. What is the correct reading?", o:["There is a 95.8% chance topology works","The observed result is worse than 95.8% of random shuffles; there is no evidence of a gain","The result is significant at the 5% level","The baseline model is invalid"], a:1, e:"The p-value is the fraction of shuffled-label runs that produced an improvement at least as large as observed. p = 0.958 means the observed change is entirely ordinary under the null — and in the wrong direction.", d:"Statistics"},
+    {q:"Which hypothesis was the only one to survive Holm correction, and what is the caveat?", o:["H1, and there is no caveat","H2, and the effect is huge","H3 co-occurrence H1 persistence, but its bootstrap CI spans zero and it is exploratory","H4 market transfer, but only for tech stocks"], a:2, e:"The H3 association (ρ = −0.718, raw p = 0.0015, Holm-adjusted p = 0.024) survives correction. Its bootstrap interval [−0.877, 0.113] still crosses zero, and it is an exploratory analysis on 18 rows. Treat it as a lead, not a law.", d:"Results"},
+    {q:"What does a lower bits-per-byte (BPB) value mean?", o:["The model needs fewer bits to encode each byte, so it predicts the text better","The model has fewer parameters","The tokenizer has a smaller vocabulary","The text is shorter"], a:0, e:"BPB normalises loss by the number of bytes, which makes it comparable across tokenizers with different vocabularies. Lower is better: fewer bits per byte means better prediction.", d:"Foundation"},
+    {q:"Why does the baseline use only eight features, and why does that matter?", o:["Because more features were unavailable","To make the comparison fair: can 72 expensive descriptors beat the cheap measurements a competent team already has?","Because eight is the legal maximum","To hide the topology result"], a:1, e:"The baseline is deliberately boring. If sophisticated features cannot beat eight cheap statistics out of corpus, the burden of proof is on the sophisticated features. That is exactly what happened.", d:"Method"},
+    {q:"You run an LLM product and want to use this work tomorrow. What is the most defensible first action?", o:["Add persistent homology to your feature pipeline","Measure bytes per token and BPB for your candidate tokenizers on your own traffic, then convert the difference into tokens and cost","Switch to the largest vocabulary available","Ignore tokenization because model size dominates"], a:1, e:"Measure first, on your own distribution. Use the harness and the explorer to translate compression into token volume and budget. The negative result tells you where not to spend engineering time; the measurement tells you where the money is.", d:"Business"}
+  ];
+  let qi = 0, score = 0, answered = false;
+  const qText = $("#qText"), qOpts = $("#qOpts"), qFb = $("#qFb"), qNext = $("#qNext"), qBar = $("#qBar"), qCount = $("#qCount"), qScoreTop = $("#qScoreTop"), qHint = $("#qHint");
+  function renderQ(){
+    answered = false;
+    const q = QUESTIONS[qi];
+    qText.textContent = q.q;
+    qCount.textContent = `Question ${qi+1} of ${QUESTIONS.length}`;
+    qScoreTop.textContent = `Score ${score}`;
+    qBar.style.width = ((qi) / QUESTIONS.length * 100) + "%";
+    qHint.textContent = "Choose one answer";
+    qFb.className = "qfb"; qFb.innerHTML = "";
+    qNext.style.display = "none";
+    qOpts.innerHTML = "";
+    q.o.forEach((opt, i) => {
+      const b = document.createElement("button");
+      b.className = "qopt";
+      b.innerHTML = `<span class="letter">${String.fromCharCode(65+i)}</span><span>${esc(opt)}</span>`;
+      b.addEventListener("click", () => choose(i));
+      qOpts.appendChild(b);
+    });
+  }
+  function choose(i){
+    if(answered) return;
+    answered = true;
+    const q = QUESTIONS[qi];
+    const buttons = $$(".qopt", qOpts);
+    buttons.forEach((b, j) => {
+      b.disabled = true;
+      if(j === q.a) b.classList.add("correct");
+      if(j === i && i !== q.a) b.classList.add("wrong");
+    });
+    if(i === q.a){ score++; qScoreTop.textContent = `Score ${score}`; qFb.className = "qfb show good"; qFb.innerHTML = `<b>Correct.</b> ${esc(q.e)}`; }
+    else { qFb.className = "qfb show bad"; qFb.innerHTML = `<b>Not quite.</b> The correct answer is <b>${String.fromCharCode(65+q.a)}</b>. ${esc(q.e)}`; }
+    qHint.textContent = q.d + " · explanation above";
+    qNext.style.display = "inline-flex";
+    qNext.textContent = qi === QUESTIONS.length - 1 ? "See my result" : "Next question";
+  }
+  qNext.addEventListener("click", () => {
+    qi++;
+    if(qi >= QUESTIONS.length){ finishQuiz(); } else { renderQ(); }
+  });
+  function finishQuiz(){
+    $("#qBody").style.display = "none";
+    $("#qResult").classList.add("show");
+    qBar.style.width = "100%";
+    qCount.textContent = "Complete";
+    $("#qFinal").textContent = score + "/" + QUESTIONS.length;
+    const ratio = score / QUESTIONS.length;
+    let msg, sub;
+    if(ratio === 1){ msg = "Flawless. You can defend this benchmark in a room."; sub = "You understand tokenization economics, the LOCO design, the permutation test, and the one surviving exploratory result. That is more than most interview candidates."; }
+    else if(ratio >= .8){ msg = "Excellent. You are operating above the field."; sub = "Revisit the questions you missed, then read the protocol for the details. You already have the mental model."; }
+    else if(ratio >= .6){ msg = "Solid. The core idea is in place."; sub = "Focus on the difference between R², permutation p-values, and Holm correction. Those three separate a summary from an argument."; }
+    else if(ratio >= .4){ msg = "Good start. The intuition is forming."; sub = "Read the beginner guide sections on LOCO, permutations, and R², then retake this. The second pass will feel very different."; }
+    else { msg = "You are at the beginning — which is exactly where everyone starts."; sub = "Open the beginner guide, read the first five cards, and come back. This page is designed to take you from zero to confident in one sitting."; }
+    $("#qMsg").textContent = msg;
+    $("#qSub").textContent = sub;
+  }
+  $("#qRetry").addEventListener("click", () => {
+    qi = 0; score = 0; answered = false;
+    $("#qResult").classList.remove("show");
+    $("#qBody").style.display = "block";
+    renderQ();
+  });
+  renderQ();
+})();
+</script>
+
+<script type="module">
+const DATA = window.DATA;
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const famColor = {bpe:0x5eead4, unigram:0xf472b6};
+const famHex = {bpe:"#5eead4", unigram:"#f472b6"};
+
+function colorRamp(t){
+  const stops = [[34,211,238],[94,234,212],[251,191,36],[244,114,182]];
+  const x = Math.max(0, Math.min(1, t)) * (stops.length - 1);
+  const i = Math.min(stops.length - 2, Math.floor(x));
+  const f = x - i;
+  const a = stops[i], b = stops[i+1];
+  return `rgb(${Math.round(a[0]+(b[0]-a[0])*f)},${Math.round(a[1]+(b[1]-a[1])*f)},${Math.round(a[2]+(b[2]-a[2])*f)})`;
+}
+function toHex(rgb){
+  const m = rgb.match(/\d+/g);
+  return (m[0]<<16) + (m[1]<<8) + Number(m[2]);
+}
+
+function renderFallback2D(){
+  const mount = document.getElementById("fallback2d");
+  if(!mount || mount.dataset.done) return;
+  const pts = DATA.pca.points;
+  const xs = pts.map(p=>p.x), ys = pts.map(p=>p.y);
+  const xmin=Math.min(...xs), xmax=Math.max(...xs), ymin=Math.min(...ys), ymax=Math.max(...ys);
+  const W=800, H=520, pad=40;
+  const sx = v => pad + (v-xmin)/(xmax-xmin)*(W-2*pad);
+  const sy = v => pad + (ymax-v)/(ymax-ymin)*(H-2*pad);
+  const cmin = Math.min(...pts.map(p=>p.compression)), cmax = Math.max(...pts.map(p=>p.compression));
+  mount.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="2D PCA fallback">` + pts.map(p => {
+    const c = famHex[p.family];
+    return `<circle cx="${sx(p.x).toFixed(1)}" cy="${sy(p.y).toFixed(1)}" r="${(5+Math.log2(p.vocab/8192)*2).toFixed(1)}" fill="${c}" opacity=".8"><title>${p.label} · ${p.family.toUpperCase()} · ${p.vocab} · ${p.compression.toFixed(3)} bytes/token</title></circle>`;
+  }).join("") + `<text x="${W/2}" y="${H-8}" fill="#64748b" font-size="11" text-anchor="middle">PC1 →</text><text x="12" y="${H/2}" fill="#64748b" font-size="11" transform="rotate(-90 12 ${H/2})" text-anchor="middle">PC2 →</text></svg>`;
+  mount.dataset.done = "1";
+}
+
+function webglOK(){
+  try {
+    const c = document.createElement("canvas");
+    return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl")));
+  } catch(e){ return false; }
+}
+
+let THREE, OrbitControls;
+try {
+  THREE = await import("three");
+  ({ OrbitControls } = await import("three/addons/controls/OrbitControls.js"));
+} catch (err) {
+  document.body.classList.add("no-webgl");
+  renderFallback2D();
+}
+
+if (THREE && !webglOK()) {
+  document.body.classList.add("no-webgl");
+  renderFallback2D();
+}
+
+if (THREE && webglOK()) {
+  const basePts = DATA.pca.points;
+  const maxAbs = Math.max(...basePts.flatMap(p => [Math.abs(p.x), Math.abs(p.y), Math.abs(p.z)])) || 1;
+  const SCALE = 3.4 / maxAbs;
+  const cMin = Math.min(...basePts.map(p => p.compression));
+  const cMax = Math.max(...basePts.map(p => p.compression));
+  const bVals = basePts.filter(p => p.bpb !== null).map(p => p.bpb);
+  const bMin = Math.min(...bVals), bMax = Math.max(...bVals);
+  const allColors = {family:null, compression:null, bpb:null};
+
+  function makeLights(scene, intensity){
+    scene.add(new THREE.AmbientLight(0x9fb3c8, .75 * intensity));
+    const key = new THREE.DirectionalLight(0xffffff, 1.6 * intensity);
+    key.position.set(6, 9, 7); scene.add(key);
+    const p1 = new THREE.PointLight(0x5eead4, 28 * intensity, 30); p1.position.set(-7, 4, 5); scene.add(p1);
+    const p2 = new THREE.PointLight(0xf472b6, 22 * intensity, 30); p2.position.set(7, -4, -5); scene.add(p2);
+  }
+  function makeStars(count, radius, color){
+    const g = new THREE.BufferGeometry();
+    const arr = new Float32Array(count * 3);
+    for(let i=0;i<count;i++){
+      const r = radius * (0.55 + Math.random()*0.45);
+      const th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1);
+      arr[i*3] = r*Math.sin(ph)*Math.cos(th);
+      arr[i*3+1] = r*Math.cos(ph)*0.6;
+      arr[i*3+2] = r*Math.sin(ph)*Math.sin(th);
+    }
+    g.setAttribute("position", new THREE.BufferAttribute(arr, 3));
+    const m = new THREE.PointsMaterial({color, size:.03, transparent:true, opacity:.65, depthWrite:false});
+    return new THREE.Points(g, m);
+  }
+
+  /* hero scene */
+  const heroCanvas = document.getElementById("heroCanvas");
+  if (heroCanvas) {
+    const renderer = new THREE.WebGLRenderer({canvas:heroCanvas, alpha:true, antialias:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x05080d, .045);
+    const camera = new THREE.PerspectiveCamera(48, 1, .1, 100);
+    camera.position.set(0, .6, 13);
+    makeLights(scene, .75);
+    const group = new THREE.Group();
+    scene.add(group);
+    basePts.forEach(p => {
+      const r = .07 + (Math.log2(p.vocab) - 13) * .025;
+      const col = famColor[p.family];
+      const mesh = new THREE.Mesh(new THREE.SphereGeometry(r, 18, 14), new THREE.MeshStandardMaterial({color:col, emissive:col, emissiveIntensity:.5, roughness:.35, metalness:.15, transparent:true, opacity:.85}));
+      mesh.position.set(p.x*SCALE*.8, p.y*SCALE*.8, p.z*SCALE*.8);
+      group.add(mesh);
+    });
+    group.add(makeStars(420, 11, 0x3b5068));
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(4.6, .006, 8, 140), new THREE.MeshBasicMaterial({color:0x5eead4, transparent:true, opacity:.18}));
+    ring.rotation.x = Math.PI/2.4; ring.rotation.y = .3; scene.add(ring);
+    let running = true;
+    const resize = () => {
+      const w = heroCanvas.clientWidth || window.innerWidth, h = heroCanvas.clientHeight || window.innerHeight;
+      renderer.setSize(w, h, false); camera.aspect = w/h; camera.updateProjectionMatrix();
+    };
+    resize(); window.addEventListener("resize", resize);
+    new IntersectionObserver(es => { running = es[0].isIntersecting; }, {threshold:0}).observe(heroCanvas);
+    const clock = new THREE.Clock();
+    function loop(){
+      requestAnimationFrame(loop);
+      if(!running) return;
+      const t = clock.getElapsedTime();
+      if(!reduce){ group.rotation.y = t * .05; group.rotation.x = Math.sin(t*.12)*.06; }
+      renderer.render(scene, camera);
+    }
+    loop();
+  }
+
+  /* main scene */
+  const canvas = document.getElementById("mapCanvas");
+  const wrap = document.getElementById("sceneWrap");
+  const tooltip = document.getElementById("tooltip");
+  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x04070c, .028);
+  const camera = new THREE.PerspectiveCamera(42, 1, .1, 120);
+  const HOME = new THREE.Vector3(5.4, 3.4, 7.6);
+  camera.position.copy(HOME);
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  controls.dampingFactor = .06;
+  controls.rotateSpeed = .65;
+  controls.zoomSpeed = .8;
+  controls.minDistance = 4.2;
+  controls.maxDistance = 16;
+  controls.autoRotate = !reduce;
+  controls.autoRotateSpeed = .55;
+  controls.target.set(0,0,0);
+  makeLights(scene, 1);
+  scene.add(makeStars(650, 15, 0x2a3d55));
+
+  const grid = new THREE.GridHelper(12, 24, 0x16324a, 0x0b1a28);
+  grid.position.y = -3.6;
+  grid.material.transparent = true; grid.material.opacity = .38;
+  scene.add(grid);
+
+  const spheres = [];
+  const group = new THREE.Group();
+  scene.add(group);
+  basePts.forEach((p, i) => {
+    const radius = .10 + (Math.log2(p.vocab) - 13) * .035;
+    const geo = new THREE.SphereGeometry(radius, 24, 18);
+    const mat = new THREE.MeshStandardMaterial({color:famColor[p.family], emissive:famColor[p.family], emissiveIntensity:.42, roughness:.32, metalness:.18});
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.position.set(p.x*SCALE, p.y*SCALE, p.z*SCALE);
+    mesh.userData = {p, base:radius};
+    group.add(mesh); spheres.push(mesh);
+  });
+
+  function colorFor(p, mode){
+    if(mode === "family") return famColor[p.family];
+    if(mode === "compression") return toHex(colorRamp((p.compression - cMin)/(cMax - cMin)));
+    if(mode === "bpb"){
+      if(p.bpb === null) return 0x475569;
+      return toHex(colorRamp((p.bpb - bMin)/(bMax - bMin)));
+    }
+    return famColor[p.family];
+  }
+  let colorMode = "family";
+  function applyColors(){
+    spheres.forEach(m => {
+      const col = colorFor(m.userData.p, colorMode);
+      m.material.color.setHex(col);
+      m.material.emissive.setHex(col);
+    });
+    const legend = document.getElementById("legend");
+    if(colorMode === "family"){
+      legend.innerHTML = `<span><i style="background:#5eead4"></i>BPE · 18</span><span><i style="background:#f472b6"></i>Unigram · 18</span>`;
+    } else if(colorMode === "compression"){
+      legend.innerHTML = `<span>low</span><span style="width:90px;height:8px;border-radius:4px;background:linear-gradient(90deg,#22d3ee,#5eead4,#fbbf24,#f472b6)"></span><span>high · bytes/token ${cMin.toFixed(1)}–${cMax.toFixed(1)}</span>`;
+    } else {
+      legend.innerHTML = `<span><i style="background:#475569"></i>Unigram (no LM)</span><span style="width:90px;height:8px;border-radius:4px;background:linear-gradient(90deg,#22d3ee,#5eead4,#fbbf24,#f472b6)"></span><span>BPB ${bMin.toFixed(2)}–${bMax.toFixed(2)}</span>`;
+    }
+  }
+  applyColors();
+
+  document.querySelectorAll(".scene-controls [data-color]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      colorMode = btn.dataset.color;
+      document.querySelectorAll(".scene-controls [data-color]").forEach(b => b.classList.toggle("on", b === btn));
+      applyColors();
+    });
+  });
+  const btnRotate = document.getElementById("btnRotate");
+  btnRotate.addEventListener("click", () => {
+    controls.autoRotate = !controls.autoRotate;
+    btnRotate.classList.toggle("on", controls.autoRotate);
+    btnRotate.setAttribute("aria-pressed", String(controls.autoRotate));
+  });
+  document.getElementById("btnReset").addEventListener("click", () => {
+    camera.position.copy(HOME); controls.target.set(0,0,0); controls.update();
+  });
+
+  const ray = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  let hovered = null;
+  canvas.addEventListener("pointermove", ev => {
+    const rect = wrap.getBoundingClientRect();
+    pointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
+    pointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
+    ray.setFromCamera(pointer, camera);
+    const hits = ray.intersectObjects(spheres, false);
+    if(hits.length){
+      const m = hits[0].object;
+      if(hovered && hovered !== m) hovered.scale.setScalar(1);
+      hovered = m;
+      m.scale.setScalar(1.45);
+      const p = m.userData.p;
+      tooltip.innerHTML = `<div class="tt">${p.label} · ${p.family.toUpperCase()}</div><div class="tr">vocab ${p.vocab.toLocaleString()} · compression ${p.compression.toFixed(3)} bytes/token</div><div class="tr">BPB ${p.bpb === null ? "not measured" : p.bpb.toFixed(3)} · H1 persistence ${p.h1_total.toFixed(2)}</div>`;
+      tooltip.style.left = (ev.clientX - rect.left) + "px";
+      tooltip.style.top = (ev.clientY - rect.top - 8) + "px";
+      tooltip.style.opacity = "1";
+      canvas.style.cursor = "pointer";
+    } else {
+      if(hovered){ hovered.scale.setScalar(1); hovered = null; }
+      tooltip.style.opacity = "0";
+      canvas.style.cursor = "grab";
+    }
+  });
+  canvas.addEventListener("pointerleave", () => {
+    if(hovered){ hovered.scale.setScalar(1); hovered = null; }
+    tooltip.style.opacity = "0";
+  });
+
+  const resizeMain = () => {
+    const w = wrap.clientWidth, h = wrap.clientHeight;
+    if(!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h; camera.updateProjectionMatrix();
+  };
+  new ResizeObserver(resizeMain).observe(wrap);
+  resizeMain();
+  document.getElementById("sceneTitle").textContent = `PCA · ${DATA.meta.tokenizers} tokenizers · ${DATA.meta.features} features`;
+
+  const clock = new THREE.Clock();
+  function loop(){
+    requestAnimationFrame(loop);
+    const t = clock.getElapsedTime();
+    if(!reduce){ group.position.y = Math.sin(t*.5)*.06; }
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  loop();
+}
+</script>
+</body>
+</html>

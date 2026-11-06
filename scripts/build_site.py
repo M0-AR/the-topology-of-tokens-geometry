@@ -17,6 +17,7 @@ from sklearn.preprocessing import StandardScaler
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
 SITE = ROOT / "site"
+REPO_BASE = "https://github.com/M0-AR/the-topology-of-tokens-geometry/blob/main"
 
 LABELS = {
     "wikitext_en": ("English Wikipedia", "English", "Latin", "WikiText-103"),
@@ -51,6 +52,27 @@ def _f(x):
 
 def _metrics(m):
     return {k: _f(m.get(k)) for k in ("r2", "mae", "rmse", "n")}
+
+
+def _redirect_html() -> str:
+    return (
+        "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+        "<meta http-equiv=\"refresh\" content=\"0; url=preview.html\">"
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+        "<title>TopoBPE — tokenizer intelligence</title>"
+        "<link rel=\"canonical\" href=\"preview.html\"></head>"
+        "<body style=\"background:#06090f;color:#e8eef7;font-family:system-ui;"
+        "display:grid;place-items:center;height:100vh;margin:0\">"
+        "<p>Opening <a style=\"color:#5eead4\" href=\"preview.html\">the TopoBPE showcase</a>…</p>"
+        "</body></html>"
+    )
+
+
+def _docs_mirror(html: str) -> str:
+    for prefix in ("artifacts/", "docs/", "results/"):
+        html = html.replace(f'href="{prefix}', f'href="{REPO_BASE}/{prefix}')
+    html = html.replace('href="LICENSE"', f'href="{REPO_BASE}/LICENSE"')
+    return html.replace('href="README.md"', f'href="{REPO_BASE}/README.md"')
 
 
 def main() -> None:
@@ -255,18 +277,15 @@ def main() -> None:
         raise SystemExit("template marker missing")
     html = template.replace(marker, json.dumps(payload, allow_nan=False, separators=(",", ":")))
     (ROOT / "preview.html").write_text(html)
-    (ROOT / "index.html").write_text(
-        "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
-        "<meta http-equiv=\"refresh\" content=\"0; url=preview.html\">"
-        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
-        "<title>TopoBPE — tokenizer intelligence</title>"
-        "<link rel=\"canonical\" href=\"preview.html\"></head>"
-        "<body style=\"background:#06090f;color:#e8eef7;font-family:system-ui;"
-        "display:grid;place-items:center;height:100vh;margin:0\">"
-        "<p>Opening <a style=\"color:#5eead4\" href=\"preview.html\">the TopoBPE showcase</a>…</p>"
-        "</body></html>"
+    (ROOT / "index.html").write_text(_redirect_html())
+    docs = ROOT / "docs"
+    (docs / "preview.html").write_text(_docs_mirror(html))
+    (docs / "index.html").write_text(_redirect_html())
+    (docs / ".nojekyll").touch()
+    print(
+        f"wrote preview.html ({len(html):,} bytes), index.html, "
+        "docs/preview.html, docs/index.html and .nojekyll files"
     )
-    print(f"wrote preview.html ({len(html):,} bytes) and index.html")
 
 
 if __name__ == "__main__":
