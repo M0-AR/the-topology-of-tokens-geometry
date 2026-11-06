@@ -1,0 +1,1886 @@
+{
+  "bpb_rows": 18,
+  "comparisons": {
+    "baseline8_plus_merge": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.9949566130548783,
+          "ci_low": 0.9668092353915058,
+          "iterations": 200,
+          "mean": 0.9828554813592
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": -0.18990005802921625,
+          "ci_low": -74.77241887589429,
+          "iterations": 200,
+          "mean": -19.68861284745209,
+          "p_bootstrap": 1.0
+        },
+        "full": {
+          "ci_high": 0.8026264766074923,
+          "ci_low": -73.78267046188198,
+          "iterations": 200,
+          "mean": -18.705757366092893
+        },
+        "topology": {
+          "ci_high": 0.7207053336552284,
+          "ci_low": -43.3184666805381,
+          "iterations": 200,
+          "mean": -11.019587563333893
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.11109578273833787,
+          "n": 42.0,
+          "r2": 0.9806049930610891,
+          "rmse": 0.16467099779359956
+        },
+        "full": {
+          "mae": 1.7685754206147903,
+          "n": 42.0,
+          "r2": -13.548284356684706,
+          "rmse": 4.510015535832128
+        },
+        "topology": {
+          "mae": 1.646296453138371,
+          "n": 42.0,
+          "r2": -8.02144590278341,
+          "rmse": 3.551486940175115
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": -0.024477479906473122,
+        "null_mean": -0.07117060732062212,
+        "observed_delta_r2": -2.6179682661326895,
+        "p_value": 1.0
+      },
+      "target": "test_compression"
+    },
+    "baseline8_plus_selected": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.9949566130548783,
+          "ci_low": 0.9668092353915058,
+          "iterations": 200,
+          "mean": 0.9828554813592
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.010968478223504996,
+          "ci_low": -2.1642637690746542,
+          "iterations": 200,
+          "mean": -0.6084107586679384,
+          "p_bootstrap": 0.9402985074626866
+        },
+        "full": {
+          "ci_high": 0.9907730440698054,
+          "ci_low": -1.174567211914519,
+          "iterations": 200,
+          "mean": 0.3744447226912615
+        },
+        "topology": {
+          "ci_high": 0.8360022101822939,
+          "ci_low": -70.18907046789545,
+          "iterations": 200,
+          "mean": -17.89224919662615
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.11109578273833787,
+          "n": 42.0,
+          "r2": 0.9806049930610891,
+          "rmse": 0.16467099779359956
+        },
+        "full": {
+          "mae": 0.41099888329109674,
+          "n": 42.0,
+          "r2": 0.5337215474967779,
+          "rmse": 0.8074112951458109
+        },
+        "topology": {
+          "mae": 1.8819061854323127,
+          "n": 42.0,
+          "r2": -13.022942422173161,
+          "rmse": 4.427837996996745
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": -0.0006334864007001797,
+        "null_mean": -0.00832344793941197,
+        "observed_delta_r2": -0.3511704746360166,
+        "p_value": 1.0
+      },
+      "target": "test_compression"
+    },
+    "bpb_baseline8_plus_merge": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.9159999657043875,
+          "ci_low": -0.03627605640037953,
+          "iterations": 200,
+          "mean": 0.760821500933066
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": -0.9503753738331341,
+          "ci_low": -1153.7939592091545,
+          "iterations": 200,
+          "mean": -362.28474015609464,
+          "p_bootstrap": 0.9950248756218906
+        },
+        "full": {
+          "ci_high": -0.288056746490872,
+          "ci_low": -1152.966263610466,
+          "iterations": 200,
+          "mean": -361.5239186551616
+        },
+        "topology": {
+          "ci_high": -0.9204384702233457,
+          "ci_low": -1567.7329924070646,
+          "iterations": 200,
+          "mean": -492.2069021282514
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.09080055337630928,
+          "n": 18.0,
+          "r2": 0.8799444684577533,
+          "rmse": 0.10703699667518915
+        },
+        "full": {
+          "mae": 2.1349496177806735,
+          "n": 18.0,
+          "r2": -349.38584356861566,
+          "rmse": 5.782506145899556
+        },
+        "topology": {
+          "mae": 2.512236357101935,
+          "n": 18.0,
+          "r2": -475.4305381865789,
+          "rmse": 6.742836404573979
+        }
+      },
+      "n": 18,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": -0.09527981290909475,
+        "null_mean": -0.8171193140480564,
+        "observed_delta_r2": -661.5830426131057,
+        "p_value": 1.0
+      },
+      "target": "bpb_mean"
+    },
+    "bpb_lean_plus_merge": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.987732688861796,
+          "ci_low": 0.055744346765645984,
+          "iterations": 200,
+          "mean": 0.845810669966319
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": -1.2405953907155618,
+          "ci_low": -1302.9447452484458,
+          "iterations": 200,
+          "mean": -409.20776234811063,
+          "p_bootstrap": 0.9950248756218906
+        },
+        "full": {
+          "ci_high": -0.4767605207623895,
+          "ci_low": -1301.985700367381,
+          "iterations": 200,
+          "mean": -408.36195167814435
+        },
+        "topology": {
+          "ci_high": -0.9204384702233457,
+          "ci_low": -1567.7329924070646,
+          "iterations": 200,
+          "mean": -492.2069021282514
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.05254743910015833,
+          "n": 18.0,
+          "r2": 0.9510157985183565,
+          "rmse": 0.06837082868274894
+        },
+        "full": {
+          "mae": 2.265906722984012,
+          "n": 18.0,
+          "r2": -394.64729892157084,
+          "rmse": 6.144646880102993
+        },
+        "topology": {
+          "mae": 2.512236357101935,
+          "n": 18.0,
+          "r2": -475.4305381865789,
+          "rmse": 6.742836404573979
+        }
+      },
+      "n": 18,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": -0.044222463370022,
+        "null_mean": -2.224599058345513,
+        "observed_delta_r2": -772.7042441632062,
+        "p_value": 1.0
+      },
+      "target": "bpb_mean"
+    },
+    "bpb_lean_plus_selected": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.987732688861796,
+          "ci_low": 0.055744346765645984,
+          "iterations": 200,
+          "mean": 0.845810669966319
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": -0.3359231787911202,
+          "ci_low": -7714.546030166636,
+          "iterations": 200,
+          "mean": -2416.997492673643,
+          "p_bootstrap": 0.9751243781094527
+        },
+        "full": {
+          "ci_high": 0.3708775275104593,
+          "ci_low": -7713.586985285571,
+          "iterations": 200,
+          "mean": -2416.1516820036773
+        },
+        "topology": {
+          "ci_high": -0.3432750921157763,
+          "ci_low": -2819.601574952039,
+          "iterations": 200,
+          "mean": -883.6132597206907
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.05254743910015833,
+          "n": 18.0,
+          "r2": 0.9510157985183565,
+          "rmse": 0.06837082868274894
+        },
+        "full": {
+          "mae": 5.103091874272208,
+          "n": 18.0,
+          "r2": -2338.3231056880586,
+          "rmse": 14.941284405814947
+        },
+        "topology": {
+          "mae": 3.2483684328416036,
+          "n": 18.0,
+          "r2": -854.7220172609001,
+          "rmse": 9.036685761111187
+        }
+      },
+      "n": 18,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.043221790551348,
+        "null_mean": -0.9395182811893198,
+        "observed_delta_r2": -4511.633724696297,
+        "p_value": 1.0
+      },
+      "target": "bpb_mean"
+    },
+    "bpb_size_plus_merge": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.008463193738702426,
+          "ci_low": -1.6769551180460993,
+          "iterations": 200,
+          "mean": -0.6389865486124306
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": -0.04401526841066915,
+          "ci_low": -1573.5809014517647,
+          "iterations": 200,
+          "mean": -493.8300224165604,
+          "p_bootstrap": 0.9900497512437811
+        },
+        "full": {
+          "ci_high": -0.9137093322654328,
+          "ci_low": -1574.9788018583008,
+          "iterations": 200,
+          "mean": -494.46900896517286
+        },
+        "topology": {
+          "ci_high": -0.9204384702233457,
+          "ci_low": -1567.7329924070646,
+          "iterations": 200,
+          "mean": -492.2069021282514
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.258966310936758,
+          "n": 18.0,
+          "r2": -0.4032125359076024,
+          "rmse": 0.3659355102640352
+        },
+        "full": {
+          "mae": 2.5170956390379544,
+          "n": 18.0,
+          "r2": -477.62374797958915,
+          "rmse": 6.75833863768659
+        },
+        "topology": {
+          "mae": 2.512236357101935,
+          "n": 18.0,
+          "r2": -475.4305381865789,
+          "rmse": 6.742836404573979
+        }
+      },
+      "n": 18,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.2546453418832806,
+        "null_mean": -14.109268320321133,
+        "observed_delta_r2": -1212.5195391583889,
+        "p_value": 0.9917355371900827
+      },
+      "target": "bpb_mean"
+    },
+    "bpb_size_plus_selected": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.008463193738702426,
+          "ci_low": -1.6769551180460993,
+          "iterations": 200,
+          "mean": -0.6389865486124306
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.8816388549003492,
+          "ci_low": -11592.550944751372,
+          "iterations": 200,
+          "mean": -3631.455325875823,
+          "p_bootstrap": 0.7661691542288557
+        },
+        "full": {
+          "ci_high": -0.23050732364120938,
+          "ci_low": -11593.94884515791,
+          "iterations": 200,
+          "mean": -3632.094312424435
+        },
+        "topology": {
+          "ci_high": -0.3432750921157763,
+          "ci_low": -2819.601574952039,
+          "iterations": 200,
+          "mean": -883.6132597206907
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.258966310936758,
+          "n": 18.0,
+          "r2": -0.4032125359076024,
+          "rmse": 0.3659355102640352
+        },
+        "full": {
+          "mae": 6.3319546232290405,
+          "n": 18.0,
+          "r2": -3515.0840643275374,
+          "rmse": 18.317763700257505
+        },
+        "topology": {
+          "mae": 3.2483684328416036,
+          "n": 18.0,
+          "r2": -854.7220172609001,
+          "rmse": 9.036685761111187
+        }
+      },
+      "n": 18,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.2493813978534681,
+        "null_mean": -1.0271638919056392,
+        "observed_delta_r2": -9884.817703185534,
+        "p_value": 1.0
+      },
+      "target": "bpb_mean"
+    },
+    "bpb_size_plus_selected_within_size": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": -0.0020029108200694257,
+          "ci_low": -0.0596105831466921,
+          "iterations": 200,
+          "mean": -0.021596323485139575
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.8812150131376065,
+          "ci_low": 0.8110010757013685,
+          "iterations": 200,
+          "mean": 0.836125897125983,
+          "p_bootstrap": 0.004975124378109453
+        },
+        "full": {
+          "ci_high": 0.8293305247155939,
+          "ci_low": 0.7896055644478646,
+          "iterations": 200,
+          "mean": 0.8145295736408434
+        },
+        "topology": {
+          "ci_high": 0.8266333071941354,
+          "ci_low": 0.7696233682324214,
+          "iterations": 200,
+          "mean": 0.7986481130447385
+        }
+      },
+      "grouping": "requested_vocab_size",
+      "metrics": {
+        "baseline": {
+          "mae": 0.2262728787430103,
+          "n": 18.0,
+          "r2": -0.013448068434704918,
+          "rmse": 0.31098796108697074
+        },
+        "full": {
+          "mae": 0.11491790059635326,
+          "n": 18.0,
+          "r2": 0.8164624279874837,
+          "rmse": 0.13234432354732362
+        },
+        "topology": {
+          "mae": 0.11461531315374798,
+          "n": 18.0,
+          "r2": 0.8007632107833502,
+          "rmse": 0.13788835626856538
+        }
+      },
+      "n": 18,
+      "permutation": {
+        "baseline_alphas": {
+          "16384": 10.0,
+          "32768": 10.0,
+          "8192": 10.0
+        },
+        "full_alphas": {
+          "16384": 10.0,
+          "32768": 10.0,
+          "8192": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.06657267172926856,
+        "null_mean": -1005.6906266677862,
+        "observed_delta_r2": 0.8084155932970705,
+        "p_value": 0.008264462809917356
+      },
+      "target": "bpb_mean"
+    },
+    "bpb_size_poly_plus_selected_within_size": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.028978908606818732,
+          "ci_low": -0.005945867723521724,
+          "iterations": 200,
+          "mean": 0.013880382370293825
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.8324908582877443,
+          "ci_low": 0.7953778318876868,
+          "iterations": 200,
+          "mean": 0.8117219789645221,
+          "p_bootstrap": 0.004975124378109453
+        },
+        "full": {
+          "ci_high": 0.8308358384399307,
+          "ci_low": 0.8187344309128062,
+          "iterations": 200,
+          "mean": 0.8256023613348162
+        },
+        "topology": {
+          "ci_high": 0.8266333071941354,
+          "ci_low": 0.7696233682324214,
+          "iterations": 200,
+          "mean": 0.7986481130447385
+        }
+      },
+      "grouping": "requested_vocab_size",
+      "metrics": {
+        "baseline": {
+          "mae": 0.21684639007863193,
+          "n": 18.0,
+          "r2": 0.02215967287485532,
+          "rmse": 0.3054757919523019
+        },
+        "full": {
+          "mae": 0.11024404369820687,
+          "n": 18.0,
+          "r2": 0.8271164908432802,
+          "rmse": 0.1284457124458292
+        },
+        "topology": {
+          "mae": 0.11461531315374798,
+          "n": 18.0,
+          "r2": 0.8007632107833502,
+          "rmse": 0.13788835626856538
+        }
+      },
+      "n": 18,
+      "permutation": {
+        "baseline_alphas": {
+          "16384": 10.0,
+          "32768": 10.0,
+          "8192": 10.0
+        },
+        "full_alphas": {
+          "16384": 10.0,
+          "32768": 10.0,
+          "8192": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.056647432436760556,
+        "null_mean": -1007.4274664667789,
+        "observed_delta_r2": 0.8061873089968629,
+        "p_value": 0.008264462809917356
+      },
+      "target": "bpb_mean"
+    },
+    "lean_plus_merge": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.8064544088927061,
+          "ci_low": 0.09984811361910423,
+          "iterations": 200,
+          "mean": 0.5160133374173502
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.1513730785833029,
+          "ci_low": -184.1235542258336,
+          "iterations": 200,
+          "mean": -48.00846246818699,
+          "p_bootstrap": 0.945273631840796
+        },
+        "full": {
+          "ci_high": 0.6523991472918722,
+          "ci_low": -183.5802108778095,
+          "iterations": 200,
+          "mean": -47.49244913076964
+        },
+        "topology": {
+          "ci_high": 0.7207053336552284,
+          "ci_low": -43.3184666805381,
+          "iterations": 200,
+          "mean": -11.019587563333893
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.6593216512717126,
+          "n": 42.0,
+          "r2": 0.5315754900032129,
+          "rmse": 0.8092672267991131
+        },
+        "full": {
+          "mae": 2.6653506185114018,
+          "n": 42.0,
+          "r2": -34.75203219069498,
+          "rmse": 7.0700504647399525
+        },
+        "topology": {
+          "mae": 1.646296453138371,
+          "n": 42.0,
+          "r2": -8.02144590278341,
+          "rmse": 3.551486940175115
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.017364123054660393,
+        "null_mean": -0.2195299357499102,
+        "observed_delta_r2": -4.55364506080304,
+        "p_value": 1.0
+      },
+      "target": "test_compression"
+    },
+    "lean_plus_selected": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.8064544088927061,
+          "ci_low": 0.09984811361910423,
+          "iterations": 200,
+          "mean": 0.5160133374173502
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.052375561036067775,
+          "ci_low": -60.69600146795537,
+          "iterations": 200,
+          "mean": -15.795082007172718,
+          "p_bootstrap": 0.8208955223880597
+        },
+        "full": {
+          "ci_high": 0.7237963406098255,
+          "ci_low": -60.15259824029661,
+          "iterations": 200,
+          "mean": -15.27906866975537
+        },
+        "topology": {
+          "ci_high": 0.8360022101822939,
+          "ci_low": -70.18907046789545,
+          "iterations": 200,
+          "mean": -17.89224919662615
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.6593216512717126,
+          "n": 42.0,
+          "r2": 0.5315754900032129,
+          "rmse": 0.8092672267991131
+        },
+        "full": {
+          "mae": 1.8577642716262162,
+          "n": 42.0,
+          "r2": -11.043005362783168,
+          "rmse": 4.103359685047223
+        },
+        "topology": {
+          "mae": 1.8819061854323127,
+          "n": 42.0,
+          "r2": -13.022942422173161,
+          "rmse": 4.427837996996745
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.03143793341195642,
+        "null_mean": -0.009111953363183052,
+        "observed_delta_r2": -1.0682176859573094,
+        "p_value": 1.0
+      },
+      "target": "test_compression"
+    },
+    "lean_plus_selected_within_size": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.8351622234417281,
+          "ci_low": 0.5195276168497551,
+          "iterations": 200,
+          "mean": 0.7009133472801465
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.41206779797189924,
+          "ci_low": 0.13786490042577373,
+          "iterations": 200,
+          "mean": 0.26096885588036756,
+          "p_bootstrap": 0.004975124378109453
+        },
+        "full": {
+          "ci_high": 0.9766015859817763,
+          "ci_low": 0.935237698389556,
+          "iterations": 200,
+          "mean": 0.9618822031605141
+        },
+        "topology": {
+          "ci_high": 0.9610255464516665,
+          "ci_low": 0.7875738324415935,
+          "iterations": 200,
+          "mean": 0.9056337811813635
+        }
+      },
+      "grouping": "requested_vocab_size",
+      "metrics": {
+        "baseline": {
+          "mae": 0.45683631322499363,
+          "n": 42.0,
+          "r2": 0.7276112800143303,
+          "rmse": 0.6171158582816317
+        },
+        "full": {
+          "mae": 0.15794823786619136,
+          "n": 42.0,
+          "r2": 0.9652560245466716,
+          "rmse": 0.22040015831802912
+        },
+        "topology": {
+          "mae": 0.2506716719733702,
+          "n": 42.0,
+          "r2": 0.9147147617966416,
+          "rmse": 0.34530994060376696
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "1024": 10.0,
+          "16384": 10.0,
+          "2048": 10.0,
+          "32768": 10.0,
+          "4096": 10.0,
+          "512": 10.0,
+          "8192": 10.0
+        },
+        "full_alphas": {
+          "1024": 10.0,
+          "16384": 10.0,
+          "2048": 10.0,
+          "32768": 10.0,
+          "4096": 10.0,
+          "512": 10.0,
+          "8192": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.007579551736116979,
+        "null_mean": -0.016382777150807323,
+        "observed_delta_r2": 0.08510568213449554,
+        "p_value": 0.008264462809917356
+      },
+      "target": "test_compression"
+    },
+    "pca3_selected": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.5829183706792854,
+          "ci_low": -0.17801991784218107,
+          "iterations": 200,
+          "mean": 0.20841810621655088
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.2359444616854942,
+          "ci_low": -75.27967968675003,
+          "iterations": 200,
+          "mean": -19.84252359746297,
+          "p_bootstrap": 0.6666666666666666
+        },
+        "full": {
+          "ci_high": 0.6407582316832731,
+          "ci_low": -74.7942933870764,
+          "iterations": 200,
+          "mean": -19.63410549124642
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.7514667533810936,
+          "n": 42.0,
+          "r2": 0.2119177458161885,
+          "rmse": 1.049682414668734
+        },
+        "full": {
+          "mae": 2.057022331952378,
+          "n": 42.0,
+          "r2": -14.570554305257485,
+          "rmse": 4.665779215589867
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "p_value": NaN
+      },
+      "target": "test_compression"
+    },
+    "size_plus_merge": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.6194481781319936,
+          "ci_low": -0.12436224262161112,
+          "iterations": 200,
+          "mean": 0.25668365319318975
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.3186955291768405,
+          "ci_low": -43.36928656654067,
+          "iterations": 200,
+          "mean": -11.162287313839888,
+          "p_bootstrap": 0.6865671641791045
+        },
+        "full": {
+          "ci_high": 0.7208387591983476,
+          "ci_low": -42.85958235167279,
+          "iterations": 200,
+          "mean": -10.9056036606467
+        },
+        "topology": {
+          "ci_high": 0.7207053336552284,
+          "ci_low": -43.3184666805381,
+          "iterations": 200,
+          "mean": -11.019587563333893
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.7495016769741704,
+          "n": 42.0,
+          "r2": 0.2296158759229281,
+          "rmse": 1.0378290180700582
+        },
+        "full": {
+          "mae": 1.6438026087280455,
+          "n": 42.0,
+          "r2": -7.94069564927352,
+          "rmse": 3.5355566721115617
+        },
+        "topology": {
+          "mae": 1.646296453138371,
+          "n": 42.0,
+          "r2": -8.02144590278341,
+          "rmse": 3.551486940175115
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": -0.1912855173562969,
+        "null_mean": -1.1057715585619392,
+        "observed_delta_r2": -4.1993347100555525,
+        "p_value": 0.9917355371900827
+      },
+      "target": "test_compression"
+    },
+    "size_plus_selected": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.6194481781319936,
+          "ci_low": -0.12436224262161112,
+          "iterations": 200,
+          "mean": 0.25668365319318975
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.39051050904534795,
+          "ci_low": -86.96543386261183,
+          "iterations": 200,
+          "mean": -22.408796269985242,
+          "p_bootstrap": 0.6865671641791045
+        },
+        "full": {
+          "ci_high": 0.7385852659909511,
+          "ci_low": -86.45572964774395,
+          "iterations": 200,
+          "mean": -22.152112616792053
+        },
+        "topology": {
+          "ci_high": 0.8360022101822939,
+          "ci_low": -70.18907046789545,
+          "iterations": 200,
+          "mean": -17.89224919662615
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.7495016769741704,
+          "n": 42.0,
+          "r2": 0.2296158759229281,
+          "rmse": 1.0378290180700582
+        },
+        "full": {
+          "mae": 2.060259590379712,
+          "n": 42.0,
+          "r2": -16.14571223921301,
+          "rmse": 4.896095865139947
+        },
+        "topology": {
+          "mae": 1.8819061854323127,
+          "n": 42.0,
+          "r2": -13.022942422173161,
+          "rmse": 4.427837996996745
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.039417976378950795,
+        "null_mean": -0.07978047689628258,
+        "observed_delta_r2": 0.0981535513803864,
+        "p_value": 0.01652892561983471
+      },
+      "target": "test_compression"
+    },
+    "size_plus_selected_within_size": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.13663366977584512,
+          "ci_low": -0.4290553969844332,
+          "iterations": 200,
+          "mean": -0.0146709083526896
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 1.357776757578523,
+          "ci_low": 0.7850520330902512,
+          "iterations": 200,
+          "mean": 0.9339774232661651,
+          "p_bootstrap": 0.004975124378109453
+        },
+        "full": {
+          "ci_high": 0.9599308384074111,
+          "ci_low": 0.8392338451111703,
+          "iterations": 200,
+          "mean": 0.9193065149134756
+        },
+        "topology": {
+          "ci_high": 0.9610255464516665,
+          "ci_low": 0.7875738324415935,
+          "iterations": 200,
+          "mean": 0.9056337811813635
+        }
+      },
+      "grouping": "requested_vocab_size",
+      "metrics": {
+        "baseline": {
+          "mae": 0.8698557576249721,
+          "n": 42.0,
+          "r2": 0.08839437204701883,
+          "rmse": 1.128952439184419
+        },
+        "full": {
+          "mae": 0.239648211551531,
+          "n": 42.0,
+          "r2": 0.9268137145305483,
+          "rmse": 0.3198799357009537
+        },
+        "topology": {
+          "mae": 0.2506716719733702,
+          "n": 42.0,
+          "r2": 0.9147147617966416,
+          "rmse": 0.34530994060376696
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "1024": 10.0,
+          "16384": 10.0,
+          "2048": 10.0,
+          "32768": 10.0,
+          "4096": 10.0,
+          "512": 10.0,
+          "8192": 10.0
+        },
+        "full_alphas": {
+          "1024": 10.0,
+          "16384": 10.0,
+          "2048": 10.0,
+          "32768": 10.0,
+          "4096": 10.0,
+          "512": 10.0,
+          "8192": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.12359267403438894,
+        "null_mean": -0.06508718252962949,
+        "observed_delta_r2": 0.7621976208846732,
+        "p_value": 0.008264462809917356
+      },
+      "target": "test_compression"
+    },
+    "size_poly_plus_merge_within_size": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.6770311308200976,
+          "ci_low": 0.2335229592992175,
+          "iterations": 200,
+          "mean": 0.5153331731718735
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.5492944954689523,
+          "ci_low": 0.08041671847623443,
+          "iterations": 200,
+          "mean": 0.2809944194985394,
+          "p_bootstrap": 0.004975124378109453
+        },
+        "full": {
+          "ci_high": 0.918824332309625,
+          "ci_low": 0.5564202231282668,
+          "iterations": 200,
+          "mean": 0.796327592670413
+        },
+        "topology": {
+          "ci_high": 0.9164157272135173,
+          "ci_low": 0.48086239079307613,
+          "iterations": 200,
+          "mean": 0.7708876360087785
+        }
+      },
+      "grouping": "requested_vocab_size",
+      "metrics": {
+        "baseline": {
+          "mae": 0.545322910643273,
+          "n": 42.0,
+          "r2": 0.5748754845870673,
+          "rmse": 0.7709571177095684
+        },
+        "full": {
+          "mae": 0.302698169635199,
+          "n": 42.0,
+          "r2": 0.8118875427693805,
+          "rmse": 0.5128388594070682
+        },
+        "topology": {
+          "mae": 0.31302205046399284,
+          "n": 42.0,
+          "r2": 0.7880262542080952,
+          "rmse": 0.5443938176416421
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "1024": 10.0,
+          "16384": 10.0,
+          "2048": 10.0,
+          "32768": 10.0,
+          "4096": 10.0,
+          "512": 10.0,
+          "8192": 10.0
+        },
+        "full_alphas": {
+          "1024": 10.0,
+          "16384": 10.0,
+          "2048": 10.0,
+          "32768": 10.0,
+          "4096": 10.0,
+          "512": 10.0,
+          "8192": 10.0
+        },
+        "iterations": 120,
+        "null_95": -0.08731514153674975,
+        "null_mean": -0.8324252902399379,
+        "observed_delta_r2": 0.3906750314269227,
+        "p_value": 0.008264462809917356
+      },
+      "target": "test_compression"
+    },
+    "size_poly_plus_selected": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.8761025144180523,
+          "ci_low": 0.009248766386231358,
+          "iterations": 200,
+          "mean": 0.4479737771223681
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.34449449000562726,
+          "ci_low": -109.40819456166044,
+          "iterations": 200,
+          "mean": -28.31508345486074,
+          "p_bootstrap": 0.7014925373134329
+        },
+        "full": {
+          "ci_high": 0.8610995719810537,
+          "ci_low": -108.63048467103911,
+          "iterations": 200,
+          "mean": -27.867109677738373
+        },
+        "topology": {
+          "ci_high": 0.8360022101822939,
+          "ci_low": -70.18907046789545,
+          "iterations": 200,
+          "mean": -17.89224919662615
+        }
+      },
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.6513877091506985,
+          "n": 42.0,
+          "r2": 0.38855598779855616,
+          "rmse": 0.924592775278901
+        },
+        "full": {
+          "mae": 2.1883900882044935,
+          "n": 42.0,
+          "r2": -20.33798725765404,
+          "rmse": 5.461964499806985
+        },
+        "topology": {
+          "mae": 1.8819061854323127,
+          "n": 42.0,
+          "r2": -13.022942422173161,
+          "rmse": 4.427837996996745
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "full_alphas": {
+          "codeparrot_py": 10.0,
+          "wikipedia_ar": 10.0,
+          "wikipedia_hu": 10.0,
+          "wikipedia_sw": 10.0,
+          "wikipedia_zh": 10.0,
+          "wikitext_en": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.01665612086324298,
+        "null_mean": -0.052484310284661335,
+        "observed_delta_r2": 0.16939370686710864,
+        "p_value": 0.008264462809917356
+      },
+      "target": "test_compression"
+    },
+    "size_poly_plus_selected_within_size": {
+      "bootstrap": {
+        "baseline": {
+          "ci_high": 0.6770311308200976,
+          "ci_low": 0.2335229592992175,
+          "iterations": 200,
+          "mean": 0.5153331731718735
+        },
+        "delta_full_minus_baseline": {
+          "ci_high": 0.7048658664130988,
+          "ci_low": 0.1957115056029003,
+          "iterations": 200,
+          "mean": 0.4115006759280658,
+          "p_bootstrap": 0.009950248756218905
+        },
+        "full": {
+          "ci_high": 0.9714422793964789,
+          "ci_low": 0.8260211297897654,
+          "iterations": 200,
+          "mean": 0.9268338490999394
+        },
+        "topology": {
+          "ci_high": 0.9610255464516665,
+          "ci_low": 0.7875738324415935,
+          "iterations": 200,
+          "mean": 0.9056337811813635
+        }
+      },
+      "grouping": "requested_vocab_size",
+      "metrics": {
+        "baseline": {
+          "mae": 0.545322910643273,
+          "n": 42.0,
+          "r2": 0.5748754845870673,
+          "rmse": 0.7709571177095684
+        },
+        "full": {
+          "mae": 0.22404487596084563,
+          "n": 42.0,
+          "r2": 0.9340048058590031,
+          "rmse": 0.3037584043454844
+        },
+        "topology": {
+          "mae": 0.2506716719733702,
+          "n": 42.0,
+          "r2": 0.9147147617966416,
+          "rmse": 0.34530994060376696
+        }
+      },
+      "n": 42,
+      "permutation": {
+        "baseline_alphas": {
+          "1024": 10.0,
+          "16384": 10.0,
+          "2048": 10.0,
+          "32768": 10.0,
+          "4096": 10.0,
+          "512": 10.0,
+          "8192": 10.0
+        },
+        "full_alphas": {
+          "1024": 10.0,
+          "16384": 10.0,
+          "2048": 10.0,
+          "32768": 10.0,
+          "4096": 10.0,
+          "512": 10.0,
+          "8192": 10.0
+        },
+        "iterations": 120,
+        "null_95": 0.04084766217923726,
+        "null_mean": -0.05254835259364231,
+        "observed_delta_r2": 0.34745559255147007,
+        "p_value": 0.008264462809917356
+      },
+      "target": "test_compression"
+    }
+  },
+  "created_at": "2026-11-06T12:17:50.316796+00:00",
+  "holdout_compression": {
+    "32768": {
+      "holdout_size": 32768,
+      "metrics": {
+        "baseline": {
+          "mae": 0.7749143912420426,
+          "n": 6.0,
+          "r2": -0.0036372454761524065,
+          "rmse": 1.056459288371756
+        },
+        "delta_r2": {
+          "value": 0.6835979673771202
+        },
+        "full": {
+          "mae": 0.45404346362621584,
+          "n": 6.0,
+          "r2": 0.6799607219009678,
+          "rmse": 0.5965763352099928
+        }
+      },
+      "n_test": 6,
+      "n_train": 36,
+      "target": "test_compression"
+    },
+    "512": {
+      "holdout_size": 512,
+      "metrics": {
+        "baseline": {
+          "mae": 0.3458650771599952,
+          "n": 6.0,
+          "r2": -0.00013664024266990538,
+          "rmse": 0.48224302746118375
+        },
+        "delta_r2": {
+          "value": 0.37925793861110946
+        },
+        "full": {
+          "mae": 0.3446482387477221,
+          "n": 6.0,
+          "r2": 0.37912129836843955,
+          "rmse": 0.3799615662172346
+        }
+      },
+      "n_test": 6,
+      "n_train": 36,
+      "target": "test_compression"
+    }
+  },
+  "importance_bpb": [
+    {
+      "coefficient": 0.03522409931319969,
+      "feature": "byte_entropy"
+    },
+    {
+      "coefficient": 0.030431874742416782,
+      "feature": "gzip_ratio"
+    },
+    {
+      "coefficient": -0.028615798351565924,
+      "feature": "merge_tree_mean_strahler"
+    },
+    {
+      "coefficient": -0.024812752303673708,
+      "feature": "merge_tree_mean_size"
+    },
+    {
+      "coefficient": -0.02356013581562744,
+      "feature": "merge_tree_mean_log_size"
+    },
+    {
+      "coefficient": -0.023313814182257187,
+      "feature": "merge_gain_mean"
+    },
+    {
+      "coefficient": -0.021022937875524755,
+      "feature": "merge_tree_std_depth"
+    },
+    {
+      "coefficient": -0.02063905695439485,
+      "feature": "merge_tree_mean_depth"
+    },
+    {
+      "coefficient": 0.0201997586700993,
+      "feature": "merge_graph_max_degree"
+    },
+    {
+      "coefficient": 0.01986568382902373,
+      "feature": "merge_gain_gini"
+    },
+    {
+      "coefficient": -0.016500052116402777,
+      "feature": "merge_graph_h0_std_persistence"
+    },
+    {
+      "coefficient": 0.01491861745680991,
+      "feature": "merge_gain_top10_share"
+    },
+    {
+      "coefficient": -0.013008315819405382,
+      "feature": "merge_gain_total"
+    },
+    {
+      "coefficient": 0.011584334320963893,
+      "feature": "conditional_entropy"
+    },
+    {
+      "coefficient": -0.010593846199616511,
+      "feature": "merge_tree_max_depth"
+    }
+  ],
+  "importance_compression": [
+    {
+      "coefficient": 0.17493292516322267,
+      "feature": "merge_tree_mean_size"
+    },
+    {
+      "coefficient": 0.16537157704996547,
+      "feature": "merge_gain_total"
+    },
+    {
+      "coefficient": -0.16305208140733343,
+      "feature": "byte_entropy"
+    },
+    {
+      "coefficient": 0.14158929871263196,
+      "feature": "merge_tree_mean_strahler"
+    },
+    {
+      "coefficient": 0.13400322729246314,
+      "feature": "merge_tree_mean_log_size"
+    },
+    {
+      "coefficient": 0.12137136919987833,
+      "feature": "merge_tree_mean_depth"
+    },
+    {
+      "coefficient": -0.10220109393111242,
+      "feature": "merge_graph_max_degree"
+    },
+    {
+      "coefficient": 0.09096795200998968,
+      "feature": "token_entropy"
+    },
+    {
+      "coefficient": 0.09096252513628432,
+      "feature": "type_token_ratio"
+    },
+    {
+      "coefficient": -0.08117493019086193,
+      "feature": "merge_gain_gini"
+    },
+    {
+      "coefficient": 0.07055750105249954,
+      "feature": "merge_tree_std_depth"
+    },
+    {
+      "coefficient": 0.06543485120018266,
+      "feature": "merge_gain_effective_count"
+    },
+    {
+      "coefficient": 0.0614067206652122,
+      "feature": "merge_gain_entropy"
+    },
+    {
+      "coefficient": 0.0513596450819416,
+      "feature": "conditional_entropy"
+    },
+    {
+      "coefficient": -0.050120093562209714,
+      "feature": "gzip_ratio"
+    }
+  ],
+  "merge_features": 63,
+  "merge_only_bpb": {
+    "n": 18,
+    "r2": -475.4305381865789,
+    "selected_alphas": {
+      "codeparrot_py": 100.0,
+      "wikipedia_ar": 10.0,
+      "wikipedia_hu": 100.0,
+      "wikipedia_sw": 0.01,
+      "wikipedia_zh": 100.0,
+      "wikitext_en": 100.0
+    },
+    "target": "bpb_mean"
+  },
+  "merge_only_compression": {
+    "n": 42,
+    "r2": -8.02144590278341,
+    "selected_alphas": {
+      "codeparrot_py": 10.0,
+      "wikipedia_ar": 1.0,
+      "wikipedia_hu": 100.0,
+      "wikipedia_sw": 100.0,
+      "wikipedia_zh": 1.0,
+      "wikitext_en": 100.0
+    },
+    "target": "test_compression"
+  },
+  "partial_bpb": [
+    {
+      "ci_high": 0.17351037232098446,
+      "ci_low": -0.9490112144026069,
+      "control": "test_compression",
+      "holm_p": 0.12396694214876033,
+      "iterations": 112,
+      "p_value": 0.008264462809917356,
+      "rho": -0.6705087079672138,
+      "target": "bpb_mean",
+      "variable": "merge_tree_mean_strahler"
+    },
+    {
+      "ci_high": 0.9447751988878486,
+      "ci_low": 0.6309950926026798,
+      "control": "test_compression",
+      "holm_p": 0.12396694214876033,
+      "iterations": 79,
+      "p_value": 0.008264462809917356,
+      "rho": 0.6600647923464723,
+      "target": "bpb_mean",
+      "variable": "merge_graph_h1_betti_at_0p2"
+    },
+    {
+      "ci_high": 0.9303726448572501,
+      "ci_low": 0.0005362927936264448,
+      "control": "test_compression",
+      "holm_p": 0.12396694214876033,
+      "iterations": 115,
+      "p_value": 0.008264462809917356,
+      "rho": 0.6552279210701238,
+      "target": "bpb_mean",
+      "variable": "merge_gain_max"
+    },
+    {
+      "ci_high": 0.9416795146589879,
+      "ci_low": 0.6163173714361369,
+      "control": "test_compression",
+      "holm_p": 0.12396694214876033,
+      "iterations": 79,
+      "p_value": 0.008264462809917356,
+      "rho": 0.6517186947435745,
+      "target": "bpb_mean",
+      "variable": "merge_graph_h1_count_0p05"
+    },
+    {
+      "ci_high": 0.9416795146589879,
+      "ci_low": 0.6163173714361369,
+      "control": "test_compression",
+      "holm_p": 0.12396694214876033,
+      "iterations": 79,
+      "p_value": 0.008264462809917356,
+      "rho": 0.6517186947435745,
+      "target": "bpb_mean",
+      "variable": "merge_graph_h1_betti_area"
+    },
+    {
+      "ci_high": 0.017544807276026145,
+      "ci_low": -0.9535266652278345,
+      "control": "test_compression",
+      "holm_p": 0.12396694214876033,
+      "iterations": 115,
+      "p_value": 0.008264462809917356,
+      "rho": -0.6086832087823197,
+      "target": "bpb_mean",
+      "variable": "merge_graph_components"
+    },
+    {
+      "ci_high": 0.025342411981899085,
+      "ci_low": -0.9549022811706347,
+      "control": "test_compression",
+      "holm_p": 0.12396694214876033,
+      "iterations": 115,
+      "p_value": 0.008264462809917356,
+      "rho": -0.598317336701084,
+      "target": "bpb_mean",
+      "variable": "merge_graph_h0_std_persistence"
+    },
+    {
+      "ci_high": 0.9588689933220245,
+      "ci_low": -0.6039014749829086,
+      "control": "test_compression",
+      "holm_p": 0.2644628099173554,
+      "iterations": 115,
+      "p_value": 0.03305785123966942,
+      "rho": 0.48445919593603776,
+      "target": "bpb_mean",
+      "variable": "merge_gain_top10_share"
+    },
+    {
+      "ci_high": 0.7498286617327131,
+      "ci_low": 0.21654401851622332,
+      "control": "test_compression",
+      "holm_p": 0.34710743801652894,
+      "iterations": 79,
+      "p_value": 0.05785123966942149,
+      "rho": 0.4712132456719963,
+      "target": "bpb_mean",
+      "variable": "merge_graph_h1_count_0p1"
+    },
+    {
+      "ci_high": 0.7498286617327131,
+      "ci_low": 0.21654401851622332,
+      "control": "test_compression",
+      "holm_p": 0.34710743801652894,
+      "iterations": 79,
+      "p_value": 0.05785123966942149,
+      "rho": 0.4712132456719963,
+      "target": "bpb_mean",
+      "variable": "merge_graph_h1_betti_at_0p4"
+    }
+  ],
+  "partial_compression": [
+    {
+      "ci_high": 0.9442974146807314,
+      "ci_low": 0.5824608644436613,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": 0.8873878835076555,
+      "target": "test_compression",
+      "variable": "merge_tree_mean_log_size"
+    },
+    {
+      "ci_high": 0.9493295025685243,
+      "ci_low": 0.37463196721971237,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": 0.8769988624734578,
+      "target": "test_compression",
+      "variable": "merge_tree_mean_strahler"
+    },
+    {
+      "ci_high": 0.9528612015845854,
+      "ci_low": 0.32964719289786953,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": 0.8613480234904586,
+      "target": "test_compression",
+      "variable": "merge_tree_mean_size"
+    },
+    {
+      "ci_high": 0.9323248224661087,
+      "ci_low": 0.41381315935189433,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": 0.8343030506333199,
+      "target": "test_compression",
+      "variable": "merge_tree_mean_depth"
+    },
+    {
+      "ci_high": -0.33094007595433894,
+      "ci_low": -0.9058676848859372,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": -0.7621015376361874,
+      "target": "test_compression",
+      "variable": "merge_gain_top10_share"
+    },
+    {
+      "ci_high": 0.9807780666228849,
+      "ci_low": -0.293186808810072,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": 0.6989333436325061,
+      "target": "test_compression",
+      "variable": "merge_gain_total"
+    },
+    {
+      "ci_high": -0.1479645559112214,
+      "ci_low": -0.8985792339752897,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": -0.6710093214532875,
+      "target": "test_compression",
+      "variable": "merge_gain_top1_share"
+    },
+    {
+      "ci_high": 0.8321941890377216,
+      "ci_low": 0.11924281758025952,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": 0.5687847875933701,
+      "target": "test_compression",
+      "variable": "merge_gain_entropy"
+    },
+    {
+      "ci_high": 0.8321941890377216,
+      "ci_low": 0.11924281758025952,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": 0.5687847875933701,
+      "target": "test_compression",
+      "variable": "merge_gain_effective_count"
+    },
+    {
+      "ci_high": NaN,
+      "ci_low": NaN,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 0,
+      "p_value": 0.008264462809917356,
+      "rho": NaN,
+      "target": "test_compression",
+      "variable": "merge_tree_tokens"
+    },
+    {
+      "ci_high": NaN,
+      "ci_low": NaN,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 0,
+      "p_value": 0.008264462809917356,
+      "rho": NaN,
+      "target": "test_compression",
+      "variable": "merge_tree_leaf_fraction"
+    },
+    {
+      "ci_high": NaN,
+      "ci_low": NaN,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 0,
+      "p_value": 0.008264462809917356,
+      "rho": NaN,
+      "target": "test_compression",
+      "variable": "merge_num_parents"
+    },
+    {
+      "ci_high": NaN,
+      "ci_low": NaN,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 0,
+      "p_value": 0.008264462809917356,
+      "rho": NaN,
+      "target": "test_compression",
+      "variable": "merge_num_merges"
+    },
+    {
+      "ci_high": NaN,
+      "ci_low": NaN,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 0,
+      "p_value": 0.008264462809917356,
+      "rho": NaN,
+      "target": "test_compression",
+      "variable": "merge_graph_h0_max_persistence"
+    },
+    {
+      "ci_high": 0.9227715403498282,
+      "ci_low": -0.6347208256713647,
+      "control": "log_vocab",
+      "holm_p": 0.1652892561983471,
+      "iterations": 120,
+      "p_value": 0.008264462809917356,
+      "rho": 0.4432109512177719,
+      "target": "test_compression",
+      "variable": "merge_tree_max_depth"
+    }
+  ],
+  "rows": 42,
+  "selected_merge_features": [
+    "merge_tree_mean_balance",
+    "merge_tree_mean_strahler",
+    "merge_gain_gini",
+    "merge_gain_entropy",
+    "merge_gain_top10_share",
+    "merge_graph_h1_total_persistence",
+    "merge_graph_h1_persistence_entropy",
+    "merge_graph_cycle_rank",
+    "merge_graph_mean_path",
+    "merge_graph_mean_nn_distance"
+  ]
+}

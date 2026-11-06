@@ -1,0 +1,447 @@
+{
+  "comparisons": {
+    "across_corpus_normalized": {
+      "delta_r2": -7.4445904664394575,
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.6513877091506985,
+          "n": 42.0,
+          "r2": 0.38855598779855616,
+          "rmse": 0.924592775278901,
+          "selected_alphas": {
+            "codeparrot_py": 0.01,
+            "wikipedia_ar": 0.01,
+            "wikipedia_hu": 0.01,
+            "wikipedia_sw": 0.01,
+            "wikipedia_zh": 0.01,
+            "wikitext_en": 0.01
+          }
+        },
+        "full": {
+          "mae": 1.5372061404687742,
+          "n": 42.0,
+          "r2": -7.0560344786409015,
+          "rmse": 3.3560838700965205,
+          "selected_alphas": {
+            "codeparrot_py": 0.01,
+            "wikipedia_ar": 1.0,
+            "wikipedia_hu": 1000.0,
+            "wikipedia_sw": 100.0,
+            "wikipedia_zh": 0.1,
+            "wikitext_en": 0.1
+          }
+        },
+        "topology": {
+          "mae": 1.6961352592021726,
+          "n": 42.0,
+          "r2": -6.725878122825513,
+          "rmse": 3.286594118860446,
+          "selected_alphas": {
+            "codeparrot_py": 0.01,
+            "wikipedia_ar": 10000.0,
+            "wikipedia_hu": 1000.0,
+            "wikipedia_sw": 1000.0,
+            "wikipedia_zh": 0.01,
+            "wikitext_en": 0.1
+          }
+        }
+      },
+      "n": 42
+    },
+    "across_corpus_raw": {
+      "delta_r2": -20.800334985268428,
+      "grouping": "corpus",
+      "metrics": {
+        "baseline": {
+          "mae": 0.6513877091506985,
+          "n": 42.0,
+          "r2": 0.38855598779855616,
+          "rmse": 0.924592775278901,
+          "selected_alphas": {
+            "codeparrot_py": 0.01,
+            "wikipedia_ar": 0.01,
+            "wikipedia_hu": 0.01,
+            "wikipedia_sw": 0.01,
+            "wikipedia_zh": 0.01,
+            "wikitext_en": 0.01
+          }
+        },
+        "full": {
+          "mae": 2.2680539608990364,
+          "n": 42.0,
+          "r2": -20.41177899746987,
+          "rmse": 5.471400722662095,
+          "selected_alphas": {
+            "codeparrot_py": 1000.0,
+            "wikipedia_ar": 10.0,
+            "wikipedia_hu": 10.0,
+            "wikipedia_sw": 10.0,
+            "wikipedia_zh": 0.01,
+            "wikitext_en": 10.0
+          }
+        },
+        "topology": {
+          "mae": 1.9688189274578578,
+          "n": 42.0,
+          "r2": -13.141787375234612,
+          "rmse": 4.446561455178205,
+          "selected_alphas": {
+            "codeparrot_py": 1000.0,
+            "wikipedia_ar": 10.0,
+            "wikipedia_hu": 1000.0,
+            "wikipedia_sw": 10.0,
+            "wikipedia_zh": 0.1,
+            "wikitext_en": 10.0
+          }
+        }
+      },
+      "n": 42
+    },
+    "within_size_normalized": {
+      "delta_r2": 0.38357960538967395,
+      "grouping": "requested_vocab_size",
+      "metrics": {
+        "baseline": {
+          "mae": 0.545322910643273,
+          "n": 42.0,
+          "r2": 0.5748754845870673,
+          "rmse": 0.7709571177095684,
+          "selected_alphas": {
+            "1024": 0.01,
+            "16384": 0.01,
+            "2048": 0.01,
+            "32768": 0.01,
+            "4096": 0.01,
+            "512": 0.01,
+            "8192": 0.01
+          }
+        },
+        "full": {
+          "mae": 0.19594521383951993,
+          "n": 42.0,
+          "r2": 0.9584550899767412,
+          "rmse": 0.24100777801924328,
+          "selected_alphas": {
+            "1024": 1.0,
+            "16384": 1.0,
+            "2048": 1.0,
+            "32768": 1.0,
+            "4096": 1.0,
+            "512": 1.0,
+            "8192": 1.0
+          }
+        },
+        "topology": {
+          "mae": 0.2381609246181434,
+          "n": 42.0,
+          "r2": 0.9270701097993573,
+          "rmse": 0.3193191225679367,
+          "selected_alphas": {
+            "1024": 0.01,
+            "16384": 0.1,
+            "2048": 0.1,
+            "32768": 1.0,
+            "4096": 0.1,
+            "512": 0.1,
+            "8192": 0.1
+          }
+        }
+      },
+      "n": 42
+    },
+    "within_size_raw": {
+      "delta_r2": 0.35912932127193586,
+      "grouping": "requested_vocab_size",
+      "metrics": {
+        "baseline": {
+          "mae": 0.545322910643273,
+          "n": 42.0,
+          "r2": 0.5748754845870673,
+          "rmse": 0.7709571177095684,
+          "selected_alphas": {
+            "1024": 0.01,
+            "16384": 0.01,
+            "2048": 0.01,
+            "32768": 0.01,
+            "4096": 0.01,
+            "512": 0.01,
+            "8192": 0.01
+          }
+        },
+        "full": {
+          "mae": 0.22404487596084563,
+          "n": 42.0,
+          "r2": 0.9340048058590031,
+          "rmse": 0.3037584043454844,
+          "selected_alphas": {
+            "1024": 1.0,
+            "16384": 0.1,
+            "2048": 1.0,
+            "32768": 1.0,
+            "4096": 1.0,
+            "512": 0.01,
+            "8192": 1.0
+          }
+        },
+        "topology": {
+          "mae": 0.2506716719733702,
+          "n": 42.0,
+          "r2": 0.9147147617966416,
+          "rmse": 0.34530994060376696,
+          "selected_alphas": {
+            "1024": 1.0,
+            "16384": 1.0,
+            "2048": 1.0,
+            "32768": 1.0,
+            "4096": 1.0,
+            "512": 0.01,
+            "8192": 1.0
+          }
+        }
+      },
+      "n": 42
+    }
+  },
+  "created_at": "2026-11-06T12:20:23.621468+00:00",
+  "drift_summary": [
+    {
+      "cv": 0.030534796306698156,
+      "feature": "merge_graph_h1_entropy_norm",
+      "kind": "normalized"
+    },
+    {
+      "cv": 0.038327361784356,
+      "feature": "merge_tree_mean_strahler_per_log_merges",
+      "kind": "normalized"
+    },
+    {
+      "cv": 0.12734691160004127,
+      "feature": "merge_tree_mean_balance",
+      "kind": "normalized"
+    },
+    {
+      "cv": 0.13710802767107133,
+      "feature": "merge_graph_cycle_density",
+      "kind": "normalized"
+    },
+    {
+      "cv": 0.1377922943102107,
+      "feature": "merge_gain_gini",
+      "kind": "normalized"
+    },
+    {
+      "cv": 0.17866204992951285,
+      "feature": "merge_gain_entropy",
+      "kind": "normalized"
+    },
+    {
+      "cv": 0.7341308122795179,
+      "feature": "merge_graph_h1_total_per_nn",
+      "kind": "normalized"
+    },
+    {
+      "cv": 0.9048565848457337,
+      "feature": "merge_graph_mean_path",
+      "kind": "normalized"
+    },
+    {
+      "cv": 1.845626214827662,
+      "feature": "merge_gain_top10_share",
+      "kind": "normalized"
+    },
+    {
+      "cv": 0.12734691160004127,
+      "feature": "merge_tree_mean_balance",
+      "kind": "raw"
+    },
+    {
+      "cv": 0.1377922943102107,
+      "feature": "merge_gain_gini",
+      "kind": "raw"
+    },
+    {
+      "cv": 0.17866204992951285,
+      "feature": "merge_gain_entropy",
+      "kind": "raw"
+    },
+    {
+      "cv": 0.18352647854503257,
+      "feature": "merge_tree_mean_strahler",
+      "kind": "raw"
+    },
+    {
+      "cv": 0.20360386366400768,
+      "feature": "merge_graph_h1_persistence_entropy",
+      "kind": "raw"
+    },
+    {
+      "cv": 0.5014975967572372,
+      "feature": "merge_graph_cycle_rank",
+      "kind": "raw"
+    },
+    {
+      "cv": 0.9048565848457337,
+      "feature": "merge_graph_mean_path",
+      "kind": "raw"
+    },
+    {
+      "cv": 0.9686008414715945,
+      "feature": "merge_graph_mean_nn_distance",
+      "kind": "raw"
+    },
+    {
+      "cv": 1.845626214827662,
+      "feature": "merge_gain_top10_share",
+      "kind": "raw"
+    },
+    {
+      "cv": 3.3011191853824315,
+      "feature": "merge_graph_h1_total_persistence",
+      "kind": "raw"
+    }
+  ],
+  "holdouts": {
+    "normalized_32768": {
+      "delta_r2": -0.042380214133684424,
+      "holdout_size": 32768,
+      "metrics": {
+        "baseline": {
+          "alpha": 0.01,
+          "mae": 0.7749143912420426,
+          "n": 6.0,
+          "r2": -0.0036372454761524065,
+          "rmse": 1.056459288371756
+        },
+        "full": {
+          "alpha": 100.0,
+          "mae": 0.795647157712295,
+          "n": 6.0,
+          "r2": -0.04601745960983683,
+          "rmse": 1.0785340178821332
+        }
+      },
+      "n_test": 6,
+      "n_train": 36
+    },
+    "normalized_512": {
+      "delta_r2": 0.2949472125619689,
+      "holdout_size": 512,
+      "metrics": {
+        "baseline": {
+          "alpha": 0.01,
+          "mae": 0.3458650771599952,
+          "n": 6.0,
+          "r2": -0.00013664024266990538,
+          "rmse": 0.48224302746118375
+        },
+        "full": {
+          "alpha": 0.01,
+          "mae": 0.3713777630762243,
+          "n": 6.0,
+          "r2": 0.29481057231929897,
+          "rmse": 0.4049386068618533
+        }
+      },
+      "n_test": 6,
+      "n_train": 36
+    },
+    "raw_32768": {
+      "delta_r2": 0.6835979673771202,
+      "holdout_size": 32768,
+      "metrics": {
+        "baseline": {
+          "alpha": 0.01,
+          "mae": 0.7749143912420426,
+          "n": 6.0,
+          "r2": -0.0036372454761524065,
+          "rmse": 1.056459288371756
+        },
+        "full": {
+          "alpha": 10.0,
+          "mae": 0.45404346362621584,
+          "n": 6.0,
+          "r2": 0.6799607219009678,
+          "rmse": 0.5965763352099928
+        }
+      },
+      "n_test": 6,
+      "n_train": 36
+    },
+    "raw_512": {
+      "delta_r2": -6.211711218739999,
+      "holdout_size": 512,
+      "metrics": {
+        "baseline": {
+          "alpha": 0.01,
+          "mae": 0.3458650771599952,
+          "n": 6.0,
+          "r2": -0.00013664024266990538,
+          "rmse": 0.48224302746118375
+        },
+        "full": {
+          "alpha": 1000.0,
+          "mae": 1.2132513038244745,
+          "n": 6.0,
+          "r2": -6.211847858982669,
+          "rmse": 1.2949695789101454
+        }
+      },
+      "n_test": 6,
+      "n_train": 36
+    }
+  },
+  "normalized_selected": [
+    "merge_tree_mean_balance",
+    "merge_tree_mean_strahler_per_log_merges",
+    "merge_gain_gini",
+    "merge_gain_entropy",
+    "merge_gain_top10_share",
+    "merge_graph_h1_total_per_nn",
+    "merge_graph_h1_entropy_norm",
+    "merge_graph_cycle_density",
+    "merge_graph_mean_path"
+  ],
+  "raw_selected": [
+    "merge_tree_mean_balance",
+    "merge_tree_mean_strahler",
+    "merge_gain_gini",
+    "merge_gain_entropy",
+    "merge_gain_top10_share",
+    "merge_graph_h1_total_persistence",
+    "merge_graph_h1_persistence_entropy",
+    "merge_graph_cycle_rank",
+    "merge_graph_mean_path",
+    "merge_graph_mean_nn_distance"
+  ],
+  "rows": 42,
+  "tda_stability": {
+    "records": 6,
+    "summary": [
+      {
+        "count": 12,
+        "feature": "entropy_per_log_bar",
+        "max": 0.011385068707501063,
+        "median": 0.006914832885940059
+      },
+      {
+        "count": 12,
+        "feature": "persistence_entropy",
+        "max": 0.16129791581551342,
+        "median": 0.13413236337237922
+      },
+      {
+        "count": 12,
+        "feature": "raw_total_persistence",
+        "max": 1.7488518251725618,
+        "median": 1.0637256793515026
+      },
+      {
+        "count": 12,
+        "feature": "total_per_bar",
+        "max": 0.2717568336152822,
+        "median": 0.08910099378327678
+      }
+    ]
+  }
+}

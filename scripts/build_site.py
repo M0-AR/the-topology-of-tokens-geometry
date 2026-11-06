@@ -69,10 +69,11 @@ def _redirect_html() -> str:
 
 
 def _docs_mirror(html: str) -> str:
-    for prefix in ("artifacts/", "docs/", "results/"):
+    for prefix in ("artifacts/", "benchmark/", "docs/", "results/"):
         html = html.replace(f'href="{prefix}', f'href="{REPO_BASE}/{prefix}')
     html = html.replace('href="LICENSE"', f'href="{REPO_BASE}/LICENSE"')
-    return html.replace('href="README.md"', f'href="{REPO_BASE}/README.md"')
+    html = html.replace('href="README.md"', f'href="{REPO_BASE}/README.md"')
+    return html.replace('href="calculator.html"', f'href="{REPO_BASE}/calculator.html"')
 
 
 def main() -> None:

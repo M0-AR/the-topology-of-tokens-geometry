@@ -1,0 +1,431 @@
+{
+  "created_at": "2026-11-06T12:20:58.927898+00:00",
+  "holdout_32k": {
+    "by_family": [
+      {
+        "family": "bpe",
+        "mae": 0.12229498533693266,
+        "n": 6.0,
+        "n_test": 6,
+        "n_train": 12,
+        "r2": 0.2823425239809316,
+        "rmse": 0.16714926762765425
+      },
+      {
+        "family": "unigram",
+        "mae": 0.12292880927770163,
+        "n": 6.0,
+        "n_test": 6,
+        "n_train": 12,
+        "r2": 0.43379815131453026,
+        "rmse": 0.15651292682343257
+      }
+    ],
+    "target": "log_compression"
+  },
+  "per_corpus": [
+    {
+      "a": 1.8942361444648874,
+      "b": 0.06568402231638164,
+      "corpus": "codeparrot_py",
+      "family": "bpe",
+      "points": [
+        {
+          "compression": 3.4105718964645364,
+          "vocab": 8192
+        },
+        {
+          "compression": 3.610458668583224,
+          "vocab": 16384
+        },
+        {
+          "compression": 3.735708073614525,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.9794371334884109,
+      "sigma_log": 0.006596882464551102
+    },
+    {
+      "a": 2.0193748902366897,
+      "b": 0.04515012588664647,
+      "corpus": "codeparrot_py",
+      "family": "unigram",
+      "points": [
+        {
+          "compression": 3.0241027082140493,
+          "vocab": 8192
+        },
+        {
+          "compression": 3.1486143398351896,
+          "vocab": 16384
+        },
+        {
+          "compression": 3.2194347060515724,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.9728676610329343,
+      "sigma_log": 0.0052263821268908025
+    },
+    {
+      "a": 1.5902586745221392,
+      "b": 0.1427645122293283,
+      "corpus": "wikipedia_ar",
+      "family": "bpe",
+      "points": [
+        {
+          "compression": 5.737864963753155,
+          "vocab": 8192
+        },
+        {
+          "compression": 6.396739915363554,
+          "vocab": 16384
+        },
+        {
+          "compression": 6.993637602929094,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.996778172955289,
+      "sigma_log": 0.005625972157830792
+    },
+    {
+      "a": 2.114712881137738,
+      "b": 0.10187747164655392,
+      "corpus": "wikipedia_ar",
+      "family": "unigram",
+      "points": [
+        {
+          "compression": 5.274720271194281,
+          "vocab": 8192
+        },
+        {
+          "compression": 5.72904666520364,
+          "vocab": 16384
+        },
+        {
+          "compression": 6.074853132822647,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.9904543689537906,
+      "sigma_log": 0.006932481278261253
+    },
+    {
+      "a": 0.9696496224061686,
+      "b": 0.1504760328129262,
+      "corpus": "wikipedia_hu",
+      "family": "bpe",
+      "points": [
+        {
+          "compression": 3.751981303799153,
+          "vocab": 8192
+        },
+        {
+          "compression": 4.199863223461018,
+          "vocab": 16384
+        },
+        {
+          "compression": 4.622280157411653,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.9978087901549226,
+      "sigma_log": 0.004887773994681367
+    },
+    {
+      "a": 1.2234842686244642,
+      "b": 0.1190940476547156,
+      "corpus": "wikipedia_hu",
+      "family": "unigram",
+      "points": [
+        {
+          "compression": 3.564212057055164,
+          "vocab": 8192
+        },
+        {
+          "compression": 3.916546839917833,
+          "vocab": 16384
+        },
+        {
+          "compression": 4.204025061234397,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.9933285320668721,
+      "sigma_log": 0.006765186340121824
+    },
+    {
+      "a": 1.3410491202605657,
+      "b": 0.11171635655959337,
+      "corpus": "wikipedia_sw",
+      "family": "bpe",
+      "points": [
+        {
+          "compression": 3.656227567471098,
+          "vocab": 8192
+        },
+        {
+          "compression": 3.9945383248840938,
+          "vocab": 16384
+        },
+        {
+          "compression": 4.268675755955151,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.9932457098187989,
+      "sigma_log": 0.006385629740504117
+    },
+    {
+      "a": 1.8671898748009796,
+      "b": 0.06116765961042263,
+      "corpus": "wikipedia_sw",
+      "family": "unigram",
+      "points": [
+        {
+          "compression": 3.23064860062973,
+          "vocab": 8192
+        },
+        {
+          "compression": 3.4003061346808177,
+          "vocab": 16384
+        },
+        {
+          "compression": 3.516546161607107,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.9858930356859004,
+      "sigma_log": 0.005071649236594754
+    },
+    {
+      "a": 1.05830075595508,
+      "b": 0.13275148986950122,
+      "corpus": "wikipedia_zh",
+      "family": "bpe",
+      "points": [
+        {
+          "compression": 3.4926163993825363,
+          "vocab": 8192
+        },
+        {
+          "compression": 3.854896818604757,
+          "vocab": 16384
+        },
+        {
+          "compression": 4.1983172146103165,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.998248050273169,
+      "sigma_log": 0.0038548408221326883
+    },
+    {
+      "a": 1.1503173039606716,
+      "b": 0.12161922403936956,
+      "corpus": "wikipedia_zh",
+      "family": "unigram",
+      "points": [
+        {
+          "compression": 3.4339475933765957,
+          "vocab": 8192
+        },
+        {
+          "compression": 3.76103185656826,
+          "vocab": 16384
+        },
+        {
+          "compression": 4.06458052481072,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.997909573569838,
+      "sigma_log": 0.003858331499340698
+    },
+    {
+      "a": 1.362138794435441,
+      "b": 0.12242757809110073,
+      "corpus": "wikitext_en",
+      "family": "bpe",
+      "points": [
+        {
+          "compression": 4.077694383080433,
+          "vocab": 8192
+        },
+        {
+          "compression": 4.52907666626443,
+          "vocab": 16384
+        },
+        {
+          "compression": 4.831960991519196,
+          "vocab": 32768
+        }
+      ],
+      "r2": 0.9815957371670505,
+      "sigma_log": 0.0116197718471991
+    },
+    {
+      "a": 1.9819461411489752,
+      "b": 0.05544034396557295,
+      "corpus": "wikitext_en",
+      "family": "unigram",
+      "points": [
+        {
+          "compression": 3.254565096432468,
+          "vocab": 8192
+        },
+        {
+          "compression": 3.4209698797239767,
+          "vocab": 16384
+        },
+        {
+          "compression": 3.4910126032833646,
+          "vocab": 29379
+        }
+      ],
+      "r2": 0.9644495684102986,
+      "sigma_log": 0.006805174824814213
+    }
+  ],
+  "pooled_intrinsic": {
+    "features": [
+      "log_vocab",
+      "byte_entropy",
+      "conditional_entropy",
+      "type_token_ratio",
+      "gzip_ratio",
+      "log_train_tokens"
+    ],
+    "n": 36,
+    "r2_log": -0.5412208630334789,
+    "rmse_log": 0.26112494545052717,
+    "selected_alphas": {
+      "codeparrot_py": 1.0,
+      "wikipedia_ar": 100.0,
+      "wikipedia_hu": 1000.0,
+      "wikipedia_sw": 1000.0,
+      "wikipedia_zh": 1000.0,
+      "wikitext_en": 1000.0
+    }
+  },
+  "pooled_with_train_compression": {
+    "features": [
+      "log_vocab",
+      "byte_entropy",
+      "conditional_entropy",
+      "type_token_ratio",
+      "gzip_ratio",
+      "log_train_tokens",
+      "train_compression"
+    ],
+    "n": 36,
+    "r2_log": 0.6925387303164872,
+    "rmse_log": 0.11663022964893295,
+    "selected_alphas": {
+      "codeparrot_py": 0.01,
+      "wikipedia_ar": 1.0,
+      "wikipedia_hu": 0.1,
+      "wikipedia_sw": 0.01,
+      "wikipedia_zh": 1.0,
+      "wikitext_en": 0.1
+    }
+  },
+  "power_law_extrapolation_32k": {
+    "by_family": [
+      {
+        "family": "bpe",
+        "mape": 0.022792432908278853,
+        "max_abs_relative_error": 0.04107316487400947,
+        "n": 6
+      },
+      {
+        "family": "unigram",
+        "mape": 0.019493295066792315,
+        "max_abs_relative_error": 0.024305497568660295,
+        "n": 5
+      }
+    ],
+    "rows": [
+      {
+        "actual": 3.735708073614525,
+        "corpus": "codeparrot_py",
+        "family": "bpe",
+        "predicted": 3.8220604031425047,
+        "relative_error": 0.02311538477481423
+      },
+      {
+        "actual": 3.2194347060515724,
+        "corpus": "codeparrot_py",
+        "family": "unigram",
+        "predicted": 3.2782524991919293,
+        "relative_error": 0.01826960274417022
+      },
+      {
+        "actual": 6.993637602929094,
+        "corpus": "wikipedia_ar",
+        "family": "bpe",
+        "predicted": 7.131273008913851,
+        "relative_error": 0.01968008836018509
+      },
+      {
+        "actual": 6.074853132822647,
+        "corpus": "wikipedia_ar",
+        "family": "unigram",
+        "predicted": 6.222505460872436,
+        "relative_error": 0.024305497568660295
+      },
+      {
+        "actual": 4.622280157411653,
+        "corpus": "wikipedia_hu",
+        "family": "bpe",
+        "predicted": 4.7012097522766885,
+        "relative_error": 0.017075900243405773
+      },
+      {
+        "actual": 4.204025061234397,
+        "corpus": "wikipedia_hu",
+        "family": "unigram",
+        "predicted": 4.303711143927865,
+        "relative_error": 0.023712057193160163
+      },
+      {
+        "actual": 4.268675755955151,
+        "corpus": "wikipedia_sw",
+        "family": "bpe",
+        "predicted": 4.364152978586162,
+        "relative_error": 0.02236694190178601
+      },
+      {
+        "actual": 3.516546161607107,
+        "corpus": "wikipedia_sw",
+        "family": "unigram",
+        "predicted": 3.5788732353293624,
+        "relative_error": 0.017723945842863964
+      },
+      {
+        "actual": 4.1983172146103165,
+        "corpus": "wikipedia_zh",
+        "family": "bpe",
+        "predicted": 4.254755685369925,
+        "relative_error": 0.01344311729547254
+      },
+      {
+        "actual": 4.06458052481072,
+        "corpus": "wikipedia_zh",
+        "family": "unigram",
+        "predicted": 4.119270967735469,
+        "relative_error": 0.013455371985106934
+      },
+      {
+        "actual": 4.831960991519196,
+        "corpus": "wikitext_en",
+        "family": "bpe",
+        "predicted": 5.030424921988646,
+        "relative_error": 0.04107316487400947
+      }
+    ]
+  },
+  "target": "test_compression (bytes per token)"
+}

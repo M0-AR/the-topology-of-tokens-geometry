@@ -1,0 +1,125 @@
+{
+  "corpora": {
+    "codeparrot_py": {
+      "path": "results/merge_features_codeparrot_py.csv",
+      "rows": 9,
+      "sizes": [
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "variants": [
+        "base",
+        "native",
+        "truncated"
+      ]
+    },
+    "wikipedia_ar": {
+      "path": "results/merge_features_wikipedia_ar.csv",
+      "rows": 9,
+      "sizes": [
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "variants": [
+        "base",
+        "native",
+        "truncated"
+      ]
+    },
+    "wikipedia_hu": {
+      "path": "results/merge_features_wikipedia_hu.csv",
+      "rows": 9,
+      "sizes": [
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "variants": [
+        "base",
+        "native",
+        "truncated"
+      ]
+    },
+    "wikipedia_sw": {
+      "path": "results/merge_features_wikipedia_sw.csv",
+      "rows": 9,
+      "sizes": [
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "variants": [
+        "base",
+        "native",
+        "truncated"
+      ]
+    },
+    "wikipedia_zh": {
+      "path": "results/merge_features_wikipedia_zh.csv",
+      "rows": 9,
+      "sizes": [
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "variants": [
+        "base",
+        "native",
+        "truncated"
+      ]
+    },
+    "wikitext_en": {
+      "path": "results/merge_features_wikitext_en.csv",
+      "rows": 9,
+      "sizes": [
+        512,
+        1024,
+        2048,
+        4096,
+        8192,
+        16384,
+        32768
+      ],
+      "variants": [
+        "base",
+        "native",
+        "truncated"
+      ]
+    }
+  },
+  "created_at": "2026-11-06T12:02:14.627225+00:00",
+  "max_docs": 2000,
+  "sizes": [
+    512,
+    1024,
+    2048,
+    4096,
+    8192,
+    16384,
+    32768
+  ],
+  "test_bytes": 1000000,
+  "train_bytes": 4000000
+}

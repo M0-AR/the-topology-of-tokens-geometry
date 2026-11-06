@@ -6,10 +6,12 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-5eead4)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-22d3ee)](pyproject.toml)
-[![Tests](https://img.shields.io/badge/tests-14%20passing-5eead4)](tests)
+[![Tests](https://img.shields.io/badge/tests-22%20passing-5eead4)](tests)
 [![Artifacts](https://img.shields.io/badge/artifacts-332%20hashed-a78bfa)](artifacts/manifest.json)
 
 **Explore:** [Live interactive preview](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [Demo GIF](docs/assets/topobpe-demo.gif) · [Generated report](results/REPORT.md) · [Frozen protocol](docs/PROTOCOL.md)
+
+**Extensions:** [Merge-topology experiments](docs/EXTENSIONS.md) · [Scaling calculator](calculator.html) · [TokenizerBench card](benchmark/BENCHMARK_CARD.md)
 
 **All preview entry points work:** [site root](https://m0-ar.github.io/the-topology-of-tokens-geometry/) · [preview.html](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [docs/preview.html](https://m0-ar.github.io/the-topology-of-tokens-geometry/docs/preview.html).
 
@@ -176,6 +178,16 @@ All numbers above come from the fixed analysis run in [`results/analysis.json`](
 
 ---
 
+## Beyond the null: scale-aware geometry
+
+The original study asked whether topology transfers **across corpora**. It does not. A follow-up asked a narrower question: does the **merge construction** of a BPE vocabulary predict how compression changes with vocabulary size inside a corpus? On the frozen data, yes:
+
+- **Unseen vocabulary size:** adding ten pre-registered merge-topology features to a cubic size baseline raises R² from 0.575 to 0.934 (Δ = +0.359, 95% CI [0.196, 0.705], permutation p = 0.008).
+- **Extrapolation to 32k** (trained on 512–16k): R² = 0.680 versus −0.004 for the size baseline. Downward to 512: 0.379 versus ≈0.
+- **Cross-corpus transfer still fails:** every leave-one-corpus-out comparison is negative, including a 3-component PCA of the same features.
+
+This is a scale-planning result, not a universal tokenizer score. The all-feature model overfits catastrophically under LOCO; the report keeps that failure visible. Read the full methods, nulls and caveats in **[docs/EXTENSIONS.md](docs/EXTENSIONS.md)**, try the **[calculator](calculator.html)**, or use the **[benchmark package](benchmark/BENCHMARK_CARD.md)**.
+
 ## Why this negative result is valuable
 
 A negative result is only useful if it is trustworthy and reusable. This one is both.
@@ -257,7 +269,7 @@ This is not a one-off notebook. Every claim has a paper trail.
 - **Bug found and fixed.** A permutation-test slicing bug was discovered during the final audit, fixed, covered by a regression test, and the analysis was re-run from cached features. All numbers here come from the fixed run.
 - **Seed and scale checks.** BPB standard deviation across seeds is at most 0.007. Point-count sensitivity is reported honestly: persistence summaries are scale-dependent, so absolute descriptor magnitudes should not be compared across studies.
 - **Hashed manifest.** 332 artifacts with SHA-256 hashes, environment details, and the config hash: [`artifacts/manifest.json`](artifacts/manifest.json).
-- **Tests.** 14 tests pass; `ruff` is clean; Docker Compose configuration is verified.
+- **Tests.** 22 tests pass; `ruff` is clean; Docker Compose configuration is verified.
 
 ### What this does not claim
 
@@ -302,7 +314,7 @@ This is not a one-off notebook. Every claim has a paper trail.
 | `preview.html` | Generated showcase: 3D map, explorer, quiz, glossary, business case |
 | `index.html` | Meta-refresh redirect to `preview.html` |
 | `scripts/` | Reproduce, build site, byte audit, TDA stability, download, report |
-| `tests/` | 14 tests, including the permutation slicing regression |
+| `tests/` | 22 tests, including the permutation slicing regression and the extension checks |
 | `artifacts/manifest.json` | SHA-256 hashes for 332 artifacts |
 | `Dockerfile`, `docker-compose.yml`, `Makefile` | CPU/GPU reproducibility entry points |
 | `CITATION.cff`, `LICENSE` | Citation metadata and MIT license |
