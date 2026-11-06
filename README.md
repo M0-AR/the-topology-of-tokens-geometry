@@ -9,7 +9,7 @@
 [![Tests](https://img.shields.io/badge/tests-14%20passing-5eead4)](tests)
 [![Artifacts](https://img.shields.io/badge/artifacts-332%20hashed-a78bfa)](artifacts/manifest.json)
 
-**Explore:** [Live interactive preview](preview.html) · [Demo GIF](docs/assets/topobpe-demo.gif) · [Generated report](results/REPORT.md) · [Frozen protocol](docs/PROTOCOL.md)
+**Explore:** [Live interactive preview](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) · [Demo GIF](docs/assets/topobpe-demo.gif) · [Generated report](results/REPORT.md) · [Frozen protocol](docs/PROTOCOL.md)
 
 ![TopoBPE interactive preview](docs/assets/site-hero.png)
 
@@ -22,7 +22,7 @@
 | What did you find? | No out-of-corpus gain from topology. Eight cheap features already explain almost everything. |
 | Why should I care? | It replaces tokenizer folklore with measured curves — and shows how to avoid paying for features that do not predict. |
 | What is the asset? | The benchmark harness, the evidence trail, and the interactive explainer — not just the paper. |
-| How do I see it? | Open [`preview.html`](preview.html) or watch the [15-second demo](docs/assets/topobpe-demo.gif). |
+| How do I see it? | Open [`preview.html`](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html) or watch the [15-second demo](docs/assets/topobpe-demo.gif). |
 
 **Headline numbers:** 36 tokenizers · 6 corpora · 36 language-model runs · 80 predictors · 2,000 permutations · 2,000 cluster-bootstrap resamples · 332 hashed artifacts · 0.695 GPU-hours of language-model training.
 
@@ -58,7 +58,7 @@ It is easy to fit a complicated model to six data points and declare victory. Th
 
 Eight simple statistics — vocabulary size, byte entropy, token entropy, conditional entropy, type-token ratio, gzip ratio, mean token bytes, and training compression — explain **97.4%** of held-out compression variance and **88.7%** of BPB variance. The 72 topology descriptors add no out-of-corpus predictive value. In LOCO evaluation they make predictions worse. One exploratory association survives correction, but its interval crosses zero, so it is reported as a signal worth studying — not a confirmed effect.
 
-**You will know more than most interview candidates.** You can now explain why tokenizer quality is an economic measurement, why BPB is not the same as compression, why leave-one-corpus-out is the honest test, and why a well-run negative result is more valuable than a fragile positive one. Test yourself with the [10-question interactive quiz](preview.html#quiz); every answer includes an explanation.
+**You will know more than most interview candidates.** You can now explain why tokenizer quality is an economic measurement, why BPB is not the same as compression, why leave-one-corpus-out is the honest test, and why a well-run negative result is more valuable than a fragile positive one. Test yourself with the [10-question interactive quiz](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html#quiz); every answer includes an explanation.
 
 ---
 
@@ -204,7 +204,7 @@ The preview is responsive and keyboard-accessible. On mobile, the navigation col
 |---|---|
 | ![Mobile hero](docs/assets/site-mobile-hero.png) | ![Mobile menu](docs/assets/site-mobile-menu.png) |
 
-**Open the preview:** [`preview.html`](preview.html). GitHub Pages serves it from the repository root; `index.html` redirects there automatically.
+**Open the preview:** [`preview.html`](https://m0-ar.github.io/the-topology-of-tokens-geometry/preview.html). GitHub Pages serves it from the repository root; `index.html` redirects there automatically.
 
 ---
 
